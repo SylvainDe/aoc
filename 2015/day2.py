@@ -2,17 +2,31 @@
 import datetime
 
 
-def get_xxx_from_file(file_path="day2_input.txt"):
+def get_dimensions_from_string(s):
+    dims = [int(v) for v in s.split("x")]
+    assert len(dims) == 3
+    return dims
+
+
+def get_dimensions_from_file(file_path="day2_input.txt"):
     with open(file_path) as f:
-        return [l.strip() for l in f]
+        return [get_dimensions_from_string(l.strip()) for l in f]
+
+
+def get_surface(dimensions):
+    l, w, h = dimensions
+    sides = [l * w, l * h, w * h]
+    return 2 * sum(sides) + min(sides)
 
 
 def run_tests():
-    xxx = some_hardcoded_value
+    assert get_surface((2, 3, 4)) == 58
+    assert get_surface((1, 1, 10)) == 43
 
 
 def get_solutions():
-    xxx = get_xxx_from_file()
+    dimensions = get_dimensions_from_file()
+    print(sum(get_surface(dim) for dim in dimensions))
 
 
 if __name__ == "__main__":
