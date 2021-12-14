@@ -14,16 +14,29 @@ def get_final_floor(instructions):
     return c["("] - c[")"]
 
 
+def get_position_to_basement(instructions, basement=-1):
+    floor = 0
+    values = {"(": 1, ")": -1}
+    for i, ins in enumerate(instructions, start=1):
+        floor += values[ins]
+        if floor == basement:
+            return i
+    assert False
+
+
 def run_tests():
     assert get_final_floor("(())") == 0
     assert get_final_floor("()()") == 0
     assert get_final_floor("(((") == 3
     assert get_final_floor("())") == -1
+    assert get_position_to_basement(")") == 1
+    assert get_position_to_basement("()())") == 5
 
 
 def get_solutions():
     instructions = get_instructions_from_file()
     print(get_final_floor(instructions))
+    print(get_position_to_basement(instructions))
 
 
 if __name__ == "__main__":
