@@ -25,17 +25,40 @@ def is_nice(s):
     )
 
 
+def has_double_pair(s):
+    pairs = dict()
+    for i, pair in enumerate(zip(s, s[1:])):
+        if pair not in pairs:
+            pairs[pair] = i
+        elif i > 1 + pairs[pair]:
+            return True
+    return False
+
+
+def has_double_letter_with_one_between(s):
+    return any(c1 == c2 for c1, c2 in zip(s, s[2:]))
+
+
+def is_nice2(s):
+    return has_double_pair(s) and has_double_letter_with_one_between(s)
+
+
 def run_tests():
     assert is_nice("ugknbfddgicrmopn")
     assert is_nice("aaa")
     assert not is_nice("jchzalrnumimnmhp")
     assert not is_nice("haegwjzuvuyypxyu")
     assert not is_nice("dvszwmarrgswjxmb")
+    assert is_nice2("qjhvhtzxzqqjkmpb")
+    assert is_nice2("xxyxx")
+    assert not is_nice2("uurcxstgmygtbstg")
+    assert not is_nice2("ieodomkazucvgmuy")
 
 
 def get_solutions():
     strings = get_strings_from_file()
     print(sum(is_nice(s) for s in strings))
+    print(sum(is_nice2(s) for s in strings))
 
 
 if __name__ == "__main__":
