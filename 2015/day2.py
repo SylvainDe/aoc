@@ -19,14 +19,24 @@ def get_surface(dimensions):
     return 2 * sum(sides) + min(sides)
 
 
+def get_length(dimensions):
+    l, w, h = dimensions
+    halfperi = [l + w, l + h, w + h]
+    volume = l * w * h
+    return 2 * min(halfperi) + volume
+
+
 def run_tests():
     assert get_surface((2, 3, 4)) == 58
     assert get_surface((1, 1, 10)) == 43
+    assert get_length((2, 3, 4)) == 34
+    assert get_length((1, 1, 10)) == 14
 
 
 def get_solutions():
     dimensions = get_dimensions_from_file()
     print(sum(get_surface(dim) for dim in dimensions))
+    print(sum(get_length(dim) for dim in dimensions))
 
 
 if __name__ == "__main__":
