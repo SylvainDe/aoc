@@ -30,15 +30,24 @@ def get_nb_houses(instructions):
     return len(set(get_path(instructions)))
 
 
+def get_nb_houses_with_robo(instructions):
+    ins1, ins2 = instructions[1::2], instructions[0::2]
+    return len(set(get_path(ins1)) | set(get_path(ins2)))
+
+
 def run_tests():
     assert get_nb_houses(">") == 2
     assert get_nb_houses("^>v<") == 4
     assert get_nb_houses("^v^v^v^v^v") == 2
+    assert get_nb_houses_with_robo("^v") == 3
+    assert get_nb_houses_with_robo("^>v<") == 3
+    assert get_nb_houses_with_robo("^v^v^v^v^v") == 11
 
 
 def get_solutions():
     instructions = get_instructions_from_file()
     print(get_nb_houses(instructions))
+    print(get_nb_houses_with_robo(instructions))
 
 
 if __name__ == "__main__":
