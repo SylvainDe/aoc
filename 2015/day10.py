@@ -42,6 +42,7 @@ def run_tests():
 def get_solutions():
     seq = get_string_from_file()
     print(len(repeated_look_and_say(seq, 40)))
+    print(len(repeated_look_and_say(seq, 50)))
 
 
 if __name__ == "__main__":
