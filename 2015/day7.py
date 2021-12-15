@@ -83,7 +83,11 @@ def run_tests():
 
 def get_solutions():
     wires = get_wires_from_file()
-    print(eval_wire("a", wires))
+    val_a = eval_wire("a", wires)
+    print(val_a)
+    wires["b"] = str(val_a)
+    val_a2 = eval_wire("a", wires)
+    print(val_a2)
 
 
 if __name__ == "__main__":
