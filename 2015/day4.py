@@ -1,18 +1,32 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
+import itertools
+import hashlib
 
 
-def get_xxx_from_file(file_path="day4_input.txt"):
+def get_key_from_file(file_path="day4_input.txt"):
     with open(file_path) as f:
-        return [l.strip() for l in f]
+        for l in f:
+            return l.strip()
+
+
+def get_coin(key):
+    zeros = "0" * 5
+    for i in itertools.count():
+        s = key + str(i)
+        h = hashlib.md5(s.encode("utf-8")).hexdigest()
+        if h.startswith(zeros):
+            return i
 
 
 def run_tests():
-    xxx = some_hardcoded_value
+    assert get_coin("abcdef") == 609043
+    assert get_coin("pqrstuv") == 1048970
 
 
 def get_solutions():
-    xxx = get_xxx_from_file()
+    key = get_key_from_file()
+    print(get_coin(key))
 
 
 if __name__ == "__main__":
