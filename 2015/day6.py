@@ -1,6 +1,7 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
 import itertools
+import collections
 
 verbs = ["turn on", "toggle", "turn off"]
 
@@ -60,6 +61,26 @@ def apply_instructions(instructions):
     return lights
 
 
+def apply_instruction2(lights, instruction):
+    verb, points = instruction
+    for p in get_points(points):
+        if verb == "turn on":
+            lights[p] += 1
+        elif verb == "turn off":
+            lights[p] = max(lights[p] - 1, 0)
+        elif verb == "toggle":
+            lights[p] += 2
+        else:
+            assert False
+
+
+def apply_instructions2(instructions):
+    lights = collections.defaultdict(int)
+    for ins in instructions:
+        apply_instruction2(lights, ins)
+    return lights
+
+
 def run_tests():
     assert len(list(get_points(get_range_from_string("0,0 through 999,0")))) == 1000
     assert len(list(get_points(get_range_from_string("499,499 through 500,500")))) == 4
@@ -68,6 +89,7 @@ def run_tests():
 def get_solutions():
     instructions = get_instructions_from_file()
     print(len(apply_instructions(instructions)))
+    print(sum(apply_instructions2(instructions).values()))
 
 
 if __name__ == "__main__":
