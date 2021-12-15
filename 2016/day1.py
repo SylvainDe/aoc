@@ -8,7 +8,7 @@ def get_xxx_from_file(file_path="day1_input.txt"):
 
 
 def run_tests():
-    xxx = some_hardcoded_value
+    xxx = ""
 
 
 def get_solutions():
