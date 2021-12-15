@@ -10,8 +10,8 @@ def get_key_from_file(file_path="day4_input.txt"):
             return l.strip()
 
 
-def get_coin(key):
-    zeros = "0" * 5
+def get_coin(key, nb_zeros=5):
+    zeros = "0" * nb_zeros
     for i in itertools.count():
         s = key + str(i)
         h = hashlib.md5(s.encode("utf-8")).hexdigest()
@@ -27,6 +27,7 @@ def run_tests():
 def get_solutions():
     key = get_key_from_file()
     print(get_coin(key))
+    print(get_coin(key, 6))
 
 
 if __name__ == "__main__":
