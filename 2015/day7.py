@@ -2,17 +2,6 @@
 import datetime
 
 
-def get_wire_from_string(s, sep=" -> "):
-    expr, mid, wire = s.partition(sep)
-    assert mid == sep
-    return wire, expr
-
-
-def get_wires_from_file(file_path="day7_input.txt"):
-    with open(file_path) as f:
-        return dict(get_wire_from_string(l.strip()) for l in f)
-
-
 max_val = 65535
 
 binary_ops = {
@@ -25,13 +14,30 @@ binary_ops = {
 unary_ops = {"NOT ": lambda x: max_val - x}
 
 
+def get_parse_expr(expr):
+    for bin_name, bin_func in binary_ops.items():
+        left, mid, right = expr.partition(bin_name)
+        if mid == bin_name:
+            return (bin_func, left, right)
+    for un_name, un_func in unary_ops.items():
+        if expr.startswith(un_name):
+            return (un_func, expr[len(un_name) :])
+    return (expr,)
+
+
+def get_wire_from_string(s, sep=" -> "):
+    expr, mid, wire = s.partition(sep)
+    assert mid == sep
+    return wire, get_parse_expr(expr)
+
+
+def get_wires_from_file(file_path="day7_input.txt"):
+    with open(file_path) as f:
+        return dict(get_wire_from_string(l.strip()) for l in f)
+
+
 def eval_wire(wire, wires):
     return eval(wire, dict(), wires)
-
-
-def add_val_to_env(wire, value, env):
-    env[wire] = value
-    return value
 
 
 def eval(wire, env, wires):
@@ -40,19 +46,18 @@ def eval(wire, env, wires):
         return val
     expr = wires.get(wire, None)
     if expr is None:
-        return add_val_to_env(wire, int(wire), env)
-    for bin_name, bin_func in binary_ops.items():
-        left, mid, right = expr.partition(bin_name)
-        if mid == bin_name:
-            ret = bin_func(eval(left, env, wires), eval(right, env, wires))
-            return add_val_to_env(wire, ret, env)
-    for un_name, un_func in unary_ops.items():
-        if expr.startswith(un_name):
-            remaining = expr[len(un_name) :]
-            ret = un_func(eval(remaining, env, wires))
-            return add_val_to_env(wire, ret, env)
-    ret = eval(expr, env, wires)
-    return add_val_to_env(wire, ret, env)
+        ret = int(wire)
+    elif len(expr) == 3:
+        func, left, right = expr
+        ret = func(eval(left, env, wires), eval(right, env, wires))
+    elif len(expr) == 2:
+        func, value = expr
+        ret = func(eval(value, env, wires))
+    else:
+        value = expr[0]
+        ret = eval(value, env, wires)
+    env[wire] = ret
+    return ret
 
 
 def run_tests():
