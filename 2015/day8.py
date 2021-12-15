@@ -7,7 +7,7 @@ def get_strings_from_file(file_path="day8_input.txt"):
         return [l.strip() for l in f]
 
 
-def get_str_len_diff(s):
+def get_str_len_diff_decode(s):
     char_diff = {
         "\\": 1,
         '"': 1,
@@ -24,16 +24,33 @@ def get_str_len_diff(s):
     return count
 
 
+def get_str_len_diff_encode(s):
+    char_diff = {
+        '"': 1,
+        "\\": 1,
+    }
+    count = 2  # first and last quotes
+    for c in s:
+        count += char_diff.get(c, 0)
+    return count
+
+
 def run_tests():
-    assert get_str_len_diff('""') == 2
-    assert get_str_len_diff('"abc"') == 2
-    assert get_str_len_diff('"aaa\\"aaa"') == 3
-    assert get_str_len_diff('"\\x27"') == 5
+    tests = [
+        ('""', 2, 4),
+        ('"abc"', 2, 4),
+        ('"aaa\\"aaa"', 3, 6),
+        ('"\\x27"', 5, 5),
+    ]
+    for s, d1, d2 in tests:
+        assert get_str_len_diff_decode(s) == d1
+        assert get_str_len_diff_encode(s) == d2
 
 
 def get_solutions():
     strings = get_strings_from_file()
-    print(sum(get_str_len_diff(s) for s in strings))
+    print(sum(get_str_len_diff_decode(s) for s in strings))
+    print(sum(get_str_len_diff_encode(s) for s in strings))
 
 
 if __name__ == "__main__":
