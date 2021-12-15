@@ -27,6 +27,17 @@ def get_distance(reindeer, time):
     return time_flying * reindeer.speed
 
 
+def get_scores(reindeers, time):
+    points = [0] * len(reindeers)
+    for t in range(1, time + 1):
+        distances = [get_distance(r, t) for r in reindeers]
+        max_distance = max(distances)
+        for i, d in enumerate(distances):
+            if d == max_distance:
+                points[i] += 1
+    return points
+
+
 def run_tests():
     reindeers = [
         (
@@ -47,11 +58,16 @@ def run_tests():
         assert get_distance(r, 1) == d1
         assert get_distance(r, 10) == d10
         assert get_distance(r, 1000) == d1000
+    reindeers = [get_reindeer_from_line(s) for s, _, _, _ in reindeers]
+    assert get_scores(reindeers, 1) == [0, 1]
+    assert get_scores(reindeers, 140) == [1, 139]
+    assert get_scores(reindeers, 1000) == [312, 689]
 
 
 def get_solutions():
     reindeers = get_reindeers_from_file()
     print(max(get_distance(r, 2503) for r in reindeers))
+    print(max(get_scores(reindeers, 2503)))
 
 
 if __name__ == "__main__":
