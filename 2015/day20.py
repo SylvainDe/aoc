@@ -81,16 +81,48 @@ def sum_of_divisors_optimised(n):
 
 
 # https://en.wikipedia.org/wiki/Highly_abundant_number
-def get_sum_of_divisors_bigger_than(n):
-    # They may be a more constructive/optimised method to
-    # get numbers using the prime distinct factors formula
+def get_naive_sum_of_divisors_bigger_than(n):
     for i in itertools.count(start=1):
         if sum_of_divisors_optimised(i) >= n:
             return i
 
 
+def get_optimised_sum_of_divisors_bigger_than(n):
+    # Get numbers of divisors using the prime distinct factors formula
+    # sigma(n) > X
+    # _____    ai + 1
+    #  | |   pi       - 1
+    #  | |  ------------  > X
+    #  | |      pi  - 1
+    if n < 2:
+        return 1
+    candidate = None
+    values = [(1, 1)]  # (i, sigma(i)) with sigma(i) < n
+    # TODO: We are missing a condition to stop checking more primes
+    for p in [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67]:  # TODO
+        new_values = []
+        for power in itertools.count(start=1):
+            new_value_added = False
+            p_pow = p ** power
+            coef, remaining = divmod(p_pow * p - 1, p - 1)
+            assert remaining == 0
+            for (prod, sum_div) in values:
+                prod2, sum_div2 = prod * p_pow, sum_div * coef
+                cand2 = prod2, sum_div2
+                if candidate is None or prod2 <= candidate:
+                    if sum_div2 >= n:
+                        candidate = prod2
+                    else:
+                        new_values.append(cand2)
+                        new_value_added = True
+            if not new_value_added:
+                break
+        values.extend(new_values)
+    return candidate
+
+
 def get_lowest_house_with_presents(nb):
-    return get_sum_of_divisors_bigger_than(nb // 10)
+    return get_optimised_sum_of_divisors_bigger_than(nb // 10)
 
 
 def run_tests():
@@ -108,6 +140,12 @@ def run_tests():
     for n, s in tests:
         assert sum_of_divisors_naive(n) == s
         assert sum_of_divisors_optimised(n) == s
+    assert get_lowest_house_with_presents(140) == 8
+    assert get_lowest_house_with_presents(120) == 6
+    for val in list(range(0, 10)) + list(range(100, 110)) + list(range(1000, 1100)):
+        naive = get_naive_sum_of_divisors_bigger_than(val)
+        optimised = get_optimised_sum_of_divisors_bigger_than(val)
+        assert naive == optimised
 
 
 def get_solutions():
