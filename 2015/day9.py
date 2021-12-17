@@ -24,7 +24,7 @@ def build_graph(info):
     return g
 
 
-def get_shortest_route(graph):
+def get_routes(graph):
     paths = [([loc], 0) for loc in graph]
     for i in range(len(graph) - 1):
         paths2 = []
@@ -34,7 +34,7 @@ def get_shortest_route(graph):
                 if loc2 not in path:
                     paths2.append((path + [loc2], d + d2))
         paths = paths2
-    return min(d for path, d in paths)
+    return paths
 
 
 def run_tests():
@@ -45,13 +45,17 @@ def run_tests():
     ]
     info = [get_info_from_str(s) for s in info]
     graph = build_graph(info)
-    assert get_shortest_route(graph) == 605
+    routes = get_routes(graph)
+    assert min(d for path, d in routes) == 605
+    assert max(d for path, d in routes) == 982
 
 
 def get_solutions():
     info = get_info_from_file()
     graph = build_graph(info)
-    print(get_shortest_route(graph))
+    routes = get_routes(graph)
+    print(min(d for path, d in routes))
+    print(max(d for path, d in routes))
 
 
 if __name__ == "__main__":
