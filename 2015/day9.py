@@ -1,18 +1,57 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
+import re
+
+info_re = r"^(?P<loc1>[A-Za-z]+) to (?P<loc2>[A-Za-z]+) = (?P<dist>\d+)$"
 
 
-def get_xxx_from_file(file_path="day9_input.txt"):
+def get_info_from_str(s):
+    match = re.match(info_re, s)
+    d = match.groupdict()
+    return d["loc1"], d["loc2"], int(d["dist"])
+
+
+def get_info_from_file(file_path="day9_input.txt"):
     with open(file_path) as f:
-        return [l.strip() for l in f]
+        return [get_info_from_str(l.strip()) for l in f]
+
+
+def build_graph(info):
+    g = dict()
+    for loc1, loc2, d in info:
+        g.setdefault(loc1, dict())[loc2] = d
+        g.setdefault(loc2, dict())[loc1] = d
+    return g
+
+
+def get_shortest_route(graph):
+    paths = [([loc], 0) for loc in graph]
+    for i in range(len(graph) - 1):
+        paths2 = []
+        for path, d in paths:
+            last = path[-1]
+            for loc2, d2 in graph[last].items():
+                if loc2 not in path:
+                    paths2.append((path + [loc2], d + d2))
+        paths = paths2
+    return min(d for path, d in paths)
 
 
 def run_tests():
-    xxx = ""
+    info = [
+        "London to Dublin = 464",
+        "London to Belfast = 518",
+        "Dublin to Belfast = 141",
+    ]
+    info = [get_info_from_str(s) for s in info]
+    graph = build_graph(info)
+    assert get_shortest_route(graph) == 605
 
 
 def get_solutions():
-    xxx = get_xxx_from_file()
+    info = get_info_from_file()
+    graph = build_graph(info)
+    print(get_shortest_route(graph))
 
 
 if __name__ == "__main__":
