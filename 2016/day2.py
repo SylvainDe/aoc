@@ -8,7 +8,12 @@ def get_instructions_from_file(file_path="day2_input.txt"):
 
 
 def dict_from_grid(grid):
-    return {(i, j): val for i, line in enumerate(grid) for j, val in enumerate(line)}
+    return {
+        (i, j): val
+        for i, line in enumerate(grid)
+        for j, val in enumerate(line)
+        if val != " "
+    }
 
 
 directions = {
@@ -38,8 +43,8 @@ def follow_instruction(graph, instruction, start):
     return p
 
 
-def follow_instructions(grid, instructions):
-    p = (1, 1)
+def follow_instructions(grid, instructions, start):
+    p = start
     points = dict_from_grid(grid)
     graph = get_graph_from_points(points)
     ret = []
@@ -50,6 +55,15 @@ def follow_instructions(grid, instructions):
 
 
 keypad = ["123", "456", "789"]
+start = (1, 1)
+keypad2 = [
+    "  1",
+    " 234",
+    "56789",
+    " ABC",
+    "  D",
+]
+start2 = (2, 0)
 
 
 def run_tests():
@@ -59,12 +73,14 @@ def run_tests():
         "LURDL",
         "UUUUD",
     ]
-    assert follow_instructions(keypad, instructions) == "1985"
+    assert follow_instructions(keypad, instructions, start) == "1985"
+    assert follow_instructions(keypad2, instructions, start2) == "5DB3"
 
 
 def get_solutions():
     instructions = get_instructions_from_file()
-    print(follow_instructions(keypad, instructions))
+    print(follow_instructions(keypad, instructions, start))
+    print(follow_instructions(keypad2, instructions, start2))
 
 
 if __name__ == "__main__":
