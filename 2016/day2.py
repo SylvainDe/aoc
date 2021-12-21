@@ -2,17 +2,69 @@
 import datetime
 
 
-def get_xxx_from_file(file_path="day2_input.txt"):
+def get_instructions_from_file(file_path="day2_input.txt"):
     with open(file_path) as f:
         return [l.strip() for l in f]
 
 
+def dict_from_grid(grid):
+    return {(i, j): val for i, line in enumerate(grid) for j, val in enumerate(line)}
+
+
+directions = {
+    "U": (-1, 0),
+    "D": (1, 0),
+    "R": (0, 1),
+    "L": (0, -1),
+}
+
+
+def get_neighbours(point):
+    x, y = point
+    return {l: (x + dx, y + dy) for l, (dx, dy) in directions.items()}
+
+
+def get_graph_from_points(points):
+    graph = dict()
+    for p in points:
+        graph[p] = {l: p2 for l, p2 in get_neighbours(p).items() if p2 in points}
+    return graph
+
+
+def follow_instruction(graph, instruction, start):
+    p = start
+    for ins in instruction:
+        p = graph[p].get(ins, p)
+    return p
+
+
+def follow_instructions(grid, instructions):
+    p = (1, 1)
+    points = dict_from_grid(grid)
+    graph = get_graph_from_points(points)
+    ret = []
+    for ins in instructions:
+        p = follow_instruction(graph, ins, p)
+        ret.append(points[p])
+    return "".join(ret)
+
+
+keypad = ["123", "456", "789"]
+
+
 def run_tests():
-    xxx = ""
+    instructions = [
+        "ULL",
+        "RRDDD",
+        "LURDL",
+        "UUUUD",
+    ]
+    assert follow_instructions(keypad, instructions) == "1985"
 
 
 def get_solutions():
-    xxx = get_xxx_from_file()
+    instructions = get_instructions_from_file()
+    print(follow_instructions(keypad, instructions))
 
 
 if __name__ == "__main__":

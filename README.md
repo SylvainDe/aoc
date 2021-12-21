@@ -210,3 +210,5 @@ https://adventofcode.com/2018/day/24 : 0/2
 https://adventofcode.com/2018/day/25 : 0/2
 
 https://adventofcode.com/2016/day/1 : 0/2
+
+https://adventofcode.com/2016/day/2 : 0/2
