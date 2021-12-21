@@ -24,13 +24,28 @@ turns = {
 
 def follow_sequence(sequence):
     x, y, direc = 0, 0, 0
+    yield x, y
     for seq in sequence:
         turn, walk = seq[0], int(seq[1:])
         direc = (direc + turns[turn]) % 4
         dx, dy = directions[direc]
-        x += dx * walk
-        y += dy * walk
-    return x, y
+        for _ in range(walk):
+            x += dx
+            y += dy
+            yield x, y
+
+
+def destination(sequence):
+    return list(follow_sequence(sequence))[-1]
+
+
+def double_visit(sequence):
+    seen = set()
+    for point in follow_sequence(sequence):
+        if point in seen:
+            return point
+        seen.add(point)
+    assert False
 
 
 def dist(point):
@@ -40,16 +55,19 @@ def dist(point):
 
 def run_tests():
     sequence = "R2, L3".split(", ")
-    assert follow_sequence(sequence) == (2, 3)
+    assert destination(sequence) == (2, 3)
     sequence = "R2, R2, R2".split(", ")
-    assert follow_sequence(sequence) == (0, -2)
+    assert destination(sequence) == (0, -2)
     sequence = "R5, L5, R5, R3".split(", ")
-    assert follow_sequence(sequence) == (10, 2)
+    assert destination(sequence) == (10, 2)
+    sequence = "R8, R4, R4, R8".split(", ")
+    assert double_visit(sequence) == (4, 0)
 
 
 def get_solutions():
     sequence = get_sequence_from_file()
-    print(dist(follow_sequence(sequence)))
+    print(dist(destination(sequence)))
+    print(dist(double_visit(sequence)))
 
 
 if __name__ == "__main__":
