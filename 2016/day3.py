@@ -2,17 +2,28 @@
 import datetime
 
 
-def get_xxx_from_file(file_path="day3_input.txt"):
+def get_triangle_from_line(line):
+    return tuple(int(v) for v in line.split())
+
+
+def get_triangles_from_file(file_path="day3_input.txt"):
     with open(file_path) as f:
-        return [l.strip() for l in f]
+        return [get_triangle_from_line(l.strip()) for l in f]
+
+
+def triangle_is_possible(t):
+    a, b, c = sorted(t)
+    return a + b > c
 
 
 def run_tests():
-    xxx = ""
+    assert not triangle_is_possible((5, 10, 25))
+    assert triangle_is_possible((5, 10, 12))
 
 
 def get_solutions():
-    xxx = get_xxx_from_file()
+    triangles = get_triangles_from_file()
+    print(sum(triangle_is_possible(t) for t in triangles))
 
 
 if __name__ == "__main__":
