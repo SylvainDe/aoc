@@ -29,11 +29,10 @@ def get_solutions():
     triangles_iter = iter(triangles)
     while True:
         try:
-            l1 = next(triangles_iter)
-            l2 = next(triangles_iter)
-            l3 = next(triangles_iter)
-            for i in (0, 1, 2):
-                s += triangle_is_possible((l1[i], l2[i], l3[i]))
+            for t in zip(
+                next(triangles_iter), next(triangles_iter), next(triangles_iter)
+            ):
+                s += triangle_is_possible(t)
         except StopIteration:
             break
     print(s)
