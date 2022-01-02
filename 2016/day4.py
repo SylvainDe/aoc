@@ -2,6 +2,8 @@
 import datetime
 import re
 import collections
+import string
+
 
 Room = collections.namedtuple("Room", ("name", "sector", "checksum"))
 
@@ -37,6 +39,16 @@ def is_real(room):
     return get_checksum(room.name) == room.checksum
 
 
+def caesar_cipher(n):
+    az = string.ascii_lowercase
+    shift = n % len(az)
+    return str.maketrans(az + "-", az[shift:] + az[:shift] + " ")
+
+
+def decrypt_name(room):
+    return room.name.translate(caesar_cipher(room.sector))
+
+
 def run_tests():
     assert is_real(get_room_from_string("aaaaa-bbb-z-y-x-123[abxyz]"))
     assert is_real(get_room_from_string("a-b-c-d-e-f-g-h-987[abcde]"))
@@ -47,6 +59,10 @@ def run_tests():
 def get_solutions():
     rooms = get_rooms_from_file()
     print(sum(room.sector for room in rooms if is_real(room)))
+    for room in rooms:
+        d = decrypt_name(room)
+        if "north" in d:
+            print(room.sector)
 
 
 if __name__ == "__main__":
