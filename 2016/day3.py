@@ -25,6 +25,19 @@ def get_solutions():
     triangles = get_triangles_from_file()
     print(sum(triangle_is_possible(t) for t in triangles))
 
+    s = 0
+    triangles_iter = iter(triangles)
+    while True:
+        try:
+            l1 = next(triangles_iter)
+            l2 = next(triangles_iter)
+            l3 = next(triangles_iter)
+            for i in (0, 1, 2):
+                s += triangle_is_possible((l1[i], l2[i], l3[i]))
+        except StopIteration:
+            break
+    print(s)
+
 
 if __name__ == "__main__":
     begin = datetime.datetime.now()
