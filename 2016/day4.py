@@ -1,18 +1,52 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
+import re
+import collections
+
+Room = collections.namedtuple("Room", ("name", "sector", "checksum"))
+
+# Example: aaaaa-bbb-z-y-x-123[abxyz]
+room_re = r"(?P<name>[a-z-]+)-(?P<sector>[0-9]+)\[(?P<checksum>.*)\]"
 
 
-def get_xxx_from_file(file_path="day4_input.txt"):
+def get_room_from_string(s):
+    match = re.match(room_re, s)
+    d = match.groupdict()
+    return Room(d["name"], int(d["sector"]), d["checksum"])
+
+
+def get_rooms_from_file(file_path="day4_input.txt"):
     with open(file_path) as f:
-        return [l.strip() for l in f]
+        return [get_room_from_string(l.strip()) for l in f]
+
+
+def get_checksum(name):
+    groups = []
+    prev_n = None
+    for d, n in collections.Counter(name).most_common():
+        if d != "-":
+            if prev_n != n:
+                groups.append([])
+            groups[-1].append(d)
+            prev_n = n
+    check = "".join("".join(sorted(g)) for g in groups)
+    return check[:5]
+
+
+def is_real(room):
+    return get_checksum(room.name) == room.checksum
 
 
 def run_tests():
-    xxx = ""
+    assert is_real(get_room_from_string("aaaaa-bbb-z-y-x-123[abxyz]"))
+    assert is_real(get_room_from_string("a-b-c-d-e-f-g-h-987[abcde]"))
+    assert is_real(get_room_from_string("not-a-real-room-404[oarel]"))
+    assert not is_real(get_room_from_string("totally-real-room-200[decoy]"))
 
 
 def get_solutions():
-    xxx = get_xxx_from_file()
+    rooms = get_rooms_from_file()
+    print(sum(room.sector for room in rooms if is_real(room)))
 
 
 if __name__ == "__main__":
