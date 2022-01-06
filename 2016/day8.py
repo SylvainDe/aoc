@@ -7,7 +7,7 @@ def get_instructions_from_file(file_path="day8_input.txt"):
         return [l.strip() for l in f]
 
 
-def show_pixels(pixels):
+def show_pixels(pixels, width, height):
     for y in range(height):
         print("".join("#" if (x, y) in pixels else "." for x in range(width)))
     print()
@@ -59,7 +59,9 @@ def run_tests():
 
 def get_solutions():
     instructions = get_instructions_from_file()
-    print(len(apply_instructions(instructions, width=50, height=6)))
+    ret = apply_instructions(instructions, width=50, height=6)
+    print(len(ret))
+    show_pixels(ret, width=50, height=6)
 
 
 if __name__ == "__main__":
