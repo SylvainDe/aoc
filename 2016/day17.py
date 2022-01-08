@@ -34,7 +34,7 @@ def point_is_valid(point):
     return 0 <= x <= 3 and 0 <= y <= 3
 
 
-def shortest_path(passcode):
+def paths(passcode):
     start = (0, 0)
     end = (3, 3)
     paths = collections.deque([(passcode, start)])
@@ -42,32 +42,22 @@ def shortest_path(passcode):
         path, pos = paths.popleft()
         if pos == end:
             assert path.startswith(passcode)
-            return path[len(passcode) :]
-        for d in directions(path):
-            pos2 = point_in_dir(pos, d)
-            if point_is_valid(pos2):
-                paths.append((path + d, pos2))
-    return None
-
-
-def longest_path(passcode):
-    start = (0, 0)
-    end = (3, 3)
-    paths = collections.deque([(passcode, start)])
-    longest_path = 0
-    while paths:
-        path, pos = paths.popleft()
-        if pos == end:
-            assert path.startswith(passcode)
-            path_len = len(path[len(passcode) :])
-            assert path_len >= longest_path
-            longest_path = path_len
+            yield path[len(passcode) :]
         else:
             for d in directions(path):
                 pos2 = point_in_dir(pos, d)
                 if point_is_valid(pos2):
                     paths.append((path + d, pos2))
-    return longest_path
+
+
+def shortest_path(passcode):
+    for p in paths(passcode):
+        return p
+
+
+def longest_path(passcode):
+    p = list(paths(passcode))
+    return len(p[-1]) if p else 0
 
 
 def run_tests():
