@@ -11,8 +11,11 @@ def get_number_from_file(file_path="day13_input.txt"):
 
 def is_open(point, number):
     x, y = point
-    n = bin(x * x + 3 * x + 2 * x * y + y + y * y + number).count("1")
-    return n % 2 == 0
+    return (
+        x >= 0
+        and y >= 0
+        and (bin(x * x + 3 * x + 2 * x * y + y + y * y + number).count("1") % 2 == 0)
+    )
 
 
 neigh = [
@@ -45,8 +48,8 @@ def show_distances(number, distances):
 
     x_vals = [x for x, _ in distances.keys()]
     y_vals = [y for _, y in distances.keys()]
-    x_range = list(range(0, 1 + max(x_vals)))
-    y_range = list(range(0, 1 + max(y_vals)))
+    x_range = list(range(min(x_vals), 1 + max(x_vals)))
+    y_range = list(range(min(y_vals), 1 + max(y_vals)))
     for y in y_range:
         print("".join(point_str((x, y)) for x in x_range))
     print()
@@ -71,6 +74,24 @@ def shortest_path(start, end, number):
     return distances[end]
 
 
+def reachable(start, number, steps):
+    distances = dict()
+    assert is_open(start, number)
+    points = collections.deque([(start, 0)])
+    while points:
+        p, d = points.popleft()
+        if d > steps:
+            continue
+        if p in distances:
+            assert d >= distances[p]
+            continue
+        distances[p] = d
+        for n in neighbours(p, number):
+            points.append((n, d + 1))
+    # show_distances(number, distances)
+    return distances
+
+
 def run_tests():
     number = 10
     assert shortest_path((1, 1), (7, 4), number) == 11
@@ -79,6 +100,7 @@ def run_tests():
 def get_solutions():
     number = get_number_from_file()
     print(shortest_path((1, 1), (31, 39), number))
+    print(len(reachable((1, 1), number, 50)))
 
 
 if __name__ == "__main__":
