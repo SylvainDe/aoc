@@ -1,18 +1,84 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
+import collections
 
 
-def get_xxx_from_file(file_path="day13_input.txt"):
+def get_number_from_file(file_path="day13_input.txt"):
     with open(file_path) as f:
-        return [l.strip() for l in f]
+        for l in f:
+            return int(l.strip())
+
+
+def is_open(point, number):
+    x, y = point
+    n = bin(x * x + 3 * x + 2 * x * y + y + y * y + number).count("1")
+    return n % 2 == 0
+
+
+neigh = [
+    (-1, 0),
+    (1, 0),
+    (0, -1),
+    (0, 1),
+]
+
+
+def neighbours(point, number):
+    x, y = point
+    for dx, dy in neigh:
+        p = (x + dx, y + dy)
+        if is_open(p, number):
+            yield p
+
+
+def show_distances(number, distances):
+    max_d = max(distances.values())
+    width = len(str(max_d)) + 2
+
+    def point_str(p):
+        if p in distances:
+            return str(distances[p]).center(width, " ")
+        elif is_open(p, number):
+            return "#" * width
+        else:
+            return " " * width
+
+    x_vals = [x for x, _ in distances.keys()]
+    y_vals = [y for _, y in distances.keys()]
+    x_range = list(range(0, 1 + max(x_vals)))
+    y_range = list(range(0, 1 + max(y_vals)))
+    for y in y_range:
+        print("".join(point_str((x, y)) for x in x_range))
+    print()
+
+
+def shortest_path(start, end, number):
+    distances = dict()
+    assert is_open(start, number)
+    assert is_open(end, number)
+    points = collections.deque([(start, 0)])
+    while points:
+        p, d = points.popleft()
+        if p in distances:
+            assert d >= distances[p]
+            continue
+        distances[p] = d
+        if p == end:
+            break
+        for n in neighbours(p, number):
+            points.append((n, d + 1))
+    # show_distances(number, distances)
+    return distances[end]
 
 
 def run_tests():
-    xxx = ""
+    number = 10
+    assert shortest_path((1, 1), (7, 4), number) == 11
 
 
 def get_solutions():
-    xxx = get_xxx_from_file()
+    number = get_number_from_file()
+    print(shortest_path((1, 1), (31, 39), number))
 
 
 if __name__ == "__main__":
