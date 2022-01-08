@@ -63,15 +63,13 @@ def shortest_path(start, end, number):
     while points:
         p, d = points.popleft()
         if p in distances:
-            assert d >= distances[p]
+            assert d == distances[p]
             continue
         distances[p] = d
         if p == end:
-            break
-        for n in neighbours(p, number):
-            points.append((n, d + 1))
-    # show_distances(number, distances)
-    return distances[end]
+            return distances[end]
+        points.extend((n, d + 1) for n in neighbours(p, number) if n not in distances)
+    assert False
 
 
 def reachable(start, number, steps):
@@ -81,14 +79,12 @@ def reachable(start, number, steps):
     while points:
         p, d = points.popleft()
         if d > steps:
-            continue
+            break
         if p in distances:
-            assert d >= distances[p]
+            assert d == distances[p]
             continue
         distances[p] = d
-        for n in neighbours(p, number):
-            points.append((n, d + 1))
-    # show_distances(number, distances)
+        points.extend((n, d + 1) for n in neighbours(p, number) if n not in distances)
     return distances
 
 
