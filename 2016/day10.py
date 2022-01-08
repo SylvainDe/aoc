@@ -55,7 +55,7 @@ def follow_instructions(instructions):
                     bots_to_action.append(dest_nb)
             else:
                 assert False
-    return comparisons
+    return comparisons, outputs
 
 
 def run_tests():
@@ -67,18 +67,25 @@ def run_tests():
         "bot 0 gives low to output 2 and high to output 0",
         "value 2 goes to bot 2",
     ]
-    assert follow_instructions(instructions) == [(2, 2, 5), (1, 2, 3), (0, 3, 5)]
+    comp, out = follow_instructions(instructions)
+    assert comp == [(2, 2, 5), (1, 2, 3), (0, 3, 5)]
+    assert out == {1: [2], 2: [3], 0: [5]}
 
 
 def get_solutions():
     instructions = get_instructions_from_file()
-    follow_instructions(instructions)
-    for bot, low, high in follow_instructions(instructions):
+    comp, out = follow_instructions(instructions)
+    for bot, low, high in comp:
         if (low, high) == (17, 61):
             print(bot)
             break
     else:
         assert False
+    mult = 1
+    for chips in [out[0], out[1], out[2]]:
+        (val,) = chips
+        mult *= val
+    print(mult)
 
 
 if __name__ == "__main__":
