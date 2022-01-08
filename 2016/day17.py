@@ -50,6 +50,26 @@ def shortest_path(passcode):
     return None
 
 
+def longest_path(passcode):
+    start = (0, 0)
+    end = (3, 3)
+    paths = collections.deque([(passcode, start)])
+    longest_path = 0
+    while paths:
+        path, pos = paths.popleft()
+        if pos == end:
+            assert path.startswith(passcode)
+            path_len = len(path[len(passcode) :])
+            assert path_len >= longest_path
+            longest_path = path_len
+        else:
+            for d in directions(path):
+                pos2 = point_in_dir(pos, d)
+                if point_is_valid(pos2):
+                    paths.append((path + d, pos2))
+    return longest_path
+
+
 def run_tests():
     assert directions("hijkl") == ["U", "D", "L"]
     assert directions("hijklD") == ["U", "L", "R"]
@@ -60,11 +80,16 @@ def run_tests():
     assert shortest_path("ihgpwlah") == "DDRRRD"
     assert shortest_path("kglvqrro") == "DDUDRLRRUDRD"
     assert shortest_path("ulqzkmiv") == "DRURDRUDDLLDLUURRDULRLDUUDDDRR"
+    assert longest_path("hijkl") == 0
+    assert longest_path("ihgpwlah") == 370
+    assert longest_path("kglvqrro") == 492
+    assert longest_path("ulqzkmiv") == 830
 
 
 def get_solutions():
     passcode = get_passcode_from_file()
     print(shortest_path(passcode))
+    print(longest_path(passcode))
 
 
 if __name__ == "__main__":
