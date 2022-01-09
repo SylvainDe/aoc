@@ -40,6 +40,7 @@ def run_tests():
 def get_solutions():
     tiles = get_tiles_from_file()
     print(get_nb_safe_tiles(tiles, 40))
+    print(get_nb_safe_tiles(tiles, 400000))
 
 
 if __name__ == "__main__":
