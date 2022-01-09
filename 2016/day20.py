@@ -2,17 +2,38 @@
 import datetime
 
 
-def get_xxx_from_file(file_path="day20_input.txt"):
-    with open(file_path) as f:
-        return [l.strip() for l in f]
+def get_range_from_str(s, sep="-"):
+    left, mid, right = s.partition(sep)
+    assert mid == sep
+    return int(left), int(right)
 
+
+def get_ip_range_from_file(file_path="day20_input.txt"):
+    with open(file_path) as f:
+        return [get_range_from_str(l.strip()) for l in f]
+
+
+def lowest_ip(ip_range):
+    ip_range = sorted(ip_range)
+    last_allowed = 0
+    for beg, end in ip_range:
+        if beg > last_allowed:
+            break
+        last_allowed = max(end+1, last_allowed)
+    return last_allowed
 
 def run_tests():
-    xxx = ""
-
+    ip_range = [
+        "5-8",
+        "0-2",
+        "4-7",
+    ]
+    ip_range = [get_range_from_str(s) for s in ip_range]
+    assert lowest_ip(ip_range) == 3
 
 def get_solutions():
-    xxx = get_xxx_from_file()
+    ip_range = get_ip_range_from_file()
+    print(lowest_ip(ip_range))
 
 
 if __name__ == "__main__":
