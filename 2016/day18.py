@@ -2,17 +2,44 @@
 import datetime
 
 
-def get_xxx_from_file(file_path="day18_input.txt"):
+def get_tiles_from_file(file_path="day18_input.txt"):
     with open(file_path) as f:
-        return [l.strip() for l in f]
+        for l in f:
+            return l.strip()
+
+
+traps = set([("^", "^", "."), (".", "^", "^"), ("^", ".", "."), (".", ".", "^"),])
+
+
+def get_next_line(tiles):
+    return "".join(
+        "^" if val in traps else "." for val in zip("." + tiles, tiles, tiles[1:] + ".")
+    )
+
+
+def get_tiles(tiles, rows):
+    yield tiles
+    for r in range(rows - 1):
+        tiles = get_next_line(tiles)
+        yield tiles
+
+
+def get_nb_safe_tiles(tiles, rows):
+    return "".join(get_tiles(tiles, rows)).count(".")
 
 
 def run_tests():
-    xxx = ""
+    tiles = "..^^."
+    tiles = get_next_line(tiles)
+    assert tiles == ".^^^^"
+    tiles = get_next_line(tiles)
+    assert tiles == "^^..^"
+    assert get_nb_safe_tiles(".^^.^.^^^^", 10) == 38
 
 
 def get_solutions():
-    xxx = get_xxx_from_file()
+    tiles = get_tiles_from_file()
+    print(get_nb_safe_tiles(tiles, 40))
 
 
 if __name__ == "__main__":
