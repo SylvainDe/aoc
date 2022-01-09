@@ -19,8 +19,22 @@ def lowest_ip(ip_range):
     for beg, end in ip_range:
         if beg > last_allowed:
             break
-        last_allowed = max(end+1, last_allowed)
+        last_allowed = max(end + 1, last_allowed)
     return last_allowed
+
+
+def nb_ip(ip_range, maxi):
+    ip_range = sorted(ip_range)
+    nb_ip = 0
+    range_beg = 0
+    for beg, end in ip_range:
+        if beg > range_beg:
+            nb_ip += beg - range_beg
+        range_beg = max(end + 1, range_beg)
+    if maxi > range_beg:
+        nb_ip += maxi - range_beg
+    return nb_ip
+
 
 def run_tests():
     ip_range = [
@@ -30,10 +44,13 @@ def run_tests():
     ]
     ip_range = [get_range_from_str(s) for s in ip_range]
     assert lowest_ip(ip_range) == 3
+    assert nb_ip(ip_range, 10) == 2
+
 
 def get_solutions():
     ip_range = get_ip_range_from_file()
     print(lowest_ip(ip_range))
+    print(nb_ip(ip_range, 4294967295))
 
 
 if __name__ == "__main__":
