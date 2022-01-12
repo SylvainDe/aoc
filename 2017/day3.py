@@ -1,6 +1,7 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
 import math
+import itertools
 
 
 def get_int_from_file(file_path="day3_input.txt"):
@@ -68,17 +69,50 @@ def distance_to_center(n):
     return sum(abs(c1 - c2) for c1, c2 in zip(center, pos))
 
 
+def get_spiral_position():
+    x, y = 0, 0
+    yield x, y
+    directions = [(1, 0), (0, 1), (-1, 0), (0, -1)]
+    direc = 0
+    for step in itertools.count(1):
+        for _ in range(2):
+            dx, dy = directions[direc]
+            for _ in range(step):
+                x += dx
+                y += dy
+                yield x, y
+            direc = (direc + 1) % 4
+
+
+def get_neighbours(point):
+    x, y = point
+    for dx, dy in itertools.product([-1, 0, 1], repeat=2):
+        if (dx, dy) != (0, 0):
+            yield x + dx, y + dy
+
+
+def part2(target):
+    values = dict()
+    for p in get_spiral_position():
+        val = sum(values.get(n, 0) for n in get_neighbours(p)) if values else 1
+        if val > target:
+            return val
+        values[p] = val
+
+
 def run_tests():
     # Tests provided
     assert distance_to_center(1) == 0
     assert distance_to_center(12) == 3
     assert distance_to_center(23) == 2
     assert distance_to_center(1024) == 31
+    assert part2(805) == 806
 
 
 def get_solutions():
     n = get_int_from_file()
     print(distance_to_center(n))
+    print(part2(n))
 
 
 if __name__ == "__main__":
