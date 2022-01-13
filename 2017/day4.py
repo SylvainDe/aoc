@@ -12,15 +12,24 @@ def passphrase_is_valid(s):
     return len(lst) == len(set(lst))
 
 
+def passphrase_is_valid2(s):
+    lst = ["".join(sorted(w)) for w in s.split(" ")]
+    return len(lst) == len(set(lst))
+
+
 def run_tests():
     assert passphrase_is_valid("aa bb cc dd ee")
     assert not passphrase_is_valid("aa bb cc dd aa")
     assert passphrase_is_valid("aa bb cc dd aaa")
+    assert passphrase_is_valid2("abcde fghij")
+    assert not passphrase_is_valid2("abcde xyz ecdab")
+    assert passphrase_is_valid2("iiii oiii ooii oooi oooo")
 
 
 def get_solutions():
     passphrases = get_passphrases_from_file()
     print(sum(passphrase_is_valid(s) for s in passphrases))
+    print(sum(passphrase_is_valid2(s) for s in passphrases))
 
 
 if __name__ == "__main__":
