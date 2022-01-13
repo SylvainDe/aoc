@@ -2,17 +2,25 @@
 import datetime
 
 
-def get_xxx_from_file(file_path="day4_input.txt"):
+def get_passphrases_from_file(file_path="day4_input.txt"):
     with open(file_path) as f:
         return [l.strip() for l in f]
 
 
+def passphrase_is_valid(s):
+    lst = s.split(" ")
+    return len(lst) == len(set(lst))
+
+
 def run_tests():
-    xxx = ""
+    assert passphrase_is_valid("aa bb cc dd ee")
+    assert not passphrase_is_valid("aa bb cc dd aa")
+    assert passphrase_is_valid("aa bb cc dd aaa")
 
 
 def get_solutions():
-    xxx = get_xxx_from_file()
+    passphrases = get_passphrases_from_file()
+    print(sum(passphrase_is_valid(s) for s in passphrases))
 
 
 if __name__ == "__main__":
