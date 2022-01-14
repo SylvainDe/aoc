@@ -9,21 +9,21 @@ def get_program_from_string(s):
     left, mid, right = s.partition(" -> ")
     lst = right.split(", ") if right else []
     name, weight = re.match(left_re, left).groups()
-    return name, int(weight), lst
+    return name, (int(weight), lst)
 
 
 def get_prog_from_file(file_path="day7_input.txt"):
     with open(file_path) as f:
-        return [get_program_from_string(l.strip()) for l in f]
+        return dict(get_program_from_string(l.strip()) for l in f)
 
 
 def get_bottom(programs):
     parents = dict()
-    for name, _, lst in programs:
+    for name, (_, lst) in programs.items():
         for e in lst:
             assert e not in parents
             parents[e] = name
-    bottoms = [name for name, _, lst in programs if name not in parents]
+    bottoms = list(programs.keys() - parents)
     assert len(bottoms) == 1
     return bottoms[0]
 
@@ -44,7 +44,7 @@ def run_tests():
         "gyxo (61)",
         "cntj (57)",
     ]
-    prog = [get_program_from_string(s) for s in prog]
+    prog = dict(get_program_from_string(s) for s in prog)
     assert get_bottom(prog) == "tknk"
 
 
