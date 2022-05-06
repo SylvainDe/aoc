@@ -3,7 +3,7 @@ use std::fs::File;
 use std::io::BufRead;
 use std::io::BufReader;
 
-const INPUT_FILEPATH: &str = "res/input.txt";
+const INPUT_FILEPATH: &str = "res/2021/day1/input.txt";
 
 type Int = u32;
 

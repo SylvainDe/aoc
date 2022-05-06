@@ -1,7 +1,16 @@
 [package]
-name = "day1"
+name = "aoc"
 version = "0.1.0"
 edition = "2021"
+
+[[bin]]
+name = "day1_2021"
+path = "src/2021/day1/main.rs"
+
+[[bin]]
+name = "day2_2021"
+path = "src/2021/day2/main.rs"
+
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
