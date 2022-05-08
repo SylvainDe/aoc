@@ -5,6 +5,8 @@ use std::io::BufReader;
 
 const INPUT_FILEPATH: &str = "res/2021/day2/input.txt";
 
+type Int = i32;
+
 #[derive(Debug, PartialEq)]
 enum Action {
     Forward,
@@ -27,7 +29,7 @@ impl FromStr for Action {
 #[derive(Debug, PartialEq)]
 struct Command {
     action: Action,
-    value: i32,
+    value: Int,
 }
 
 impl FromStr for Command {
@@ -49,8 +51,8 @@ fn get_input_from_file(filepath: &str) -> Vec<Command> {
         .collect()
 }
 
-fn part1(commands: &Vec<Command>) -> i32 {
-    let (mut depth, mut position): (i32, i32) = (0, 0);
+fn part1(commands: &Vec<Command>) -> Int {
+    let (mut depth, mut position): (Int, Int) = (0, 0);
     for Command { action, value } in commands {
         match action {
             Action::Forward => position += value,
@@ -61,8 +63,8 @@ fn part1(commands: &Vec<Command>) -> i32 {
     depth * position
 }
 
-fn part2(commands: &Vec<Command>) -> i32 {
-    let (mut depth, mut position, mut aim): (i32, i32, i32) = (0, 0, 0);
+fn part2(commands: &Vec<Command>) -> Int {
+    let (mut depth, mut position, mut aim): (Int, Int, Int) = (0, 0, 0);
     for Command { action, value } in commands {
         match action {
             Action::Forward => {

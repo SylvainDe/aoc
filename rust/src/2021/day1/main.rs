@@ -36,8 +36,12 @@ fn part2(depths: &[Int]) -> usize {
 fn main() {
     println!("Hello, world!");
     let numbers = get_input(INPUT_FILEPATH);
-    println!("{:?}", part1(&numbers));
-    println!("{:?}", part2(&numbers));
+    let res = part1(&numbers);
+    println!("{:?}", res);
+    assert_eq!(res, 1832);
+    let res2 = part2(&numbers);
+    println!("{:?}", res2);
+    assert_eq!(res2, 1858);
 }
 
 #[cfg(test)]
