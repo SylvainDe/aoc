@@ -27,7 +27,7 @@ impl FromStr for Action {
 #[derive(Debug, PartialEq)]
 struct Command {
     action: Action,
-    value: u32,
+    value: i32,
 }
 
 impl FromStr for Command {
@@ -49,13 +49,28 @@ fn get_input_from_file(filepath: &str) -> Vec<Command> {
         .collect()
 }
 
-fn part1(commands: Vec<Command>) -> i32 {
+fn part1(commands: &Vec<Command>) -> i32 {
     let (mut depth, mut position): (i32, i32) = (0, 0);
     for Command { action, value } in commands {
         match action {
-            Action::Forward => position += value as i32,
-            Action::Down => depth += value as i32,
-            Action::Up => depth -= value as i32,
+            Action::Forward => position += value,
+            Action::Down => depth += value,
+            Action::Up => depth -= value,
+        }
+    }
+    depth * position
+}
+
+fn part2(commands: &Vec<Command>) -> i32 {
+    let (mut depth, mut position, mut aim): (i32, i32, i32) = (0, 0, 0);
+    for Command { action, value } in commands {
+        match action {
+            Action::Forward => {
+                position += value;
+                depth += aim * value
+            }
+            Action::Down => aim += value,
+            Action::Up => aim -= value,
         }
     }
     depth * position
@@ -64,7 +79,12 @@ fn part1(commands: Vec<Command>) -> i32 {
 fn main() {
     println!("Hello, world!");
     let commands = get_input_from_file(INPUT_FILEPATH);
-    println!("{:?}", part1(commands));
+    let res = part1(&commands);
+    println!("{:?}", res);
+    assert_eq!(res, 1670340);
+    let res2 = part2(&commands);
+    println!("{:?}", res2);
+    assert_eq!(res2, 1954293920);
 }
 
 #[cfg(test)]
@@ -110,7 +130,7 @@ mod tests {
 
     #[test]
     fn command_from_str_invalid_values() {
-        assert!(Command::from_str("up -3").is_err());
+        assert!(Command::from_str("up three").is_err());
         assert!(Command::from_str("backward 2").is_err());
     }
 
@@ -129,6 +149,11 @@ forward 2";
 
     #[test]
     fn test_part1() {
-        assert_eq!(part1(get_input_from_str(EXAMPLE)), 150);
+        assert_eq!(part1(&get_input_from_str(EXAMPLE)), 150);
+    }
+
+    #[test]
+    fn test_part2() {
+        assert_eq!(part2(&get_input_from_str(EXAMPLE)), 900);
     }
 }
