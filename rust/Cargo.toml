@@ -4,6 +4,10 @@ version = "0.1.0"
 edition = "2021"
 
 [[bin]]
+name = "template"
+path = "src/template/main.rs"
+
+[[bin]]
 name = "day1_2021"
 path = "src/2021/day1/main.rs"
 

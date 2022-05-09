@@ -1,7 +1,5 @@
 use core::str::FromStr;
-use std::fs::File;
-use std::io::BufRead;
-use std::io::BufReader;
+use std::fs;
 
 const INPUT_FILEPATH: &str = "res/2021/day2/input.txt";
 
@@ -44,11 +42,14 @@ impl FromStr for Command {
     }
 }
 
-fn get_input_from_file(filepath: &str) -> Vec<Command> {
-    BufReader::new(File::open(filepath).expect("Could not open file"))
-        .lines()
-        .map(|line| Command::from_str(&line.unwrap()).unwrap())
+fn get_input_from_str(s: &str) -> Vec<Command> {
+    s.lines()
+        .map(|line| Command::from_str(line).unwrap())
         .collect()
+}
+
+fn get_input_from_file(filepath: &str) -> Vec<Command> {
+    get_input_from_str(&fs::read_to_string(filepath).expect("Could not open file"))
 }
 
 fn part1(commands: &Vec<Command>) -> Int {
@@ -79,7 +80,6 @@ fn part2(commands: &Vec<Command>) -> Int {
 }
 
 fn main() {
-    println!("Hello, world!");
     let commands = get_input_from_file(INPUT_FILEPATH);
     let res = part1(&commands);
     println!("{:?}", res);
@@ -142,12 +142,6 @@ forward 8
 up 3
 down 8
 forward 2";
-
-    fn get_input_from_str(s: &str) -> Vec<Command> {
-        s.split('\n')
-            .map(|line| Command::from_str(line).unwrap())
-            .collect()
-    }
 
     #[test]
     fn test_part1() {

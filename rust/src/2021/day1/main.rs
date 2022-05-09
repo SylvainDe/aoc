@@ -1,21 +1,21 @@
 use itertools::Itertools;
-use std::fs::File;
-use std::io::BufRead;
-use std::io::BufReader;
+use std::fs;
 
 const INPUT_FILEPATH: &str = "res/2021/day1/input.txt";
 
 type Int = u32;
 
-fn get_input(filepath: &str) -> Vec<Int> {
-    BufReader::new(File::open(filepath).expect("Could not open file"))
-        .lines()
+fn get_input_from_str(s: &str) -> Vec<Int> {
+    s.lines()
         .map(|line| {
-            line.unwrap()
-                .parse::<Int>()
+            line.parse::<Int>()
                 .expect("Could not convert line to integer")
         })
         .collect()
+}
+
+fn get_input_from_file(filepath: &str) -> Vec<Int> {
+    get_input_from_str(&fs::read_to_string(filepath).expect("Could not open file"))
 }
 
 fn part1(depths: &[Int]) -> usize {
@@ -34,8 +34,7 @@ fn part2(depths: &[Int]) -> usize {
 }
 
 fn main() {
-    println!("Hello, world!");
-    let numbers = get_input(INPUT_FILEPATH);
+    let numbers = get_input_from_file(INPUT_FILEPATH);
     let res = part1(&numbers);
     println!("{:?}", res);
     assert_eq!(res, 1832);
