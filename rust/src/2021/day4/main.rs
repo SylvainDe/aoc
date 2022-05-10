@@ -1,5 +1,6 @@
 use std::collections::HashSet;
 use std::fs;
+use std::iter::zip;
 
 const INPUT_FILEPATH: &str = "res/2021/day4/input.txt";
 
@@ -19,6 +20,7 @@ fn get_input_from_str(string: &str) -> BingoGame {
         .split(',')
         .map(|nb| nb.parse::<Int>().unwrap())
         .collect();
+    line_it.next();
     let mut grids = Vec::<Grid>::new();
     let mut grid = Grid::new();
     for line in line_it {
@@ -35,6 +37,7 @@ fn get_input_from_str(string: &str) -> BingoGame {
             grid = Grid::new();
         }
     }
+    grids.push(grid);
     BingoGame { numbers, grids }
 }
 
@@ -42,7 +45,7 @@ fn get_input_from_file(filepath: &str) -> BingoGame {
     get_input_from_str(&fs::read_to_string(filepath).expect("Could not open file"))
 }
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Clone)]
 enum BingoState {
     InProgress,
     Finished(Int),
@@ -68,58 +71,61 @@ impl Scorable for Grid {
     fn score(&self, numbers: &HashSet<Int>, last_number: Int) -> BingoState {
         // Look for horizontal lines
         for line in self.iter() {
-            //println!( "{:?}", line.iter().filter(|n| { !numbers.contains(n) }).next());
+            if !line.iter().any(|n| !numbers.contains(n)) {
+                return BingoState::Finished(self.compute_score(numbers, last_number));
+            }
         }
-        BingoState::Finished(self.compute_score(numbers, last_number))
+        // Look for vertical lines
+        for i in 0..self[0].len() {
+            if !self.iter().any(|l| !numbers.contains(&l[i])) {
+                return BingoState::Finished(self.compute_score(numbers, last_number));
+            }
+        }
+        BingoState::InProgress
     }
 }
 
-fn part1(_arg: &BingoGame) -> Int {
-    let mut nbs = HashSet::<Int>::new();
-    for n in &_arg.numbers {
-        nbs.insert(*n);
-        for grid in &_arg.grids {
-            let s = grid.score(&nbs, *n);
-            //println!("{} {:?}", n, s);
+impl BingoGame {
+    fn play(&self) -> Vec<Int> {
+        // Store state (finished or not & score) for the different grids in a vector to
+        // avoid rechecking already finished grids
+        // A more efficient implementation could be to have a mapping from the numbers
+        // to the places where they appear (grid number and position)
+        let mut states = vec![BingoState::InProgress; self.grids.len()];
+        let mut nbs = HashSet::<Int>::new();
+        let mut scores = Vec::<Int>::new(); // I would have preferred a generator
+        for n in &self.numbers {
+            nbs.insert(*n);
+            for (state, grid) in zip(states.iter_mut(), self.grids.iter()) {
+                if *state == BingoState::InProgress {
+                    let s = grid.score(&nbs, *n);
+                    if let BingoState::Finished(score) = s {
+                        *state = s;
+                        scores.push(score);
+                    }
+                }
+            }
         }
+        scores
     }
-    0
 }
 
-fn part2(_arg: &BingoGame) -> Int {
-    0
+fn part1(_bingo: &BingoGame) -> Int {
+    _bingo.play()[0]
 }
 
-const EXAMPLE: &str = "7,4,9,5,11,17,23,2,0,14,21,24,10,16,13,6,15,25,12,22,18,20,8,19,3,26,1
-
-22 13 17 11  0
- 8  2 23  4 24
-21  9 14 16  7
- 6 10  3 18  5
- 1 12 20 15 19
-
- 3 15  0  2 22
- 9 18 13 17  5
-19  8  7 25 23
-20 11 10 24  4
-14 21 16 12  6
-
-14 21 17 24  4
-10 16 15  9 19
-18  8 23 26 20
-22 11 13  6  5
- 2  0 12  3  7";
+fn part2(_bingo: &BingoGame) -> Int {
+    *_bingo.play().last().unwrap()
+}
 
 fn main() {
     let bingo = get_input_from_file(INPUT_FILEPATH);
-    // let bingo = get_input_from_str(EXAMPLE);
-    //println!("{:?}", bingo);
     let res = part1(&bingo);
     println!("{:?}", res);
-    assert_eq!(res, 0);
+    assert_eq!(res, 50008);
     let res2 = part2(&bingo);
     println!("{:?}", res2);
-    assert_eq!(res2, 0);
+    assert_eq!(res2, 17408);
 }
 
 #[cfg(test)]
@@ -147,12 +153,17 @@ mod tests {
  2  0 12  3  7";
 
     #[test]
+    fn test_play() {
+        assert_eq!(get_input_from_str(EXAMPLE).play(), vec![4512, 2192, 1924]);
+    }
+
+    #[test]
     fn test_part1() {
-        assert_eq!(part1(&get_input_from_str(EXAMPLE)), 0);
+        assert_eq!(part1(&get_input_from_str(EXAMPLE)), 4512);
     }
 
     #[test]
     fn test_part2() {
-        assert_eq!(part2(&get_input_from_str(EXAMPLE)), 0);
+        assert_eq!(part2(&get_input_from_str(EXAMPLE)), 1924);
     }
 }
