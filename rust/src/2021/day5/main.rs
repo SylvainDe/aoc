@@ -4,7 +4,7 @@ use std::fs;
 
 const INPUT_FILEPATH: &str = "res/2021/day5/input.txt";
 
-type Int = u32;
+type Int = i32;
 
 #[derive(Debug, PartialEq, Eq, Hash)]
 struct Point {
@@ -50,23 +50,31 @@ fn get_input_from_file(filepath: &str) -> Vec<Vent> {
     get_input_from_str(&fs::read_to_string(filepath).expect("Could not open file"))
 }
 
-fn part1(vents: &Vec<Vent>) -> usize {
+fn count_intersection(vents: &Vec<Vent>, diagonal: bool) -> usize {
     let mut point_counter = HashMap::<Point, usize>::new();
     for Vent {
         p1: Point { x: x1, y: y1 },
         p2: Point { x: x2, y: y2 },
     } in vents
     {
-        if x1 == x2 {
-            let (min, max) = if y1 < y2 { (y1, y2) } else { (y2, y1) };
-            for y in *min..=*max {
-                let count = point_counter.entry(Point { x: *x1, y }).or_insert(0);
-                *count += 1;
-            }
-        } else if y1 == y2 {
-            let (min, max) = if x1 < x2 { (x1, x2) } else { (x2, x1) };
-            for x in *min..=*max {
-                let count = point_counter.entry(Point { x, y: *y1 }).or_insert(0);
+        let dx = x2 - x1;
+        let dy = y2 - y1;
+        let adx = dx.abs();
+        let ady = dy.abs();
+        let mut step: Option<Int> = None;
+        if dx == 0 {
+            step = Some(ady);
+        } else if dy == 0 || (diagonal && adx == ady) {
+            step = Some(adx);
+        }
+        if let Some(step) = step {
+            for s in 0..=step {
+                let count = point_counter
+                    .entry(Point {
+                        x: x1 + s * dx / step,
+                        y: y1 + s * dy / step,
+                    })
+                    .or_insert(0);
                 *count += 1;
             }
         }
@@ -74,8 +82,12 @@ fn part1(vents: &Vec<Vent>) -> usize {
     point_counter.iter().filter(|(_, &v)| v > 1).count()
 }
 
-fn part2(_vents: &[Vent]) -> Int {
-    0
+fn part1(vents: &Vec<Vent>) -> usize {
+    count_intersection(vents, false)
+}
+
+fn part2(vents: &Vec<Vent>) -> usize {
+    count_intersection(vents, true)
 }
 
 fn main() {
@@ -85,7 +97,7 @@ fn main() {
     assert_eq!(res, 6225);
     let res2 = part2(&vents);
     println!("{:?}", res2);
-    assert_eq!(res2, 0);
+    assert_eq!(res2, 22116);
 }
 
 #[cfg(test)]
@@ -139,6 +151,6 @@ mod tests {
 
     #[test]
     fn test_part2() {
-        assert_eq!(part2(&get_input_from_str(EXAMPLE)), 0);
+        assert_eq!(part2(&get_input_from_str(EXAMPLE)), 12);
     }
 }
