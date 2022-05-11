@@ -40,13 +40,15 @@ impl FromStr for Vent {
     }
 }
 
-fn get_input_from_str(s: &str) -> Vec<Vent> {
+type InputContent = Vec<Vent>;
+
+fn get_input_from_str(s: &str) -> InputContent {
     s.lines()
         .map(|line| Vent::from_str(line).unwrap())
         .collect()
 }
 
-fn get_input_from_file(filepath: &str) -> Vec<Vent> {
+fn get_input_from_file(filepath: &str) -> InputContent {
     get_input_from_str(&fs::read_to_string(filepath).expect("Could not open file"))
 }
 
@@ -82,11 +84,11 @@ fn count_intersection(vents: &Vec<Vent>, diagonal: bool) -> usize {
     point_counter.iter().filter(|(_, &v)| v > 1).count()
 }
 
-fn part1(vents: &Vec<Vent>) -> usize {
+fn part1(vents: &InputContent) -> usize {
     count_intersection(vents, false)
 }
 
-fn part2(vents: &Vec<Vent>) -> usize {
+fn part2(vents: &InputContent) -> usize {
     count_intersection(vents, true)
 }
 

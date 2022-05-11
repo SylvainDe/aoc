@@ -42,17 +42,19 @@ impl FromStr for Command {
     }
 }
 
-fn get_input_from_str(s: &str) -> Vec<Command> {
+type InputContent = Vec<Command>;
+
+fn get_input_from_str(s: &str) -> InputContent {
     s.lines()
         .map(|line| Command::from_str(line).unwrap())
         .collect()
 }
 
-fn get_input_from_file(filepath: &str) -> Vec<Command> {
+fn get_input_from_file(filepath: &str) -> InputContent {
     get_input_from_str(&fs::read_to_string(filepath).expect("Could not open file"))
 }
 
-fn part1(commands: &Vec<Command>) -> Int {
+fn part1(commands: &InputContent) -> Int {
     let (mut depth, mut position): (Int, Int) = (0, 0);
     for Command { action, value } in commands {
         match action {
@@ -64,7 +66,7 @@ fn part1(commands: &Vec<Command>) -> Int {
     depth * position
 }
 
-fn part2(commands: &Vec<Command>) -> Int {
+fn part2(commands: &InputContent) -> Int {
     let (mut depth, mut position, mut aim): (Int, Int, Int) = (0, 0, 0);
     for Command { action, value } in commands {
         match action {

@@ -3,20 +3,21 @@ use std::fs;
 const INPUT_FILEPATH: &str = "res/2021/day7/input.txt";
 
 type Int = u32;
+type InputContent = Int;
 
-fn get_input_from_str(_string: &str) -> Int {
+fn get_input_from_str(_string: &str) -> InputContent {
     0
 }
 
-fn get_input_from_file(filepath: &str) -> Int {
+fn get_input_from_file(filepath: &str) -> InputContent {
     get_input_from_str(&fs::read_to_string(filepath).expect("Could not open file"))
 }
 
-fn part1(_arg: &Int) -> Int {
+fn part1(_arg: &InputContent) -> Int {
     0
 }
 
-fn part2(_arg: &Int) -> Int {
+fn part2(_arg: &InputContent) -> Int {
     0
 }
 

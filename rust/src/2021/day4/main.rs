@@ -13,7 +13,9 @@ struct BingoGame {
     grids: Vec<Grid>,
 }
 
-fn get_input_from_str(string: &str) -> BingoGame {
+type InputContent = BingoGame;
+
+fn get_input_from_str(string: &str) -> InputContent {
     let mut line_it = string.lines();
     let first_line = line_it.next().unwrap();
     let numbers: Vec<Int> = first_line
@@ -41,7 +43,7 @@ fn get_input_from_str(string: &str) -> BingoGame {
     BingoGame { numbers, grids }
 }
 
-fn get_input_from_file(filepath: &str) -> BingoGame {
+fn get_input_from_file(filepath: &str) -> InputContent {
     get_input_from_str(&fs::read_to_string(filepath).expect("Could not open file"))
 }
 
@@ -110,12 +112,12 @@ impl BingoGame {
     }
 }
 
-fn part1(_bingo: &BingoGame) -> Int {
-    _bingo.play()[0]
+fn part1(bingo: &InputContent) -> Int {
+    bingo.play()[0]
 }
 
-fn part2(_bingo: &BingoGame) -> Int {
-    *_bingo.play().last().unwrap()
+fn part2(bingo: &InputContent) -> Int {
+    *bingo.play().last().unwrap()
 }
 
 fn main() {

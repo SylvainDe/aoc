@@ -4,7 +4,9 @@ const INPUT_FILEPATH: &str = "res/2021/day6/input.txt";
 
 type Int = usize;
 
-fn get_input_from_str(string: &str) -> Vec<Int> {
+type InputContent = Vec<Int>;
+
+fn get_input_from_str(string: &str) -> InputContent {
     string
         .lines()
         .next()
@@ -14,7 +16,7 @@ fn get_input_from_str(string: &str) -> Vec<Int> {
         .collect()
 }
 
-fn get_input_from_file(filepath: &str) -> Vec<Int> {
+fn get_input_from_file(filepath: &str) -> InputContent {
     get_input_from_str(&fs::read_to_string(filepath).expect("Could not open file"))
 }
 

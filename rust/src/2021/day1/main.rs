@@ -4,8 +4,9 @@ use std::fs;
 const INPUT_FILEPATH: &str = "res/2021/day1/input.txt";
 
 type Int = u32;
+type InputContent = Vec<Int>;
 
-fn get_input_from_str(s: &str) -> Vec<Int> {
+fn get_input_from_str(s: &str) -> InputContent {
     s.lines()
         .map(|line| {
             line.parse::<Int>()
@@ -14,15 +15,15 @@ fn get_input_from_str(s: &str) -> Vec<Int> {
         .collect()
 }
 
-fn get_input_from_file(filepath: &str) -> Vec<Int> {
+fn get_input_from_file(filepath: &str) -> InputContent {
     get_input_from_str(&fs::read_to_string(filepath).expect("Could not open file"))
 }
 
-fn part1(depths: &[Int]) -> usize {
+fn part1(depths: &InputContent) -> usize {
     depths.iter().tuple_windows().filter(|(a, b)| a < b).count()
 }
 
-fn part2(depths: &[Int]) -> usize {
+fn part2(depths: &InputContent) -> usize {
     // Window(n + 1) > Window(n)
     // d(n+1) + d(n+2) + ... + d(n+1+windowsize) > d(n) + d(n+1) + ... + d(n+windowsize)
     // d(n+1+windowsize) > d(n)
@@ -47,15 +48,32 @@ fn main() {
 mod tests {
     use super::*;
 
+    const EXAMPLE: &str = "199
+200
+208
+210
+200
+207
+240
+269
+260
+263";
+
     #[test]
-    fn part1_provided_test() {
-        let numbers: Vec<Int> = vec![99, 200, 208, 210, 200, 207, 240, 269, 260, 263];
-        assert_eq!(part1(&numbers), 7);
+    fn input_from_str() {
+        assert_eq!(
+            get_input_from_str(EXAMPLE),
+            vec![199, 200, 208, 210, 200, 207, 240, 269, 260, 263]
+        );
     }
 
     #[test]
-    fn part2_provided_test() {
-        let numbers: Vec<Int> = vec![99, 200, 208, 210, 200, 207, 240, 269, 260, 263];
-        assert_eq!(part2(&numbers), 5);
+    fn test_part1() {
+        assert_eq!(part1(&get_input_from_str(EXAMPLE)), 7);
+    }
+
+    #[test]
+    fn test_part2() {
+        assert_eq!(part2(&get_input_from_str(EXAMPLE)), 5);
     }
 }
