@@ -1,1 +1,2 @@
-Puzzle inputs differ by user.  Please log in to get your puzzle input.
+3469259
+13170438
