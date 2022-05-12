@@ -33,12 +33,11 @@ bin="day${day}_${year}"
 input_file="res/${folder}/input.txt"
 input_example="res/template/input.txt"
 
-# Instruction for Cargo content:
-echo """Add the following content to Cargo.toml:
-[[bin]]
-name = \"${bin}\"
-path = \"${src_file}\"
-"""
+# Add content in Cargo.toml file
+cargo_file="Cargo.toml"
+cargo_content="[[bin]]\nname = \"${bin}\"\npath = \"${src_file}\"\n\n"
+echo -e "Add the following content to ${cargo_file}:\n${cargo_content}"
+sed -i "s#.*See more keys#${cargo_content}&#g" "${cargo_file}"
 
 # Prepare folders
 mkdir -p {res,src}/${folder}

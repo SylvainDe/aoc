@@ -31,6 +31,78 @@ path = "src/2021/day6/main.rs"
 name = "day7_2021"
 path = "src/2021/day7/main.rs"
 
+[[bin]]
+name = "day8_2021"
+path = "src/2021/day8/main.rs"
+
+[[bin]]
+name = "day9_2021"
+path = "src/2021/day9/main.rs"
+
+[[bin]]
+name = "day10_2021"
+path = "src/2021/day10/main.rs"
+
+[[bin]]
+name = "day11_2021"
+path = "src/2021/day11/main.rs"
+
+[[bin]]
+name = "day12_2021"
+path = "src/2021/day12/main.rs"
+
+[[bin]]
+name = "day13_2021"
+path = "src/2021/day13/main.rs"
+
+[[bin]]
+name = "day14_2021"
+path = "src/2021/day14/main.rs"
+
+[[bin]]
+name = "day15_2021"
+path = "src/2021/day15/main.rs"
+
+[[bin]]
+name = "day16_2021"
+path = "src/2021/day16/main.rs"
+
+[[bin]]
+name = "day17_2021"
+path = "src/2021/day17/main.rs"
+
+[[bin]]
+name = "day18_2021"
+path = "src/2021/day18/main.rs"
+
+[[bin]]
+name = "day19_2021"
+path = "src/2021/day19/main.rs"
+
+[[bin]]
+name = "day20_2021"
+path = "src/2021/day20/main.rs"
+
+[[bin]]
+name = "day21_2021"
+path = "src/2021/day21/main.rs"
+
+[[bin]]
+name = "day22_2021"
+path = "src/2021/day22/main.rs"
+
+[[bin]]
+name = "day23_2021"
+path = "src/2021/day23/main.rs"
+
+[[bin]]
+name = "day24_2021"
+path = "src/2021/day24/main.rs"
+
+[[bin]]
+name = "day25_2021"
+path = "src/2021/day25/main.rs"
+
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
