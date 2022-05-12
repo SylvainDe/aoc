@@ -2,7 +2,7 @@ use std::fs;
 
 const INPUT_FILEPATH: &str = "res/2021/day10/input.txt";
 
-type Int = u32;
+type Int = u64;
 type InputContent = Vec<String>;
 
 fn get_input_from_str(string: &str) -> InputContent {
@@ -17,7 +17,7 @@ fn get_input_from_file(filepath: &str) -> InputContent {
 enum ParseResult {
     Success,
     Corrupted(char),
-    // Incomplete,
+    Incomplete(String),
 }
 
 fn parse_string(s: &str) -> ParseResult {
@@ -38,7 +38,11 @@ fn parse_string(s: &str) -> ParseResult {
             },
         }
     }
-    ParseResult::Success
+    if stack.is_empty() {
+        ParseResult::Success
+    } else {
+        ParseResult::Incomplete(stack.into_iter().rev().collect())
+    }
 }
 
 fn syntax_error_score(s: &str) -> Int {
@@ -58,8 +62,37 @@ fn part1(strings: &InputContent) -> Int {
     strings.iter().map(|s| syntax_error_score(s)).sum()
 }
 
-fn part2(_arg: &InputContent) -> Int {
-    0
+fn completion_score_for_missing(s: &str) -> Int {
+    let mut score: Int = 0;
+    for c in s.chars() {
+        score *= 5;
+        score += match c {
+            ')' => 1,
+            ']' => 2,
+            '}' => 3,
+            '>' => 4,
+            _ => panic!("Unexpected value {}", c),
+        }
+    }
+    score
+}
+
+fn completion_score(s: &str) -> Int {
+    match parse_string(s) {
+        ParseResult::Incomplete(missing) => completion_score_for_missing(&missing),
+        _ => 0,
+    }
+}
+
+fn part2(strings: &InputContent) -> Int {
+    let mut values: Vec<Int> = strings
+        .iter()
+        .map(|s| completion_score(s))
+        .filter(|n| *n > 0)
+        .collect();
+    values.sort_unstable();
+    let n = (values.len() - 1) / 2;
+    values[n]
 }
 
 fn main() {
@@ -69,7 +102,7 @@ fn main() {
     assert_eq!(res, 339411);
     let res2 = part2(&strings);
     println!("{:?}", res2);
-    assert_eq!(res2, 0);
+    assert_eq!(res2, 2289754624);
 }
 
 #[cfg(test)]
@@ -132,11 +165,49 @@ mod tests {
     }
 
     #[test]
+    fn test_parse_incomplete_string() {
+        // Complete by adding }}]])})]
+        assert_eq!(
+            parse_string("[({(<(())[]>[[{[]{<()<>>"),
+            ParseResult::Incomplete("}}]])})]".to_string())
+        );
+        // Complete by adding )}>]})
+        assert_eq!(
+            parse_string("[(()[<>])]({[<{<<[]>>("),
+            ParseResult::Incomplete(")}>]})".to_string())
+        );
+        // Complete by adding }}>}>))))
+        assert_eq!(
+            parse_string("(((({<>}<{<{<>}{[]{[]{}"),
+            ParseResult::Incomplete("}}>}>))))".to_string())
+        );
+        // Complete by adding ]]}}]}]}>
+        assert_eq!(
+            parse_string("{<[[]]>}<{[{[{[]{()[[[]"),
+            ParseResult::Incomplete("]]}}]}]}>".to_string())
+        );
+        // Complete by adding ])}>
+        assert_eq!(
+            parse_string("<{([{{}}[<[[[<>{}]]]>[]]"),
+            ParseResult::Incomplete("])}>".to_string())
+        );
+    }
+
+    #[test]
     fn test_parse_strings_example() {
         for s in get_input_from_str(EXAMPLE) {
             // Nothing is checked yet
             parse_string(&s);
         }
+    }
+
+    #[test]
+    fn test_completion_score_for_missing() {
+        assert_eq!(completion_score_for_missing("}}]])})]"), 288957);
+        assert_eq!(completion_score_for_missing(")}>]})"), 5566);
+        assert_eq!(completion_score_for_missing("}}>}>))))"), 1480781);
+        assert_eq!(completion_score_for_missing("]]}}]}]}>"), 995444);
+        assert_eq!(completion_score_for_missing("])}>"), 294);
     }
 
     #[test]
@@ -146,6 +217,6 @@ mod tests {
 
     #[test]
     fn test_part2() {
-        assert_eq!(part2(&get_input_from_str(EXAMPLE)), 0);
+        assert_eq!(part2(&get_input_from_str(EXAMPLE)), 288957);
     }
 }
