@@ -11,6 +11,8 @@ year="${2:-$real_year}"
 # Configuration
 browser="firefox"  # Can be left empty
 editor="vim"  # Can be left empty
+browser=""
+editor=""
 
 # URLs and file paths
 puzzle_url="https://adventofcode.com/${year}/day/${day}"
@@ -56,7 +58,7 @@ else
 fi
 
 # Add line to README.md
-echo -e "\n${puzzle_url} : 0/2" >> README.md
+# echo -e "\n${puzzle_url} : 0/2" >> README.md
 
 # Change number of days in all_days.py
 if [ ! -f "${all_days_file}" ]; then
