@@ -1,12 +1,34 @@
+use core::str::FromStr;
 use std::fs;
 
 const INPUT_FILEPATH: &str = "res/2021/day8/input.txt";
 
 type Int = u32;
-type InputContent = Int;
 
-fn get_input_from_str(_string: &str) -> InputContent {
-    0
+#[derive(Debug, PartialEq)]
+struct Entry {
+    signals: Vec<String>,
+    output: Vec<String>,
+}
+
+impl FromStr for Entry {
+    type Err = ();
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        let (p1, p2) = s.split_once(" | ").ok_or(())?;
+        Ok(Entry {
+            signals: p1.split(' ').map(|s| s.to_owned()).collect(),
+            output: p2.split(' ').map(|s| s.to_owned()).collect(),
+        })
+    }
+}
+
+type InputContent = Vec<Entry>;
+
+fn get_input_from_str(string: &str) -> InputContent {
+    string
+        .lines()
+        .map(|line| Entry::from_str(line).unwrap())
+        .collect()
 }
 
 fn get_input_from_file(filepath: &str) -> InputContent {
@@ -36,6 +58,11 @@ mod tests {
     use super::*;
 
     const EXAMPLE: &str = "";
+
+    #[test]
+    fn test_entry_from_str() {
+        assert_eq!(Entry::from_str("acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | cdfeb fcadb cdfeb cdbaf"), Ok(Entry { signals: ["acedgfb", "cdfbe", "gcdfa", "fbcad", "dab", "cefabd", "cdfgeb", "eafb", "cagedb", "ab"].map(|s| s.to_owned()).to_vec(), output: ["cdfeb", "fcadb", "cdfeb", "cdbaf"].map(|s| s.to_owned()).to_vec() }));
+    }
 
     #[test]
     fn test_part1() {
