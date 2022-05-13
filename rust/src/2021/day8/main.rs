@@ -1,4 +1,5 @@
 use core::str::FromStr;
+use std::borrow::ToOwned;
 use std::fs;
 
 const INPUT_FILEPATH: &str = "res/2021/day8/input.txt";
@@ -15,9 +16,9 @@ impl FromStr for Entry {
     type Err = ();
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         let (p1, p2) = s.split_once(" | ").ok_or(())?;
-        Ok(Entry {
-            signals: p1.split(' ').map(|s| s.to_owned()).collect(),
-            output: p2.split(' ').map(|s| s.to_owned()).collect(),
+        Ok(Self {
+            signals: p1.split(' ').map(ToOwned::to_owned).collect(),
+            output: p2.split(' ').map(ToOwned::to_owned).collect(),
         })
     }
 }
@@ -35,10 +36,12 @@ fn get_input_from_file(filepath: &str) -> InputContent {
     get_input_from_str(&fs::read_to_string(filepath).expect("Could not open file"))
 }
 
+#[allow(clippy::trivially_copy_pass_by_ref,clippy::missing_const_for_fn)]
 fn part1(_arg: &InputContent) -> Int {
     0
 }
 
+#[allow(clippy::trivially_copy_pass_by_ref,clippy::missing_const_for_fn)]
 fn part2(_arg: &InputContent) -> Int {
     0
 }

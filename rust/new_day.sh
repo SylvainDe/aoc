@@ -27,10 +27,11 @@ else
 fi
 
 # Paths and filenames
+bin="day${day}_${year}"
 folder="${year}/day${day}"
 src_file="src/${folder}/main.rs"
-bin="day${day}_${year}"
 input_file="res/${folder}/input.txt"
+src_example="src/template/main.rs"
 input_example="res/template/input.txt"
 
 # Add content in Cargo.toml file
@@ -62,7 +63,7 @@ fi
 if [ -f "${src_file}" ]; then
     echo "Code file ${src_file} already exists - ignored."
 else
-	cp src/template/main.rs "${src_file}"
+	cp "${src_example}" "${src_file}"
 	sed -i "s#${input_example}#${input_file}#g" "${src_file}"
 fi
 

@@ -27,16 +27,16 @@ fn get_input_from_str(string: &str) -> InputContent {
     let mut grid = Grid::new();
     for line in line_it {
         let l = line;
-        if !l.is_empty() {
+        if l.is_empty() {
+            grids.push(grid);
+            grid = Grid::new();
+        } else {
             let nbs: Vec<Int> = l
                 .split(' ')
                 .filter(|s| !s.is_empty())
                 .map(|s| s.parse::<Int>().unwrap())
                 .collect();
             grid.push(nbs);
-        } else {
-            grids.push(grid);
-            grid = Grid::new();
         }
     }
     grids.push(grid);

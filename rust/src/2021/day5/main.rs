@@ -16,7 +16,7 @@ impl FromStr for Point {
     type Err = ();
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         let (x, y) = s.split_once(',').ok_or(())?;
-        Ok(Point {
+        Ok(Self {
             x: x.parse().map_err(|_| {})?,
             y: y.parse().map_err(|_| {})?,
         })
@@ -33,7 +33,7 @@ impl FromStr for Vent {
     type Err = ();
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         let (p1, p2) = s.split_once(" -> ").ok_or(())?;
-        Ok(Vent {
+        Ok(Self {
             p1: Point::from_str(p1)?,
             p2: Point::from_str(p2)?,
         })
@@ -52,6 +52,7 @@ fn get_input_from_file(filepath: &str) -> InputContent {
     get_input_from_str(&fs::read_to_string(filepath).expect("Could not open file"))
 }
 
+#[allow(clippy::similar_names)]
 fn count_intersection(vents: &Vec<Vent>, diagonal: bool) -> usize {
     let mut point_counter = HashMap::<Point, usize>::new();
     for Vent {
@@ -61,13 +62,13 @@ fn count_intersection(vents: &Vec<Vent>, diagonal: bool) -> usize {
     {
         let dx = x2 - x1;
         let dy = y2 - y1;
-        let adx = dx.abs();
-        let ady = dy.abs();
+        let absdx = dx.abs();
+        let absdy = dy.abs();
         let mut step: Option<Int> = None;
         if dx == 0 {
-            step = Some(ady);
-        } else if dy == 0 || (diagonal && adx == ady) {
-            step = Some(adx);
+            step = Some(absdy);
+        } else if dy == 0 || (diagonal && absdx == absdy) {
+            step = Some(absdx);
         }
         if let Some(step) = step {
             for s in 0..=step {

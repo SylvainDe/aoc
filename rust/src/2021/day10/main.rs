@@ -1,4 +1,5 @@
 use std::fs;
+use std::string::ToString;
 
 const INPUT_FILEPATH: &str = "res/2021/day10/input.txt";
 
@@ -6,7 +7,7 @@ type Int = u64;
 type InputContent = Vec<String>;
 
 fn get_input_from_str(string: &str) -> InputContent {
-    string.lines().map(|l| l.to_string()).collect()
+    string.lines().map(ToString::to_string).collect()
 }
 
 fn get_input_from_file(filepath: &str) -> InputContent {
@@ -99,10 +100,10 @@ fn main() {
     let strings = get_input_from_file(INPUT_FILEPATH);
     let res = part1(&strings);
     println!("{:?}", res);
-    assert_eq!(res, 339411);
+    assert_eq!(res, 339_411);
     let res2 = part2(&strings);
     println!("{:?}", res2);
-    assert_eq!(res2, 2289754624);
+    assert_eq!(res2, 2_289_754_624);
 }
 
 #[cfg(test)]

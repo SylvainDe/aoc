@@ -47,10 +47,10 @@ fn main() {
     let fishes = get_input_from_file(INPUT_FILEPATH);
     let res = part1(&fishes);
     println!("{:?}", res);
-    assert_eq!(res, 390011);
+    assert_eq!(res, 390_011);
     let res2 = part2(&fishes);
     println!("{:?}", res2);
-    assert_eq!(res2, 1746710169834);
+    assert_eq!(res2, 1_746_710_169_834);
 }
 
 #[cfg(test)]

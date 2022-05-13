@@ -49,6 +49,7 @@ fn part1(positions: &InputContent) -> Int {
     )
 }
 
+#[allow(clippy::cast_possible_wrap,clippy::cast_possible_truncation,clippy::cast_precision_loss)]
 fn part2(positions: &InputContent) -> Int {
     // 1. Computing the minimal cost with a square cost: C = d²
     //    can be done:
@@ -77,10 +78,10 @@ fn main() {
     let positions = get_input_from_file(INPUT_FILEPATH);
     let res = part1(&positions);
     println!("{:?}", res);
-    assert_eq!(res, 343468);
+    assert_eq!(res, 343_468);
     let res2 = part2(&positions);
     println!("{:?}", res2);
-    assert_eq!(res2, 96086265);
+    assert_eq!(res2, 96_086_265);
 }
 
 #[cfg(test)]

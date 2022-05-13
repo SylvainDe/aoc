@@ -2,6 +2,12 @@
 name = "aoc"
 version = "0.1.0"
 edition = "2021"
+description = "My solutions for Advent of Code in Rust"
+repository = "https://github.com/SylvainDe/aoc"
+readme = "../README.md"
+license = "MIT OR Apache-2.0"
+keywords = ["aoc", "adventofcode", "advent of code"]
+categories = ["games"]
 
 [[bin]]
 name = "template"

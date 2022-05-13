@@ -16,9 +16,9 @@ impl FromStr for Action {
     type Err = ();
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
-            "forward" => Ok(Action::Forward),
-            "down" => Ok(Action::Down),
-            "up" => Ok(Action::Up),
+            "forward" => Ok(Self::Forward),
+            "down" => Ok(Self::Down),
+            "up" => Ok(Self::Up),
             _ => Err(()),
         }
     }
@@ -35,7 +35,7 @@ impl FromStr for Command {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         let (action, value) = s.split_once(' ').ok_or(())?;
-        Ok(Command {
+        Ok(Self {
             action: Action::from_str(action)?,
             value: value.parse().map_err(|_| {})?,
         })
@@ -72,7 +72,7 @@ fn part2(commands: &InputContent) -> Int {
         match action {
             Action::Forward => {
                 position += value;
-                depth += aim * value
+                depth += aim * value;
             }
             Action::Down => aim += value,
             Action::Up => aim -= value,
@@ -85,10 +85,10 @@ fn main() {
     let commands = get_input_from_file(INPUT_FILEPATH);
     let res = part1(&commands);
     println!("{:?}", res);
-    assert_eq!(res, 1670340);
+    assert_eq!(res, 1_670_340);
     let res2 = part2(&commands);
     println!("{:?}", res2);
-    assert_eq!(res2, 1954293920);
+    assert_eq!(res2, 1_954_293_920);
 }
 
 #[cfg(test)]

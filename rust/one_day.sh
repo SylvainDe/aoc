@@ -9,10 +9,21 @@ real_year=$(date "+%Y")
 day="${1:-$real_day}"
 year="${2:-$real_year}"
 
-# Binary name
+# Paths and filenames
 bin="day${day}_${year}"
+src_file="src/${folder}/main.rs"
 
 # Run cargo commands
 cargo test --bin "${bin}"
 cargo run --bin "${bin}"
-cargo clippy
+cargo clippy --bin "${bin}" -- \
+    -D clippy::all \
+    -D clippy::correctness \
+    -D clippy::suspicious \
+    -D clippy::style \
+    -D clippy::complexity \
+    -D clippy::perf \
+    -D clippy::pedantic \
+    -D clippy::cargo \
+    -D clippy::nursery
+
