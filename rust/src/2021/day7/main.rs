@@ -49,7 +49,11 @@ fn part1(positions: &InputContent) -> Int {
     )
 }
 
-#[allow(clippy::cast_possible_wrap,clippy::cast_possible_truncation,clippy::cast_precision_loss)]
+#[allow(
+    clippy::cast_possible_wrap,
+    clippy::cast_possible_truncation,
+    clippy::cast_precision_loss
+)]
 fn part2(positions: &InputContent) -> Int {
     // 1. Computing the minimal cost with a square cost: C = d²
     //    can be done:

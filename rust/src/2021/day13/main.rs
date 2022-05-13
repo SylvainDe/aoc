@@ -14,12 +14,12 @@ fn get_input_from_file(filepath: &str) -> InputContent {
     get_input_from_str(&fs::read_to_string(filepath).expect("Could not open file"))
 }
 
-#[allow(clippy::trivially_copy_pass_by_ref,clippy::missing_const_for_fn)]
+#[allow(clippy::trivially_copy_pass_by_ref, clippy::missing_const_for_fn)]
 fn part1(_arg: &InputContent) -> Int {
     0
 }
 
-#[allow(clippy::trivially_copy_pass_by_ref,clippy::missing_const_for_fn)]
+#[allow(clippy::trivially_copy_pass_by_ref, clippy::missing_const_for_fn)]
 fn part2(_arg: &InputContent) -> Int {
     0
 }
