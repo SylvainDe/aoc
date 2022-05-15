@@ -1,5 +1,6 @@
 use core::str::FromStr;
 use std::borrow::ToOwned;
+use std::collections::HashMap;
 use std::fs;
 
 const INPUT_FILEPATH: &str = "res/2021/day8/input.txt";
@@ -36,14 +37,34 @@ fn get_input_from_file(filepath: &str) -> InputContent {
     get_input_from_str(&fs::read_to_string(filepath).expect("Could not open file"))
 }
 
+const RAW_SEGMENTS: [[bool; 7]; 10] = [
+    [true, true, true, false, true, true, true],
+    [false, false, true, false, false, true, false],
+    [true, false, true, true, true, false, true],
+    [true, false, true, true, false, true, true],
+    [false, true, true, true, false, true, false],
+    [true, true, false, true, false, true, true],
+    [true, true, false, true, true, true, true],
+    [true, false, true, false, false, true, false],
+    [true, true, true, true, true, true, true],
+    [true, true, true, true, false, true, true],
+];
+
 fn part1(entries: &InputContent) -> usize {
+    let mut seg_count = HashMap::<usize, usize>::new();
+    for segments in RAW_SEGMENTS {
+        let count = seg_count
+            .entry(segments.iter().filter(|v| **v).count())
+            .or_insert(0);
+        *count += 1;
+    }
     entries
         .iter()
         .map(|entry| {
             entry
                 .output
                 .iter()
-                .filter(|s| [2, 3, 4, 7].contains(&s.len()))
+                .filter(|s| seg_count.get(&s.len()) == Some(&1))
                 .count()
         })
         .sum()
