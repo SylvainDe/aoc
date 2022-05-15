@@ -20,4 +20,5 @@ cargo clippy -- \
     -D clippy::pedantic \
     -D clippy::cargo \
     -D clippy::nursery
+cargo fmt --check
 

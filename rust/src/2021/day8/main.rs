@@ -49,9 +49,13 @@ fn part1(entries: &InputContent) -> usize {
         .sum()
 }
 
-fn part2(entries: &InputContent) -> Int {
-    for _entry in entries {}
+#[allow(clippy::trivially_copy_pass_by_ref, clippy::missing_const_for_fn)]
+fn solve(_entry: &Entry) -> Int {
     0
+}
+
+fn part2(entries: &InputContent) -> Int {
+    entries.iter().map(solve).sum()
 }
 
 fn main() {
