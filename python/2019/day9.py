@@ -1,18 +1,16 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
-
-
-def get_xxx_from_file(file_path="day9_input.txt"):
-    with open(file_path) as f:
-        return [l.strip() for l in f]
+import int_code
 
 
 def run_tests():
-    xxx = ""
+    int_code.run_tests_day9()
 
 
 def get_solutions():
-    xxx = get_xxx_from_file()
+    intcode = int_code.get_intcode_from_file("day9_input.txt")
+    print(int_code.run(intcode, input_=1)[1])
+    print(int_code.run(intcode, input_=2)[1])
 
 
 if __name__ == "__main__":
