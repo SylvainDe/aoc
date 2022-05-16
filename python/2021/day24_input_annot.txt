@@ -1,0 +1,254 @@
+inp w     # w = input[0]
+mul x 0   # x, y, z = 0 
+add x z   # same
+mod x 26  # same
+div z 1   # same
+add x 13  # x = 13, y = 0, z = 0
+eql x w   # x = (input[0] == 13) so x = 0 with monad limitations
+eql x 0   # x = 1, y = 0, z = 0
+mul y 0   # same 
+add y 25  # y = 25
+mul y x   # x = 1, y = 0, z = 0
+add y 1
+mul z y
+mul y 0
+add y w
+add y 8
+mul y x
+add z y  # x = 1, y = z = input[0] + 8
+
+inp w    # w = input[1]
+mul x 0  # x = 0, y = z = input[0] + 8 
+add x z  # x = y = z = input[0] + 8 
+mod x 26 # x = y = z = input[0] + 8 with monad limitations
+div z 1  # same 
+add x 12 # x = 12+...,  
+eql x w  # x = (input[1] == 12+...) so x = 0 with monad limitations
+eql x 0  # x = 1, y = 
+mul y 0  # x = 1, y = 0, z = input[0] + 8
+add y 25 # x = 1, y = 25, z = input[0] + 8
+mul y x  # same
+add y 1  # x = 1, y = 26, z = input[0] + 8
+mul z y  # x = 1, y=26, z = 26*(input[0]+8) 
+mul y 0  # x = 1, y=0, z = 26*(input[0]+8) 
+add y w  # x = 1, y=input[1], z = 26*(input[0]+8) 
+add y 13 # x = 1, y=13 + input[1], z = 26*(input[0]+8) 
+mul y x  # same
+add z y  # x = 1, y=13 + input[1], z = 26*(input[0]+8) + 13 + input[1]
+
+inp w
+mul x 0
+add x z
+mod x 26
+div z 1
+add x 12
+eql x w
+eql x 0
+mul y 0
+add y 25
+mul y x
+add y 1
+mul z y
+mul y 0
+add y w
+add y 8
+mul y x
+add z y
+inp w
+mul x 0
+add x z
+mod x 26
+div z 1
+add x 10
+eql x w
+eql x 0
+mul y 0
+add y 25
+mul y x
+add y 1
+mul z y
+mul y 0
+add y w
+add y 10
+mul y x
+add z y
+inp w
+mul x 0
+add x z
+mod x 26
+div z 26
+add x -11
+eql x w
+eql x 0
+mul y 0
+add y 25
+mul y x
+add y 1
+mul z y
+mul y 0
+add y w
+add y 12
+mul y x
+add z y
+inp w
+mul x 0
+add x z
+mod x 26
+div z 26
+add x -13
+eql x w
+eql x 0
+mul y 0
+add y 25
+mul y x
+add y 1
+mul z y
+mul y 0
+add y w
+add y 1
+mul y x
+add z y
+inp w
+mul x 0
+add x z
+mod x 26
+div z 1
+add x 15
+eql x w
+eql x 0
+mul y 0
+add y 25
+mul y x
+add y 1
+mul z y
+mul y 0
+add y w
+add y 13
+mul y x
+add z y
+inp w
+mul x 0
+add x z
+mod x 26
+div z 1
+add x 10
+eql x w
+eql x 0
+mul y 0
+add y 25
+mul y x
+add y 1
+mul z y
+mul y 0
+add y w
+add y 5
+mul y x
+add z y
+inp w
+mul x 0
+add x z
+mod x 26
+div z 26
+add x -2
+eql x w
+eql x 0
+mul y 0
+add y 25
+mul y x
+add y 1
+mul z y
+mul y 0
+add y w
+add y 10
+mul y x
+add z y
+inp w
+mul x 0
+add x z
+mod x 26
+div z 26
+add x -6
+eql x w
+eql x 0
+mul y 0
+add y 25
+mul y x
+add y 1
+mul z y
+mul y 0
+add y w
+add y 3
+mul y x
+add z y
+inp w
+mul x 0
+add x z
+mod x 26
+div z 1
+add x 14
+eql x w
+eql x 0
+mul y 0
+add y 25
+mul y x
+add y 1
+mul z y
+mul y 0
+add y w
+add y 2
+mul y x
+add z y
+inp w
+mul x 0
+add x z
+mod x 26
+div z 26
+add x 0
+eql x w
+eql x 0
+mul y 0
+add y 25
+mul y x
+add y 1
+mul z y
+mul y 0
+add y w
+add y 2
+mul y x
+add z y
+inp w
+mul x 0
+add x z
+mod x 26
+div z 26
+add x -15
+eql x w
+eql x 0
+mul y 0
+add y 25
+mul y x
+add y 1
+mul z y
+mul y 0
+add y w
+add y 12
+mul y x
+add z y
+inp w
+mul x 0
+add x z
+mod x 26
+div z 26
+add x -4
+eql x w
+eql x 0
+mul y 0
+add y 25
+mul y x
+add y 1
+mul z y
+mul y 0
+add y w
+add y 7
+mul y x
+add z y
