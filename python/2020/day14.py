@@ -4,7 +4,7 @@ import re
 import itertools
 
 
-def get_program_from_file(file_path="day14_input.txt"):
+def get_program_from_file(file_path="../../resources/year2020_day14_input.txt"):
     with open(file_path) as f:
         return [l.strip() for l in f]
 

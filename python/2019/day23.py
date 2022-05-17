@@ -2,7 +2,7 @@
 import datetime
 
 
-def get_xxx_from_file(file_path="day23_input.txt"):
+def get_xxx_from_file(file_path="../../resources/year2019_day23_input.txt"):
     with open(file_path) as f:
         return [l.strip() for l in f]
 

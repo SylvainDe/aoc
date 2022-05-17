@@ -3,7 +3,7 @@ import datetime
 import itertools
 
 
-def get_image_from_file(file_path="day8_input.txt"):
+def get_image_from_file(file_path="../../resources/year2019_day8_input.txt"):
     with open(file_path) as f:
         return [l.strip() for l in f][0]
 

@@ -12,7 +12,7 @@ def get_map_from_lines(lines):
     return [get_map_item_from_line(l.strip()) for l in lines]
 
 
-def get_map_from_file(file_path="day12_input.txt"):
+def get_map_from_file(file_path="../../resources/year2021_day12_input.txt"):
     with open(file_path) as f:
         return get_map_from_lines(f)
 

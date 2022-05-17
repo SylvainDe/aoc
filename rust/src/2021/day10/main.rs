@@ -1,7 +1,7 @@
 use std::fs;
 use std::string::ToString;
 
-const INPUT_FILEPATH: &str = "res/2021/day10/input.txt";
+const INPUT_FILEPATH: &str = "../resources/year2021_day10_input.txt";
 
 type Int = u64;
 type InputContent = Vec<String>;

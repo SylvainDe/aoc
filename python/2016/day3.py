@@ -6,7 +6,7 @@ def get_triangle_from_line(line):
     return tuple(int(v) for v in line.split())
 
 
-def get_triangles_from_file(file_path="day3_input.txt"):
+def get_triangles_from_file(file_path="../../resources/year2016_day3_input.txt"):
     with open(file_path) as f:
         return [get_triangle_from_line(l.strip()) for l in f]
 

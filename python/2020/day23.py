@@ -5,7 +5,7 @@ import datetime
 RUN_LONG_TESTS = False
 
 
-def get_cups_from_file(file_path="day23_input.txt"):
+def get_cups_from_file(file_path="../../resources/year2020_day23_input.txt"):
     with open(file_path) as f:
         for l in f:
             return [int(c) for c in l.strip()]

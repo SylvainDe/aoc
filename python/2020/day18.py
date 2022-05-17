@@ -3,7 +3,7 @@ import datetime
 import operator
 
 
-def get_expr_from_file(file_path="day18_input.txt"):
+def get_expr_from_file(file_path="../../resources/year2020_day18_input.txt"):
     with open(file_path) as f:
         return [l.strip() for l in f]
 

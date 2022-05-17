@@ -8,7 +8,7 @@ def get_position_from_line(s):
     return int(s.split(": ")[-1])
 
 
-def get_positions_from_file(file_path="day21_input.txt"):
+def get_positions_from_file(file_path="../../resources/year2021_day21_input.txt"):
     with open(file_path) as f:
         return [get_position_from_line(l.strip()) for l in f]
 

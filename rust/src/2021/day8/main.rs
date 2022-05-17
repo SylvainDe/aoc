@@ -3,7 +3,7 @@ use std::borrow::ToOwned;
 use std::collections::HashMap;
 use std::fs;
 
-const INPUT_FILEPATH: &str = "res/2021/day8/input.txt";
+const INPUT_FILEPATH: &str = "../resources/year2021_day8_input.txt";
 
 type Int = u32;
 

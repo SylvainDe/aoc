@@ -8,7 +8,7 @@ def run_tests():
 
 
 def get_solutions():
-    intcode = int_code.get_intcode_from_file("day5_input.txt")
+    intcode = int_code.get_intcode_from_file("../../resources/year2019_day5_input.txt")
     print(int_code.run_diagnostic(intcode, input_=1))
     print(int_code.run_diagnostic(intcode, input_=5))
 

@@ -15,7 +15,7 @@ def get_reindeer_from_line(s):
     return Reindeer(d["name"], int(d["speed"]), int(d["time"]), int(d["rest"]))
 
 
-def get_reindeers_from_file(file_path="day14_input.txt"):
+def get_reindeers_from_file(file_path="../../resources/year2015_day14_input.txt"):
     with open(file_path) as f:
         return [get_reindeer_from_line(l.strip()) for l in f]
 

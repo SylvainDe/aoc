@@ -5,7 +5,7 @@ import itertools
 RUN_LONG_TESTS = False
 
 
-def get_public_keys_from_file(file_path="day25_input.txt"):
+def get_public_keys_from_file(file_path="../../resources/year2020_day25_input.txt"):
     with open(file_path) as f:
         return [int(l) for l in f]
 

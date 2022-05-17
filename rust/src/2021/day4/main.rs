@@ -2,7 +2,7 @@ use std::collections::HashSet;
 use std::fs;
 use std::iter::zip;
 
-const INPUT_FILEPATH: &str = "res/2021/day4/input.txt";
+const INPUT_FILEPATH: &str = "../resources/year2021_day4_input.txt";
 
 type Int = u32;
 type Grid = Vec<Vec<Int>>;

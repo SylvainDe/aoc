@@ -9,7 +9,7 @@ def get_grid_from_lines(lines):
             yield (x, y), int(v)
 
 
-def get_grid_from_file(file_path="day11_input.txt"):
+def get_grid_from_file(file_path="../../resources/year2021_day11_input.txt"):
     with open(file_path) as f:
         return dict(get_grid_from_lines(f))
 

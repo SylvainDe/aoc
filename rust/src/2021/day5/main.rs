@@ -2,7 +2,7 @@ use core::str::FromStr;
 use std::collections::HashMap;
 use std::fs;
 
-const INPUT_FILEPATH: &str = "res/2021/day5/input.txt";
+const INPUT_FILEPATH: &str = "../resources/year2021_day5_input.txt";
 
 type Int = i32;
 

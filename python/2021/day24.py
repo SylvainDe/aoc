@@ -4,7 +4,7 @@ import math
 import itertools
 
 
-def get_program_from_file(file_path="day24_input.txt"):
+def get_program_from_file(file_path="../../resources/year2021_day24_input.txt"):
     with open(file_path) as f:
         return [l.strip() for l in f]
 

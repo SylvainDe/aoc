@@ -3,7 +3,7 @@ import datetime
 import collections
 
 
-def get_diag_from_file(file_path="day3_input.txt"):
+def get_diag_from_file(file_path="../../resources/year2021_day3_input.txt"):
     with open(file_path) as f:
         return [l.strip() for l in f]
 

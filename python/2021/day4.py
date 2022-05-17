@@ -2,7 +2,7 @@
 import datetime
 
 
-def get_bingo_from_file(file_path="day4_input.txt"):
+def get_bingo_from_file(file_path="../../resources/year2021_day4_input.txt"):
     with open(file_path) as f:
         lines = [l.strip() for l in f]
         numbers = [int(n) for n in lines[0].split(",")]

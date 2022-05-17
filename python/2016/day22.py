@@ -22,7 +22,7 @@ def get_node_from_str(s):
     )
 
 
-def get_nodes_from_file(file_path="day22_input.txt"):
+def get_nodes_from_file(file_path="../../resources/year2016_day22_input.txt"):
     with open(file_path) as f:
         lines = [l.strip() for l in f]
         return [get_node_from_str(s) for s in lines[2:]]

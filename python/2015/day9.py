@@ -11,7 +11,7 @@ def get_info_from_str(s):
     return d["loc1"], d["loc2"], int(d["dist"])
 
 
-def get_info_from_file(file_path="day9_input.txt"):
+def get_info_from_file(file_path="../../resources/year2015_day9_input.txt"):
     with open(file_path) as f:
         return [get_info_from_str(l.strip()) for l in f]
 

@@ -3,7 +3,7 @@ import datetime
 import math
 
 
-def get_crabs_from_file(file_path="day7_input.txt"):
+def get_crabs_from_file(file_path="../../resources/year2021_day7_input.txt"):
     with open(file_path) as f:
         for l in f:
             return [int(v) for v in l.strip().split(",")]

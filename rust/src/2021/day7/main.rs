@@ -1,7 +1,7 @@
 use std::cmp::min;
 use std::fs;
 
-const INPUT_FILEPATH: &str = "res/2021/day7/input.txt";
+const INPUT_FILEPATH: &str = "../resources/year2021_day7_input.txt";
 
 type Int = i32;
 type InputContent = Vec<Int>;

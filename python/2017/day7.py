@@ -13,7 +13,7 @@ def get_program_from_string(s):
     return name, (int(weight), lst)
 
 
-def get_prog_from_file(file_path="day7_input.txt"):
+def get_prog_from_file(file_path="../../resources/year2017_day7_input.txt"):
     with open(file_path) as f:
         return dict(get_program_from_string(l.strip()) for l in f)
 

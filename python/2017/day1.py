@@ -2,7 +2,7 @@
 import datetime
 
 
-def get_line_from_file(file_path="day1_input.txt"):
+def get_line_from_file(file_path="../../resources/year2017_day1_input.txt"):
     with open(file_path) as f:
         for l in f:
             return l.strip()

@@ -7,7 +7,7 @@ import functools
 import operator
 
 
-def get_input_value_from_file(file_path="day20_input.txt"):
+def get_input_value_from_file(file_path="../../resources/year2015_day20_input.txt"):
     with open(file_path) as f:
         for l in f:
             return int(l.strip())

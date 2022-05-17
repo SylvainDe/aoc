@@ -15,7 +15,7 @@ def get_info_from_line(line):
     return (mini, maxi, letter, pwd)
 
 
-def get_lines_from_file(file_path="day2_input.txt"):
+def get_lines_from_file(file_path="../../resources/year2020_day2_input.txt"):
     with open(file_path) as f:
         return [l.strip() for l in f]
 

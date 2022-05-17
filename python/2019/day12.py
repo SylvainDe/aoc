@@ -12,7 +12,7 @@ def get_pos_from_str(s):
     return [int(v) for v in s.split(",")]
 
 
-def get_pos_from_file(file_path="day12_input.txt"):
+def get_pos_from_file(file_path="../../resources/year2019_day12_input.txt"):
     with open(file_path) as f:
         return [get_pos_from_str(l.strip()) for l in f]
 

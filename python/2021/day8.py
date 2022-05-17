@@ -9,7 +9,7 @@ def get_signals_from_str(l, sep=" | "):
     return (left.split(), right.split())
 
 
-def get_signals_from_file(file_path="day8_input.txt"):
+def get_signals_from_file(file_path="../../resources/year2021_day8_input.txt"):
     with open(file_path) as f:
         return [get_signals_from_str(l) for l in f]
 

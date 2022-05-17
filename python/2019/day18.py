@@ -4,7 +4,7 @@ import string
 import heapq
 import collections
 
-def get_maze_from_file(file_path="day18_input.txt"):
+def get_maze_from_file(file_path="../../resources/year2019_day18_input.txt"):
     with open(file_path) as f:
         return [l.strip() for l in f]
 

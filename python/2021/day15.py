@@ -5,7 +5,7 @@ import heapq
 # Everything looks a lot like AOC 2019 Day 2020
 
 
-def get_grid_from_file(file_path="day15_input.txt"):
+def get_grid_from_file(file_path="../../resources/year2021_day15_input.txt"):
     with open(file_path) as f:
         return [l.strip() for l in f]
 

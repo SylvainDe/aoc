@@ -6,7 +6,7 @@ import itertools
 import heapq
 
 
-def get_grid_from_file(file_path="day20_input.txt"):
+def get_grid_from_file(file_path="../../resources/year2019_day20_input.txt"):
     with open(file_path) as f:
         return [l for l in f]
 

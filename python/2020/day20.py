@@ -3,7 +3,7 @@ import datetime
 import math
 
 
-def get_tiles_from_file(file_path="day20_input.txt"):
+def get_tiles_from_file(file_path="../../resources/year2020_day20_input.txt"):
     with open(file_path) as f:
         return get_tiles_from_string(f.read())
 
@@ -60,8 +60,9 @@ def get_tile_from_string(string):
 def get_tiles_from_string(string):
     tiles_dict = dict()
     for s in string.split("\n\n"):
-        nb, cont = get_tile_from_string(s)
-        tiles_dict[nb] = cont
+        if s:
+            nb, cont = get_tile_from_string(s)
+            tiles_dict[nb] = cont
     return tiles_dict
 
 

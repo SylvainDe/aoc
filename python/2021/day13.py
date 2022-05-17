@@ -18,7 +18,7 @@ def get_info_from_lines(lines, fold_instr="fold along "):
     return dots, folds
 
 
-def get_info_from_file(file_path="day13_input.txt"):
+def get_info_from_file(file_path="../../resources/year2021_day13_input.txt"):
     with open(file_path) as f:
         return get_info_from_lines(f)
 

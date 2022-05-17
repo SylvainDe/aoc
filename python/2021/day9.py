@@ -7,7 +7,7 @@ def get_line_from_str(s):
     return [int(d) for d in s.strip()]
 
 
-def get_grid_from_file(file_path="day9_input.txt"):
+def get_grid_from_file(file_path="../../resources/year2021_day9_input.txt"):
     with open(file_path) as f:
         return [get_line_from_str(l) for l in f]
 

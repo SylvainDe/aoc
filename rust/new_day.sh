@@ -30,9 +30,9 @@ fi
 bin="day${day}_${year}"
 folder="${year}/day${day}"
 src_file="src/${folder}/main.rs"
-input_file="res/${folder}/input.txt"
+input_file="../resources/year${year}_day${day}_input.txt"
 src_example="src/template/main.rs"
-input_example="res/template/input.txt"
+input_example="../resources/yearYYYY_dayDD_input.txt"
 
 # Add content in Cargo.toml file
 cargo_file="Cargo.toml"

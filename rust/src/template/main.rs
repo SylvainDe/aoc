@@ -1,6 +1,6 @@
 use std::fs;
 
-const INPUT_FILEPATH: &str = "res/template/input.txt";
+const INPUT_FILEPATH: &str = "../resources/yearYYYY_dayDD_input.txt";
 
 type Int = u32;
 type InputContent = Int;

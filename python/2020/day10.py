@@ -4,7 +4,7 @@ import collections
 import itertools
 
 
-def get_adapters_from_file(file_path="day10_input.txt"):
+def get_adapters_from_file(file_path="../../resources/year2020_day10_input.txt"):
     with open(file_path) as f:
         return [int(l) for l in f]
 

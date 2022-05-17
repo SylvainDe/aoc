@@ -16,7 +16,7 @@ def get_disc_from_str(s):
     return Disc(int(d["number"]), int(d["nb_pos"]), int(d["init_pos"]))
 
 
-def get_discs_from_file(file_path="day15_input.txt"):
+def get_discs_from_file(file_path="../../resources/year2016_day15_input.txt"):
     with open(file_path) as f:
         return [get_disc_from_str(l.strip()) for l in f]
 

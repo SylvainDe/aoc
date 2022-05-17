@@ -17,7 +17,7 @@ def get_room_from_string(s):
     return Room(d["name"], int(d["sector"]), d["checksum"])
 
 
-def get_rooms_from_file(file_path="day4_input.txt"):
+def get_rooms_from_file(file_path="../../resources/year2016_day4_input.txt"):
     with open(file_path) as f:
         return [get_room_from_string(l.strip()) for l in f]
 

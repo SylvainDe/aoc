@@ -4,7 +4,7 @@ import hashlib
 import collections
 
 
-def get_passcode_from_file(file_path="day17_input.txt"):
+def get_passcode_from_file(file_path="../../resources/year2016_day17_input.txt"):
     with open(file_path) as f:
         for l in f:
             return l.strip()

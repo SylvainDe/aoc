@@ -3,7 +3,7 @@ import datetime
 import math
 
 
-def get_info_from_file(file_path="day13_input.txt"):
+def get_info_from_file(file_path="../../resources/year2020_day13_input.txt"):
     with open(file_path) as f:
         return get_time_and_buses(*[l for l in f])
 

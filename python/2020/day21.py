@@ -7,7 +7,7 @@ def get_ingredients_from_line(line):
     return tuple(beg.split(" ")), end[:-1].split(", ")
 
 
-def get_ingredients_from_file(file_path="day21_input.txt"):
+def get_ingredients_from_file(file_path="../../resources/year2020_day21_input.txt"):
     with open(file_path) as f:
         return [get_ingredients_from_line(l.strip()) for l in f]
 

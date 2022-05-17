@@ -2,7 +2,7 @@
 import datetime
 
 
-def get_decks_from_file(file_path="day22_input.txt"):
+def get_decks_from_file(file_path="../../resources/year2020_day22_input.txt"):
     with open(file_path) as f:
         return get_decks_from_string(f.read())
 

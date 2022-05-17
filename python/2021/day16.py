@@ -5,7 +5,7 @@ import functools
 import operator
 
 
-def get_str_from_file(file_path="day16_input.txt"):
+def get_str_from_file(file_path="../../resources/year2021_day16_input.txt"):
     with open(file_path) as f:
         for l in f:
             return l.strip()

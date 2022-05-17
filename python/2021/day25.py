@@ -4,7 +4,7 @@ import collections
 import itertools
 
 
-def get_sea_from_file(file_path="day25_input.txt"):
+def get_sea_from_file(file_path="../../resources/year2021_day25_input.txt"):
     with open(file_path) as f:
         return [l.strip() for l in f]
 

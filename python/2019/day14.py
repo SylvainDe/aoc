@@ -19,7 +19,7 @@ def get_reaction_from_line(l):
     )
 
 
-def get_reactions_from_file(file_path="day14_input.txt"):
+def get_reactions_from_file(file_path="../../resources/year2019_day14_input.txt"):
     with open(file_path) as f:
         return [get_reaction_from_line(l) for l in f]
 

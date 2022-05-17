@@ -1,7 +1,7 @@
 use core::str::FromStr;
 use std::fs;
 
-const INPUT_FILEPATH: &str = "res/2021/day2/input.txt";
+const INPUT_FILEPATH: &str = "../resources/year2021_day2_input.txt";
 
 type Int = i32;
 

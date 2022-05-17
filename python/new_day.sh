@@ -17,8 +17,8 @@ editor=""
 # URLs and file paths
 puzzle_url="https://adventofcode.com/${year}/day/${day}"
 input_url="https://adventofcode.com/${year}/day/${day}/input"
+input_file="../resources/year${year}_day${day}_input.txt"
 year_folder="${year}"
-input_file="${year_folder}/day${day}_input.txt"
 script_file="${year_folder}/day${day}.py"
 all_days_file="${year_folder}/all_days.py"
 
@@ -54,17 +54,17 @@ if [ -f "${script_file}" ]; then
     echo "Script file ${script_file} already exists - ignored."
 else
     cp ./day_template.py "${script_file}"
-    sed -i "s/DAYNUMBER/${day}/g" "${script_file}"
+    sed -i "s/yearYYYY_dayDD/year${year}_day${day}/g" "${script_file}"
 fi
 
 # Add line to README.md
 # echo -e "\n${puzzle_url} : 0/2" >> README.md
 
 # Change number of days in all_days.py
-if [ ! -f "${all_days_file}" ]; then
-    cp all_days.py "${all_days_file}"
-fi
-sed -i "s/^\(nb_days = \).*/\1${day}/g" "${all_days_file}"
+# if [ ! -f "${all_days_file}" ]; then
+#     cp all_days.py "${all_days_file}"
+# fi
+# sed -i "s/^\(nb_days = \).*/\1${day}/g" "${all_days_file}"
 
 # Add everything and commit - not performed anymore
 # git add "${input_file}" "${script_file}" README.md

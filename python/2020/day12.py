@@ -3,7 +3,7 @@ import datetime
 from enum import Enum
 
 
-def get_instructions_from_file(file_path="day12_input.txt"):
+def get_instructions_from_file(file_path="../../resources/year2020_day12_input.txt"):
     with open(file_path) as f:
         return [l.strip() for l in f]
 

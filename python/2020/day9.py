@@ -2,7 +2,7 @@
 import datetime
 
 
-def get_numbers_from_file(file_path="day9_input.txt"):
+def get_numbers_from_file(file_path="../../resources/year2020_day9_input.txt"):
     with open(file_path) as f:
         return [int(l) for l in f]
 

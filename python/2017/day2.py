@@ -7,7 +7,7 @@ def get_numbers_from_line(s):
     return [int(v) for v in s.split()]
 
 
-def get_spreadsheet_from_file(file_path="day2_input.txt"):
+def get_spreadsheet_from_file(file_path="../../resources/year2017_day2_input.txt"):
     with open(file_path) as f:
         return [get_numbers_from_line(l.strip()) for l in f]
 

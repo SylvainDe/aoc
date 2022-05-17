@@ -13,7 +13,7 @@ def get_2d_points_from_string(string):
     }
 
 
-def get_2d_points_from_file(file_path="day17_input.txt"):
+def get_2d_points_from_file(file_path="../../resources/year2020_day17_input.txt"):
     with open(file_path) as f:
         return get_2d_points_from_string(f.read())
 

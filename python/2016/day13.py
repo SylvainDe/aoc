@@ -3,7 +3,7 @@ import datetime
 import collections
 
 
-def get_number_from_file(file_path="day13_input.txt"):
+def get_number_from_file(file_path="../../resources/year2016_day13_input.txt"):
     with open(file_path) as f:
         for l in f:
             return int(l.strip())

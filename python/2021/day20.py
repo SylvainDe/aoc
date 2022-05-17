@@ -26,7 +26,7 @@ def get_info_from_lines(lines):
     return get_algo_from_str(lines[0]), get_points_from_lines(lines[2:])
 
 
-def get_info_from_file(file_path="day20_input.txt"):
+def get_info_from_file(file_path="../../resources/year2021_day20_input.txt"):
     with open(file_path) as f:
         return get_info_from_lines([l.strip() for l in f])
 

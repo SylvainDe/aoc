@@ -2,13 +2,13 @@
 import datetime
 
 
-def get_xxx_from_file(file_path="dayDAYNUMBER_input.txt"):
+def get_xxx_from_file(file_path="../../resources/year2019_dayDAYNUMBER_input.txt"):
     with open(file_path) as f:
         return [l.strip() for l in f]
 
 
 def run_tests():
-    xxx = some_hardcoded_value
+    xxx = ""
 
 
 def get_solutions():

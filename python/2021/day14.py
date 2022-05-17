@@ -16,7 +16,7 @@ def get_info_from_lines(lines):
     return template, rules
 
 
-def get_info_from_file(file_path="day14_input.txt"):
+def get_info_from_file(file_path="../../resources/year2021_day14_input.txt"):
     with open(file_path) as f:
         return get_info_from_lines(f)
 

@@ -25,7 +25,7 @@ def get_instruction_from_string(s):
     assert False
 
 
-def get_instructions_from_file(file_path="day6_input.txt"):
+def get_instructions_from_file(file_path="../../resources/year2015_day6_input.txt"):
     with open(file_path) as f:
         return [get_instruction_from_string(l.strip()) for l in f]
 

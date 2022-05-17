@@ -23,7 +23,7 @@ def get_info_from_string(string):
     )
 
 
-def get_info_from_file(file_path="day16_input.txt"):
+def get_info_from_file(file_path="../../resources/year2020_day16_input.txt"):
     with open(file_path) as f:
         return get_info_from_string(f.read())
 

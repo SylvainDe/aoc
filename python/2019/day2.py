@@ -23,7 +23,7 @@ def part2(intcode):
 
 
 def get_solutions():
-    intcode = int_code.get_intcode_from_file("day2_input.txt")
+    intcode = int_code.get_intcode_from_file("../../resources/year2019_day2_input.txt")
     print(part1(intcode))
     print(part2(intcode))
 

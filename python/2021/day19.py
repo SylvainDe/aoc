@@ -28,7 +28,7 @@ def get_info_from_lines(lines):
     return info
 
 
-def get_info_from_file(file_path="day19_input.txt"):
+def get_info_from_file(file_path="../../resources/year2021_day19_input.txt"):
     with open(file_path) as f:
         return get_info_from_lines([l.strip() for l in f])
 

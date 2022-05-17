@@ -24,7 +24,7 @@ def get_pair_from_str(s):
     return pair
 
 
-def get_pairs_from_file(file_path="day18_input.txt"):
+def get_pairs_from_file(file_path="../../resources/year2021_day18_input.txt"):
     with open(file_path) as f:
         return [get_pair_from_str(l.strip()) for l in f]
 

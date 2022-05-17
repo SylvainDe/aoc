@@ -3,7 +3,7 @@ import datetime
 import itertools
 
 
-def get_numbers_from_file(file_path="day15_input.txt"):
+def get_numbers_from_file(file_path="../../resources/year2020_day15_input.txt"):
     with open(file_path) as f:
         for l in f:
             return [int(s) for s in l.split(",")]

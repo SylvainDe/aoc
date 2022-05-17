@@ -11,7 +11,7 @@ def get_target_area_from_string(s):
     return [int(v) for v in m.group(1, 2, 3, 4)]
 
 
-def get_target_area_from_file(file_path="day17_input.txt"):
+def get_target_area_from_file(file_path="../../resources/year2021_day17_input.txt"):
     with open(file_path) as f:
         for l in f:
             return get_target_area_from_string(l.strip())

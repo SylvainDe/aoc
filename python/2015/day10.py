@@ -2,7 +2,7 @@
 import datetime
 
 
-def get_string_from_file(file_path="day10_input.txt"):
+def get_string_from_file(file_path="../../resources/year2015_day10_input.txt"):
     with open(file_path) as f:
         for l in f:
             return [int(d) for d in l.strip()]

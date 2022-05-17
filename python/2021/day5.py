@@ -13,7 +13,7 @@ def get_vent(string):
     return get_point(left), get_point(right)
 
 
-def get_vents_from_file(file_path="day5_input.txt"):
+def get_vents_from_file(file_path="../../resources/year2021_day5_input.txt"):
     with open(file_path) as f:
         return [get_vent(l) for l in f]
 

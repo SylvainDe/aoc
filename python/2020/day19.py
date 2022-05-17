@@ -2,7 +2,7 @@
 import datetime
 
 
-def get_data_from_file(file_path="day19_input.txt"):
+def get_data_from_file(file_path="../../resources/year2020_day19_input.txt"):
     with open(file_path) as f:
         rules, strings = f.read().split("\n\n")
         return get_rules_from_string(rules), strings.splitlines()

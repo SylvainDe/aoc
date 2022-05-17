@@ -3,7 +3,7 @@ import datetime
 import re
 
 
-def get_rules_from_file(file_path="day7_input.txt"):
+def get_rules_from_file(file_path="../../resources/year2020_day7_input.txt"):
     with open(file_path) as f:
         return [get_rule_from_line(l.strip()) for l in f]
 
