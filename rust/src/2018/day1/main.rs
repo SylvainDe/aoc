@@ -6,7 +6,6 @@ const INPUT_FILEPATH: &str = "../resources/year2018_day1_input.txt";
 type Int = i32;
 type InputContent = Vec<Int>;
 
-#[allow(clippy::missing_const_for_fn)]
 fn get_input_from_str(string: &str) -> InputContent {
     string.lines().map(|l| l.parse::<Int>().unwrap()).collect()
 }
@@ -15,12 +14,10 @@ fn get_input_from_file(filepath: &str) -> InputContent {
     get_input_from_str(&fs::read_to_string(filepath).expect("Could not open file"))
 }
 
-#[allow(clippy::trivially_copy_pass_by_ref, clippy::missing_const_for_fn)]
 fn part1(arg: &InputContent) -> Int {
     arg.iter().sum()
 }
 
-#[allow(clippy::trivially_copy_pass_by_ref, clippy::missing_const_for_fn)]
 fn part2(arg: &InputContent) -> Int {
     let mut f: Int = 0;
     let mut frequencies = HashSet::<Int>::new();
