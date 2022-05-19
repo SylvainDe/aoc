@@ -1,27 +1,30 @@
-use core::str::FromStr;
 use std::fs;
+use std::str::FromStr;
 
 const INPUT_FILEPATH: &str = "../resources/year2018_day6_input.txt";
 
-type Int = i32;
+mod point_module {
+    use core::str::FromStr;
+    #[derive(Debug, PartialEq, Eq, Hash)]
+    pub struct Point<T> {
+        pub x: T,
+        pub y: T,
+    }
 
-#[derive(Debug, PartialEq, Eq, Hash)]
-struct Point {
-    x: Int,
-    y: Int,
-}
-
-impl FromStr for Point {
-    type Err = ();
-    fn from_str(s: &str) -> Result<Self, Self::Err> {
-        let (x, y) = s.split_once(", ").ok_or(())?;
-        Ok(Self {
-            x: x.parse().map_err(|_| {})?,
-            y: y.parse().map_err(|_| {})?,
-        })
+    impl<T: std::str::FromStr> FromStr for Point<T> {
+        type Err = ();
+        fn from_str(s: &str) -> Result<Self, Self::Err> {
+            let (x, y) = s.split_once(", ").ok_or(())?;
+            Ok(Self {
+                x: x.parse().map_err(|_| {})?,
+                y: y.parse().map_err(|_| {})?,
+            })
+        }
     }
 }
 
+type Int = i32;
+type Point = point_module::Point<Int>;
 type InputContent = Vec<Point>;
 
 fn get_input_from_str(string: &str) -> InputContent {
