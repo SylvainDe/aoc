@@ -1,7 +1,6 @@
 use itertools::min;
-use itertools::Itertools;
-use std::collections::HashSet;
 use std::fs;
+use std::time::Instant;
 
 const INPUT_FILEPATH: &str = "../resources/year2018_day5_input.txt";
 
@@ -18,25 +17,23 @@ fn get_input_from_file(filepath: &str) -> InputContent {
 }
 
 fn reduce(string: &InputContent) -> String {
-    let mut reactors = HashSet::<(char, char)>::new();
+    let mut reactors = Vec::<String>::new();
     // Compute pairs
     for low in "abcdefghijklmnopqrstuvwxyz".chars() {
-        let up = low.to_ascii_uppercase();
-        reactors.insert((low, up));
-        reactors.insert((up, low));
+        let up = low.to_ascii_uppercase().to_string();
+        reactors.push(low.to_string() + &up);
+        reactors.push(up + &low.to_string());
     }
-    // Remove pairs
+    // Remove pairs - a bit bruteforcing, not very elegant
     let mut string = string.clone();
-    'outer: loop {
-        for (prev, next) in string.chars().tuple_windows() {
-            if reactors.contains(&(prev, next)) {
-                // Not very suble nor very elegant
-                let sub = prev.to_string() + &next.to_string();
-                string = string.replace(&sub, "");
-                continue 'outer;
-            }
+    loop {
+        let l = &string.len();
+        for s in &reactors {
+            string = string.replace(s, "");
         }
-        return string;
+        if l == &string.len() {
+            return string;
+        }
     }
 }
 
@@ -55,6 +52,7 @@ fn part2(string: &InputContent) -> Int {
 }
 
 fn main() {
+    let before = Instant::now();
     let data = get_input_from_file(INPUT_FILEPATH);
     let res = part1(&data);
     println!("{:?}", res);
@@ -62,6 +60,7 @@ fn main() {
     let res2 = part2(&data);
     println!("{:?}", res2);
     assert_eq!(res2, 4944);
+    println!("Elapsed time: {:.2?}", before.elapsed());
 }
 
 #[cfg(test)]
