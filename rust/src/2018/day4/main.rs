@@ -1,0 +1,174 @@
+use core::str::FromStr;
+use std::fs;
+
+const INPUT_FILEPATH: &str = "../resources/year2018_day4_input.txt";
+
+type Int = u32;
+
+#[derive(Debug, Eq, Ord, PartialEq, PartialOrd)]
+enum Action {
+    ShiftBegins(Int),
+    FallsAsleep,
+    WakesUp,
+}
+
+impl FromStr for Action {
+    type Err = ();
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        match s {
+            "falls asleep" => Ok(Self::FallsAsleep),
+            "wakes up" => Ok(Self::WakesUp),
+            _ => {
+                let (_, s) = s.split_once('#').ok_or(())?;
+                let (id, _) = s.split_once(' ').ok_or(())?;
+                Ok(Self::ShiftBegins(id.parse().map_err(|_| {})?))
+            }
+        }
+    }
+}
+
+#[derive(Debug, Eq, Ord, PartialEq, PartialOrd)]
+struct Timestamp {
+    year: u8,
+    month: u8,
+    day: u8,
+    hour: u8,
+    minute: u8,
+}
+
+impl FromStr for Timestamp {
+    type Err = ();
+    fn from_str(_s: &str) -> Result<Self, Self::Err> {
+        // TODO
+        Ok(Self {
+            year: 0,
+            month: 0,
+            day: 0,
+            hour: 0,
+            minute: 0,
+        })
+    }
+}
+
+#[derive(Debug, Eq, Ord, PartialEq, PartialOrd)]
+struct Event {
+    timestamp: Timestamp,
+    action: Action,
+}
+
+impl FromStr for Event {
+    type Err = ();
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        let (_, s) = s.split_once(':').ok_or(())?;
+        let (ts, action) = s.split_once("] ").ok_or(())?;
+        Ok(Self {
+            timestamp: ts.parse().map_err(|_| {})?,
+            action: action.parse().map_err(|_| {})?,
+        })
+    }
+}
+type InputContent = Vec<Event>;
+
+fn get_input_from_str(string: &str) -> InputContent {
+    let mut entries: InputContent = string
+        .lines()
+        .map(|line| Event::from_str(line).unwrap())
+        .collect();
+    entries.sort();
+    entries
+}
+
+fn get_input_from_file(filepath: &str) -> InputContent {
+    get_input_from_str(&fs::read_to_string(filepath).expect("Could not open file"))
+}
+
+fn part1(events: &InputContent) -> Int {
+    for _e in events {}
+    0
+}
+
+#[allow(clippy::trivially_copy_pass_by_ref, clippy::missing_const_for_fn)]
+fn part2(_arg: &InputContent) -> Int {
+    0
+}
+
+fn main() {
+    let data = get_input_from_file(INPUT_FILEPATH);
+    let res = part1(&data);
+    println!("{:?}", res);
+    assert_eq!(res, 0);
+    let res2 = part2(&data);
+    println!("{:?}", res2);
+    assert_eq!(res2, 0);
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    const EXAMPLE: &str = "[1518-11-01 00:00] Guard #10 begins shift
+[1518-11-01 00:05] falls asleep
+[1518-11-01 00:25] wakes up
+[1518-11-01 00:30] falls asleep
+[1518-11-01 00:55] wakes up
+[1518-11-01 23:58] Guard #99 begins shift
+[1518-11-02 00:40] falls asleep
+[1518-11-02 00:50] wakes up
+[1518-11-03 00:05] Guard #10 begins shift
+[1518-11-03 00:24] falls asleep
+[1518-11-03 00:29] wakes up
+[1518-11-04 00:02] Guard #99 begins shift
+[1518-11-04 00:36] falls asleep
+[1518-11-04 00:46] wakes up
+[1518-11-05 00:03] Guard #99 begins shift
+[1518-11-05 00:45] falls asleep
+[1518-11-05 00:55] wakes up";
+    #[test]
+    fn test_action_from_str() {
+        assert_eq!(Action::from_str("wakes up"), Ok(Action::WakesUp));
+        assert_eq!(Action::from_str("falls asleep"), Ok(Action::FallsAsleep));
+        assert_eq!(
+            Action::from_str("Guard #99 begins shift"),
+            Ok(Action::ShiftBegins(99))
+        );
+    }
+    #[test]
+    fn test_timestamp_from_str() {
+        assert_eq!(
+            Timestamp::from_str("1518-11-05 00:55"),
+            Ok(Timestamp {
+                year: 0,
+                month: 0,
+                day: 0,
+                hour: 0,
+                minute: 0,
+            })
+        );
+    }
+    #[test]
+    fn test_event_from_str() {
+        assert_eq!(
+            Event::from_str("[1518-11-05 00:03] Guard #99 begins shift"),
+            Ok(Event {
+                timestamp: Timestamp {
+                    year: 0,
+                    month: 0,
+                    day: 0,
+                    hour: 0,
+                    minute: 0,
+                },
+                action: Action::ShiftBegins(99,),
+            },)
+        );
+    }
+
+    #[test]
+    fn test_part1() {
+        assert_eq!(part1(&get_input_from_str(EXAMPLE)), 0);
+    }
+
+    #[test]
+    fn test_part2() {
+        assert_eq!(part2(&get_input_from_str(EXAMPLE)), 0);
+    }
+}
