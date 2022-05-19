@@ -125,6 +125,10 @@ path = "src/2018/day4/main.rs"
 name = "day5_2018"
 path = "src/2018/day5/main.rs"
 
+[[bin]]
+name = "day6_2018"
+path = "src/2018/day6/main.rs"
+
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
