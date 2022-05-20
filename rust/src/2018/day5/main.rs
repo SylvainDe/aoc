@@ -1,4 +1,5 @@
 use itertools::min;
+use std::collections::HashSet;
 use std::fs;
 use std::time::Instant;
 
@@ -17,24 +18,25 @@ fn get_input_from_file(filepath: &str) -> InputContent {
 }
 
 fn reduce(string: &InputContent) -> String {
-    let mut reactors = Vec::<String>::new();
+    let mut reactors = HashSet::<(char, char)>::new();
     // Compute pairs
     for low in "abcdefghijklmnopqrstuvwxyz".chars() {
-        let up = low.to_ascii_uppercase().to_string();
-        reactors.push(low.to_string() + &up);
-        reactors.push(up + &low.to_string());
+        let up = low.to_ascii_uppercase();
+        reactors.insert((low, up));
+        reactors.insert((up, low));
     }
-    // Remove pairs - a bit bruteforcing, not very elegant
-    let mut string = string.clone();
-    loop {
-        let l = &string.len();
-        for s in &reactors {
-            string = string.replace(s, "");
+    // Iterate and remove pairs as we go
+    let mut accu = String::new();
+    for c in string.chars() {
+        if let Some(prev) = accu.pop() {
+            if reactors.contains(&(c, prev)) {
+                continue;
+            }
+            accu.push(prev);
         }
-        if l == &string.len() {
-            return string;
-        }
+        accu.push(c);
     }
+    accu
 }
 
 fn part1(string: &InputContent) -> Int {
