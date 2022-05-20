@@ -1,5 +1,6 @@
 use std::fs;
 use std::string::ToString;
+use std::time::Instant;
 
 const INPUT_FILEPATH: &str = "../resources/year2021_day10_input.txt";
 
@@ -97,6 +98,7 @@ fn part2(strings: &InputContent) -> Int {
 }
 
 fn main() {
+    let before = Instant::now();
     let strings = get_input_from_file(INPUT_FILEPATH);
     let res = part1(&strings);
     println!("{:?}", res);
@@ -104,6 +106,7 @@ fn main() {
     let res2 = part2(&strings);
     println!("{:?}", res2);
     assert_eq!(res2, 2_289_754_624);
+    println!("Elapsed time: {:.2?}", before.elapsed());
 }
 
 #[cfg(test)]

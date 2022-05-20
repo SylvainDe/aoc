@@ -1,4 +1,5 @@
 use std::fs;
+use std::time::Instant;
 
 const INPUT_FILEPATH: &str = "../resources/year2021_day6_input.txt";
 
@@ -44,6 +45,7 @@ fn part2(fishes: &Vec<Int>) -> Int {
 }
 
 fn main() {
+    let before = Instant::now();
     let fishes = get_input_from_file(INPUT_FILEPATH);
     let res = part1(&fishes);
     println!("{:?}", res);
@@ -51,6 +53,7 @@ fn main() {
     let res2 = part2(&fishes);
     println!("{:?}", res2);
     assert_eq!(res2, 1_746_710_169_834);
+    println!("Elapsed time: {:.2?}", before.elapsed());
 }
 
 #[cfg(test)]

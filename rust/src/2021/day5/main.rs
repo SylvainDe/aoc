@@ -1,6 +1,7 @@
 use core::str::FromStr;
 use std::collections::HashMap;
 use std::fs;
+use std::time::Instant;
 
 const INPUT_FILEPATH: &str = "../resources/year2021_day5_input.txt";
 
@@ -98,6 +99,7 @@ fn part2(vents: &InputContent) -> usize {
 }
 
 fn main() {
+    let before = Instant::now();
     let vents = get_input_from_file(INPUT_FILEPATH);
     let res = part1(&vents);
     println!("{:?}", res);
@@ -105,6 +107,7 @@ fn main() {
     let res2 = part2(&vents);
     println!("{:?}", res2);
     assert_eq!(res2, 22116);
+    println!("Elapsed time: {:.2?}", before.elapsed());
 }
 
 #[cfg(test)]
