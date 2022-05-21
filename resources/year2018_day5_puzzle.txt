@@ -88,10 +88,10 @@ If you'd like to hang out, I'm @ericwastl on Twitter.
 
 -->
 <body>
-<header><div><h1 class="title-global"><a href="/">Advent of Code</a></h1><nav><ul><li><a href="/2018/about">[About]</a></li><li><a href="/2018/events">[Events]</a></li><li><a href="https://teespring.com/stores/advent-of-code" target="_blank">[Shop]</a></li><li><a href="/2018/settings">[Settings]</a></li><li><a href="/2018/auth/logout">[Log Out]</a></li></ul></nav><div class="user">Sylvain</div></div><div><h1 class="title-event">&nbsp;&nbsp;&nbsp;<span class="title-event-wrap">0xffff&amp;</span><a href="/2018">2018</a><span class="title-event-wrap"></span></h1><nav><ul><li><a href="/2018">[Calendar]</a></li><li><a href="/2018/support">[AoC++]</a></li><li><a href="/2018/sponsors">[Sponsors]</a></li><li><a href="/2018/leaderboard">[Leaderboard]</a></li><li><a href="/2018/stats">[Stats]</a></li></ul></nav></div></header>
+<header><div><h1 class="title-global"><a href="/">Advent of Code</a></h1><nav><ul><li><a href="/2018/about">[About]</a></li><li><a href="/2018/events">[Events]</a></li><li><a href="https://teespring.com/stores/advent-of-code" target="_blank">[Shop]</a></li><li><a href="/2018/settings">[Settings]</a></li><li><a href="/2018/auth/logout">[Log Out]</a></li></ul></nav><div class="user">Sylvain <span class="star-count">8*</span></div></div><div><h1 class="title-event">&nbsp;&nbsp;&nbsp;<span class="title-event-wrap">$year=</span><a href="/2018">2018</a><span class="title-event-wrap">;</span></h1><nav><ul><li><a href="/2018">[Calendar]</a></li><li><a href="/2018/support">[AoC++]</a></li><li><a href="/2018/sponsors">[Sponsors]</a></li><li><a href="/2018/leaderboard">[Leaderboard]</a></li><li><a href="/2018/stats">[Stats]</a></li></ul></nav></div></header>
 
 <div id="sidebar">
-<div id="sponsor"><div class="quiet">Our <a href="/2018/sponsors">sponsors</a> help make Advent of Code possible:</div><div class="sponsor"><a href="https://www.honeypot.io/" target="_blank" onclick="if(ga)ga('send','event','sponsor','sidebar',this.href);" rel="noopener">Honeypot.io</a> - Europe&apos;s Tech Job Platform where companies apply to you with salary and tech stack upfront!</div></div>
+<div id="sponsor"><div class="quiet">Our <a href="/2018/sponsors">sponsors</a> help make Advent of Code possible:</div><div class="sponsor"><a href="https://rainway.io/" target="_blank" onclick="if(ga)ga('send','event','sponsor','sidebar',this.href);" rel="noopener">Rainway</a> - Play all your favorite PC games anytime, anywhere, across a variety of different devices.</div></div>
 </div><!--/sidebar-->
 
 <main>
@@ -114,11 +114,24 @@ dabCBAcaDA        No further actions can be taken.
 <p>After all possible reactions, the resulting polymer contains <em>10 units</em>.</p>
 <p><em>How many units remain after fully reacting the polymer you scanned?</em> <span class="quiet">(Note: in this puzzle and others, the input is large; if you copy/paste your input, make sure you get the whole thing.)</span></p>
 </article>
-<p>To begin, <a href="5/input" target="_blank">get your puzzle input</a>.</p>
-<form method="post" action="5/answer"><input type="hidden" name="level" value="1"/><p>Answer: <input type="text" name="answer" autocomplete="off"/> <input type="submit" value="[Submit]"/></p></form>
+<p>Your puzzle answer was <code>10638</code>.</p><article class="day-desc"><h2 id="part2">--- Part Two ---</h2><p>Time to improve the polymer.</p>
+<p>One of the unit types is causing problems; it's preventing the polymer from collapsing as much as it should.  Your goal is to figure out which unit type is causing the most problems, remove all instances of it (regardless of polarity), fully react the remaining polymer, and measure its length.</p>
+<p>For example, again using the polymer <code>dabAcCaCBAcCcaDA</code> from above:</p>
+<ul>
+<li>Removing all <code>A</code>/<code>a</code> units produces <code>dbcCCBcCcD</code>. Fully reacting this polymer produces <code>dbCBcD</code>, which has length 6.</li>
+<li>Removing all <code>B</code>/<code>b</code> units produces <code>daAcCaCAcCcaDA</code>. Fully reacting this polymer produces <code>daCAcaDA</code>, which has length 8.</li>
+<li>Removing all <code>C</code>/<code>c</code> units produces <code>dabAaBAaDA</code>. Fully reacting this polymer produces <code>daDA</code>, which has length 4.</li>
+<li>Removing all <code>D</code>/<code>d</code> units produces <code>abAcCaCBAcCcaA</code>. Fully reacting this polymer produces <code>abCBAc</code>, which has length 6.</li>
+</ul>
+<p>In this example, removing all <code>C</code>/<code>c</code> units was best, producing the answer <em>4</em>.</p>
+<p><em>What is the length of the shortest polymer you can produce</em> by removing all units of exactly one type and fully reacting the result?</p>
+</article>
+<p>Your puzzle answer was <code>4944</code>.</p><p class="day-success">Both parts of this puzzle are complete! They provide two gold stars: **</p>
+<p>At this point, you should <a href="/2018">return to your Advent calendar</a> and try another puzzle.</p>
+<p>If you still want to see it, you can <a href="5/input" target="_blank">get your puzzle input</a>.</p>
 <p>You can also <span class="share">[Share<span class="share-content">on
-  <a href="https://twitter.com/intent/tweet?text=%22Alchemical+Reduction%22+%2D+Day+5+%2D+Advent+of+Code+2018&amp;url=https%3A%2F%2Fadventofcode%2Ecom%2F2018%2Fday%2F5&amp;related=ericwastl&amp;hashtags=AdventOfCode" target="_blank">Twitter</a>
-  <a href="javascript:void(0);" onclick="var mastodon_instance=prompt('Mastodon Instance / Server Name?'); if(typeof mastodon_instance==='string' && mastodon_instance.length){this.href='https://'+mastodon_instance+'/share?text=%22Alchemical+Reduction%22+%2D+Day+5+%2D+Advent+of+Code+2018+%23AdventOfCode+https%3A%2F%2Fadventofcode%2Ecom%2F2018%2Fday%2F5'}else{return false;}" target="_blank">Mastodon</a
+  <a href="https://twitter.com/intent/tweet?text=I%27ve+completed+%22Alchemical+Reduction%22+%2D+Day+5+%2D+Advent+of+Code+2018&amp;url=https%3A%2F%2Fadventofcode%2Ecom%2F2018%2Fday%2F5&amp;related=ericwastl&amp;hashtags=AdventOfCode" target="_blank">Twitter</a>
+  <a href="javascript:void(0);" onclick="var mastodon_instance=prompt('Mastodon Instance / Server Name?'); if(typeof mastodon_instance==='string' && mastodon_instance.length){this.href='https://'+mastodon_instance+'/share?text=I%27ve+completed+%22Alchemical+Reduction%22+%2D+Day+5+%2D+Advent+of+Code+2018+%23AdventOfCode+https%3A%2F%2Fadventofcode%2Ecom%2F2018%2Fday%2F5'}else{return false;}" target="_blank">Mastodon</a
 ></span>]</span> this puzzle.</p>
 </main>
 

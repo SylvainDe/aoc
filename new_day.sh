@@ -14,7 +14,9 @@ editor="vim"  # Can be left empty
 browser=""
 editor=""
 get_input="1"
+overwrite_input="0"
 get_puzzle="1"
+overwrite_puzzle="1"
 create_rust="0"
 create_python="0"
 
@@ -24,10 +26,10 @@ input_url="https://adventofcode.com/${year}/day/${day}/input"
 
 # Open pages
 if [ -z "${browser}" ]; then
-    echo "No browser set - ignored."
+	echo "No browser set - ignored."
 else
-    "${browser}" "${puzzle_url}"
-    "${browser}"  "${input_url}"
+	"${browser}" "${puzzle_url}"
+	"${browser}"  "${input_url}"
 fi
 
 
@@ -42,15 +44,16 @@ puzzle_file="resources/year${year}_day${day}_puzzle.txt"
 get_url_and_save() {
 	url="${1}"
 	dest="${2}"
-    echo "${url} - ${dest}"
+	overwrite="${3}"
+	echo "${url} - ${dest}"
 	mkdir -p $(dirname "${dest}")
-	if [ -f "${dest}" ]; then
+	if [ "${overwrite}" == "0" -a -f "${dest}" ]; then
 		echo "File ${dest} already exists - ignored."
 	elif [ -z "${AOC_SESSION_COOKIE}" ]; then
 		# Create empty file
 		touch "${dest}"
 	else
-		echo "Cookie session AOC_SESSION_COOKIE used to get file."
+		echo "Cookie session AOC_SESSION_COOKIE used to get file at url ${url}"
 		# Get file
 		curl "${url}" -H "cookie: session=${AOC_SESSION_COOKIE}" -o "${dest}"
 	fi
@@ -59,16 +62,16 @@ get_url_and_save() {
 }
 
 if [ "${get_puzzle}" = "1" ]; then
-	get_url_and_save "${puzzle_url}" "${puzzle_file}"
+	get_url_and_save "${puzzle_url}" "${puzzle_file}" "${overwrite_puzzle}"
 fi
 if [ "${get_input}" = "1" ]; then
-	get_url_and_save "${input_url}" "${input_file}"
+	get_url_and_save "${input_url}" "${input_file}" "${overwrite_input}"
 fi
 
 # TODO: Perform actions for Rust and/or Python
 if [ "${create_rust}" = "1" ]; then
-    echo "Not implemented yet"
+	echo "Not implemented yet"
 fi
 if [ "${create_python}" = "1" ]; then
-    echo "Not implemented yet"
+	echo "Not implemented yet"
 fi

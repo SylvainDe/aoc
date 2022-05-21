@@ -88,10 +88,10 @@ If you'd like to hang out, I'm @ericwastl on Twitter.
 
 -->
 <body>
-<header><div><h1 class="title-global"><a href="/">Advent of Code</a></h1><nav><ul><li><a href="/2018/about">[About]</a></li><li><a href="/2018/events">[Events]</a></li><li><a href="https://teespring.com/stores/advent-of-code" target="_blank">[Shop]</a></li><li><a href="/2018/settings">[Settings]</a></li><li><a href="/2018/auth/logout">[Log Out]</a></li></ul></nav><div class="user">Sylvain</div></div><div><h1 class="title-event">&nbsp;<span class="title-event-wrap">{&apos;year&apos;:</span><a href="/2018">2018</a><span class="title-event-wrap">}</span></h1><nav><ul><li><a href="/2018">[Calendar]</a></li><li><a href="/2018/support">[AoC++]</a></li><li><a href="/2018/sponsors">[Sponsors]</a></li><li><a href="/2018/leaderboard">[Leaderboard]</a></li><li><a href="/2018/stats">[Stats]</a></li></ul></nav></div></header>
+<header><div><h1 class="title-global"><a href="/">Advent of Code</a></h1><nav><ul><li><a href="/2018/about">[About]</a></li><li><a href="/2018/events">[Events]</a></li><li><a href="https://teespring.com/stores/advent-of-code" target="_blank">[Shop]</a></li><li><a href="/2018/settings">[Settings]</a></li><li><a href="/2018/auth/logout">[Log Out]</a></li></ul></nav><div class="user">Sylvain <span class="star-count">8*</span></div></div><div><h1 class="title-event">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="title-event-wrap">λy.</span><a href="/2018">2018</a><span class="title-event-wrap"></span></h1><nav><ul><li><a href="/2018">[Calendar]</a></li><li><a href="/2018/support">[AoC++]</a></li><li><a href="/2018/sponsors">[Sponsors]</a></li><li><a href="/2018/leaderboard">[Leaderboard]</a></li><li><a href="/2018/stats">[Stats]</a></li></ul></nav></div></header>
 
 <div id="sidebar">
-<div id="sponsor"><div class="quiet">Our <a href="/2018/sponsors">sponsors</a> help make Advent of Code possible:</div><div class="sponsor"><a href="https://rainway.io/" target="_blank" onclick="if(ga)ga('send','event','sponsor','sidebar',this.href);" rel="noopener">Rainway</a> - Play all your favorite PC games anytime, anywhere, across a variety of different devices.</div></div>
+<div id="sponsor"><div class="quiet">Our <a href="/2018/sponsors">sponsors</a> help make Advent of Code possible:</div><div class="sponsor"><a href="https://www.winton.com/" target="_blank" onclick="if(ga)ga('send','event','sponsor','sidebar',this.href);" rel="noopener">Winton</a> - a data science and investment management company</div></div>
 </div><!--/sidebar-->
 
 <main>
@@ -125,11 +125,24 @@ A----------------------------------
 <p>The first check done on the license file is to simply add up all of the metadata entries.  In this example, that sum is <code>1+1+2+10+11+12+2+99=<em>138</em></code>.</p>
 <p><em>What is the sum of all metadata entries?</em></p>
 </article>
-<p>To begin, <a href="8/input" target="_blank">get your puzzle input</a>.</p>
-<form method="post" action="8/answer"><input type="hidden" name="level" value="1"/><p>Answer: <input type="text" name="answer" autocomplete="off"/> <input type="submit" value="[Submit]"/></p></form>
+<p>Your puzzle answer was <code>40848</code>.</p><article class="day-desc"><h2 id="part2">--- Part Two ---</h2><p>The second check is slightly more complicated: you need to find the value of the root node (<code>A</code> in the example above).</p>
+<p>The <em>value of a node</em> depends on whether it has child nodes.</p>
+<p>If a node has <em>no child nodes</em>, its value is the sum of its metadata entries. So, the value of node <code>B</code> is <code>10+11+12=33</code>, and the value of node <code>D</code> is <code>99</code>.</p>
+<p>However, if a node <em>does have child nodes</em>, the metadata entries become indexes which refer to those child nodes. A metadata entry of <code>1</code> refers to the first child node, <code>2</code> to the second, <code>3</code> to the third, and so on. The value of this node is the sum of the values of the child nodes referenced by the metadata entries. If a referenced child node does not exist, that reference is skipped. A child node can be referenced multiple time and counts each time it is referenced. A metadata entry of <code>0</code> does not refer to any child node.</p>
+<p>For example, again using the above nodes:</p>
+<ul>
+<li>Node <code>C</code> has one metadata entry, <code>2</code>. Because node <code>C</code> has only one child node, <code>2</code> references a child node which does not exist, and so the value of node <code>C</code> is <code>0</code>.</li>
+<li>Node <code>A</code> has three metadata entries: <code>1</code>, <code>1</code>, and <code>2</code>. The <code>1</code> references node <code>A</code>'s first child node, <code>B</code>, and the <code>2</code> references node <code>A</code>'s second child node, <code>C</code>. Because node B has a value of <code>33</code> and node <code>C</code> has a value of <code>0</code>, the value of node <code>A</code> is <code>33+33+0=<em>66</em></code>.</li>
+</ul>
+<p>So, in this example, the value of the root node is <code>66</code>.</p>
+<p><em>What is the value of the root node?</em></p>
+</article>
+<p>Your puzzle answer was <code>34466</code>.</p><p class="day-success">Both parts of this puzzle are complete! They provide two gold stars: **</p>
+<p>At this point, you should <a href="/2018">return to your Advent calendar</a> and try another puzzle.</p>
+<p>If you still want to see it, you can <a href="8/input" target="_blank">get your puzzle input</a>.</p>
 <p>You can also <span class="share">[Share<span class="share-content">on
-  <a href="https://twitter.com/intent/tweet?text=%22Memory+Maneuver%22+%2D+Day+8+%2D+Advent+of+Code+2018&amp;url=https%3A%2F%2Fadventofcode%2Ecom%2F2018%2Fday%2F8&amp;related=ericwastl&amp;hashtags=AdventOfCode" target="_blank">Twitter</a>
-  <a href="javascript:void(0);" onclick="var mastodon_instance=prompt('Mastodon Instance / Server Name?'); if(typeof mastodon_instance==='string' && mastodon_instance.length){this.href='https://'+mastodon_instance+'/share?text=%22Memory+Maneuver%22+%2D+Day+8+%2D+Advent+of+Code+2018+%23AdventOfCode+https%3A%2F%2Fadventofcode%2Ecom%2F2018%2Fday%2F8'}else{return false;}" target="_blank">Mastodon</a
+  <a href="https://twitter.com/intent/tweet?text=I%27ve+completed+%22Memory+Maneuver%22+%2D+Day+8+%2D+Advent+of+Code+2018&amp;url=https%3A%2F%2Fadventofcode%2Ecom%2F2018%2Fday%2F8&amp;related=ericwastl&amp;hashtags=AdventOfCode" target="_blank">Twitter</a>
+  <a href="javascript:void(0);" onclick="var mastodon_instance=prompt('Mastodon Instance / Server Name?'); if(typeof mastodon_instance==='string' && mastodon_instance.length){this.href='https://'+mastodon_instance+'/share?text=I%27ve+completed+%22Memory+Maneuver%22+%2D+Day+8+%2D+Advent+of+Code+2018+%23AdventOfCode+https%3A%2F%2Fadventofcode%2Ecom%2F2018%2Fday%2F8'}else{return false;}" target="_blank">Mastodon</a
 ></span>]</span> this puzzle.</p>
 </main>
 
