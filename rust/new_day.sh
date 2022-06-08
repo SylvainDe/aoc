@@ -28,8 +28,8 @@ fi
 
 # Paths and filenames
 bin="day${day}_${year}"
-folder="${year}/day${day}"
-src_file="src/${folder}/main.rs"
+src_folder="src/${year}/day${day}"
+src_file="${src_folder}/main.rs"
 input_file="../resources/year${year}_day${day}_input.txt"
 src_example="src/template/main.rs"
 input_example="../resources/yearYYYY_dayDD_input.txt"
@@ -40,8 +40,8 @@ cargo_content="[[bin]]\nname = \"${bin}\"\npath = \"${src_file}\"\n\n"
 echo -e "Add the following content to ${cargo_file}:\n${cargo_content}"
 sed -i "s#.*See more keys#${cargo_content}&#g" "${cargo_file}"
 
-# Prepare folders
-mkdir -p {res,src}/${folder}
+# Prepare folder
+mkdir -p "${src_folder}"
 
 # Optional: read cookie config file - setting AOC_SESSION_COOKIE env variable
 # See template file aoc_cookie_session.sh for instructions
