@@ -1,3 +1,4 @@
+use common::get_first_line;
 use std::cmp::min;
 use std::fs;
 use std::time::Instant;
@@ -8,10 +9,7 @@ type Int = i32;
 type InputContent = Vec<Int>;
 
 fn get_input_from_str(string: &str) -> InputContent {
-    string
-        .lines()
-        .next()
-        .unwrap()
+    get_first_line(string)
         .split(',')
         .map(|s| s.parse::<Int>().expect("Could not convert line to integer"))
         .collect()

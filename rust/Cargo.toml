@@ -9,6 +9,10 @@ license = "MIT OR Apache-2.0"
 keywords = ["aoc", "adventofcode", "advent of code"]
 categories = ["games"]
 
+[lib]
+name = "common"
+path = "src/lib/common.rs"
+
 [[bin]]
 name = "template"
 path = "src/template/main.rs"

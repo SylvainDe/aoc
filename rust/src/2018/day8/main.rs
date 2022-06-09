@@ -1,3 +1,4 @@
+use common::get_first_line;
 use std::fs;
 use std::time::Instant;
 
@@ -7,10 +8,7 @@ type Int = usize;
 type InputContent = Vec<Int>;
 
 fn get_input_from_str(string: &str) -> InputContent {
-    let mut line_it = string.lines();
-    line_it
-        .next()
-        .unwrap()
+    get_first_line(string)
         .split(' ')
         .map(|nb| nb.parse::<Int>().unwrap())
         .collect()

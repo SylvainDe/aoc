@@ -1,3 +1,4 @@
+use common::get_first_line;
 use std::collections::HashSet;
 use std::fs;
 use std::time::Instant;
@@ -6,15 +7,8 @@ const INPUT_FILEPATH: &str = "../resources/year2015_day3_input.txt";
 
 type InputContent = String;
 
-#[allow(clippy::missing_const_for_fn)]
 fn get_input_from_str(string: &str) -> InputContent {
-    if string.is_empty() {
-        ""
-    } else {
-        let mut line_it = string.lines();
-        line_it.next().unwrap()
-    }
-    .to_string()
+    get_first_line(string)
 }
 
 fn get_input_from_file(filepath: &str) -> InputContent {

@@ -1,3 +1,4 @@
+use common::get_first_line;
 use std::fs;
 use std::time::Instant;
 
@@ -6,8 +7,7 @@ const INPUT_FILEPATH: &str = "../resources/year2015_day1_input.txt";
 type InputContent = String;
 
 fn get_input_from_str(string: &str) -> InputContent {
-    let mut line_it = string.lines();
-    line_it.next().unwrap().to_string()
+    get_first_line(string)
 }
 
 fn get_input_from_file(filepath: &str) -> InputContent {

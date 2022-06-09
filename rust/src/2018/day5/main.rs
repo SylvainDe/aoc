@@ -1,3 +1,4 @@
+use common::get_first_line;
 use itertools::min;
 use std::collections::HashSet;
 use std::fs;
@@ -9,8 +10,7 @@ type Int = usize;
 type InputContent = String;
 
 fn get_input_from_str(string: &str) -> InputContent {
-    let mut line_it = string.lines();
-    line_it.next().unwrap().to_string()
+    get_first_line(string)
 }
 
 fn get_input_from_file(filepath: &str) -> InputContent {
