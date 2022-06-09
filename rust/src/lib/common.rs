@@ -1,11 +1,8 @@
-#[allow(clippy::missing_panics_doc)]
 #[must_use]
 pub fn get_first_line(string: &str) -> String {
-    if string.is_empty() {
-        ""
-    } else {
-        let mut line_it = string.lines();
-        line_it.next().unwrap()
+    match string.lines().next() {
+        None => "",
+        Some(l) => l,
     }
     .to_string()
 }
