@@ -11,7 +11,6 @@ year="${2:-$real_year}"
 
 # Paths and filenames
 bin="day${day}_${year}"
-src_file="src/${folder}/main.rs"
 
 # Run cargo commands
 cargo test --bin "${bin}"
