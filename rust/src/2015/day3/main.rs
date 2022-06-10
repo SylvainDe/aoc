@@ -15,12 +15,14 @@ fn get_input_from_file(filepath: &str) -> InputContent {
     get_input_from_str(&fs::read_to_string(filepath).expect("Could not open file"))
 }
 
-fn part1(input: &InputContent) -> usize {
+type Position = (i32, i32);
+
+fn get_path(input: impl Iterator<Item = char>) -> HashSet<Position> {
     let mut x: i32 = 0;
     let mut y: i32 = 0;
     let mut pos = HashSet::<(i32, i32)>::new();
     pos.insert((x, y));
-    for c in input.chars() {
+    for c in input {
         match c {
             '^' => x += 1,
             'v' => x -= 1,
@@ -30,12 +32,19 @@ fn part1(input: &InputContent) -> usize {
         }
         pos.insert((x, y));
     }
-    pos.len()
+    pos
 }
 
-#[allow(clippy::trivially_copy_pass_by_ref, clippy::missing_const_for_fn)]
-fn part2(_arg: &InputContent) -> u32 {
-    0
+fn part1(input: &InputContent) -> usize {
+    get_path(input.chars()).len()
+}
+
+fn part2(input: &InputContent) -> usize {
+    let mut path1 = get_path(input.chars().step_by(2));
+    let mut char_it = input.chars();
+    char_it.next();
+    path1.extend(get_path(char_it.step_by(2)));
+    path1.len()
 }
 
 fn main() {
@@ -46,7 +55,7 @@ fn main() {
     assert_eq!(res, 2081);
     let res2 = part2(&data);
     println!("{:?}", res2);
-    assert_eq!(res2, 0);
+    assert_eq!(res2, 2341);
     println!("Elapsed time: {:.2?}", before.elapsed());
 }
 
@@ -64,6 +73,9 @@ mod tests {
 
     #[test]
     fn test_part2() {
-        assert_eq!(part2(&get_input_from_str("")), 0);
+        assert_eq!(part2(&get_input_from_str("")), 1);
+        assert_eq!(part2(&get_input_from_str("^v")), 3);
+        assert_eq!(part2(&get_input_from_str("^>v<")), 3);
+        assert_eq!(part2(&get_input_from_str("^v^v^v^v^v")), 11);
     }
 }
