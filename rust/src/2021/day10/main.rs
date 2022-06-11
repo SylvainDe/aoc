@@ -1,5 +1,5 @@
+use common::collect_lines;
 use common::get_file_content;
-use std::string::ToString;
 use std::time::Instant;
 
 const INPUT_FILEPATH: &str = "../resources/year2021_day10_input.txt";
@@ -8,7 +8,7 @@ type Int = u64;
 type InputContent = Vec<String>;
 
 fn get_input_from_str(string: &str) -> InputContent {
-    string.lines().map(ToString::to_string).collect()
+    collect_lines(string)
 }
 
 fn get_input_from_file(filepath: &str) -> InputContent {

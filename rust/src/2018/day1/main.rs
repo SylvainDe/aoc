@@ -1,3 +1,4 @@
+use common::collect_from_lines;
 use common::get_file_content;
 use std::collections::HashSet;
 use std::time::Instant;
@@ -8,7 +9,7 @@ type Int = i32;
 type InputContent = Vec<Int>;
 
 fn get_input_from_str(string: &str) -> InputContent {
-    string.lines().map(|l| l.parse::<Int>().unwrap()).collect()
+    collect_from_lines(string, str::parse::<Int>)
 }
 
 fn get_input_from_file(filepath: &str) -> InputContent {

@@ -1,5 +1,5 @@
+use common::collect_lines;
 use common::get_file_content;
-use std::borrow::ToOwned;
 use std::collections::HashMap;
 use std::iter::zip;
 use std::time::Instant;
@@ -10,7 +10,7 @@ type Int = u32;
 type InputContent = Vec<String>;
 
 fn get_input_from_str(string: &str) -> InputContent {
-    string.lines().map(ToOwned::to_owned).collect()
+    collect_lines(string)
 }
 
 fn get_input_from_file(filepath: &str) -> InputContent {

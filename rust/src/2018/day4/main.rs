@@ -1,3 +1,4 @@
+use common::collect_from_lines;
 use common::get_file_content;
 use core::str::FromStr;
 use std::time::Instant;
@@ -71,10 +72,7 @@ impl FromStr for Event {
 type InputContent = Vec<Event>;
 
 fn get_input_from_str(string: &str) -> InputContent {
-    let mut entries: InputContent = string
-        .lines()
-        .map(|line| Event::from_str(line).unwrap())
-        .collect();
+    let mut entries: InputContent = collect_from_lines(string, Event::from_str);
     entries.sort();
     entries
 }

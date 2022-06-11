@@ -1,3 +1,4 @@
+use common::collect_from_lines;
 use common::get_file_content;
 use core::str::FromStr;
 use std::borrow::ToOwned;
@@ -28,10 +29,7 @@ impl FromStr for Entry {
 type InputContent = Vec<Entry>;
 
 fn get_input_from_str(string: &str) -> InputContent {
-    string
-        .lines()
-        .map(|line| Entry::from_str(line).unwrap())
-        .collect()
+    collect_from_lines(string, Entry::from_str)
 }
 
 fn get_input_from_file(filepath: &str) -> InputContent {

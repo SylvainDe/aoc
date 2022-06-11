@@ -1,3 +1,4 @@
+use common::collect_from_lines;
 use common::get_file_content;
 use core::str::FromStr;
 use std::time::Instant;
@@ -45,10 +46,8 @@ impl FromStr for Command {
 
 type InputContent = Vec<Command>;
 
-fn get_input_from_str(s: &str) -> InputContent {
-    s.lines()
-        .map(|line| Command::from_str(line).unwrap())
-        .collect()
+fn get_input_from_str(string: &str) -> InputContent {
+    collect_from_lines(string, Command::from_str)
 }
 
 fn get_input_from_file(filepath: &str) -> InputContent {

@@ -1,3 +1,4 @@
+use common::collect_from_lines;
 use common::get_file_content;
 use core::str::FromStr;
 use std::collections::HashMap;
@@ -47,10 +48,8 @@ impl FromStr for Vent {
 
 type InputContent = Vec<Vent>;
 
-fn get_input_from_str(s: &str) -> InputContent {
-    s.lines()
-        .map(|line| Vent::from_str(line).unwrap())
-        .collect()
+fn get_input_from_str(string: &str) -> InputContent {
+    collect_from_lines(string, Vent::from_str)
 }
 
 fn get_input_from_file(filepath: &str) -> InputContent {

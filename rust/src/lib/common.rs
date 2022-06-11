@@ -1,3 +1,5 @@
+// First line
+use std::borrow::ToOwned;
 use std::fs;
 
 #[must_use]
@@ -19,6 +21,23 @@ pub fn get_first_line_from_file(filepath: &str) -> String {
     get_first_line(&get_file_content(filepath))
 }
 
+#[must_use]
+pub fn collect_lines(string: &str) -> Vec<String> {
+    string.lines().map(ToOwned::to_owned).collect()
+}
+
+/// # Panics
+///
+/// Will panic if call to F fails on a element
+#[must_use]
+pub fn collect_from_lines<Item, F, E>(string: &str, f: F) -> Vec<Item>
+where
+    F: Fn(&str) -> Result<Item, E>,
+    E: std::fmt::Debug,
+{
+    string.lines().map(|l| f(l).unwrap()).collect()
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -35,7 +54,7 @@ mod tests {
     fn test_get_first_line_from_file() {
         assert_eq!(
             get_first_line_from_file("src/lib/common.rs"),
-            "use std::fs;"
+            "// First line"
         );
     }
 }

@@ -1,3 +1,4 @@
+use common::collect_from_lines;
 use common::get_file_content;
 use itertools::Itertools;
 use std::time::Instant;
@@ -7,13 +8,8 @@ const INPUT_FILEPATH: &str = "../resources/year2021_day1_input.txt";
 type Int = u32;
 type InputContent = Vec<Int>;
 
-fn get_input_from_str(s: &str) -> InputContent {
-    s.lines()
-        .map(|line| {
-            line.parse::<Int>()
-                .expect("Could not convert line to integer")
-        })
-        .collect()
+fn get_input_from_str(string: &str) -> InputContent {
+    collect_from_lines(string, str::parse::<Int>)
 }
 
 fn get_input_from_file(filepath: &str) -> InputContent {

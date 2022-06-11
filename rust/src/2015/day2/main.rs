@@ -1,3 +1,4 @@
+use common::collect_from_lines;
 use common::get_file_content;
 use core::str::FromStr;
 use itertools::min;
@@ -41,10 +42,7 @@ impl BoxDimensions {
 }
 
 fn get_input_from_str(string: &str) -> InputContent {
-    string
-        .lines()
-        .map(|line| BoxDimensions::from_str(line).unwrap())
-        .collect()
+    collect_from_lines(string, BoxDimensions::from_str)
 }
 
 fn get_input_from_file(filepath: &str) -> InputContent {
