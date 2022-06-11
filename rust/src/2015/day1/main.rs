@@ -4,14 +4,8 @@ use std::time::Instant;
 
 const INPUT_FILEPATH: &str = "../resources/year2015_day1_input.txt";
 
-type InputContent = String;
-
-fn get_input_from_str(string: &str) -> InputContent {
-    get_first_line(string)
-}
-
-fn get_input_from_file(filepath: &str) -> InputContent {
-    get_input_from_str(&fs::read_to_string(filepath).expect("Could not open file"))
+fn get_input_from_file(filepath: &str) -> String {
+    get_first_line(&fs::read_to_string(filepath).expect("Could not open file"))
 }
 
 fn floor_value(c: char) -> i32 {
@@ -22,11 +16,11 @@ fn floor_value(c: char) -> i32 {
     }
 }
 
-fn part1(string: &InputContent) -> i32 {
+fn part1(string: &str) -> i32 {
     string.chars().map(floor_value).sum()
 }
 
-fn part2(string: &InputContent) -> usize {
+fn part2(string: &str) -> usize {
     let mut floor = 0;
     for (i, f) in string.chars().map(floor_value).enumerate() {
         floor += f;
@@ -55,20 +49,20 @@ mod tests {
 
     #[test]
     fn test_part1() {
-        assert_eq!(part1(&get_input_from_str("(())")), 0);
-        assert_eq!(part1(&get_input_from_str("()()")), 0);
-        assert_eq!(part1(&get_input_from_str("(((")), 3);
-        assert_eq!(part1(&get_input_from_str("(()(()(")), 3);
-        assert_eq!(part1(&get_input_from_str("))(((((")), 3);
-        assert_eq!(part1(&get_input_from_str("())")), -1);
-        assert_eq!(part1(&get_input_from_str("))(")), -1);
-        assert_eq!(part1(&get_input_from_str(")))")), -3);
-        assert_eq!(part1(&get_input_from_str(")())())")), -3);
+        assert_eq!(part1("(())"), 0);
+        assert_eq!(part1("()()"), 0);
+        assert_eq!(part1("((("), 3);
+        assert_eq!(part1("(()(()("), 3);
+        assert_eq!(part1("))((((("), 3);
+        assert_eq!(part1("())"), -1);
+        assert_eq!(part1("))("), -1);
+        assert_eq!(part1(")))"), -3);
+        assert_eq!(part1(")())())"), -3);
     }
 
     #[test]
     fn test_part2() {
-        assert_eq!(part2(&get_input_from_str(")")), 1);
-        assert_eq!(part2(&get_input_from_str("()())")), 5);
+        assert_eq!(part2(")"), 1);
+        assert_eq!(part2("()())"), 5);
     }
 }

@@ -5,15 +5,10 @@ use std::time::Instant;
 const INPUT_FILEPATH: &str = "../resources/year2015_day4_input.txt";
 
 type Int = u32;
-type InputContent = String;
 const SKIP_SLOW: bool = true;
 
-fn get_input_from_str(string: &str) -> InputContent {
-    get_first_line(string)
-}
-
-fn get_input_from_file(filepath: &str) -> InputContent {
-    get_input_from_str(&fs::read_to_string(filepath).expect("Could not open file"))
+fn get_input_from_file(filepath: &str) -> String {
+    get_first_line(&fs::read_to_string(filepath).expect("Could not open file"))
 }
 
 fn digest_starts_with(data: &str, prefix: &str) -> bool {
@@ -28,14 +23,14 @@ fn find_coin(data: &str, prefix: &str) -> Int {
             return i;
         }
     }
-    0
+    panic!("No value found");
 }
 
-fn part1(input: &InputContent) -> Int {
+fn part1(input: &str) -> Int {
     find_coin(input, "00000")
 }
 
-fn part2(input: &InputContent) -> Int {
+fn part2(input: &str) -> Int {
     find_coin(input, "000000")
 }
 

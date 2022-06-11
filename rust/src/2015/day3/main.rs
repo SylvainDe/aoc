@@ -5,14 +5,8 @@ use std::time::Instant;
 
 const INPUT_FILEPATH: &str = "../resources/year2015_day3_input.txt";
 
-type InputContent = String;
-
-fn get_input_from_str(string: &str) -> InputContent {
-    get_first_line(string)
-}
-
-fn get_input_from_file(filepath: &str) -> InputContent {
-    get_input_from_str(&fs::read_to_string(filepath).expect("Could not open file"))
+fn get_input_from_file(filepath: &str) -> String {
+    get_first_line(&fs::read_to_string(filepath).expect("Could not open file"))
 }
 
 type Position = (i32, i32);
@@ -35,11 +29,11 @@ fn get_path(input: impl Iterator<Item = char>) -> HashSet<Position> {
     pos
 }
 
-fn part1(input: &InputContent) -> usize {
+fn part1(input: &str) -> usize {
     get_path(input.chars()).len()
 }
 
-fn part2(input: &InputContent) -> usize {
+fn part2(input: &str) -> usize {
     let mut path1 = get_path(input.chars().step_by(2));
     let mut char_it = input.chars();
     char_it.next();
@@ -65,17 +59,17 @@ mod tests {
 
     #[test]
     fn test_part1() {
-        assert_eq!(part1(&get_input_from_str("")), 1);
-        assert_eq!(part1(&get_input_from_str(">")), 2);
-        assert_eq!(part1(&get_input_from_str("^>v<")), 4);
-        assert_eq!(part1(&get_input_from_str("^v^v^v^v^v")), 2);
+        assert_eq!(part1(""), 1);
+        assert_eq!(part1(">"), 2);
+        assert_eq!(part1("^>v<"), 4);
+        assert_eq!(part1("^v^v^v^v^v"), 2);
     }
 
     #[test]
     fn test_part2() {
-        assert_eq!(part2(&get_input_from_str("")), 1);
-        assert_eq!(part2(&get_input_from_str("^v")), 3);
-        assert_eq!(part2(&get_input_from_str("^>v<")), 3);
-        assert_eq!(part2(&get_input_from_str("^v^v^v^v^v")), 11);
+        assert_eq!(part2(""), 1);
+        assert_eq!(part2("^v"), 3);
+        assert_eq!(part2("^>v<"), 3);
+        assert_eq!(part2("^v^v^v^v^v"), 11);
     }
 }

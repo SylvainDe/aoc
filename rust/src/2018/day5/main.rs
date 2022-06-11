@@ -7,17 +7,12 @@ use std::time::Instant;
 const INPUT_FILEPATH: &str = "../resources/year2018_day5_input.txt";
 
 type Int = usize;
-type InputContent = String;
 
-fn get_input_from_str(string: &str) -> InputContent {
-    get_first_line(string)
+fn get_input_from_file(filepath: &str) -> String {
+    get_first_line(&fs::read_to_string(filepath).expect("Could not open file"))
 }
 
-fn get_input_from_file(filepath: &str) -> InputContent {
-    get_input_from_str(&fs::read_to_string(filepath).expect("Could not open file"))
-}
-
-fn reduce(string: &InputContent) -> String {
+fn reduce(string: &str) -> String {
     let mut reactors = HashSet::<(char, char)>::new();
     // Compute pairs
     for low in "abcdefghijklmnopqrstuvwxyz".chars() {
@@ -39,11 +34,11 @@ fn reduce(string: &InputContent) -> String {
     accu
 }
 
-fn part1(string: &InputContent) -> Int {
+fn part1(string: &str) -> Int {
     reduce(string).len()
 }
 
-fn part2(string: &InputContent) -> Int {
+fn part2(string: &str) -> Int {
     // Not sure if it is smart but we first reduce the string before removing candidates pairs
     let s = reduce(string);
     // Remove and reduce
@@ -69,16 +64,15 @@ fn main() {
 mod tests {
     use super::*;
 
-    const EXAMPLE: &str = "dabAcCaCBAcCcaDA
-";
+    const EXAMPLE: &str = "dabAcCaCBAcCcaDA";
 
     #[test]
     fn test_part1() {
-        assert_eq!(part1(&get_input_from_str(EXAMPLE)), 10);
+        assert_eq!(part1(EXAMPLE), 10);
     }
 
     #[test]
     fn test_part2() {
-        assert_eq!(part2(&get_input_from_str(EXAMPLE)), 4);
+        assert_eq!(part2(EXAMPLE), 4);
     }
 }
