@@ -89,8 +89,18 @@ path = "src/2015/day3/main.rs"
 name = "day4_2015"
 path = "src/2015/day4/main.rs"
 
+[[bin]]
+name = "day9_2018"
+path = "src/2018/day9/main.rs"
+
+[[bin]]
+name = "day10_2018"
+path = "src/2018/day10/main.rs"
+
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 itertools = "0.10.3"
 md5 = "0.7.0"
+regex = "1"
+lazy_static = "1.4.0"
