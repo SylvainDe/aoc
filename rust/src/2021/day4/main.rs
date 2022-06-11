@@ -1,5 +1,5 @@
+use common::get_file_content;
 use std::collections::HashSet;
-use std::fs;
 use std::iter::zip;
 use std::time::Instant;
 
@@ -45,7 +45,7 @@ fn get_input_from_str(string: &str) -> InputContent {
 }
 
 fn get_input_from_file(filepath: &str) -> InputContent {
-    get_input_from_str(&fs::read_to_string(filepath).expect("Could not open file"))
+    get_input_from_str(&get_file_content(filepath))
 }
 
 #[derive(Debug, PartialEq, Clone)]

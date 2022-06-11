@@ -1,12 +1,11 @@
-use common::get_first_line;
+use common::get_first_line_from_file;
 use std::collections::HashSet;
-use std::fs;
 use std::time::Instant;
 
 const INPUT_FILEPATH: &str = "../resources/year2015_day3_input.txt";
 
 fn get_input_from_file(filepath: &str) -> String {
-    get_first_line(&fs::read_to_string(filepath).expect("Could not open file"))
+    get_first_line_from_file(filepath)
 }
 
 type Position = (i32, i32);

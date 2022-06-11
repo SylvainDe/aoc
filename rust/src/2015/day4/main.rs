@@ -1,5 +1,4 @@
-use common::get_first_line;
-use std::fs;
+use common::get_first_line_from_file;
 use std::time::Instant;
 
 const INPUT_FILEPATH: &str = "../resources/year2015_day4_input.txt";
@@ -8,7 +7,7 @@ type Int = u32;
 const SKIP_SLOW: bool = true;
 
 fn get_input_from_file(filepath: &str) -> String {
-    get_first_line(&fs::read_to_string(filepath).expect("Could not open file"))
+    get_first_line_from_file(filepath)
 }
 
 fn digest_starts_with(data: &str, prefix: &str) -> bool {

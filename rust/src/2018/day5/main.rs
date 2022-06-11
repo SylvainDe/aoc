@@ -1,7 +1,6 @@
-use common::get_first_line;
+use common::get_first_line_from_file;
 use itertools::min;
 use std::collections::HashSet;
-use std::fs;
 use std::time::Instant;
 
 const INPUT_FILEPATH: &str = "../resources/year2018_day5_input.txt";
@@ -9,7 +8,7 @@ const INPUT_FILEPATH: &str = "../resources/year2018_day5_input.txt";
 type Int = usize;
 
 fn get_input_from_file(filepath: &str) -> String {
-    get_first_line(&fs::read_to_string(filepath).expect("Could not open file"))
+    get_first_line_from_file(filepath)
 }
 
 fn reduce(string: &str) -> String {

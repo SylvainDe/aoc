@@ -1,5 +1,4 @@
-use common::get_first_line;
-use std::fs;
+use common::get_first_line_from_file;
 use std::time::Instant;
 
 const INPUT_FILEPATH: &str = "../resources/year2021_day6_input.txt";
@@ -9,14 +8,14 @@ type Int = usize;
 type InputContent = Vec<Int>;
 
 fn get_input_from_str(string: &str) -> InputContent {
-    get_first_line(string)
+    string
         .split(',')
         .map(|s| s.parse::<Int>().unwrap())
         .collect()
 }
 
 fn get_input_from_file(filepath: &str) -> InputContent {
-    get_input_from_str(&fs::read_to_string(filepath).expect("Could not open file"))
+    get_input_from_str(&get_first_line_from_file(filepath))
 }
 
 fn get_generation_count(fishes: &Vec<Int>, nb_generation: Int) -> Int {

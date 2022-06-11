@@ -1,5 +1,5 @@
+use common::get_file_content;
 use itertools::Itertools;
-use std::fs;
 use std::time::Instant;
 
 const INPUT_FILEPATH: &str = "../resources/year2021_day1_input.txt";
@@ -17,7 +17,7 @@ fn get_input_from_str(s: &str) -> InputContent {
 }
 
 fn get_input_from_file(filepath: &str) -> InputContent {
-    get_input_from_str(&fs::read_to_string(filepath).expect("Could not open file"))
+    get_input_from_str(&get_file_content(filepath))
 }
 
 fn part1(depths: &InputContent) -> usize {

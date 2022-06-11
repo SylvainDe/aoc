@@ -1,6 +1,5 @@
-use common::get_first_line;
+use common::get_first_line_from_file;
 use std::cmp::min;
-use std::fs;
 use std::time::Instant;
 
 const INPUT_FILEPATH: &str = "../resources/year2021_day7_input.txt";
@@ -9,14 +8,14 @@ type Int = i32;
 type InputContent = Vec<Int>;
 
 fn get_input_from_str(string: &str) -> InputContent {
-    get_first_line(string)
+    string
         .split(',')
         .map(|s| s.parse::<Int>().expect("Could not convert line to integer"))
         .collect()
 }
 
 fn get_input_from_file(filepath: &str) -> InputContent {
-    get_input_from_str(&fs::read_to_string(filepath).expect("Could not open file"))
+    get_input_from_str(&get_first_line_from_file(filepath))
 }
 
 fn get_fuel_cost_for_position(positions: &[Int], target: Int) -> Int {
