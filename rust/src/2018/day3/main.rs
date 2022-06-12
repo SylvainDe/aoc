@@ -1,6 +1,7 @@
 use common::collect_from_lines;
 use common::get_file_content;
 use core::str::FromStr;
+use itertools::iproduct;
 use lazy_static::lazy_static;
 use regex::Captures;
 use regex::Regex;
@@ -44,13 +45,11 @@ impl FromStr for Claim {
 
 impl Claim {
     fn fabric(&self) -> Vec<(Int, Int)> {
-        let mut v = Vec::<(Int, Int)>::new();
-        for x in self.topedge..self.topedge + self.height {
-            for y in self.leftedge..self.leftedge + self.width {
-                v.push((x, y));
-            }
-        }
-        v
+        iproduct!(
+            self.topedge..self.topedge + self.height,
+            self.leftedge..self.leftedge + self.width
+        )
+        .collect()
     }
 }
 
