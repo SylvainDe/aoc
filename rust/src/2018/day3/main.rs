@@ -3,7 +3,6 @@ use common::get_file_content;
 use core::str::FromStr;
 use itertools::iproduct;
 use lazy_static::lazy_static;
-use regex::Captures;
 use regex::Regex;
 use std::collections::HashMap;
 use std::time::Instant;
