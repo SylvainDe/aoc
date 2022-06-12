@@ -1,26 +1,26 @@
+use common::collect_lines;
 use common::get_file_content;
 use std::time::Instant;
 
 const INPUT_FILEPATH: &str = "../resources/yearYYYY_dayDD_input.txt";
 
 type Int = u32;
-type InputContent = Int;
+type InputContent = Vec<String>;
 
-#[allow(clippy::missing_const_for_fn)]
-fn get_input_from_str(_string: &str) -> InputContent {
-    0
+fn get_input_from_str(string: &str) -> InputContent {
+    collect_lines(string)
 }
 
 fn get_input_from_file(filepath: &str) -> InputContent {
     get_input_from_str(&get_file_content(filepath))
 }
 
-#[allow(clippy::trivially_copy_pass_by_ref, clippy::missing_const_for_fn)]
+#[allow(clippy::missing_const_for_fn)]
 fn part1(_arg: &InputContent) -> Int {
     0
 }
 
-#[allow(clippy::trivially_copy_pass_by_ref, clippy::missing_const_for_fn)]
+#[allow(clippy::missing_const_for_fn)]
 fn part2(_arg: &InputContent) -> Int {
     0
 }

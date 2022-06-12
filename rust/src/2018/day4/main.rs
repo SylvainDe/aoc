@@ -72,7 +72,7 @@ impl FromStr for Event {
 type InputContent = Vec<Event>;
 
 fn get_input_from_str(string: &str) -> InputContent {
-    let mut entries: InputContent = collect_from_lines(string, Event::from_str);
+    let mut entries = collect_from_lines(string, Event::from_str);
     entries.sort();
     entries
 }

@@ -5,16 +5,14 @@ const INPUT_FILEPATH: &str = "../resources/year2021_day6_input.txt";
 
 type Int = usize;
 
-type InputContent = Vec<Int>;
-
-fn get_input_from_str(string: &str) -> InputContent {
+fn get_input_from_str(string: &str) -> Vec<Int> {
     string
         .split(',')
         .map(|s| s.parse::<Int>().unwrap())
         .collect()
 }
 
-fn get_input_from_file(filepath: &str) -> InputContent {
+fn get_input_from_file(filepath: &str) -> Vec<Int> {
     get_input_from_str(&get_first_line_from_file(filepath))
 }
 
