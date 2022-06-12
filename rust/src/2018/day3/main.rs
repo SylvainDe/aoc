@@ -31,14 +31,13 @@ impl FromStr for Claim {
                 .unwrap();
         }
         let c = RE.captures(s).ok_or(())?;
-        let to_int =
-            |c: &Captures, s: &str| c.name(s).ok_or(())?.as_str().parse::<Int>().map_err(|_| {});
+        let to_int = |s: &str| c.name(s).ok_or(())?.as_str().parse::<Int>().map_err(|_| {});
         Ok(Self {
-            id: to_int(&c, "claimid")?,
-            leftedge: to_int(&c, "leftedge")?,
-            topedge: to_int(&c, "topedge")?,
-            width: to_int(&c, "width")?,
-            height: to_int(&c, "height")?,
+            id: to_int("claimid")?,
+            leftedge: to_int("leftedge")?,
+            topedge: to_int("topedge")?,
+            width: to_int("width")?,
+            height: to_int("height")?,
         })
     }
 }

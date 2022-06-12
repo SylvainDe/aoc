@@ -1,6 +1,8 @@
 use common::collect_from_lines;
 use common::get_file_content;
 use core::str::FromStr;
+use lazy_static::lazy_static;
+use regex::Regex;
 use std::time::Instant;
 
 const INPUT_FILEPATH: &str = "../resources/year2018_day4_input.txt";
@@ -31,23 +33,31 @@ impl FromStr for Action {
 
 #[derive(Debug, Eq, Ord, PartialEq, PartialOrd)]
 struct Timestamp {
-    year: u8,
-    month: u8,
-    day: u8,
-    hour: u8,
-    minute: u8,
+    year: Int,
+    month: Int,
+    day: Int,
+    hour: Int,
+    minute: Int,
 }
 
 impl FromStr for Timestamp {
     type Err = ();
-    fn from_str(_s: &str) -> Result<Self, Self::Err> {
-        // TODO
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        // [1518-11-01 00:00
+        lazy_static! {
+            static ref RE: Regex = Regex::new(
+                r"^\[(?P<year>\d+)-(?P<month>\d+)-(?P<day>\d+) (?P<hour>\d+):(?P<minute>\d+)"
+            )
+            .unwrap();
+        }
+        let c = RE.captures(s).ok_or(())?;
+        let to_int = |s: &str| c.name(s).ok_or(())?.as_str().parse::<Int>().map_err(|_| {});
         Ok(Self {
-            year: 0,
-            month: 0,
-            day: 0,
-            hour: 0,
-            minute: 0,
+            year: to_int("year")?,
+            month: to_int("month")?,
+            day: to_int("day")?,
+            hour: to_int("hour")?,
+            minute: to_int("minute")?,
         })
     }
 }
@@ -61,7 +71,6 @@ struct Event {
 impl FromStr for Event {
     type Err = ();
     fn from_str(s: &str) -> Result<Self, Self::Err> {
-        let (_, s) = s.split_once(':').ok_or(())?;
         let (ts, action) = s.split_once("] ").ok_or(())?;
         Ok(Self {
             timestamp: ts.parse().map_err(|_| {})?,
@@ -136,13 +145,13 @@ mod tests {
     #[test]
     fn test_timestamp_from_str() {
         assert_eq!(
-            Timestamp::from_str("1518-11-05 00:55"),
+            Timestamp::from_str("[1518-11-05 00:55"),
             Ok(Timestamp {
-                year: 0,
-                month: 0,
-                day: 0,
+                year: 1518,
+                month: 11,
+                day: 5,
                 hour: 0,
-                minute: 0,
+                minute: 55,
             })
         );
     }
@@ -152,11 +161,11 @@ mod tests {
             Event::from_str("[1518-11-05 00:03] Guard #99 begins shift"),
             Ok(Event {
                 timestamp: Timestamp {
-                    year: 0,
-                    month: 0,
-                    day: 0,
+                    year: 1518,
+                    month: 11,
+                    day: 5,
                     hour: 0,
-                    minute: 0,
+                    minute: 3,
                 },
                 action: Action::ShiftBegins(99,),
             },)
