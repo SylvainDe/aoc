@@ -64,7 +64,7 @@ fn get_input_from_file(filepath: &str) -> InputContent {
     get_input_from_str(&get_file_content(filepath))
 }
 
-fn part1(claims: &InputContent) -> usize {
+fn fabric_counter(claims: &InputContent) -> HashMap<(Int, Int), Int> {
     let mut counter = HashMap::<(Int, Int), Int>::new();
     for claim in claims {
         for p in claim.fabric() {
@@ -72,11 +72,27 @@ fn part1(claims: &InputContent) -> usize {
             *count += 1;
         }
     }
-    counter.iter().filter(|(_, &v)| v > 1).count()
+    counter
 }
 
-#[allow(clippy::missing_const_for_fn)]
-fn part2(_arg: &InputContent) -> Int {
+fn part1(claims: &InputContent) -> usize {
+    fabric_counter(claims)
+        .iter()
+        .filter(|(_, &v)| v > 1)
+        .count()
+}
+
+fn part2(claims: &InputContent) -> Int {
+    let counter = fabric_counter(claims);
+    for claim in claims {
+        if claim
+            .fabric()
+            .iter()
+            .all(|&p| *counter.get(&p).expect("Point in counter") == 1)
+        {
+            return claim.id;
+        }
+    }
     0
 }
 
@@ -88,7 +104,7 @@ fn main() {
     assert_eq!(res, 109_716);
     let res2 = part2(&data);
     println!("{:?}", res2);
-    assert_eq!(res2, 0);
+    assert_eq!(res2, 124);
     println!("Elapsed time: {:.2?}", before.elapsed());
 }
 
@@ -122,6 +138,6 @@ mod tests {
 
     #[test]
     fn test_part2() {
-        assert_eq!(part2(&get_input_from_str(EXAMPLE)), 0);
+        assert_eq!(part2(&get_input_from_str(EXAMPLE)), 3);
     }
 }
