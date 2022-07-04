@@ -1,30 +1,11 @@
 use common::collect_from_lines;
 use common::get_file_content;
+use common::point_module;
 use core::str::FromStr;
 use std::collections::HashMap;
 use std::time::Instant;
 
 const INPUT_FILEPATH: &str = "../resources/year2021_day5_input.txt";
-
-mod point_module {
-    use core::str::FromStr;
-    #[derive(Debug, PartialEq, Eq, Hash)]
-    pub struct Point<T> {
-        pub x: T,
-        pub y: T,
-    }
-
-    impl<T: std::str::FromStr> FromStr for Point<T> {
-        type Err = ();
-        fn from_str(s: &str) -> Result<Self, Self::Err> {
-            let (x, y) = s.split_once(',').ok_or(())?;
-            Ok(Self {
-                x: x.parse().map_err(|_| {})?,
-                y: y.parse().map_err(|_| {})?,
-            })
-        }
-    }
-}
 
 type Int = i32;
 type Point = point_module::Point<Int>;
@@ -40,8 +21,8 @@ impl FromStr for Vent {
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         let (p1, p2) = s.split_once(" -> ").ok_or(())?;
         Ok(Self {
-            p1: Point::from_str(p1)?,
-            p2: Point::from_str(p2)?,
+            p1: Point::from_str_with_param(p1, ",")?,
+            p2: Point::from_str_with_param(p2, ",")?,
         })
     }
 }
@@ -123,18 +104,6 @@ mod tests {
 3,4 -> 1,4
 0,0 -> 8,8
 5,5 -> 8,2";
-
-    #[test]
-    fn test_point_from_str() {
-        assert_eq!(Point::from_str("9,4"), Ok(Point { x: 9, y: 4 }));
-    }
-
-    #[test]
-    fn point_from_str_invalid_values() {
-        assert!(Point::from_str("9 4").is_err());
-        assert!(Point::from_str("9, 4").is_err());
-        assert!(Point::from_str("9,four").is_err());
-    }
 
     #[test]
     fn test_vent_from_str() {

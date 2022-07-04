@@ -38,9 +38,38 @@ where
     string.lines().map(|l| f(l).unwrap()).collect()
 }
 
+pub mod point_module {
+    #[derive(Debug, PartialEq, Eq, Hash)]
+    pub struct Point<T> {
+        pub x: T,
+        pub y: T,
+    }
+
+    use std::str::FromStr;
+    impl<T: std::str::FromStr> Point<T> {
+        #[allow(clippy::result_unit_err, clippy::missing_errors_doc)]
+        pub fn from_str_with_param(s: &str, separator: &str) -> Result<Self, ()> {
+            let (x, y) = s.split_once(separator).ok_or(())?;
+            Ok(Self {
+                x: x.parse().map_err(|_| {})?,
+                y: y.parse().map_err(|_| {})?,
+            })
+        }
+    }
+
+    impl<T: std::str::FromStr> FromStr for Point<T> {
+        type Err = ();
+        fn from_str(s: &str) -> Result<Self, Self::Err> {
+            Self::from_str_with_param(s, ", ")
+        }
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::point_module::Point;
+    use std::str::FromStr;
 
     #[test]
     fn test_get_first_line() {
@@ -56,5 +85,33 @@ mod tests {
             get_first_line_from_file("src/lib/common.rs"),
             "// First line"
         );
+    }
+
+    #[test]
+    fn test_point_from_str() {
+        assert_eq!(
+            Point::from_str_with_param("9, 4", ", "),
+            Ok(Point { x: 9, y: 4 })
+        );
+        assert_eq!(
+            Point::from_str_with_param("9,4", ","),
+            Ok(Point { x: 9, y: 4 })
+        );
+        assert_eq!(Point::from_str("9, 4"), Ok(Point { x: 9, y: 4 }));
+    }
+
+    #[test]
+    fn point_from_str_invalid_values() {
+        assert!(Point::<i32>::from_str_with_param("9 4", ", ").is_err());
+        assert!(Point::<i32>::from_str_with_param("9,4", ", ").is_err());
+        assert!(Point::<i32>::from_str_with_param("9, 4", ",").is_err());
+        assert!(Point::<i32>::from_str_with_param("9,four", ", ").is_err());
+        assert!(Point::<i32>::from_str_with_param("9 4", ",").is_err());
+        assert!(Point::<i32>::from_str_with_param("9, 4", ",").is_err());
+        assert!(Point::<i32>::from_str_with_param("9,four", ",").is_err());
+
+        assert!(Point::<i32>::from_str("9 4").is_err());
+        assert!(Point::<i32>::from_str("9,4").is_err());
+        assert!(Point::<i32>::from_str("9,four").is_err());
     }
 }

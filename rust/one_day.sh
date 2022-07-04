@@ -13,6 +13,7 @@ year="${2:-$real_year}"
 bin="day${day}_${year}"
 
 # Run cargo commands
+cargo test --lib
 cargo test --bin "${bin}"
 cargo run --bin "${bin}"
 cargo clippy --bin "${bin}" -- \

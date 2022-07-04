@@ -1,36 +1,16 @@
 use common::collect_from_lines;
 use common::get_file_content;
-use std::str::FromStr;
+use common::point_module;
 use std::time::Instant;
 
 const INPUT_FILEPATH: &str = "../resources/year2018_day6_input.txt";
-
-mod point_module {
-    use core::str::FromStr;
-    #[derive(Debug, PartialEq, Eq, Hash)]
-    pub struct Point<T> {
-        pub x: T,
-        pub y: T,
-    }
-
-    impl<T: std::str::FromStr> FromStr for Point<T> {
-        type Err = ();
-        fn from_str(s: &str) -> Result<Self, Self::Err> {
-            let (x, y) = s.split_once(", ").ok_or(())?;
-            Ok(Self {
-                x: x.parse().map_err(|_| {})?,
-                y: y.parse().map_err(|_| {})?,
-            })
-        }
-    }
-}
 
 type Int = i32;
 type Point = point_module::Point<Int>;
 type InputContent = Vec<Point>;
 
 fn get_input_from_str(string: &str) -> InputContent {
-    collect_from_lines(string, Point::from_str)
+    collect_from_lines(string, |s| Point::from_str_with_param(s, ", "))
 }
 
 fn get_input_from_file(filepath: &str) -> InputContent {
@@ -70,18 +50,6 @@ mod tests {
 3, 4
 5, 5
 8, 9";
-
-    #[test]
-    fn test_point_from_str() {
-        assert_eq!(Point::from_str("9, 4"), Ok(Point { x: 9, y: 4 }));
-    }
-
-    #[test]
-    fn point_from_str_invalid_values() {
-        assert!(Point::from_str("9 4").is_err());
-        assert!(Point::from_str("9,4").is_err());
-        assert!(Point::from_str("9,four").is_err());
-    }
 
     #[test]
     fn test_part1() {
