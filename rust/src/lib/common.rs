@@ -45,14 +45,17 @@ pub mod point_module {
         pub y: T,
     }
 
+    #[derive(Debug, PartialEq, Eq, Hash)]
+    pub struct FromStrError;
+
     use std::str::FromStr;
     impl<T: std::str::FromStr> Point<T> {
         #[allow(clippy::result_unit_err, clippy::missing_errors_doc)]
-        pub fn from_str_with_param(s: &str, separator: &str) -> Result<Self, ()> {
-            let (x, y) = s.split_once(separator).ok_or(())?;
+        pub fn from_str_with_param(s: &str, separator: &str) -> Result<Self, FromStrError> {
+            let (x, y) = s.split_once(separator).ok_or(FromStrError)?;
             Ok(Self {
-                x: x.parse().map_err(|_| {})?,
-                y: y.parse().map_err(|_| {})?,
+                x: x.parse().map_err(|_| FromStrError)?,
+                y: y.parse().map_err(|_| FromStrError)?,
             })
         }
     }
@@ -60,7 +63,11 @@ pub mod point_module {
     impl<T: std::str::FromStr> FromStr for Point<T> {
         type Err = ();
         fn from_str(s: &str) -> Result<Self, Self::Err> {
-            Self::from_str_with_param(s, ", ")
+            let (x, y) = s.split_once(", ").ok_or(())?;
+            Ok(Self {
+                x: x.parse().map_err(|_| {})?,
+                y: y.parse().map_err(|_| {})?,
+            })
         }
     }
 }
