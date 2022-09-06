@@ -17,9 +17,9 @@ struct Vent {
 }
 
 impl FromStr for Vent {
-    type Err = ();
+    type Err = point_module::FromStrError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
-        let (p1, p2) = s.split_once(" -> ").ok_or(())?;
+        let (p1, p2) = s.split_once(" -> ").ok_or(point_module::FromStrError)?;
         Ok(Self {
             p1: Point::from_str_with_param(p1, ",")?,
             p2: Point::from_str_with_param(p2, ",")?,
