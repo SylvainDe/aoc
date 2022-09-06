@@ -30,12 +30,12 @@ impl FromStr for BoxDimensions {
 
 impl BoxDimensions {
     fn paper(&self) -> Int {
-        let BoxDimensions { l, w, h } = self;
+        let Self { l, w, h } = self;
         let sides = [l * w, l * h, w * h];
         2 * (sides.iter().sum::<Int>()) + min(sides).unwrap()
     }
     fn ribbon(&self) -> Int {
-        let BoxDimensions { l, w, h } = self;
+        let Self { l, w, h } = self;
         let peri = [l + w, l + h, w + h];
         2 * min(peri).unwrap() + l * w * h
     }
