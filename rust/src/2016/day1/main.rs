@@ -5,7 +5,7 @@ use std::time::Instant;
 
 const INPUT_FILEPATH: &str = "../resources/year2016_day1_input.txt";
 
-type Int = u32;
+type Int = i32;
 
 #[derive(Debug, PartialEq)]
 enum Turn {
@@ -59,8 +59,20 @@ fn get_input_from_file(filepath: &str) -> InputContent {
 }
 
 #[allow(clippy::missing_const_for_fn)]
-fn part1(_arg: &InputContent) -> Int {
-    0
+fn part1(arg: &InputContent) -> Int {
+    let mut x: Int = 0;
+    let mut y: Int = 0;
+    let mut dx: Int = 0;
+    let mut dy: Int = 1;
+    for Action { turn, length } in arg {
+        match turn {
+            Turn::Left => (dx, dy) = (-dy, dx),
+            Turn::Right => (dx, dy) = (dy, -dx),
+        };
+        x += dx * length;
+        y += dy * length;
+    }
+    x.abs() + y.abs()
 }
 
 #[allow(clippy::missing_const_for_fn)]
@@ -73,7 +85,7 @@ fn main() {
     let data = get_input_from_file(INPUT_FILEPATH);
     let res = part1(&data);
     println!("{:?}", res);
-    assert_eq!(res, 0);
+    assert_eq!(res, 226);
     let res2 = part2(&data);
     println!("{:?}", res2);
     assert_eq!(res2, 0);
@@ -99,7 +111,7 @@ mod tests {
 
     #[test]
     fn test_part1() {
-        assert_eq!(part1(&get_input_from_str(EXAMPLE)), 0);
+        assert_eq!(part1(&get_input_from_str(EXAMPLE)), 12);
     }
 
     #[test]
