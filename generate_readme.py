@@ -31,11 +31,25 @@ Solutions used to be stored in different repositories for each year limiting the
 Solutions are written in Python and/or Rust.
 """
 
+def file_contains(filepath, string):
+    with open(filepath) as f:
+        for line in f:
+            if string in line:
+                return True
+    return False
+
 def format_file(filepath):
     if not os.path.isfile(filepath):
         return ""
-    # TODO: Check whether file corresponds to the template
-    return "[{basename}]({fullpath})".format(basename=os.path.basename(filepath), fullpath=filepath)
+    basename=os.path.basename(filepath)
+    note=""
+    if basename.endswith(".py"):
+        if file_contains(filepath, "xxx = get_xxx_from_file"):
+            note = ": template"
+    elif basename.endswith(".rs"):
+        if file_contains(filepath, "fn part1(_arg"):
+            note = ": template"
+    return "[{basename}{note}]({fullpath})".format(basename=basename, note=note, fullpath=filepath)
 
 def format_table_colums(columns):
     return "{}{}{}".format(sep, sep.join(columns), sep)
