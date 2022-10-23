@@ -59,6 +59,7 @@ fn get_input_from_file(filepath: &str) -> InputContent {
     get_input_from_str(&get_file_content(filepath))
 }
 
+// TODO: Define logic in https://doc.rust-lang.org/std/iter/fn.from_fn.html ?
 fn part1(arg: &InputContent) -> Int {
     let mut x: Int = 0;
     let mut y: Int = 0;
