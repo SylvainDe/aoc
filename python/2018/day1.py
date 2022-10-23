@@ -2,17 +2,35 @@
 import datetime
 
 
-def get_xxx_from_file(file_path="../../resources/year2018_day1_input.txt"):
+def get_freq_from_file(file_path="../../resources/year2018_day1_input.txt"):
     with open(file_path) as f:
-        return [l.strip() for l in f]
+        return [int(l.strip()) for l in f]
+
+
+def get_resulting_freq(freqs):
+    return sum(freqs)
+
+
+def get_first_repetition(freqs):
+    freq = 0
+    seens = set([freq])
+    while True:
+        for f in freqs:
+            freq += f
+            if freq in seens:
+                return freq
+            seens.add(freq)
 
 
 def run_tests():
-    xxx = ""
+    assert get_resulting_freq([+1, -2, +3, +1]) == 3
+    assert get_first_repetition([+1, -2, +3, +1]) == 2
 
 
 def get_solutions():
-    xxx = get_xxx_from_file()
+    freqs = get_freq_from_file()
+    print(get_resulting_freq(freqs))
+    print(get_first_repetition(freqs))
 
 
 if __name__ == "__main__":
