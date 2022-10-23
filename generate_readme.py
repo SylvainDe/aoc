@@ -41,15 +41,13 @@ def file_contains(filepath, string):
 def format_file(filepath):
     if not os.path.isfile(filepath):
         return ""
-    basename=os.path.basename(filepath)
-    note=""
-    if basename.endswith(".py"):
-        if file_contains(filepath, "xxx = get_xxx_from_file"):
-            note = ": template"
-    elif basename.endswith(".rs"):
-        if file_contains(filepath, "fn part1(_arg"):
-            note = ": template"
-    return "[{basename}{note}]({fullpath})".format(basename=basename, note=note, fullpath=filepath)
+    is_template=False
+    if filepath.endswith(".py") and file_contains(filepath, "xxx = get_xxx_from_file"):
+        is_template = True
+    elif filepath.endswith(".rs") and file_contains(filepath, "fn part1(_arg"):
+        is_template = True
+    basename="template" if is_template else os.path.basename(filepath)
+    return "[{basename}]({fullpath})".format(basename=basename, fullpath=filepath)
 
 def format_table_colums(columns):
     return "{}{}{}".format(sep, sep.join(columns), sep)
