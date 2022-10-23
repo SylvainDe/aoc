@@ -45,10 +45,11 @@ print(header)
 columns = ["Year", "Day", "Problem URL", "Input URL", "Input", "Python", "Rust"]
 print(format_table_colums(columns))
 print(format_table_colums(("---" for _ in columns)))
-for year in range(2016, 2021):
-    for day in range(1, 25):
+for year in range(2016, 2021+1):
+    for day in range(1, 25+1):
         day_urls = [u.format(year=year, day=day) for u in urls]
         day_files = [format_file(f.format(year=year, day=day)) for f in files]
         columns = [str(year), str(day)] + day_urls + day_files
         print(format_table_colums(columns))
+    print(format_table_colums(("-" for _ in columns)))
 
