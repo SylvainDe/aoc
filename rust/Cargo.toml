@@ -9,6 +9,7 @@ license = "MIT OR Apache-2.0"
 keywords = ["aoc", "adventofcode", "advent of code"]
 categories = ["games"]
 
+# Common parts
 [lib]
 name = "common"
 path = "src/lib/common.rs"
@@ -17,62 +18,7 @@ path = "src/lib/common.rs"
 name = "template"
 path = "src/template/main.rs"
 
-[[bin]]
-name = "day1_2021"
-path = "src/2021/day1/main.rs"
-
-[[bin]]
-name = "day2_2021"
-path = "src/2021/day2/main.rs"
-
-[[bin]]
-name = "day4_2021"
-path = "src/2021/day4/main.rs"
-
-[[bin]]
-name = "day5_2021"
-path = "src/2021/day5/main.rs"
-
-[[bin]]
-name = "day6_2021"
-path = "src/2021/day6/main.rs"
-
-[[bin]]
-name = "day7_2021"
-path = "src/2021/day7/main.rs"
-
-[[bin]]
-name = "day8_2021"
-path = "src/2021/day8/main.rs"
-
-[[bin]]
-name = "day10_2021"
-path = "src/2021/day10/main.rs"
-
-[[bin]]
-name = "day1_2018"
-path = "src/2018/day1/main.rs"
-
-[[bin]]
-name = "day2_2018"
-path = "src/2018/day2/main.rs"
-
-[[bin]]
-name = "day4_2018"
-path = "src/2018/day4/main.rs"
-
-[[bin]]
-name = "day5_2018"
-path = "src/2018/day5/main.rs"
-
-[[bin]]
-name = "day6_2018"
-path = "src/2018/day6/main.rs"
-
-[[bin]]
-name = "day8_2018"
-path = "src/2018/day8/main.rs"
-
+# 2015
 [[bin]]
 name = "day1_2015"
 path = "src/2015/day1/main.rs"
@@ -90,17 +36,90 @@ name = "day4_2015"
 path = "src/2015/day4/main.rs"
 
 [[bin]]
-name = "day9_2018"
-path = "src/2018/day9/main.rs"
+name = "day5_2015"
+path = "src/2015/day5/main.rs"
 
 [[bin]]
-name = "day10_2018"
-path = "src/2018/day10/main.rs"
+name = "day6_2015"
+path = "src/2015/day6/main.rs"
 
 [[bin]]
-name = "day3_2018"
-path = "src/2018/day3/main.rs"
+name = "day7_2015"
+path = "src/2015/day7/main.rs"
 
+[[bin]]
+name = "day8_2015"
+path = "src/2015/day8/main.rs"
+
+[[bin]]
+name = "day9_2015"
+path = "src/2015/day9/main.rs"
+
+[[bin]]
+name = "day10_2015"
+path = "src/2015/day10/main.rs"
+
+[[bin]]
+name = "day11_2015"
+path = "src/2015/day11/main.rs"
+
+[[bin]]
+name = "day12_2015"
+path = "src/2015/day12/main.rs"
+
+[[bin]]
+name = "day13_2015"
+path = "src/2015/day13/main.rs"
+
+[[bin]]
+name = "day14_2015"
+path = "src/2015/day14/main.rs"
+
+[[bin]]
+name = "day15_2015"
+path = "src/2015/day15/main.rs"
+
+[[bin]]
+name = "day16_2015"
+path = "src/2015/day16/main.rs"
+
+[[bin]]
+name = "day17_2015"
+path = "src/2015/day17/main.rs"
+
+[[bin]]
+name = "day18_2015"
+path = "src/2015/day18/main.rs"
+
+[[bin]]
+name = "day19_2015"
+path = "src/2015/day19/main.rs"
+
+[[bin]]
+name = "day20_2015"
+path = "src/2015/day20/main.rs"
+
+[[bin]]
+name = "day21_2015"
+path = "src/2015/day21/main.rs"
+
+[[bin]]
+name = "day22_2015"
+path = "src/2015/day22/main.rs"
+
+[[bin]]
+name = "day23_2015"
+path = "src/2015/day23/main.rs"
+
+[[bin]]
+name = "day24_2015"
+path = "src/2015/day24/main.rs"
+
+[[bin]]
+name = "day25_2015"
+path = "src/2015/day25/main.rs"
+
+# 2016
 [[bin]]
 name = "day1_2016"
 path = "src/2016/day1/main.rs"
@@ -201,6 +220,7 @@ path = "src/2016/day24/main.rs"
 name = "day25_2016"
 path = "src/2016/day25/main.rs"
 
+# 2017
 [[bin]]
 name = "day1_2017"
 path = "src/2017/day1/main.rs"
@@ -301,6 +321,108 @@ path = "src/2017/day24/main.rs"
 name = "day25_2017"
 path = "src/2017/day25/main.rs"
 
+# 2018
+[[bin]]
+name = "day1_2018"
+path = "src/2018/day1/main.rs"
+
+[[bin]]
+name = "day2_2018"
+path = "src/2018/day2/main.rs"
+
+[[bin]]
+name = "day3_2018"
+path = "src/2018/day3/main.rs"
+
+[[bin]]
+name = "day4_2018"
+path = "src/2018/day4/main.rs"
+
+[[bin]]
+name = "day5_2018"
+path = "src/2018/day5/main.rs"
+
+[[bin]]
+name = "day6_2018"
+path = "src/2018/day6/main.rs"
+
+[[bin]]
+name = "day7_2018"
+path = "src/2018/day7/main.rs"
+
+[[bin]]
+name = "day8_2018"
+path = "src/2018/day8/main.rs"
+
+[[bin]]
+name = "day9_2018"
+path = "src/2018/day9/main.rs"
+
+[[bin]]
+name = "day10_2018"
+path = "src/2018/day10/main.rs"
+
+[[bin]]
+name = "day11_2018"
+path = "src/2018/day11/main.rs"
+
+[[bin]]
+name = "day12_2018"
+path = "src/2018/day12/main.rs"
+
+[[bin]]
+name = "day13_2018"
+path = "src/2018/day13/main.rs"
+
+[[bin]]
+name = "day14_2018"
+path = "src/2018/day14/main.rs"
+
+[[bin]]
+name = "day15_2018"
+path = "src/2018/day15/main.rs"
+
+[[bin]]
+name = "day16_2018"
+path = "src/2018/day16/main.rs"
+
+[[bin]]
+name = "day17_2018"
+path = "src/2018/day17/main.rs"
+
+[[bin]]
+name = "day18_2018"
+path = "src/2018/day18/main.rs"
+
+[[bin]]
+name = "day19_2018"
+path = "src/2018/day19/main.rs"
+
+[[bin]]
+name = "day20_2018"
+path = "src/2018/day20/main.rs"
+
+[[bin]]
+name = "day21_2018"
+path = "src/2018/day21/main.rs"
+
+[[bin]]
+name = "day22_2018"
+path = "src/2018/day22/main.rs"
+
+[[bin]]
+name = "day23_2018"
+path = "src/2018/day23/main.rs"
+
+[[bin]]
+name = "day24_2018"
+path = "src/2018/day24/main.rs"
+
+[[bin]]
+name = "day25_2018"
+path = "src/2018/day25/main.rs"
+
+# 2019
 [[bin]]
 name = "day1_2019"
 path = "src/2019/day1/main.rs"
@@ -401,6 +523,7 @@ path = "src/2019/day24/main.rs"
 name = "day25_2019"
 path = "src/2019/day25/main.rs"
 
+# 2020
 [[bin]]
 name = "day1_2020"
 path = "src/2020/day1/main.rs"
@@ -500,6 +623,107 @@ path = "src/2020/day24/main.rs"
 [[bin]]
 name = "day25_2020"
 path = "src/2020/day25/main.rs"
+
+# 2021
+[[bin]]
+name = "day1_2021"
+path = "src/2021/day1/main.rs"
+
+[[bin]]
+name = "day2_2021"
+path = "src/2021/day2/main.rs"
+
+[[bin]]
+name = "day4_2021"
+path = "src/2021/day4/main.rs"
+
+[[bin]]
+name = "day5_2021"
+path = "src/2021/day5/main.rs"
+
+[[bin]]
+name = "day6_2021"
+path = "src/2021/day6/main.rs"
+
+[[bin]]
+name = "day7_2021"
+path = "src/2021/day7/main.rs"
+
+[[bin]]
+name = "day8_2021"
+path = "src/2021/day8/main.rs"
+
+[[bin]]
+name = "day10_2021"
+path = "src/2021/day10/main.rs"
+
+[[bin]]
+name = "day3_2021"
+path = "src/2021/day3/main.rs"
+
+[[bin]]
+name = "day9_2021"
+path = "src/2021/day9/main.rs"
+
+[[bin]]
+name = "day11_2021"
+path = "src/2021/day11/main.rs"
+
+[[bin]]
+name = "day12_2021"
+path = "src/2021/day12/main.rs"
+
+[[bin]]
+name = "day13_2021"
+path = "src/2021/day13/main.rs"
+
+[[bin]]
+name = "day14_2021"
+path = "src/2021/day14/main.rs"
+
+[[bin]]
+name = "day15_2021"
+path = "src/2021/day15/main.rs"
+
+[[bin]]
+name = "day16_2021"
+path = "src/2021/day16/main.rs"
+
+[[bin]]
+name = "day17_2021"
+path = "src/2021/day17/main.rs"
+
+[[bin]]
+name = "day18_2021"
+path = "src/2021/day18/main.rs"
+
+[[bin]]
+name = "day19_2021"
+path = "src/2021/day19/main.rs"
+
+[[bin]]
+name = "day20_2021"
+path = "src/2021/day20/main.rs"
+
+[[bin]]
+name = "day21_2021"
+path = "src/2021/day21/main.rs"
+
+[[bin]]
+name = "day22_2021"
+path = "src/2021/day22/main.rs"
+
+[[bin]]
+name = "day23_2021"
+path = "src/2021/day23/main.rs"
+
+[[bin]]
+name = "day24_2021"
+path = "src/2021/day24/main.rs"
+
+[[bin]]
+name = "day25_2021"
+path = "src/2021/day25/main.rs"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
