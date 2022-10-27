@@ -1,4 +1,5 @@
-set -x
+#set -x
+set -e
 
 # Retrieve date
 real_day=$(date "+%-d")
@@ -13,12 +14,20 @@ browser="firefox"  # Can be left empty
 editor="vim"  # Can be left empty
 browser=""
 editor=""
+
 get_input="1"
 overwrite_input="0"
+
 get_puzzle="1"
-overwrite_puzzle="1"
-create_rust="0"
-create_python="0"
+overwrite_puzzle="0"
+
+create_rust="1"
+overwrite_rust="0"
+
+create_python="1"
+overwrite_python="0"
+
+generate_readme="1"
 
 # URLs
 puzzle_url="https://adventofcode.com/${year}/day/${day}"
@@ -32,7 +41,6 @@ else
 	"${browser}"  "${input_url}"
 fi
 
-
 # Optional: read cookie config file - setting AOC_SESSION_COOKIE env variable
 # See template file aoc_cookie_session.sh for instructions
 source ~/aoc_cookie_session.sh 2> /dev/null
@@ -45,7 +53,7 @@ get_url_and_save() {
 	url="${1}"
 	dest="${2}"
 	overwrite="${3}"
-	echo "${url} - ${dest}"
+	echo "About to save ${url} in ${dest}"
 	mkdir -p $(dirname "${dest}")
 	if [ "${overwrite}" == "0" -a -f "${dest}" ]; then
 		echo "File ${dest} already exists - ignored."
@@ -57,8 +65,6 @@ get_url_and_save() {
 		# Get file
 		curl "${url}" -H "cookie: session=${AOC_SESSION_COOKIE}" -o "${dest}"
 	fi
-
-
 }
 
 if [ "${get_puzzle}" = "1" ]; then
@@ -68,10 +74,64 @@ if [ "${get_input}" = "1" ]; then
 	get_url_and_save "${input_url}" "${input_file}" "${overwrite_input}"
 fi
 
-# TODO: Perform actions for Rust and/or Python
-if [ "${create_rust}" = "1" ]; then
-	echo "Not implemented yet"
-fi
+create_code_from_template() {
+	template="${1}"
+	dest="${2}"
+	overwrite="${3}"
+
+	if [ "${overwrite}" == "0" -a -f "${dest}" ]; then
+		echo "Script file ${dest} already exists - ignored."
+		return
+	fi
+
+	# Create folder
+	mkdir -p $(dirname "${dest}")
+	# Create script file based on template
+	cp "${template}" "${dest}"
+	# Update file example used
+	input_example="resources/yearYYYY_dayDD_input.txt"
+	sed -i "s#${input_example}#${input_file}#g" "${dest}"
+}
+
+open_file_in_editor() {
+	filename="${1}"
+    if [ -z "${editor}" ]; then
+        echo "No editor set - ignored."
+    else
+        "${editor}" "${filename}"
+    fi
+}
+
+# Create Python file
 if [ "${create_python}" = "1" ]; then
-	echo "Not implemented yet"
+	python_template="python/day_template.py"
+	python_script_file="python/${year}/day${day}.py"
+	create_code_from_template "${python_template}" "${python_script_file}" "${overwrite_python}"
+	open_file_in_editor "${python_script_file}"
+fi
+
+# Create Rust file
+if [ "${create_rust}" = "1" ]; then
+	rust_bin="day${day}_${year}"
+	rust_src_file_rel="src/${year}/day${day}/main.rs"
+	rust_src_file="rust/${rust_src_file_rel}"
+	rust_template="rust/src/template/main.rs"
+	cargo_file="rust/Cargo.toml"
+
+	# Add content in Cargo.toml file
+	cargo_content="[[bin]]\nname = \"${rust_bin}\"\npath = \"${rust_src_file_rel}\"\n\n"
+	echo -e "Add the following content to ${cargo_file}:\n${cargo_content}"
+	grep "${rust_bin}" "${cargo_file}" || sed -i "s#.*See more keys#${cargo_content}&#g" "${cargo_file}"
+
+	create_code_from_template "${rust_template}" "${rust_src_file}" "${overwrite_rust}"
+
+	# Instruction to run cargo
+	echo """(cd rust && cargo run --bin "${rust_bin}")"""
+
+	open_file_in_editor "${python_script_file}"
+fi
+
+# Generate README
+if [ "${generate_readme}" = "1" ]; then
+	python3 generate_readme.py > README.md
 fi
