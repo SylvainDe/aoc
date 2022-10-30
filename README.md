@@ -90,7 +90,7 @@ Solutions are written in Python and/or Rust.
 |2017|25|[Problem](https://adventofcode.com/2017/day/25)|[Input](https://adventofcode.com/2017/day/25/input)|[year2017_day25_input.txt](resources/year2017_day25_input.txt)|[template](python/2017/day25.py)|[template](rust/src/2017/day25/main.rs)|
 |-|-|-|-|-|-|-|
 |2018|1|[Problem](https://adventofcode.com/2018/day/1)|[Input](https://adventofcode.com/2018/day/1/input)|[year2018_day1_input.txt](resources/year2018_day1_input.txt)|[day1.py](python/2018/day1.py)|[main.rs](rust/src/2018/day1/main.rs)|
-|2018|2|[Problem](https://adventofcode.com/2018/day/2)|[Input](https://adventofcode.com/2018/day/2/input)|[year2018_day2_input.txt](resources/year2018_day2_input.txt)|[template](python/2018/day2.py)|[main.rs](rust/src/2018/day2/main.rs)|
+|2018|2|[Problem](https://adventofcode.com/2018/day/2)|[Input](https://adventofcode.com/2018/day/2/input)|[year2018_day2_input.txt](resources/year2018_day2_input.txt)|[day2.py](python/2018/day2.py)|[main.rs](rust/src/2018/day2/main.rs)|
 |2018|3|[Problem](https://adventofcode.com/2018/day/3)|[Input](https://adventofcode.com/2018/day/3/input)|[year2018_day3_input.txt](resources/year2018_day3_input.txt)|[template](python/2018/day3.py)|[main.rs](rust/src/2018/day3/main.rs)|
 |2018|4|[Problem](https://adventofcode.com/2018/day/4)|[Input](https://adventofcode.com/2018/day/4/input)|[year2018_day4_input.txt](resources/year2018_day4_input.txt)|[template](python/2018/day4.py)|[main.rs](rust/src/2018/day4/main.rs)|
 |2018|5|[Problem](https://adventofcode.com/2018/day/5)|[Input](https://adventofcode.com/2018/day/5/input)|[year2018_day5_input.txt](resources/year2018_day5_input.txt)|[template](python/2018/day5.py)|[main.rs](rust/src/2018/day5/main.rs)|
