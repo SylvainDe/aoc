@@ -19,7 +19,7 @@ get_input="1"
 overwrite_input="0"
 
 get_puzzle="1"
-overwrite_puzzle="0"
+overwrite_puzzle="1"
 
 create_rust="1"
 overwrite_rust="0"
