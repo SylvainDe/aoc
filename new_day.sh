@@ -53,6 +53,7 @@ get_url_and_save() {
 	url="${1}"
 	dest="${2}"
 	overwrite="${3}"
+	cleanup="${4}"
 	echo "About to save ${url} in ${dest}"
 	mkdir -p $(dirname "${dest}")
 	if [ "${overwrite}" == "0" -a -f "${dest}" ]; then
@@ -64,14 +65,19 @@ get_url_and_save() {
 		echo "Cookie session AOC_SESSION_COOKIE used to get file at url ${url}"
 		# Get file
 		curl "${url}" -H "cookie: session=${AOC_SESSION_COOKIE}" -o "${dest}"
+		if [ "${cleanup}" == "1" ]; then
+			# Lines that keep changing (and are not so relevant)
+			sed -i '/div id="sponsor"/d' "${dest}"  # Random sponsor
+			sed -i '/class="title-global"/d' "${dest}"  # Random header, stars count
+		fi
 	fi
 }
 
 if [ "${get_puzzle}" = "1" ]; then
-	get_url_and_save "${puzzle_url}" "${puzzle_file}" "${overwrite_puzzle}"
+	get_url_and_save "${puzzle_url}" "${puzzle_file}" "${overwrite_puzzle}" "1"
 fi
 if [ "${get_input}" = "1" ]; then
-	get_url_and_save "${input_url}" "${input_file}" "${overwrite_input}"
+	get_url_and_save "${input_url}" "${input_file}" "${overwrite_input}" "0"
 fi
 
 create_code_from_template() {
