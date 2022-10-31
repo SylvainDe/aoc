@@ -51,9 +51,12 @@ def format_file(filepath):
         return ""
     name_shown = os.path.basename(filepath)
     if filepath.endswith("puzzle.txt"):
+        name_shown = "puzzle.txt"
         count_stars = file_count_lines(filepath, "<p>Your puzzle answer was <code>")
         if count_stars:
             name_shown += " " + "*" * count_stars
+    if filepath.endswith("input.txt"):
+        name_shown = "input.txt"
     elif filepath.endswith(".py") and file_contains(filepath, "xxx = get_xxx_from_file"):
         name_shown = "not solved"
     elif filepath.endswith(".rs") and file_contains(filepath, "fn part1(_arg"):
@@ -65,12 +68,12 @@ def format_table_colums(columns):
 
 # Generation
 print(header)
-columns = ["Year", "Day", "Problem URL", "Input URL", "Puzzle", "Input", "Python", "Rust"]
+columns = ["Year", "Day", "URLs", "Puzzle", "Input", "Python", "Rust"]
 print(format_table_colums(columns))
 print(format_table_colums(("---" for _ in columns)))
 for year in range(2015, 2021+1):
     for day in range(1, 25+1):
-        day_urls = [u.format(year=year, day=day) for u in urls]
+        day_urls = [" ".join([u.format(year=year, day=day) for u in urls])]
         day_files = [format_file(f.format(year=year, day=day)) for f in files]
         columns = [str(year), str(day)] + day_urls + day_files
         print(format_table_colums(columns))
