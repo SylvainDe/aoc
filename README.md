@@ -39,7 +39,7 @@ Solutions are written in Python and/or Rust.
 |-|-|-|-|-|-|-|
 |2016|1|[Problem](https://adventofcode.com/2016/day/1)|[Input](https://adventofcode.com/2016/day/1/input)|[year2016_day1_input.txt](resources/year2016_day1_input.txt)|[day1.py](python/2016/day1.py)|[main.rs](rust/src/2016/day1/main.rs)|
 |2016|2|[Problem](https://adventofcode.com/2016/day/2)|[Input](https://adventofcode.com/2016/day/2/input)|[year2016_day2_input.txt](resources/year2016_day2_input.txt)|[day2.py](python/2016/day2.py)|[main.rs](rust/src/2016/day2/main.rs)|
-|2016|3|[Problem](https://adventofcode.com/2016/day/3)|[Input](https://adventofcode.com/2016/day/3/input)|[year2016_day3_input.txt](resources/year2016_day3_input.txt)|[day3.py](python/2016/day3.py)|[template](rust/src/2016/day3/main.rs)|
+|2016|3|[Problem](https://adventofcode.com/2016/day/3)|[Input](https://adventofcode.com/2016/day/3/input)|[year2016_day3_input.txt](resources/year2016_day3_input.txt)|[day3.py](python/2016/day3.py)|[main.rs](rust/src/2016/day3/main.rs)|
 |2016|4|[Problem](https://adventofcode.com/2016/day/4)|[Input](https://adventofcode.com/2016/day/4/input)|[year2016_day4_input.txt](resources/year2016_day4_input.txt)|[day4.py](python/2016/day4.py)|[template](rust/src/2016/day4/main.rs)|
 |2016|5|[Problem](https://adventofcode.com/2016/day/5)|[Input](https://adventofcode.com/2016/day/5/input)|[year2016_day5_input.txt](resources/year2016_day5_input.txt)|[template](python/2016/day5.py)|[template](rust/src/2016/day5/main.rs)|
 |2016|6|[Problem](https://adventofcode.com/2016/day/6)|[Input](https://adventofcode.com/2016/day/6/input)|[year2016_day6_input.txt](resources/year2016_day6_input.txt)|[template](python/2016/day6.py)|[template](rust/src/2016/day6/main.rs)|
