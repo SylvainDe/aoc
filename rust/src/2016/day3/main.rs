@@ -36,9 +36,20 @@ fn part1(arg: &InputContent) -> usize {
     arg.iter().filter(|nbs| is_triangle(nbs)).count()
 }
 
-#[allow(clippy::missing_const_for_fn)]
-fn part2(_arg: &InputContent) -> Int {
-    0
+fn transpose(v: &InputContent) -> InputContent {
+    assert!(!v.is_empty());
+    let len = v[0].len();
+    (0..len)
+        .into_iter()
+        .map(|i| v.iter().map(|row| row[i]).collect())
+        .collect()
+}
+
+fn part2(arg: &InputContent) -> usize {
+    transpose(arg)
+        .iter()
+        .map(|col| col.chunks_exact(3).filter(|nbs| is_triangle(nbs)).count())
+        .sum()
 }
 
 fn main() {
@@ -49,7 +60,7 @@ fn main() {
     assert_eq!(res, 993);
     let res2 = part2(&data);
     println!("{:?}", res2);
-    assert_eq!(res2, 0);
+    assert_eq!(res2, 1849);
     println!("Elapsed time: {:.2?}", before.elapsed());
 }
 
@@ -61,6 +72,13 @@ mod tests {
    5    10     20
 2 3 4";
 
+    const EXAMPLE2: &str = "101 301 501
+102 302 502
+103 303 503
+201 401 601
+202 402 602
+203 403 603";
+
     #[test]
     fn test_part1() {
         assert_eq!(part1(&get_input_from_str(EXAMPLE)), 1);
@@ -68,6 +86,6 @@ mod tests {
 
     #[test]
     fn test_part2() {
-        assert_eq!(part2(&get_input_from_str(EXAMPLE)), 0);
+        assert_eq!(part2(&get_input_from_str(EXAMPLE2)), 6);
     }
 }
