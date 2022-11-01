@@ -33,6 +33,9 @@ generate_readme="1"
 puzzle_url="https://adventofcode.com/${year}/day/${day}"
 input_url="https://adventofcode.com/${year}/day/${day}/input"
 
+# Move to correct directory
+cd "$(dirname "$0")"
+
 # Open pages
 if [ -z "${browser}" ]; then
 	echo "No browser set - ignored."
