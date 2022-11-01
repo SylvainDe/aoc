@@ -1,28 +1,63 @@
-use common::collect_lines;
 use common::get_file_content;
+use std::collections::HashMap;
 use std::time::Instant;
 
 const INPUT_FILEPATH: &str = "../resources/year2016_day6_input.txt";
 
 type Int = u32;
-type InputContent = Vec<String>;
+type InputContent = Vec<Vec<char>>;
 
 fn get_input_from_str(string: &str) -> InputContent {
-    collect_lines(string)
+    string.lines().map(|l| l.chars().collect()).collect()
 }
 
 fn get_input_from_file(filepath: &str) -> InputContent {
     get_input_from_str(&get_file_content(filepath))
 }
 
-#[allow(clippy::missing_const_for_fn)]
-fn part1(_arg: &InputContent) -> Int {
-    0
+fn transpose(v: &InputContent) -> InputContent {
+    assert!(!v.is_empty());
+    let len = v[0].len();
+    (0..len)
+        .into_iter()
+        .map(|i| v.iter().map(|row| row[i]).collect())
+        .collect()
 }
 
-#[allow(clippy::missing_const_for_fn)]
-fn part2(_arg: &InputContent) -> Int {
-    0
+// TODO: Make types more generic
+fn count(v: &Vec<char>) -> HashMap<char, Int> {
+    let mut counter = HashMap::<char, Int>::new();
+    for c in v {
+        let count = counter.entry(*c).or_insert(0);
+        *count += 1;
+    }
+    counter
+}
+
+fn part1(arg: &InputContent) -> String {
+    transpose(arg)
+        .iter()
+        .map(|col| {
+            count(col)
+                .into_iter()
+                .max_by_key(|&(_, count)| count)
+                .unwrap()
+                .0
+        })
+        .collect()
+}
+
+fn part2(arg: &InputContent) -> String {
+    transpose(arg)
+        .iter()
+        .map(|col| {
+            count(col)
+                .into_iter()
+                .min_by_key(|&(_, count)| count)
+                .unwrap()
+                .0
+        })
+        .collect()
 }
 
 fn main() {
@@ -30,10 +65,10 @@ fn main() {
     let data = get_input_from_file(INPUT_FILEPATH);
     let res = part1(&data);
     println!("{:?}", res);
-    assert_eq!(res, 0);
+    assert_eq!(res, "xdkzukcf");
     let res2 = part2(&data);
     println!("{:?}", res2);
-    assert_eq!(res2, 0);
+    assert_eq!(res2, "cevsgyvd");
     println!("Elapsed time: {:.2?}", before.elapsed());
 }
 
@@ -41,15 +76,30 @@ fn main() {
 mod tests {
     use super::*;
 
-    const EXAMPLE: &str = "";
+    const EXAMPLE: &str = "eedadn
+drvtee
+eandsr
+raavrd
+atevrs
+tsrnev
+sdttsa
+rasrtv
+nssdts
+ntnada
+svetve
+tesnvt
+vntsnd
+vrdear
+dvrsen
+enarar";
 
     #[test]
     fn test_part1() {
-        assert_eq!(part1(&get_input_from_str(EXAMPLE)), 0);
+        assert_eq!(part1(&get_input_from_str(EXAMPLE)), "easter");
     }
 
     #[test]
     fn test_part2() {
-        assert_eq!(part2(&get_input_from_str(EXAMPLE)), 0);
+        assert_eq!(part2(&get_input_from_str(EXAMPLE)), "advent");
     }
 }
