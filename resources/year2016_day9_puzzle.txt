@@ -107,11 +107,24 @@ If you'd like to hang out, I'm @ericwastl on Twitter.
 </ul>
 <p>What is the <em>decompressed length</em> of the file (your puzzle input)? Don't count whitespace.</p>
 </article>
-<p>To begin, <a href="9/input" target="_blank">get your puzzle input</a>.</p>
-<form method="post" action="9/answer"><input type="hidden" name="level" value="1"/><p>Answer: <input type="text" name="answer" autocomplete="off"/> <input type="submit" value="[Submit]"/></p></form>
+<p>Your puzzle answer was <code>99145</code>.</p><p class="day-success">The first half of this puzzle is complete! It provides one gold star: *</p>
+<article class="day-desc"><h2 id="part2">--- Part Two ---</h2><p>Apparently, the file actually uses <em>version two</em> of the format.</p>
+<p>In version two, the only difference is that markers within decompressed data <em>are</em> decompressed. This, the documentation explains, provides much more substantial compression capabilities, allowing many-gigabyte files to be stored in <span title="&quot;It's the bomb!&quot;, the documentation claims.">only a few kilobytes</span>.</p>
+<p>For example:</p>
+<ul>
+<li><code>(3x3)XYZ</code> still becomes <code>XYZXYZXYZ</code>, as the decompressed section contains no markers.</li>
+<li><code>X(8x2)(3x3)ABCY</code> becomes <code>XABCABCABCABCABCABCY</code>, because the decompressed data from the <code>(8x2)</code> marker is then further decompressed, thus triggering the <code>(3x3)</code> marker twice for a total of six <code>ABC</code> sequences.</li>
+<li><code>(27x12)(20x12)(13x14)(7x10)(1x12)A</code> decompresses into a string of <code>A</code> repeated <code>241920</code> times.</li>
+<li><code>(25x3)(3x3)ABC(2x3)XY(5x2)PQRSTX(18x9)(3x2)TWO(5x7)SEVEN</code> becomes <code>445</code> characters long.</li>
+</ul>
+<p>Unfortunately, the computer you brought probably doesn't have enough memory to actually decompress the file; you'll have to <em>come up with another way</em> to get its decompressed length.</p>
+<p>What is the <em>decompressed length</em> of the file using this improved format?</p>
+</article>
+<form method="post" action="9/answer"><input type="hidden" name="level" value="2"/><p>Answer: <input type="text" name="answer" autocomplete="off"/> <input type="submit" value="[Submit]"/></p></form>
+<p>Although it hasn't changed, you can still <a href="9/input" target="_blank">get your puzzle input</a>.</p>
 <p>You can also <span class="share">[Share<span class="share-content">on
-  <a href="https://twitter.com/intent/tweet?text=%22Explosives+in+Cyberspace%22+%2D+Day+9+%2D+Advent+of+Code+2016&amp;url=https%3A%2F%2Fadventofcode%2Ecom%2F2016%2Fday%2F9&amp;related=ericwastl&amp;hashtags=AdventOfCode" target="_blank">Twitter</a>
-  <a href="javascript:void(0);" onclick="var mastodon_instance=prompt('Mastodon Instance / Server Name?'); if(typeof mastodon_instance==='string' && mastodon_instance.length){this.href='https://'+mastodon_instance+'/share?text=%22Explosives+in+Cyberspace%22+%2D+Day+9+%2D+Advent+of+Code+2016+%23AdventOfCode+https%3A%2F%2Fadventofcode%2Ecom%2F2016%2Fday%2F9'}else{return false;}" target="_blank">Mastodon</a
+  <a href="https://twitter.com/intent/tweet?text=I%27ve+completed+Part+One+of+%22Explosives+in+Cyberspace%22+%2D+Day+9+%2D+Advent+of+Code+2016&amp;url=https%3A%2F%2Fadventofcode%2Ecom%2F2016%2Fday%2F9&amp;related=ericwastl&amp;hashtags=AdventOfCode" target="_blank">Twitter</a>
+  <a href="javascript:void(0);" onclick="var mastodon_instance=prompt('Mastodon Instance / Server Name?'); if(typeof mastodon_instance==='string' && mastodon_instance.length){this.href='https://'+mastodon_instance+'/share?text=I%27ve+completed+Part+One+of+%22Explosives+in+Cyberspace%22+%2D+Day+9+%2D+Advent+of+Code+2016+%23AdventOfCode+https%3A%2F%2Fadventofcode%2Ecom%2F2016%2Fday%2F9'}else{return false;}" target="_blank">Mastodon</a
 ></span>]</span> this puzzle.</p>
 </main>
 
