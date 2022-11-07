@@ -1,4 +1,4 @@
-use common::get_file_content;
+use common::get_first_line_from_file;
 use std::time::Instant;
 
 const INPUT_FILEPATH: &str = "../resources/year2016_day9_input.txt";
@@ -6,7 +6,7 @@ const INPUT_FILEPATH: &str = "../resources/year2016_day9_input.txt";
 type Int = u32;
 
 fn get_input_from_file(filepath: &str) -> String {
-    get_file_content(filepath)
+    get_first_line_from_file(filepath)
 }
 
 fn part1(s: &str) -> Int {
@@ -26,7 +26,6 @@ fn part1(s: &str) -> Int {
         match state {
             State::Normal => match c {
                 '(' => state = State::InNbChars,
-                '\n' => (),
                 _ => len += 1,
             },
             State::InNbChars => match c {
@@ -75,8 +74,6 @@ fn main() {
 mod tests {
     use super::*;
 
-    const EXAMPLE: &str = "";
-
     #[test]
     fn test_part1() {
         assert_eq!(part1("ADVENT"), 6);
@@ -85,11 +82,15 @@ mod tests {
         assert_eq!(part1("A(2x2)BCD(2x2)EFG"), 11);
         assert_eq!(part1("(6x1)(1x3)A"), 6);
         assert_eq!(part1("X(8x2)(3x3)ABCY"), 18);
-        assert_eq!(part1("ADVENT\n"), 6);
     }
 
     #[test]
     fn test_part2() {
-        assert_eq!(part2(EXAMPLE), 0);
+        dbg!(part2("(3x3)XYZ"));
+        dbg!(part2("X(8x2)(3x3)ABCY"));
+        dbg!(part2("(27x12)(20x12)(13x14)(7x10)(1x12)A"));
+        dbg!(part2(
+            "(25x3)(3x3)ABC(2x3)XY(5x2)PQRSTX(18x9)(3x2)TWO(5x7)SEVEN"
+        ));
     }
 }
