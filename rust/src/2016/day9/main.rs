@@ -3,20 +3,19 @@ use std::time::Instant;
 
 const INPUT_FILEPATH: &str = "../resources/year2016_day9_input.txt";
 
-type Int = u32;
-
 fn get_input_from_file(filepath: &str) -> String {
     get_first_line_from_file(filepath)
 }
 
-fn part1(s: &str) -> Int {
-    // Implement a state machine to avoid performing string manipulation
-    #[derive(Debug, PartialEq)]
-    enum State {
-        Normal,
-        InNbChars,
-        InNbRepetition,
-    }
+// Implement a state machine to avoid performing string manipulation
+#[derive(Debug, PartialEq)]
+enum State {
+    Normal,
+    InNbChars,
+    InNbRepetition,
+}
+
+fn part1(s: &str) -> u32 {
     let mut state = State::Normal;
     let mut it = s.chars();
     let mut nb_char = 0;
@@ -35,12 +34,12 @@ fn part1(s: &str) -> Int {
             },
             State::InNbRepetition => match c {
                 ')' => {
-                    state = State::Normal;
                     for _ in 0..nb_char {
                         let res = it.next();
                         assert!(res.is_some());
                     }
                     len += nb_char * nb_rep;
+                    state = State::Normal;
                     nb_char = 0;
                     nb_rep = 0;
                 }
@@ -53,9 +52,37 @@ fn part1(s: &str) -> Int {
     len
 }
 
-#[allow(clippy::missing_const_for_fn)]
-fn part2(_arg: &str) -> Int {
-    0
+fn part2(s: &str) -> u64 {
+    let mut state = State::Normal;
+    let mut nb_char = 0;
+    let mut nb_rep = 0;
+    let mut len = 0;
+    for (i, c) in s.chars().enumerate() {
+        match state {
+            State::Normal => match c {
+                '(' => state = State::InNbChars,
+                _ => len += 1,
+            },
+            State::InNbChars => match c {
+                'x' => state = State::InNbRepetition,
+                '0'..='9' => nb_char = 10 * nb_char + (c as usize - '0' as usize),
+                _ => panic!("Unexpected char {} in state {:?}", c, state),
+            },
+            State::InNbRepetition => match c {
+                ')' => {
+                    assert!(nb_rep > 0);
+                    len += (nb_rep - 1) * part2(&s[i + 1..i + 1 + nb_char]);
+                    state = State::Normal;
+                    nb_char = 0;
+                    nb_rep = 0;
+                }
+                '0'..='9' => nb_rep = 10 * nb_rep + (c as u64 - '0' as u64),
+                _ => panic!("Unexpected char {} in state {:?}", c, state),
+            },
+        }
+    }
+    assert_eq!(state, State::Normal);
+    len
 }
 
 fn main() {
@@ -66,7 +93,7 @@ fn main() {
     assert_eq!(res, 99145);
     let res2 = part2(&data);
     println!("{:?}", res2);
-    assert_eq!(res2, 0);
+    assert_eq!(res2, 10_943_094_568);
     println!("Elapsed time: {:.2?}", before.elapsed());
 }
 
@@ -86,11 +113,12 @@ mod tests {
 
     #[test]
     fn test_part2() {
-        dbg!(part2("(3x3)XYZ"));
-        dbg!(part2("X(8x2)(3x3)ABCY"));
-        dbg!(part2("(27x12)(20x12)(13x14)(7x10)(1x12)A"));
-        dbg!(part2(
-            "(25x3)(3x3)ABC(2x3)XY(5x2)PQRSTX(18x9)(3x2)TWO(5x7)SEVEN"
-        ));
+        assert_eq!(part2("(3x3)XYZ"), 9);
+        assert_eq!(part2("X(8x2)(3x3)ABCY"), 20);
+        assert_eq!(part2("(27x12)(20x12)(13x14)(7x10)(1x12)A"), 241920);
+        assert_eq!(
+            part2("(25x3)(3x3)ABC(2x3)XY(5x2)PQRSTX(18x9)(3x2)TWO(5x7)SEVEN"),
+            445
+        );
     }
 }
