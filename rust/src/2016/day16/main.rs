@@ -3,7 +3,7 @@ use std::time::Instant;
 
 const INPUT_FILEPATH: &str = "../resources/year2016_day16_input.txt";
 
-type Int = u32;
+const SKIP_SLOW: bool = true;
 type InputContent = String;
 
 fn get_input_from_file(filepath: &str) -> InputContent {
@@ -49,10 +49,8 @@ fn part1(arg: &InputContent) -> String {
     disk_checksum(arg, 272)
 }
 
-#[allow(clippy::missing_const_for_fn)]
-fn part2(_arg: &InputContent) -> Int {
-    // disk_checksum(arg, 35651584) - to be optimised
-    0
+fn part2(arg: &InputContent) -> String {
+    disk_checksum(arg, 35_651_584)
 }
 
 fn main() {
@@ -61,9 +59,11 @@ fn main() {
     let res = part1(&data);
     println!("{:?}", res);
     assert_eq!(res, "10101001010100001");
-    let res2 = part2(&data);
-    println!("{:?}", res2);
-    assert_eq!(res2, 0);
+    if !SKIP_SLOW {
+        let res2 = part2(&data);
+        println!("{:?}", res2);
+        assert_eq!(res2, "10100001110101001");
+    }
     println!("Elapsed time: {:.2?}", before.elapsed());
 }
 
@@ -91,6 +91,5 @@ mod tests {
     #[test]
     fn test_disk_checksum() {
         assert_eq!(disk_checksum("10000", 20), "01100");
-        dbg!(disk_checksum("10001001100000001", 272));
     }
 }
