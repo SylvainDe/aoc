@@ -1,27 +1,57 @@
-use common::collect_lines;
-use common::get_file_content;
+use common::get_first_line_from_file;
 use std::time::Instant;
 
 const INPUT_FILEPATH: &str = "../resources/year2016_day16_input.txt";
 
 type Int = u32;
-type InputContent = Vec<String>;
-
-fn get_input_from_str(string: &str) -> InputContent {
-    collect_lines(string)
-}
+type InputContent = String;
 
 fn get_input_from_file(filepath: &str) -> InputContent {
-    get_input_from_str(&get_file_content(filepath))
+    get_first_line_from_file(filepath)
 }
 
-#[allow(clippy::missing_const_for_fn)]
-fn part1(_arg: &InputContent) -> Int {
-    0
+fn generate_data(initial_state: &str, len: usize) -> String {
+    let mut res = initial_state.chars().collect::<Vec<char>>();
+    while res.len() < len {
+        let b = res
+            .iter()
+            .rev()
+            .map(|c| match c {
+                '0' => '1',
+                '1' => '0',
+                _ => *c,
+            })
+            .collect::<Vec<char>>();
+        res.push('0');
+        res.extend(b);
+    }
+    res.iter().collect::<String>()
+}
+
+fn checksum(data: &str) -> String {
+    assert!(data.len() % 2 == 0);
+    let mut v = data.chars().collect::<Vec<char>>();
+    while v.len() % 2 == 0 {
+        v = v
+            .chunks(2)
+            .map(|s| if s[0] == s[1] { '1' } else { '0' })
+            .collect();
+    }
+    v.iter().collect::<String>()
+}
+
+fn disk_checksum(initial_state: &str, len: usize) -> String {
+    let d = &generate_data(initial_state, len)[..len];
+    checksum(d)
+}
+
+fn part1(arg: &InputContent) -> String {
+    disk_checksum(arg, 272)
 }
 
 #[allow(clippy::missing_const_for_fn)]
 fn part2(_arg: &InputContent) -> Int {
+    // disk_checksum(arg, 35651584) - to be optimised
     0
 }
 
@@ -30,7 +60,7 @@ fn main() {
     let data = get_input_from_file(INPUT_FILEPATH);
     let res = part1(&data);
     println!("{:?}", res);
-    assert_eq!(res, 0);
+    assert_eq!(res, "10101001010100001");
     let res2 = part2(&data);
     println!("{:?}", res2);
     assert_eq!(res2, 0);
@@ -41,15 +71,26 @@ fn main() {
 mod tests {
     use super::*;
 
-    const EXAMPLE: &str = "";
-
     #[test]
-    fn test_part1() {
-        assert_eq!(part1(&get_input_from_str(EXAMPLE)), 0);
+    fn test_generate_data() {
+        assert_eq!(generate_data("1", 3), "100");
+        assert_eq!(generate_data("0", 3), "001");
+        assert_eq!(generate_data("11111", 11), "11111000000");
+        assert_eq!(
+            generate_data("111100001010", 20),
+            "1111000010100101011110000"
+        );
+        assert_eq!(generate_data("10000", 20), "10000011110010000111110");
     }
 
     #[test]
-    fn test_part2() {
-        assert_eq!(part2(&get_input_from_str(EXAMPLE)), 0);
+    fn test_checksum() {
+        assert_eq!(checksum("110010110100"), "100");
+    }
+
+    #[test]
+    fn test_disk_checksum() {
+        assert_eq!(disk_checksum("10000", 20), "01100");
+        dbg!(disk_checksum("10001001100000001", 272));
     }
 }
