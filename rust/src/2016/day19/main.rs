@@ -30,13 +30,13 @@ fn part2(size: Int) -> Int {
     // Probably correct but to be optimised
     let mut v = (1..=size).collect::<Vec<Int>>();
     let mut i = 0;
-	// dbg!(&v);
+    // dbg!(&v);
     while v.len() > 1 {
         let rm = (i + (v.len() / 2)) % v.len();
-		// dbg!(rm, v.len());
+        // dbg!(rm, v.len());
         v.remove(rm);
         let incr = if rm < i { 0 } else { 1 };
-         i = (i + incr) % v.len();
+        i = (i + incr) % v.len();
     }
     *v.first().unwrap()
 }
