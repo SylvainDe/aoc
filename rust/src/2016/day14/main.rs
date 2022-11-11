@@ -40,25 +40,28 @@ fn produce_key(salt: &str, index_wanted: usize, stretched: bool) -> usize {
         reps.push(find_repetitions(&get_hash(salt, i, stretched)));
     }
     for i in 0.. {
+        // Compute and add new hash
         reps.push(find_repetitions(&get_hash(
             salt,
             (i + 1000) as usize,
             stretched,
         )));
-        for (c, cnt) in reps.get(i).unwrap() {
-            if cnt >= &3 {
-                'jloop: for j in i + 1..=i + 1000 {
-                    for (c2, cnt2) in reps.get(j).unwrap() {
-                        if c == c2 && cnt2 >= &5 {
-                            nb_found += 1;
-                            if nb_found == index_wanted {
-                                return i;
-                            }
-                            break 'jloop;
-                        }
+        // Find first triplet
+        if let Some((c, _)) = reps.get(i).unwrap().iter().find(|(_, cnt)| cnt >= &3) {
+            for j in i + 1..=i + 1000 {
+                // Find corresponding sequence of 5
+                if reps
+                    .get(j)
+                    .unwrap()
+                    .iter()
+                    .any(|(c2, cnt2)| c == c2 && cnt2 >= &5)
+                {
+                    nb_found += 1;
+                    if nb_found == index_wanted {
+                        return i;
                     }
+                    break;
                 }
-                break;
             }
         }
     }
