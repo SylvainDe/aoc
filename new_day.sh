@@ -28,6 +28,7 @@ create_python="1"
 overwrite_python="0"
 
 generate_readme="1"
+git_add="1"
 
 # URLs
 puzzle_url="https://adventofcode.com/${year}/day/${day}"
@@ -48,10 +49,16 @@ fi
 # See template file aoc_cookie_session.sh for instructions
 source ~/aoc_cookie_session.sh 2> /dev/null
 
-# Get input file
-input_file="resources/year${year}_day${day}_input.txt"
+# Paths
 puzzle_file="resources/year${year}_day${day}_puzzle.txt"
+input_file="resources/year${year}_day${day}_input.txt"
+python_script_file="python/${year}/day${day}.py"
+rust_src_file_rel="src/${year}/day${day}/main.rs"
+rust_src_file="rust/${rust_src_file_rel}"
+cargo_file="rust/Cargo.toml"
+readme_file="README.md"
 
+# Get input file
 get_url_and_save() {
 	url="${1}"
 	dest="${2}"
@@ -104,17 +111,16 @@ create_code_from_template() {
 
 open_file_in_editor() {
 	filename="${1}"
-    if [ -z "${editor}" ]; then
-        echo "No editor set - ignored."
-    else
-        "${editor}" "${filename}"
-    fi
+	if [ -z "${editor}" ]; then
+		echo "No editor set - ignored."
+	else
+		"${editor}" "${filename}"
+	fi
 }
 
 # Create Python file
 if [ "${create_python}" = "1" ]; then
 	python_template="python/day_template.py"
-	python_script_file="python/${year}/day${day}.py"
 	create_code_from_template "${python_template}" "${python_script_file}" "${overwrite_python}"
 	open_file_in_editor "${python_script_file}"
 fi
@@ -122,10 +128,7 @@ fi
 # Create Rust file
 if [ "${create_rust}" = "1" ]; then
 	rust_bin="day${day}_${year}"
-	rust_src_file_rel="src/${year}/day${day}/main.rs"
-	rust_src_file="rust/${rust_src_file_rel}"
 	rust_template="rust/src/template/main.rs"
-	cargo_file="rust/Cargo.toml"
 
 	# Add content in Cargo.toml file
 	cargo_content="[[bin]]\nname = \"${rust_bin}\"\npath = \"${rust_src_file_rel}\"\n\n"
@@ -137,10 +140,22 @@ if [ "${create_rust}" = "1" ]; then
 	# Instruction to run cargo
 	echo """(cd rust && cargo run --bin "${rust_bin}")"""
 
-	open_file_in_editor "${python_script_file}"
+	open_file_in_editor "${rust_src_file}"
 fi
 
 # Generate README
 if [ "${generate_readme}" = "1" ]; then
-	python3 generate_readme.py > README.md
+	python3 generate_readme.py > "${readme_file}"
+fi
+
+# Add to git
+if [ "${git_add}" = "1" ]; then
+	git status
+	# TODO: Some files may be created in a new folder which needs to be added
+	# as well. Other files should not have their folder added automatically.
+	for f in "${puzzle_file}" "${input_file}" "${python_script_file}" "${rust_src_file}" "${cargo_file}" "${readme_file}"; do
+		echo "${f} not done yet"
+		# git add "${f}"
+	done
+	git status
 fi
