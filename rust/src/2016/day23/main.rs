@@ -7,6 +7,7 @@ use std::time::Instant;
 const INPUT_FILEPATH: &str = "../resources/year2016_day23_input.txt";
 
 type Int = i32;
+const SKIP_SLOW: bool = true;
 
 // TODO: Put in common with assembunny logic for day 12
 #[derive(Debug, Eq, Ord, PartialEq, PartialOrd, Clone)]
@@ -139,9 +140,8 @@ fn part1(instructions: &InputContent) -> Int {
     run_instructions(instructions, 7, 0)
 }
 
-#[allow(clippy::missing_const_for_fn)]
-fn part2(_arg: &InputContent) -> Int {
-    0
+fn part2(instructions: &InputContent) -> Int {
+    run_instructions(instructions, 12, 0)
 }
 
 fn main() {
@@ -150,9 +150,14 @@ fn main() {
     let res = part1(&data);
     println!("{:?}", res);
     assert_eq!(res, 13958);
-    let res2 = part2(&data);
-    println!("{:?}", res2);
-    assert_eq!(res2, 0);
+    if !SKIP_SLOW {
+        // TODO: This is very slow. The original asm code needs to be
+        // optimised, probably with the introduction of new instructions
+        // such as multiply
+        let res2 = part2(&data);
+        println!("{:?}", res2);
+        assert_eq!(res2, 0);
+    }
     println!("Elapsed time: {:.2?}", before.elapsed());
 }
 
@@ -223,6 +228,6 @@ dec a";
 
     #[test]
     fn test_part2() {
-        assert_eq!(part2(&get_input_from_str(EXAMPLE_DAY_23)), 0);
+        assert_eq!(part2(&get_input_from_str(EXAMPLE_DAY_23)), 3);
     }
 }
