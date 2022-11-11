@@ -8,6 +8,7 @@ const INPUT_FILEPATH: &str = "../resources/year2016_day12_input.txt";
 
 type Int = i32;
 
+// TODO: Put in common with assembunny logic for day 23
 #[derive(Debug, Eq, Ord, PartialEq, PartialOrd)]
 enum Instruction {
     Copy(String, String),
