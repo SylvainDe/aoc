@@ -156,7 +156,7 @@ fn main() {
         // such as multiply
         let res2 = part2(&data);
         println!("{:?}", res2);
-        assert_eq!(res2, 0);
+        assert_eq!(res2, 479_010_518); // Obtained in 2100 secs
     }
     println!("Elapsed time: {:.2?}", before.elapsed());
 }
