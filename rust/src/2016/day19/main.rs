@@ -26,9 +26,19 @@ fn part1(size: Int) -> Int {
     *v.first().unwrap()
 }
 
-#[allow(clippy::missing_const_for_fn)]
-fn part2(_arg: Int) -> Int {
-    0
+fn part2(size: Int) -> Int {
+    // Probably correct but to be optimised
+    let mut v = (1..=size).collect::<Vec<Int>>();
+    let mut i = 0;
+	// dbg!(&v);
+    while v.len() > 1 {
+        let rm = (i + (v.len() / 2)) % v.len();
+		// dbg!(rm, v.len());
+        v.remove(rm);
+        let incr = if rm < i { 0 } else { 1 };
+         i = (i + incr) % v.len();
+    }
+    *v.first().unwrap()
 }
 
 fn main() {
@@ -37,9 +47,9 @@ fn main() {
     let res = part1(data);
     println!("{:?}", res);
     assert_eq!(res, 1_834_471);
-    let res2 = part2(data);
-    println!("{:?}", res2);
-    assert_eq!(res2, 0);
+    // let res2 = part2(data);
+    // println!("{:?}", res2);
+    // assert_eq!(res2, 0);
     println!("Elapsed time: {:.2?}", before.elapsed());
 }
 
@@ -56,6 +66,16 @@ mod tests {
 
     #[test]
     fn test_part2() {
-        assert_eq!(part2(get_input_from_str(EXAMPLE)), 0);
+        assert_eq!(part2(get_input_from_str(EXAMPLE)), 2);
+        assert_eq!(part2(1), 1);
+        assert_eq!(part2(2), 1);
+        assert_eq!(part2(3), 3);
+        assert_eq!(part2(4), 1);
+        assert_eq!(part2(5), 2);
+        assert_eq!(part2(6), 3);
+        assert_eq!(part2(7), 5);
+        assert_eq!(part2(8), 7);
+        assert_eq!(part2(9), 9);
+        assert_eq!(part2(100), 19);
     }
 }
