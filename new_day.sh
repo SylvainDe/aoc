@@ -21,6 +21,9 @@ overwrite_input="0"
 get_puzzle="1"
 overwrite_puzzle="1"
 
+get_stats="1"
+overwrite_stats="1"
+
 create_rust="1"
 overwrite_rust="0"
 
@@ -33,6 +36,7 @@ git_add="1"
 # URLs
 puzzle_url="https://adventofcode.com/${year}/day/${day}"
 input_url="https://adventofcode.com/${year}/day/${day}/input"
+stats_url="https://adventofcode.com/${year}/leaderboard/self"
 
 # Move to correct directory
 cd "$(dirname "$0")"
@@ -52,6 +56,7 @@ source ~/aoc_cookie_session.sh 2> /dev/null
 # Paths
 puzzle_file="resources/year${year}_day${day}_puzzle.txt"
 input_file="resources/year${year}_day${day}_input.txt"
+stats_file="misc/leaderboard_self_${year}.txt"
 python_script_file="python/${year}/day${day}.py"
 rust_src_file_rel="src/${year}/day${day}/main.rs"
 rust_src_file="rust/${rust_src_file_rel}"
@@ -85,6 +90,9 @@ get_url_and_save() {
 
 if [ "${get_puzzle}" = "1" ]; then
 	get_url_and_save "${puzzle_url}" "${puzzle_file}" "${overwrite_puzzle}" "1"
+fi
+if [ "${get_stats}" = "1" ]; then
+	get_url_and_save "${stats_url}" "${stats_file}" "${overwrite_stats}" "1"
 fi
 if [ "${get_input}" = "1" ]; then
 	get_url_and_save "${input_url}" "${input_file}" "${overwrite_input}" "0"
@@ -153,7 +161,7 @@ if [ "${git_add}" = "1" ]; then
 	git status
 	# TODO: Some files may be created in a new folder which needs to be added
 	# as well. Other files should not have their folder added automatically.
-	for f in "${puzzle_file}" "${input_file}" "${python_script_file}" "${rust_src_file}" "${cargo_file}" "${readme_file}"; do
+	for f in "${puzzle_file}" "${input_file}" "${stats_file}" "${python_script_file}" "${rust_src_file}" "${cargo_file}" "${readme_file}"; do
 		echo "${f} not done yet"
 		# git add "${f}"
 	done
