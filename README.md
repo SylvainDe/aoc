@@ -165,8 +165,8 @@ Solutions are written in Python and/or Rust.
 |2020/22|[Problem](https://adventofcode.com/2020/day/22) [Input](https://adventofcode.com/2020/day/22/input)|[puzzle.txt](resources/year2020_day22_puzzle.txt) [input.txt](resources/year2020_day22_input.txt)|**|[day22.py](python/2020/day22.py)|[-](rust/src/2020/day22/main.rs)|02:43:14|03:22:28|
 |2020/23|[Problem](https://adventofcode.com/2020/day/23) [Input](https://adventofcode.com/2020/day/23/input)|[puzzle.txt](resources/year2020_day23_puzzle.txt) [input.txt](resources/year2020_day23_input.txt)|**|[day23.py](python/2020/day23.py)|[-](rust/src/2020/day23/main.rs)|08:31:21|10:12:42|
 |2020/24|[Problem](https://adventofcode.com/2020/day/24) [Input](https://adventofcode.com/2020/day/24/input)|[puzzle.txt](resources/year2020_day24_puzzle.txt) [input.txt](resources/year2020_day24_input.txt)|**|[day24.py](python/2020/day24.py)|[-](rust/src/2020/day24/main.rs)|12:56:48|+24h|
-|2020/25|[Problem](https://adventofcode.com/2020/day/25) [Input](https://adventofcode.com/2020/day/25/input)|[puzzle.txt](resources/year2020_day25_puzzle.txt) [input.txt](resources/year2020_day25_input.txt)|*|[day25.py](python/2020/day25.py)|[-](rust/src/2020/day25/main.rs)|15:47:10|15:47:57|
-|2020|-|-|49|-|-|-|-|
+|2020/25|[Problem](https://adventofcode.com/2020/day/25) [Input](https://adventofcode.com/2020/day/25/input)|[puzzle.txt](resources/year2020_day25_puzzle.txt) [input.txt](resources/year2020_day25_input.txt)|**|[day25.py](python/2020/day25.py)|[-](rust/src/2020/day25/main.rs)|15:47:10|15:47:57|
+|2020|-|-|50|-|-|-|-|
 |2021/1|[Problem](https://adventofcode.com/2021/day/1) [Input](https://adventofcode.com/2021/day/1/input)|[puzzle.txt](resources/year2021_day1_puzzle.txt) [input.txt](resources/year2021_day1_input.txt)|**|[day1.py](python/2021/day1.py)|[main.rs](rust/src/2021/day1/main.rs)|07:35:16|07:40:40|
 |2021/2|[Problem](https://adventofcode.com/2021/day/2) [Input](https://adventofcode.com/2021/day/2/input)|[puzzle.txt](resources/year2021_day2_puzzle.txt) [input.txt](resources/year2021_day2_input.txt)|**|[day2.py](python/2021/day2.py)|[main.rs](rust/src/2021/day2/main.rs)|07:50:32|07:52:32|
 |2021/3|[Problem](https://adventofcode.com/2021/day/3) [Input](https://adventofcode.com/2021/day/3/input)|[puzzle.txt](resources/year2021_day3_puzzle.txt) [input.txt](resources/year2021_day3_input.txt)|**|[day3.py](python/2021/day3.py)|[-](rust/src/2021/day3/main.rs)|08:16:54|08:32:17|
@@ -193,4 +193,4 @@ Solutions are written in Python and/or Rust.
 |2021/24|[Problem](https://adventofcode.com/2021/day/24) [Input](https://adventofcode.com/2021/day/24/input)|[puzzle.txt](resources/year2021_day24_puzzle.txt) [input.txt](resources/year2021_day24_input.txt)||[day24.py](python/2021/day24.py)|[-](rust/src/2021/day24/main.rs)|-|-|
 |2021/25|[Problem](https://adventofcode.com/2021/day/25) [Input](https://adventofcode.com/2021/day/25/input)|[puzzle.txt](resources/year2021_day25_puzzle.txt) [input.txt](resources/year2021_day25_input.txt)|*|[day25.py](python/2021/day25.py)|[-](rust/src/2021/day25/main.rs)|+24h|-|
 |2021|-|-|45|-|-|-|-|
-|Total|-|-|209|-|-|-|-|
+|Total|-|-|210|-|-|-|-|

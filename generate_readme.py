@@ -36,18 +36,13 @@ Solutions are written in Python and/or Rust.
 years = range(2015, 2021+1)
 days = range(1, 25+1)
 
+
 def file_contains(filepath, string):
     with open(filepath) as f:
         for line in f:
             if string in line:
                 return True
     return False
-
-
-def file_count_lines(filepath, string):
-    with open(filepath) as f:
-        return sum(string in line for line in f)
-    return 0
 
 
 def format_file(filepath):
@@ -73,8 +68,8 @@ class YearData():
         self.year = year
         self.stats_file = self.format_str(stats_file)
         self.days = {day: DayData(year, day) for day in days}
-        self.nb_stars = sum(d.nb_stars for d in self.days.values())
         self.extract_stats()
+        self.nb_stars = sum(d.nb_stars for d in self.days.values())
 
     def format_str(self, s):
         return s.format(year=self.year)
@@ -105,11 +100,13 @@ class YearData():
                 d.part1_time = time1
                 d.part1_rank = rank1
                 d.part1_score = score1
+                d.nb_stars += 1
                 assert (rank2 == "-") == (time2 == "-") == (score2 == "-")
                 if rank2 != "-":
                     d.part2_time = time2
                     d.part2_rank = rank2
                     d.part2_score = score2
+                    d.nb_stars += 1
 
     def get_columns(self):
         return [str(self.year), "-", "-", str(self.nb_stars), "-", "-", "-", "-"]
@@ -124,7 +121,7 @@ class DayData():
         self.input_file = self.format_str(input_file)
         self.python_file = self.format_str(python_file)
         self.rust_file = self.format_str(rust_file)
-        self.nb_stars = file_count_lines(self.puzzle_file, "<p>Your puzzle answer was <code>")
+        self.nb_stars = 0
         self.part1_time = None
         self.part1_rank = None
         self.part1_score = None
