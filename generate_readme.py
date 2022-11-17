@@ -59,9 +59,9 @@ def format_file(filepath):
     elif filepath.endswith("input.txt"):
         name_shown = "input.txt"
     elif filepath.endswith(".py") and file_contains(filepath, "xxx = get_xxx_from_file"):
-        name_shown = "not solved"
+        name_shown = "-"
     elif filepath.endswith(".rs") and file_contains(filepath, "fn part1(_arg"):
-        name_shown = "not solved"
+        name_shown = "-"
     return "[{name_shown}]({fullpath})".format(name_shown=name_shown, fullpath=filepath)
 
 def format_table_colums(columns):
@@ -112,7 +112,7 @@ class YearData():
                     d.part2_score = score2
 
     def get_columns(self):
-        return ["-", "-", "-", str(self.nb_stars), "-", "-", "-", "-"]
+        return [str(self.year), "-", "-", str(self.nb_stars), "-", "-", "-", "-"]
 
 class DayData():
     def __init__(self, year, day):
@@ -162,5 +162,5 @@ for year in years:
     for day in days:
         print(format_table_colums(y.days[day].get_columns()))
     print(format_table_colums(y.get_columns()))
-print(format_table_colums(["-", "-", "-", str(total_star_count), "-", "-", "-", "-"]))
+print(format_table_colums(["Total", "-", "-", str(total_star_count), "-", "-", "-", "-"]))
 
