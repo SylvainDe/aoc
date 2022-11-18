@@ -5,9 +5,6 @@ Usage: python3 generate_readme.py > README.md
 import os
 import re
 
-# Separator
-sep = "|"
-
 # URLs
 puzzle_url = "[Problem](https://adventofcode.com/{year}/day/{day})"
 input_url = "[Input](https://adventofcode.com/{year}/day/{day}/input)"
@@ -19,19 +16,6 @@ input_file = "resources/year{year}_day{day}_input.txt"
 python_file = "python/{year}/day{day}.py"
 rust_file = "rust/src/{year}/day{day}/main.rs"
 stats_file = "misc/leaderboard_self_{year}.txt"
-
-# Header
-header = """# aoc
-
-Solutions for Advent Of Code
-
-Solutions used to be stored in different repositories for each year limiting the code reuse:
- - https://github.com/SylvainDe/aoc2019
- - https://github.com/SylvainDe/aoc2020
- - https://github.com/SylvainDe/aoc2021
-
-Solutions are written in Python and/or Rust.
-"""
 
 # Ranges
 year_range = reversed(range(2015, 2022+1))
@@ -61,9 +45,6 @@ def format_file(filepath):
     elif filepath.endswith(".rs") and file_contains(filepath, "fn part1(_arg"):
         name_shown = "-"
     return "[{name_shown}]({fullpath})".format(name_shown=name_shown, fullpath=filepath)
-
-def format_table_colums(columns):
-    return "{}{}{}".format(sep, sep.join(columns), sep)
 
 
 class YearData():
@@ -152,7 +133,7 @@ class DayData():
         self.nb_stars = (self.part1_time is not None) + (self.part2_time is not None)
 
     def __str__(self):
-        return self.format_str("{year}/{day}")
+        return self.format_str("{year}/12/{day}")
 
     def is_valid(self):
         # Any condition can be imagined here (for instance nb of stars)
@@ -174,13 +155,38 @@ class DayData():
         ]
 
 
-# Collect data
+################
+# Collect data #
+################
 years = [YearData(year) for year in year_range]
 years = [y for y in years if y.is_valid()]
 total_star_count = sum(y.nb_stars for y in years)
 
-# Format data
-print(header)
+################
+# Format data  #
+################
+
+# Header
+readme_header = """# aoc
+
+Solutions for Advent Of Code
+
+Solutions used to be stored in different repositories for each year limiting the code reuse:
+ - https://github.com/SylvainDe/aoc2019
+ - https://github.com/SylvainDe/aoc2020
+ - https://github.com/SylvainDe/aoc2021
+
+Solutions are written in Python and/or Rust.
+"""
+
+# Separator
+sep = "|"
+
+def format_table_colums(columns):
+    return "{}{}{}".format(sep, sep.join(columns), sep)
+
+
+print(readme_header)
 columns = ["Date", "URLs", "Puzzle & Input", "Stars", "Python", "Rust", "Time part 1", "Time part 2"]
 for y in years:
     print("## " + str(y))
