@@ -33,8 +33,8 @@ Solutions are written in Python and/or Rust.
 """
 
 # Ranges
-years = range(2015, 2021+1)
-days = range(1, 25+1)
+year_range = range(2015, 2022+1)
+day_range = range(1, 25+1)
 
 
 def file_contains(filepath, string):
@@ -67,9 +67,17 @@ class YearData():
     def __init__(self, year):
         self.year = year
         self.stats_file = self.format_str(stats_file)
-        stats = self.extract_stats()
-        self.days = [DayData(year, day, stats.get(day, dict())) for day in days]
-        self.nb_stars = sum(d.nb_stars for d in self.days)
+        try:
+            stats = self.extract_stats()
+        except FileNotFoundError:
+            stats = dict()
+        days = [DayData(year, day, stats.get(day, dict())) for day in day_range]
+        self.days = [d for d in days if d.is_valid()]
+        self.nb_stars = sum(d.nb_stars for d in days)
+
+    def is_valid(self):
+        # Any condition can be imagined here
+        return self.nb_stars > 0
 
     def format_str(self, s):
         return s.format(year=self.year)
@@ -129,6 +137,10 @@ class DayData():
         assert (self.part2_time is None) == (self.part2_rank is None) == (self.part2_score is None)
         self.nb_stars = (self.part1_time is not None) + (self.part2_time is not None)
 
+    def is_valid(self):
+        # Any condition can be imagined here (for instance nb of stars)
+        return any(os.path.isfile(f) for f in (self.puzzle_file, self.input_file, self.python_file, self.rust_file))
+
     def format_str(self, s):
         return s.format(year=self.year, day=self.day)
 
@@ -146,15 +158,16 @@ class DayData():
 
 
 # Collect data
-all_years = [YearData(year) for year in years]
-total_star_count = sum(y.nb_stars for y in all_years)
+years = [YearData(year) for year in year_range]
+years = [y for y in years if y.is_valid()]
+total_star_count = sum(y.nb_stars for y in years)
 
 # Format data
 print(header)
 columns = ["Date", "URLs", "Puzzle & Input", "Stars", "Python", "Rust", "Time part 1", "Time part 2"]
 print(format_table_colums(columns))
 print(format_table_colums(("---" for _ in columns)))
-for y in all_years:
+for y in years:
     for d in y.days:
         print(format_table_colums(d.get_columns()))
     print(format_table_colums(y.get_columns()))
