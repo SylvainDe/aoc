@@ -192,6 +192,6 @@ for y in years:
     print()
 print("##  Total")
 for y in years:
-    print("{year}: {nb_stars} {stars}".format(year=y, nb_stars=y.nb_stars, stars="*"*y.nb_stars))
+    print("{year}: {nb_stars} {stars}\n".format(year=y, nb_stars=y.nb_stars, stars="*"*y.nb_stars))
 print("Total:    {nb_stars}".format(nb_stars=total_star_count))
 
