@@ -11,6 +11,7 @@ sep = "|"
 # URLs
 puzzle_url = "[Problem](https://adventofcode.com/{year}/day/{day})"
 input_url = "[Input](https://adventofcode.com/{year}/day/{day}/input)"
+stats_url = "[Stats](https://adventofcode.com/{year}/leaderboard/self)"
 
 # Local files
 puzzle_file = "resources/year{year}_day{day}_puzzle.txt"
@@ -33,7 +34,7 @@ Solutions are written in Python and/or Rust.
 """
 
 # Ranges
-year_range = range(2015, 2022+1)
+year_range = reversed(range(2015, 2022+1))
 day_range = range(1, 25+1)
 
 
@@ -53,6 +54,8 @@ def format_file(filepath):
         name_shown = "puzzle.txt"
     elif filepath.endswith("input.txt"):
         name_shown = "input.txt"
+    elif filepath.startswith("misc/leaderboard_self_"):
+        name_shown = "stats.txt"
     elif filepath.endswith(".py") and file_contains(filepath, "xxx = get_xxx_from_file"):
         name_shown = "-"
     elif filepath.endswith(".rs") and file_contains(filepath, "fn part1(_arg"):
@@ -66,6 +69,7 @@ def format_table_colums(columns):
 class YearData():
     def __init__(self, year):
         self.year = year
+        self.stats_url = self.format_str(stats_url)
         self.stats_file = self.format_str(stats_file)
         try:
             stats = self.extract_stats()
@@ -76,8 +80,8 @@ class YearData():
         self.nb_stars = sum(d.nb_stars for d in days)
 
     def is_valid(self):
-        # Any condition can be imagined here
-        return self.nb_stars > 0
+        # Any condition can be imagined here (for instance nb of stars)
+        return self.days
 
     def format_str(self, s):
         return s.format(year=self.year)
@@ -87,7 +91,9 @@ class YearData():
         rank_re = r"(\d+|-)"
         score_re = r"(\d+|-)"
         stat_line_re = re.compile(
-            r"^\s+(?P<day>\d+)\s+(?P<time1>%s)\s+(?P<rank1>%s)\s+(?P<score1>%s)\s+(?P<time2>%s)\s+(?P<rank2>%s)\s+(?P<score2>%s)$"
+            r"^\s+(?P<day>\d+)" \
+             "\s+(?P<time1>%s)\s+(?P<rank1>%s)\s+(?P<score1>%s)"
+             "\s+(?P<time2>%s)\s+(?P<rank2>%s)\s+(?P<score2>%s)$"
             % (time_re, rank_re, score_re, time_re, rank_re, score_re)
         )
         all_stats = dict()
@@ -98,23 +104,28 @@ class YearData():
                     continue
                 gd = m.groupdict()
                 day = int(gd["day"])
-                stats = all_stats[day] = dict()
-                time1, rank1, score1 = gd["time1"], gd["rank1"], gd["score1"]
-                assert (rank1 == "-") == (time1 == "-") == (score1 == "-") == False
-                if rank1 != "-":
-                    stats["time1"] = time1.replace("&gt;", "+")
-                    stats["rank1"] = int(rank1)
-                    stats["score1"] = int(score1)
-                time2, rank2, score2 = gd["time2"], gd["rank2"], gd["score2"]
-                assert (rank2 == "-") == (time2 == "-") == (score2 == "-")
-                if rank2 != "-":
-                    stats["time2"] = time2.replace("&gt;", "+")
-                    stats["rank2"] = int(rank2)
-                    stats["score2"] = int(score2)
+                stats = dict()
+                for suff in ("1", "2"):
+                    time, rank, score = gd["time" + suff], gd["rank" + suff], gd["score" + suff]
+                    assert (rank == "-") == (time == "-") == (score == "-")
+                    if rank != "-":
+                        stats["time" + suff] = time.replace("&gt;", "+")
+                        stats["rank" + suff] = int(rank)
+                        stats["score" + suff] = int(score)
+                all_stats[day] = stats
         return all_stats
 
     def get_columns(self):
-        return [str(self.year), "-", "-", str(self.nb_stars), "-", "-", "-", "-"]
+        return [
+            self.format_str("Year {year}"),
+            self.stats_url,
+            format_file(self.stats_file),
+            str(self.nb_stars),
+            "-",
+            "-",
+            "-",
+            "-"
+        ]
 
 class DayData():
     def __init__(self, year, day, stats):
