@@ -67,9 +67,9 @@ class YearData():
     def __init__(self, year):
         self.year = year
         self.stats_file = self.format_str(stats_file)
-        self.days = {day: DayData(year, day) for day in days}
-        self.extract_stats()
-        self.nb_stars = sum(d.nb_stars for d in self.days.values())
+        stats = self.extract_stats()
+        self.days = [DayData(year, day, stats.get(day, dict())) for day in days]
+        self.nb_stars = sum(d.nb_stars for d in self.days)
 
     def format_str(self, s):
         return s.format(year=self.year)
@@ -82,6 +82,7 @@ class YearData():
             r"^\s+(?P<day>\d+)\s+(?P<time1>%s)\s+(?P<rank1>%s)\s+(?P<score1>%s)\s+(?P<time2>%s)\s+(?P<rank2>%s)\s+(?P<score2>%s)$"
             % (time_re, rank_re, score_re, time_re, rank_re, score_re)
         )
+        all_stats = dict()
         with open(self.stats_file) as f:
             for line in f:
                 m = stat_line_re.match(line)
@@ -89,30 +90,26 @@ class YearData():
                     continue
                 gd = m.groupdict()
                 day = int(gd["day"])
-                d = self.days[day]
-                time1 = gd["time1"].replace("&gt;", "+")
-                time2 = gd["time2"].replace("&gt;", "+")
-                rank1 = gd["rank1"]
-                rank2 = gd["rank2"]
-                score1 = gd["score1"]
-                score2 = gd["score2"]
+                stats = all_stats[day] = dict()
+                time1, rank1, score1 = gd["time1"], gd["rank1"], gd["score1"]
                 assert (rank1 == "-") == (time1 == "-") == (score1 == "-") == False
-                d.part1_time = time1
-                d.part1_rank = rank1
-                d.part1_score = score1
-                d.nb_stars += 1
+                if rank1 != "-":
+                    stats["time1"] = time1.replace("&gt;", "+")
+                    stats["rank1"] = int(rank1)
+                    stats["score1"] = int(score1)
+                time2, rank2, score2 = gd["time2"], gd["rank2"], gd["score2"]
                 assert (rank2 == "-") == (time2 == "-") == (score2 == "-")
                 if rank2 != "-":
-                    d.part2_time = time2
-                    d.part2_rank = rank2
-                    d.part2_score = score2
-                    d.nb_stars += 1
+                    stats["time2"] = time2.replace("&gt;", "+")
+                    stats["rank2"] = int(rank2)
+                    stats["score2"] = int(score2)
+        return all_stats
 
     def get_columns(self):
         return [str(self.year), "-", "-", str(self.nb_stars), "-", "-", "-", "-"]
 
 class DayData():
-    def __init__(self, year, day):
+    def __init__(self, year, day, stats):
         self.year = year
         self.day = day
         self.puzzle_url = self.format_str(puzzle_url)
@@ -122,12 +119,15 @@ class DayData():
         self.python_file = self.format_str(python_file)
         self.rust_file = self.format_str(rust_file)
         self.nb_stars = 0
-        self.part1_time = None
-        self.part1_rank = None
-        self.part1_score = None
-        self.part2_time = None
-        self.part2_rank = None
-        self.part2_score = None
+        self.part1_time = stats.get("time1")
+        self.part2_time = stats.get("time2")
+        self.part1_rank = stats.get("rank1")
+        self.part2_rank = stats.get("rank2")
+        self.part1_score = stats.get("score1")
+        self.part2_score = stats.get("score2")
+        assert (self.part1_time is None) == (self.part1_rank is None) == (self.part1_score is None)
+        assert (self.part2_time is None) == (self.part2_rank is None) == (self.part2_score is None)
+        self.nb_stars = (self.part1_time is not None) + (self.part2_time is not None)
 
     def format_str(self, s):
         return s.format(year=self.year, day=self.day)
@@ -146,18 +146,17 @@ class DayData():
 
 
 # Collect data
-all_years = {year: YearData(year) for year in years}
-total_star_count = sum(y.nb_stars for y in all_years.values())
+all_years = [YearData(year) for year in years]
+total_star_count = sum(y.nb_stars for y in all_years)
 
 # Format data
 print(header)
 columns = ["Date", "URLs", "Puzzle & Input", "Stars", "Python", "Rust", "Time part 1", "Time part 2"]
 print(format_table_colums(columns))
 print(format_table_colums(("---" for _ in columns)))
-for year in years:
-    y = all_years[year]
-    for day in days:
-        print(format_table_colums(y.days[day].get_columns()))
+for y in all_years:
+    for d in y.days:
+        print(format_table_colums(d.get_columns()))
     print(format_table_colums(y.get_columns()))
 print(format_table_colums(["Total", "-", "-", str(total_star_count), "-", "-", "-", "-"]))
 
