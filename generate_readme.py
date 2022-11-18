@@ -79,6 +79,9 @@ class YearData():
         self.days = [d for d in days if d.is_valid()]
         self.nb_stars = sum(d.nb_stars for d in days)
 
+    def __str__(self):
+        return self.format_str("Year {year}")
+
     def is_valid(self):
         # Any condition can be imagined here (for instance nb of stars)
         return self.days
@@ -117,7 +120,7 @@ class YearData():
 
     def get_columns(self):
         return [
-            self.format_str("Year {year}"),
+            str(self),
             self.stats_url,
             format_file(self.stats_file),
             str(self.nb_stars),
@@ -148,6 +151,9 @@ class DayData():
         assert (self.part2_time is None) == (self.part2_rank is None) == (self.part2_score is None)
         self.nb_stars = (self.part1_time is not None) + (self.part2_time is not None)
 
+    def __str__(self):
+        return self.format_str("{year}/{day}")
+
     def is_valid(self):
         # Any condition can be imagined here (for instance nb of stars)
         return any(os.path.isfile(f) for f in (self.puzzle_file, self.input_file, self.python_file, self.rust_file))
@@ -157,7 +163,7 @@ class DayData():
 
     def get_columns(self):
         return [
-            self.format_str("{year}/{day}"),
+            str(self),
             self.puzzle_url + " " + self.input_url,
             format_file(self.puzzle_file) + " " + format_file(self.input_file),
             "*" * self.nb_stars,
@@ -176,11 +182,16 @@ total_star_count = sum(y.nb_stars for y in years)
 # Format data
 print(header)
 columns = ["Date", "URLs", "Puzzle & Input", "Stars", "Python", "Rust", "Time part 1", "Time part 2"]
-print(format_table_colums(columns))
-print(format_table_colums(("---" for _ in columns)))
 for y in years:
+    print("## " + str(y))
+    print(format_table_colums(columns))
+    print(format_table_colums(("---" for _ in columns)))
     for d in y.days:
         print(format_table_colums(d.get_columns()))
     print(format_table_colums(y.get_columns()))
-print(format_table_colums(["Total", "-", "-", str(total_star_count), "-", "-", "-", "-"]))
+    print()
+print("##  Total")
+for y in years:
+    print("{year}: {nb_stars} {stars}".format(year=y, nb_stars=y.nb_stars, stars="*"*y.nb_stars))
+print("Total:    {nb_stars}".format(nb_stars=total_star_count))
 
