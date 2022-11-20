@@ -114,15 +114,15 @@ If you'd like to hang out, I'm @ericwastl on Twitter.
 <p>Since the robot isn't very fast, you need to find it the <em>shortest route</em>. This path is the fewest steps (in the above example, a total of <code>14</code>) required to start at <code>0</code> and then visit every other location at least once.</p>
 <p>Given your actual map, and starting from location <code>0</code>, what is the <em>fewest number of steps</em> required to visit every non-<code>0</code> number marked on the map at least once?</p>
 </article>
-<p>Your puzzle answer was <code>462</code>.</p><p class="day-success">The first half of this puzzle is complete! It provides one gold star: *</p>
-<article class="day-desc"><h2 id="part2">--- Part Two ---</h2><p>Of course, if you leave the cleaning robot somewhere weird, someone is bound to notice.</p>
+<p>Your puzzle answer was <code>462</code>.</p><article class="day-desc"><h2 id="part2">--- Part Two ---</h2><p>Of course, if you leave the cleaning robot somewhere weird, someone is bound to notice.</p>
 <p>What is the fewest number of steps required to start at <code>0</code>, visit every non-<code>0</code> number marked on the map at least once, and then <em>return to <code>0</code></em>?</p>
 </article>
-<form method="post" action="24/answer"><input type="hidden" name="level" value="2"/><p>Answer: <input type="text" name="answer" autocomplete="off"/> <input type="submit" value="[Submit]"/></p></form>
-<p>Although it hasn't changed, you can still <a href="24/input" target="_blank">get your puzzle input</a>.</p>
+<p>Your puzzle answer was <code>676</code>.</p><p class="day-success">Both parts of this puzzle are complete! They provide two gold stars: **</p>
+<p>At this point, you should <a href="/2016">return to your Advent calendar</a> and try another puzzle.</p>
+<p>If you still want to see it, you can <a href="24/input" target="_blank">get your puzzle input</a>.</p>
 <p>You can also <span class="share">[Share<span class="share-content">on
-  <a href="https://twitter.com/intent/tweet?text=I%27ve+completed+Part+One+of+%22Air+Duct+Spelunking%22+%2D+Day+24+%2D+Advent+of+Code+2016&amp;url=https%3A%2F%2Fadventofcode%2Ecom%2F2016%2Fday%2F24&amp;related=ericwastl&amp;hashtags=AdventOfCode" target="_blank">Twitter</a>
-  <a href="javascript:void(0);" onclick="var mastodon_instance=prompt('Mastodon Instance / Server Name?'); if(typeof mastodon_instance==='string' && mastodon_instance.length){this.href='https://'+mastodon_instance+'/share?text=I%27ve+completed+Part+One+of+%22Air+Duct+Spelunking%22+%2D+Day+24+%2D+Advent+of+Code+2016+%23AdventOfCode+https%3A%2F%2Fadventofcode%2Ecom%2F2016%2Fday%2F24'}else{return false;}" target="_blank">Mastodon</a
+  <a href="https://twitter.com/intent/tweet?text=I%27ve+completed+%22Air+Duct+Spelunking%22+%2D+Day+24+%2D+Advent+of+Code+2016&amp;url=https%3A%2F%2Fadventofcode%2Ecom%2F2016%2Fday%2F24&amp;related=ericwastl&amp;hashtags=AdventOfCode" target="_blank">Twitter</a>
+  <a href="javascript:void(0);" onclick="var mastodon_instance=prompt('Mastodon Instance / Server Name?'); if(typeof mastodon_instance==='string' && mastodon_instance.length){this.href='https://'+mastodon_instance+'/share?text=I%27ve+completed+%22Air+Duct+Spelunking%22+%2D+Day+24+%2D+Advent+of+Code+2016+%23AdventOfCode+https%3A%2F%2Fadventofcode%2Ecom%2F2016%2Fday%2F24'}else{return false;}" target="_blank">Mastodon</a
 ></span>]</span> this puzzle.</p>
 </main>
 

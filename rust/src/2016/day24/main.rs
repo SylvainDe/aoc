@@ -40,7 +40,7 @@ fn neighbours(p: &Point) -> Vec<Point> {
     vec![(x + 1, *y), (x - 1, *y), (*x, y + 1), (*x, y - 1)]
 }
 
-fn part1(g: &Graph) -> Int {
+fn compute_best_path(g: &Graph, return_to_origin: bool) -> Int {
     // Compute interesting points
     let interesting_points = g
         .iter()
@@ -92,15 +92,30 @@ fn part1(g: &Graph) -> Int {
             }
         }
         if !added {
-            return d;
+            if !return_to_origin {
+                assert!(points.len() == interesting_points.len());
+                return d;
+            } else if last == &start {
+                assert!(points.len() == interesting_points.len() + 1);
+                return d;
+            }
+            let mut points2 = points.clone();
+            points2.push(start);
+            distances.push(Reverse((
+                d + interesting_dist.get(&(last, &start)).unwrap(),
+                points2,
+            )));
         }
     }
     0
 }
 
-#[allow(clippy::missing_const_for_fn)]
-fn part2(_arg: &Graph) -> Int {
-    0
+fn part1(g: &Graph) -> Int {
+    compute_best_path(g, false)
+}
+
+fn part2(g: &Graph) -> Int {
+    compute_best_path(g, true)
 }
 
 fn main() {
@@ -111,7 +126,7 @@ fn main() {
     assert_eq!(res, 462);
     let res2 = part2(&data);
     println!("{:?}", res2);
-    assert_eq!(res2, 0);
+    assert_eq!(res2, 676);
     println!("Elapsed time: {:.2?}", before.elapsed());
 }
 
@@ -132,6 +147,6 @@ mod tests {
 
     #[test]
     fn test_part2() {
-        assert_eq!(part2(&get_input_from_str(EXAMPLE)), 0);
+        assert_eq!(part2(&get_input_from_str(EXAMPLE)), 20);
     }
 }
