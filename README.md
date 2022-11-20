@@ -185,9 +185,9 @@ Solutions are written in Python and/or Rust.
 |2016/12/21|[Problem](https://adventofcode.com/2016/day/21) [Input](https://adventofcode.com/2016/day/21/input)|[puzzle.txt](resources/year2016_day21_puzzle.txt) [input.txt](resources/year2016_day21_input.txt)||[-](python/2016/day21.py)|[-](rust/src/2016/day21/main.rs)|-|-|
 |2016/12/22|[Problem](https://adventofcode.com/2016/day/22) [Input](https://adventofcode.com/2016/day/22/input)|[puzzle.txt](resources/year2016_day22_puzzle.txt) [input.txt](resources/year2016_day22_input.txt)|*|[day22.py](python/2016/day22.py)|[-](rust/src/2016/day22/main.rs)|+24h|-|
 |2016/12/23|[Problem](https://adventofcode.com/2016/day/23) [Input](https://adventofcode.com/2016/day/23/input)|[puzzle.txt](resources/year2016_day23_puzzle.txt) [input.txt](resources/year2016_day23_input.txt)|**|[-](python/2016/day23.py)|[main.rs](rust/src/2016/day23/main.rs)|+24h|+24h|
-|2016/12/24|[Problem](https://adventofcode.com/2016/day/24) [Input](https://adventofcode.com/2016/day/24/input)|[puzzle.txt](resources/year2016_day24_puzzle.txt) [input.txt](resources/year2016_day24_input.txt)||[-](python/2016/day24.py)|[-](rust/src/2016/day24/main.rs)|-|-|
+|2016/12/24|[Problem](https://adventofcode.com/2016/day/24) [Input](https://adventofcode.com/2016/day/24/input)|[puzzle.txt](resources/year2016_day24_puzzle.txt) [input.txt](resources/year2016_day24_input.txt)|*|[-](python/2016/day24.py)|[main.rs](rust/src/2016/day24/main.rs)|+24h|-|
 |2016/12/25|[Problem](https://adventofcode.com/2016/day/25) [Input](https://adventofcode.com/2016/day/25/input)|[puzzle.txt](resources/year2016_day25_puzzle.txt) [input.txt](resources/year2016_day25_input.txt)||[-](python/2016/day25.py)|[-](rust/src/2016/day25/main.rs)|-|-|
-|Year 2016|[Stats](https://adventofcode.com/2016/leaderboard/self)|[stats.txt](misc/leaderboard_self_2016.txt)|40|-|-|-|-|
+|Year 2016|[Stats](https://adventofcode.com/2016/leaderboard/self)|[stats.txt](misc/leaderboard_self_2016.txt)|41|-|-|-|-|
 
 ## Year 2015
 |Date|URLs|Puzzle & Input|Stars|Python|Rust|Time part 1|Time part 2|
@@ -230,8 +230,8 @@ Year 2018: 12 ************
 
 Year 2017: 10 **********
 
-Year 2016: 40 ****************************************
+Year 2016: 41 *****************************************
 
 Year 2015: 25 *************************
 
-Total:    210
+Total:    211
