@@ -1,4 +1,4 @@
-use common::get_file_content;
+use common::input::get_file_content;
 use std::time::Instant;
 
 const INPUT_FILEPATH: &str = "../resources/year2016_day3_input.txt";

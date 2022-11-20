@@ -1,4 +1,4 @@
-use common::get_first_line_from_file;
+use common::input::get_first_line_from_file;
 use std::time::Instant;
 
 const INPUT_FILEPATH: &str = "../resources/year2016_day9_input.txt";

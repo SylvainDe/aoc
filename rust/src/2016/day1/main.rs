@@ -1,5 +1,5 @@
-use common::get_file_content;
-use common::get_first_line;
+use common::input::get_file_content;
+use common::input::get_first_line;
 use core::str::FromStr;
 use std::collections::HashSet;
 use std::time::Instant;

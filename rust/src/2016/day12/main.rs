@@ -1,7 +1,7 @@
 use common::assembunny2016::get_input_from_str;
 use common::assembunny2016::run_instructions;
 use common::assembunny2016::Instruction;
-use common::get_file_content;
+use common::input::get_file_content;
 use std::time::Instant;
 
 const INPUT_FILEPATH: &str = "../resources/year2016_day12_input.txt";

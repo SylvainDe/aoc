@@ -1,4 +1,4 @@
-use common::get_first_line_from_file;
+use common::input::get_first_line_from_file;
 use lazy_static::lazy_static;
 use regex::Regex;
 use std::time::Instant;

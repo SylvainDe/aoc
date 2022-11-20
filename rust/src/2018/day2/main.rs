@@ -1,5 +1,5 @@
-use common::collect_lines;
-use common::get_file_content;
+use common::input::collect_lines;
+use common::input::get_file_content;
 use std::collections::HashMap;
 use std::iter::zip;
 use std::time::Instant;

@@ -1,4 +1,4 @@
-use common::get_file_content;
+use common::input::get_file_content;
 use lazy_static::lazy_static;
 use regex::Regex;
 use std::time::Instant;

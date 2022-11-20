@@ -1,4 +1,4 @@
-use common::get_file_content;
+use common::input::get_file_content;
 use std::collections::HashSet;
 use std::iter::zip;
 use std::time::Instant;

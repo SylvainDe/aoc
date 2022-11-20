@@ -1,5 +1,5 @@
-use common::collect_lines;
-use common::get_file_content;
+use common::input::collect_lines;
+use common::input::get_file_content;
 use std::time::Instant;
 
 const INPUT_FILEPATH: &str = "../resources/yearYYYY_dayDD_input.txt";

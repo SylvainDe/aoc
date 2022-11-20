@@ -1,41 +1,43 @@
 // First line
-use std::borrow::ToOwned;
-use std::fs;
 
-#[must_use]
-pub fn get_first_line(string: &str) -> String {
-    match string.lines().next() {
-        None => "",
-        Some(l) => l,
+pub mod input {
+    use std::borrow::ToOwned;
+    use std::fs;
+    #[must_use]
+    pub fn get_first_line(string: &str) -> String {
+        match string.lines().next() {
+            None => "",
+            Some(l) => l,
+        }
+        .to_string()
     }
-    .to_string()
-}
 
-#[must_use]
-pub fn get_file_content(filepath: &str) -> String {
-    fs::read_to_string(filepath).expect("Could not open file")
-}
+    #[must_use]
+    pub fn get_file_content(filepath: &str) -> String {
+        fs::read_to_string(filepath).expect("Could not open file")
+    }
 
-#[must_use]
-pub fn get_first_line_from_file(filepath: &str) -> String {
-    get_first_line(&get_file_content(filepath))
-}
+    #[must_use]
+    pub fn get_first_line_from_file(filepath: &str) -> String {
+        get_first_line(&get_file_content(filepath))
+    }
 
-#[must_use]
-pub fn collect_lines(string: &str) -> Vec<String> {
-    string.lines().map(ToOwned::to_owned).collect()
-}
+    #[must_use]
+    pub fn collect_lines(string: &str) -> Vec<String> {
+        string.lines().map(ToOwned::to_owned).collect()
+    }
 
-/// # Panics
-///
-/// Will panic if call to F fails on a element
-#[must_use]
-pub fn collect_from_lines<Item, F, E>(string: &str, f: F) -> Vec<Item>
-where
-    F: Fn(&str) -> Result<Item, E>,
-    E: std::fmt::Debug,
-{
-    string.lines().map(|l| f(l).unwrap()).collect()
+    /// # Panics
+    ///
+    /// Will panic if call to F fails on a element
+    #[must_use]
+    pub fn collect_from_lines<Item, F, E>(string: &str, f: F) -> Vec<Item>
+    where
+        F: Fn(&str) -> Result<Item, E>,
+        E: std::fmt::Debug,
+    {
+        string.lines().map(|l| f(l).unwrap()).collect()
+    }
 }
 
 pub mod point_module {
@@ -73,10 +75,8 @@ pub mod point_module {
 }
 
 #[cfg(test)]
-mod tests_point {
-    use super::*;
-    use crate::point_module::Point;
-    use std::str::FromStr;
+mod tests_input {
+    use crate::input::*;
 
     #[test]
     fn test_get_first_line() {
@@ -93,6 +93,12 @@ mod tests_point {
             "// First line"
         );
     }
+}
+
+#[cfg(test)]
+mod tests_point {
+    use crate::point_module::Point;
+    use std::str::FromStr;
 
     #[test]
     fn test_point_from_str() {
@@ -124,7 +130,7 @@ mod tests_point {
 }
 
 pub mod assembunny2016 {
-    use crate::collect_from_lines;
+    use crate::input::collect_from_lines;
     use std::collections::HashMap;
     use std::str::FromStr;
     type Int = i32;
@@ -259,9 +265,7 @@ pub mod assembunny2016 {
 
 #[cfg(test)]
 mod tests_assembunny2016 {
-    use crate::assembunny2016::get_input_from_str;
-    use crate::assembunny2016::run_instructions;
-    use crate::assembunny2016::Instruction;
+    use crate::assembunny2016::*;
     use core::str::FromStr;
 
     const EXAMPLE_DAY_12: &str = "cpy 41 a

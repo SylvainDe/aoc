@@ -1,4 +1,4 @@
-use common::get_first_line_from_file;
+use common::input::get_first_line_from_file;
 use std::cmp::min;
 use std::time::Instant;
 
