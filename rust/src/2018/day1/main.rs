@@ -9,7 +9,7 @@ type Int = i32;
 type InputContent = Vec<Int>;
 
 fn get_input_from_str(string: &str) -> InputContent {
-    collect_from_lines(string, str::parse::<Int>)
+    collect_from_lines(string)
 }
 
 fn get_input_from_file(filepath: &str) -> InputContent {

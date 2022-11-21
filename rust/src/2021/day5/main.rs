@@ -30,7 +30,7 @@ impl FromStr for Vent {
 type InputContent = Vec<Vent>;
 
 fn get_input_from_str(string: &str) -> InputContent {
-    collect_from_lines(string, Vent::from_str)
+    collect_from_lines(string)
 }
 
 fn get_input_from_file(filepath: &str) -> InputContent {

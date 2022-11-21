@@ -47,7 +47,7 @@ impl FromStr for Command {
 type InputContent = Vec<Command>;
 
 fn get_input_from_str(string: &str) -> InputContent {
-    collect_from_lines(string, Command::from_str)
+    collect_from_lines(string)
 }
 
 fn get_input_from_file(filepath: &str) -> InputContent {

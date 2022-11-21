@@ -2,7 +2,10 @@
 
 pub mod input {
     use std::borrow::ToOwned;
+    use std::fmt::Debug;
     use std::fs;
+    use std::str::FromStr;
+
     #[must_use]
     pub fn get_first_line(string: &str) -> String {
         match string.lines().next() {
@@ -31,12 +34,23 @@ pub mod input {
     ///
     /// Will panic if call to F fails on a element
     #[must_use]
-    pub fn collect_from_lines<Item, F, E>(string: &str, f: F) -> Vec<Item>
+    pub fn collect_from_lines_with_func<Item, F, E>(string: &str, f: F) -> Vec<Item>
     where
         F: Fn(&str) -> Result<Item, E>,
         E: std::fmt::Debug,
     {
         string.lines().map(|l| f(l).unwrap()).collect()
+    }
+
+    /// # Panics
+    ///
+    /// Will panic if call to F fails on a element
+    #[must_use]
+    pub fn collect_from_lines<A: FromStr>(string: &str) -> Vec<A>
+    where
+        <A as FromStr>::Err: Debug,
+    {
+        string.lines().map(|l| A::from_str(l).unwrap()).collect()
     }
 }
 
@@ -130,7 +144,6 @@ mod tests_point {
 }
 
 pub mod assembunny2016 {
-    use crate::input::collect_from_lines;
     use std::collections::HashMap;
     use std::str::FromStr;
     type Int = i32;
@@ -189,11 +202,6 @@ pub mod assembunny2016 {
             }
             Err(())
         }
-    }
-
-    #[must_use]
-    pub fn get_input_from_str(string: &str) -> InputContent {
-        collect_from_lines(string, Instruction::from_str)
     }
 
     #[allow(clippy::missing_const_for_fn)]
@@ -266,6 +274,7 @@ pub mod assembunny2016 {
 #[cfg(test)]
 mod tests_assembunny2016 {
     use crate::assembunny2016::*;
+    use crate::input::collect_from_lines;
     use core::str::FromStr;
 
     const EXAMPLE_DAY_12: &str = "cpy 41 a
@@ -315,11 +324,11 @@ dec a";
     #[test]
     fn test_day12() {
         assert_eq!(
-            run_instructions(&get_input_from_str(EXAMPLE_DAY_12), 0, 0),
+            run_instructions(&collect_from_lines(EXAMPLE_DAY_12), 0, 0),
             42
         );
         assert_eq!(
-            run_instructions(&get_input_from_str(EXAMPLE_DAY_12), 0, 1),
+            run_instructions(&collect_from_lines(EXAMPLE_DAY_12), 0, 1),
             42
         );
     }
@@ -327,11 +336,11 @@ dec a";
     #[test]
     fn test_day23() {
         assert_eq!(
-            run_instructions(&get_input_from_str(EXAMPLE_DAY_23), 7, 0),
+            run_instructions(&collect_from_lines(EXAMPLE_DAY_23), 7, 0),
             3
         );
         assert_eq!(
-            run_instructions(&get_input_from_str(EXAMPLE_DAY_23), 12, 0),
+            run_instructions(&collect_from_lines(EXAMPLE_DAY_23), 12, 0),
             3
         );
     }

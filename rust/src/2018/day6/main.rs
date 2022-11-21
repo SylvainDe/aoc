@@ -1,4 +1,4 @@
-use common::input::collect_from_lines;
+use common::input::collect_from_lines_with_func;
 use common::input::get_file_content;
 use common::point_module;
 use std::time::Instant;
@@ -10,7 +10,7 @@ type Point = point_module::Point<Int>;
 type InputContent = Vec<Point>;
 
 fn get_input_from_str(string: &str) -> InputContent {
-    collect_from_lines(string, |s| Point::from_str_with_param(s, ", "))
+    collect_from_lines_with_func(string, |s| Point::from_str_with_param(s, ", "))
 }
 
 fn get_input_from_file(filepath: &str) -> InputContent {

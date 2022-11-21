@@ -29,7 +29,7 @@ impl FromStr for Entry {
 type InputContent = Vec<Entry>;
 
 fn get_input_from_str(string: &str) -> InputContent {
-    collect_from_lines(string, Entry::from_str)
+    collect_from_lines(string)
 }
 
 fn get_input_from_file(filepath: &str) -> InputContent {

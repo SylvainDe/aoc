@@ -1,6 +1,6 @@
-use common::assembunny2016::get_input_from_str;
 use common::assembunny2016::run_instructions;
 use common::assembunny2016::Instruction;
+use common::input::collect_from_lines;
 use common::input::get_file_content;
 use std::time::Instant;
 
@@ -9,6 +9,10 @@ const INPUT_FILEPATH: &str = "../resources/year2016_day12_input.txt";
 type Int = i32;
 
 type InputContent = Vec<Instruction>;
+
+fn get_input_from_str(string: &str) -> InputContent {
+    collect_from_lines(string)
+}
 
 fn get_input_from_file(filepath: &str) -> InputContent {
     get_input_from_str(&get_file_content(filepath))
