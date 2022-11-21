@@ -41,6 +41,14 @@ stats_url="https://adventofcode.com/${year}/leaderboard/self"
 # Move to correct directory
 cd "$(dirname "$0")"
 
+# Check workspace status
+if [ "${git_add}" = "1" ] && [ -n "$(git status --porcelain)" ];
+then
+	git_add="0"
+	echo "Git workspace is not clean - git commands will be skipped"
+	git status
+fi
+
 # Open pages
 if [ -z "${browser}" ]; then
 	echo "No browser set - ignored."
