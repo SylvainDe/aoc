@@ -1,5 +1,4 @@
-use common::input::get_file_content;
-use common::input::get_first_line;
+use common::input::get_first_line_from_file;
 use core::str::FromStr;
 use std::collections::HashSet;
 use std::time::Instant;
@@ -49,14 +48,14 @@ impl FromStr for Action {
 type InputContent = Vec<Action>;
 
 fn get_input_from_str(string: &str) -> InputContent {
-    get_first_line(string)
+    string
         .split(", ")
         .map(|s| s.parse::<Action>().unwrap())
         .collect()
 }
 
 fn get_input_from_file(filepath: &str) -> InputContent {
-    get_input_from_str(&get_file_content(filepath))
+    get_input_from_str(&get_first_line_from_file(filepath))
 }
 
 // TODO: Define logic in https://doc.rust-lang.org/std/iter/fn.from_fn.html ?
