@@ -142,7 +142,7 @@ Solutions are written in Python and/or Rust.
 |2017/12/8|[Problem](https://adventofcode.com/2017/day/8) [Input](https://adventofcode.com/2017/day/8/input)|[puzzle.txt](resources/year2017_day8_puzzle.txt) [input.txt](resources/year2017_day8_input.txt)|**|[day8.py](python/2017/day8.py)|[-](rust/src/2017/day8/main.rs)|+24h|+24h|
 |2017/12/9|[Problem](https://adventofcode.com/2017/day/9) [Input](https://adventofcode.com/2017/day/9/input)|[puzzle.txt](resources/year2017_day9_puzzle.txt) [input.txt](resources/year2017_day9_input.txt)||[-](python/2017/day9.py)|[-](rust/src/2017/day9/main.rs)|-|-|
 |2017/12/10|[Problem](https://adventofcode.com/2017/day/10) [Input](https://adventofcode.com/2017/day/10/input)|[puzzle.txt](resources/year2017_day10_puzzle.txt) [input.txt](resources/year2017_day10_input.txt)||[-](python/2017/day10.py)|[-](rust/src/2017/day10/main.rs)|-|-|
-|2017/12/11|[Problem](https://adventofcode.com/2017/day/11) [Input](https://adventofcode.com/2017/day/11/input)|[puzzle.txt](resources/year2017_day11_puzzle.txt) [input.txt](resources/year2017_day11_input.txt)||[-](python/2017/day11.py)|[-](rust/src/2017/day11/main.rs)|-|-|
+|2017/12/11|[Problem](https://adventofcode.com/2017/day/11) [Input](https://adventofcode.com/2017/day/11/input)|[puzzle.txt](resources/year2017_day11_puzzle.txt) [input.txt](resources/year2017_day11_input.txt)|**|[day11.py](python/2017/day11.py)|[-](rust/src/2017/day11/main.rs)|+24h|+24h|
 |2017/12/12|[Problem](https://adventofcode.com/2017/day/12) [Input](https://adventofcode.com/2017/day/12/input)|[puzzle.txt](resources/year2017_day12_puzzle.txt) [input.txt](resources/year2017_day12_input.txt)||[-](python/2017/day12.py)|[-](rust/src/2017/day12/main.rs)|-|-|
 |2017/12/13|[Problem](https://adventofcode.com/2017/day/13) [Input](https://adventofcode.com/2017/day/13/input)|[puzzle.txt](resources/year2017_day13_puzzle.txt) [input.txt](resources/year2017_day13_input.txt)||[-](python/2017/day13.py)|[-](rust/src/2017/day13/main.rs)|-|-|
 |2017/12/14|[Problem](https://adventofcode.com/2017/day/14) [Input](https://adventofcode.com/2017/day/14/input)|[puzzle.txt](resources/year2017_day14_puzzle.txt) [input.txt](resources/year2017_day14_input.txt)||[-](python/2017/day14.py)|[-](rust/src/2017/day14/main.rs)|-|-|
@@ -157,7 +157,7 @@ Solutions are written in Python and/or Rust.
 |2017/12/23|[Problem](https://adventofcode.com/2017/day/23) [Input](https://adventofcode.com/2017/day/23/input)|[puzzle.txt](resources/year2017_day23_puzzle.txt) [input.txt](resources/year2017_day23_input.txt)||[-](python/2017/day23.py)|[-](rust/src/2017/day23/main.rs)|-|-|
 |2017/12/24|[Problem](https://adventofcode.com/2017/day/24) [Input](https://adventofcode.com/2017/day/24/input)|[puzzle.txt](resources/year2017_day24_puzzle.txt) [input.txt](resources/year2017_day24_input.txt)||[-](python/2017/day24.py)|[-](rust/src/2017/day24/main.rs)|-|-|
 |2017/12/25|[Problem](https://adventofcode.com/2017/day/25) [Input](https://adventofcode.com/2017/day/25/input)|[puzzle.txt](resources/year2017_day25_puzzle.txt) [input.txt](resources/year2017_day25_input.txt)||[-](python/2017/day25.py)|[-](rust/src/2017/day25/main.rs)|-|-|
-|Year 2017|[Stats](https://adventofcode.com/2017/leaderboard/self)|[stats.txt](misc/leaderboard_self_2017.txt)|14|-|-|-|-|
+|Year 2017|[Stats](https://adventofcode.com/2017/leaderboard/self)|[stats.txt](misc/leaderboard_self_2017.txt)|16|-|-|-|-|
 
 ## Year 2016
 |Date|URLs|Puzzle & Input|Stars|Python|Rust|Time part 1|Time part 2|
@@ -228,10 +228,10 @@ Year 2019: 28 ****************************
 
 Year 2018: 12 ************
 
-Year 2017: 14 **************
+Year 2017: 16 ****************
 
 Year 2016: 42 ******************************************
 
 Year 2015: 25 *************************
 
-Total:    216
+Total:    218
