@@ -62,7 +62,7 @@ fn get_input_from_file(filepath: &str) -> InputContent {
 }
 
 fn fabric_counter(claims: &InputContent) -> HashMap<(Int, Int), Int> {
-    let mut counter = HashMap::<(Int, Int), Int>::new();
+    let mut counter = HashMap::new();
     for claim in claims {
         for p in claim.fabric() {
             let count = counter.entry(p).or_insert(0);

@@ -13,7 +13,7 @@ type Position = (i32, i32);
 fn get_path(input: impl Iterator<Item = char>) -> HashSet<Position> {
     let mut x: i32 = 0;
     let mut y: i32 = 0;
-    let mut pos = HashSet::<(i32, i32)>::new();
+    let mut pos = HashSet::new();
     pos.insert((x, y));
     for c in input {
         match c {

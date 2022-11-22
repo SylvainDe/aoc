@@ -80,7 +80,7 @@ fn part2(arg: &InputContent) -> Int {
     let mut y: Int = 0;
     let mut dx: Int = 0;
     let mut dy: Int = 1;
-    let mut positions = HashSet::<(Int, Int)>::new();
+    let mut positions = HashSet::new();
     positions.insert((x, y));
     for Action { turn, length } in arg {
         match turn {

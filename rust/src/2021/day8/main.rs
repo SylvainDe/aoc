@@ -50,7 +50,7 @@ const RAW_SEGMENTS: [[bool; 7]; 10] = [
 ];
 
 fn part1(entries: &InputContent) -> usize {
-    let mut seg_count = HashMap::<usize, usize>::new();
+    let mut seg_count = HashMap::new();
     for segments in RAW_SEGMENTS {
         let count = seg_count
             .entry(segments.iter().filter(|v| **v).count())

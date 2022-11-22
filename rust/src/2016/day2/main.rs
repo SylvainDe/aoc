@@ -42,7 +42,7 @@ fn build_keypad_graph(keypad: &Keypad) -> KeypadGraph {
 fn get_code(keypad: &Keypad, instructions: &InputContent) -> String {
     let g = build_keypad_graph(keypad);
     let mut pos = '5';
-    let mut positions = Vec::<char>::new();
+    let mut positions = Vec::new();
     for instruction in instructions.iter() {
         for c in instruction.chars() {
             if let Some(new_position) = g.get(&(pos, c)) {

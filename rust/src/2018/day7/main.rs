@@ -46,22 +46,19 @@ fn get_input_from_file(filepath: &str) -> InputContent {
 }
 
 fn build_dependencies(deps: &InputContent) -> HashMap<char, Vec<char>> {
-    let mut needs = HashMap::<char, Vec<char>>::new();
+    let mut needs = HashMap::new();
     for Dependency { first, last } in deps {
-        needs.entry(*first).or_insert(Vec::<char>::new());
-        needs
-            .entry(*last)
-            .or_insert(Vec::<char>::new())
-            .push(*first);
+        needs.entry(*first).or_insert(Vec::new());
+        needs.entry(*last).or_insert(Vec::new()).push(*first);
     }
     needs
 }
 
 fn part1(deps: &InputContent) -> String {
     let needs = build_dependencies(deps);
-    let mut done = Vec::<char>::new();
+    let mut done = Vec::new();
     loop {
-        let mut candidates = Vec::<char>::new();
+        let mut candidates = Vec::new();
         for (step, lst) in &needs {
             if !done.contains(step) && lst.iter().filter(|s| !done.contains(s)).count() == 0 {
                 candidates.push(*step);
@@ -82,8 +79,8 @@ fn part2(deps: &InputContent, duration_step_a: i32, nb_workers: usize) -> Timest
     let nb_step = needs.len();
     let mut time = 0;
     let mut workers = BinaryHeap::<(Timestamp, char)>::new();
-    let mut in_progress = HashSet::<char>::new();
-    let mut done = HashSet::<char>::new();
+    let mut in_progress = HashSet::new();
+    let mut done = HashSet::new();
     loop {
         // Switch to next finished worker(s) and take into account finished task(s)
         //  - remove worker
@@ -106,7 +103,7 @@ fn part2(deps: &InputContent, duration_step_a: i32, nb_workers: usize) -> Timest
             return time;
         }
         // Compute new candidates
-        let mut candidates = Vec::<char>::new();
+        let mut candidates = Vec::new();
         for (step, lst) in &needs {
             if !in_progress.contains(step)
                 && !done.contains(step)

@@ -22,7 +22,7 @@ fn part1(arg: &InputContent) -> Int {
 
 fn part2(arg: &InputContent) -> Int {
     let mut f: Int = 0;
-    let mut frequencies = HashSet::<Int>::new();
+    let mut frequencies = HashSet::new();
     loop {
         for d in arg {
             f += d;

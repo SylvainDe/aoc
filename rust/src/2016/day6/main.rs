@@ -26,7 +26,7 @@ fn transpose(v: &InputContent) -> InputContent {
 
 // TODO: Make types more generic
 fn count(v: &Vec<char>) -> HashMap<char, Int> {
-    let mut counter = HashMap::<char, Int>::new();
+    let mut counter = HashMap::new();
     for c in v {
         let count = counter.entry(*c).or_insert(0);
         *count += 1;

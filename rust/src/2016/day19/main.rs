@@ -26,6 +26,7 @@ fn part1(size: Int) -> Int {
     *v.first().unwrap()
 }
 
+#[allow(dead_code)]
 fn part2(size: Int) -> Int {
     // Probably correct but to be optimised
     let mut v = (1..=size).collect::<Vec<Int>>();

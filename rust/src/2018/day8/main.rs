@@ -22,7 +22,7 @@ fn compute_scores(nbs: &[Int], part1: bool) -> (Int, &[Int]) {
     let nb_child = nbs[0];
     let nb_meta = nbs[1];
     let mut remaining = &nbs[2..];
-    let mut childscores = Vec::<Int>::new();
+    let mut childscores = Vec::new();
     // Parse children
     for _ in 0..nb_child {
         let meta;

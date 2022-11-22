@@ -39,7 +39,7 @@ fn get_input_from_file(filepath: &str) -> InputContent {
 
 #[allow(clippy::similar_names)]
 fn count_intersection(vents: &Vec<Vent>, diagonal: bool) -> usize {
-    let mut point_counter = HashMap::<Point, usize>::new();
+    let mut point_counter = HashMap::new();
     for Vent {
         p1: Point { x: x1, y: y1 },
         p2: Point { x: x2, y: y2 },
@@ -49,7 +49,7 @@ fn count_intersection(vents: &Vec<Vent>, diagonal: bool) -> usize {
         let dy = y2 - y1;
         let absdx = dx.abs();
         let absdy = dy.abs();
-        let mut step: Option<Int> = None;
+        let mut step = None;
         if dx == 0 {
             step = Some(absdy);
         } else if dy == 0 || (diagonal && absdx == absdy) {

@@ -13,7 +13,7 @@ type Point = (Int, Int);
 type Graph = HashMap<Point, char>;
 
 fn build_graph(string: &str) -> HashMap<Point, char> {
-    let mut g = HashMap::<Point, char>::new();
+    let mut g = HashMap::new();
     for (i, line) in collect_lines(string).iter().enumerate() {
         for (j, c) in line.chars().enumerate() {
             match c {

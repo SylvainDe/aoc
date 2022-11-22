@@ -23,7 +23,7 @@ enum ParseResult {
 }
 
 fn parse_string(s: &str) -> ParseResult {
-    let mut stack: Vec<char> = Vec::new();
+    let mut stack = Vec::new();
     for c in s.chars() {
         match c {
             '(' => stack.push(')'),

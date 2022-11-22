@@ -18,7 +18,7 @@ fn get_input_from_file(filepath: &str) -> InputContent {
 }
 
 fn count(s: &str) -> HashMap<char, Int> {
-    let mut counter = HashMap::<char, Int>::new();
+    let mut counter = HashMap::new();
     for c in s.chars() {
         let count = counter.entry(c).or_insert(0);
         *count += 1;

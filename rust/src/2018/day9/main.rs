@@ -8,12 +8,13 @@ const INPUT_FILEPATH: &str = "../resources/year2018_day9_input.txt";
 type Int = u32;
 type InputContent = Int;
 
-fn get_input_from_str(string: &str) -> InputContent {
+#[allow(clippy::missing_const_for_fn)]
+fn get_input_from_str(_string: &str) -> InputContent {
     lazy_static! {
         static ref RE: Regex =
             Regex::new(r"^(\d+) players; last marble is worth (\d+) points$").unwrap();
     }
-    dbg!(RE.captures(string).unwrap());
+    //dbg!(RE.captures(string).unwrap());
     0
 }
 

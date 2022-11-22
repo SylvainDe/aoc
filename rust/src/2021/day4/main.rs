@@ -19,12 +19,12 @@ type InputContent = BingoGame;
 fn get_input_from_str(string: &str) -> InputContent {
     let mut line_it = string.lines();
     let first_line = line_it.next().unwrap();
-    let numbers: Vec<Int> = first_line
+    let numbers = first_line
         .split(',')
         .map(|nb| nb.parse::<Int>().unwrap())
         .collect();
     line_it.next();
-    let mut grids = Vec::<Grid>::new();
+    let mut grids = Vec::new();
     let mut grid = Grid::new();
     for line in line_it {
         let l = line;
@@ -32,7 +32,7 @@ fn get_input_from_str(string: &str) -> InputContent {
             grids.push(grid);
             grid = Grid::new();
         } else {
-            let nbs: Vec<Int> = l
+            let nbs = l
                 .split(' ')
                 .filter(|s| !s.is_empty())
                 .map(|s| s.parse::<Int>().unwrap())
@@ -95,8 +95,8 @@ impl BingoGame {
         // A more efficient implementation could be to have a mapping from the numbers
         // to the places where they appear (grid number and position)
         let mut states = vec![BingoState::InProgress; self.grids.len()];
-        let mut nbs = HashSet::<Int>::new();
-        let mut scores = Vec::<Int>::new(); // I would have preferred a generator
+        let mut nbs = HashSet::new();
+        let mut scores = Vec::new(); // I would have preferred a generator
         for n in &self.numbers {
             nbs.insert(*n);
             for (state, grid) in zip(states.iter_mut(), self.grids.iter()) {

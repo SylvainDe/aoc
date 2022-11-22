@@ -79,7 +79,7 @@ fn part2(salt: &str) -> usize {
 fn main() {
     let before = Instant::now();
     let data = get_input_from_file(INPUT_FILEPATH);
-    dbg!(&data);
+    //dbg!(&data);
     let res = part1(&data);
     println!("{:?}", res);
     assert_eq!(res, 18626);

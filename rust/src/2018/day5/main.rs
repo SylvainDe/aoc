@@ -12,7 +12,7 @@ fn get_input_from_file(filepath: &str) -> String {
 }
 
 fn reduce(string: &str) -> String {
-    let mut reactors = HashSet::<(char, char)>::new();
+    let mut reactors = HashSet::new();
     // Compute pairs
     for low in "abcdefghijklmnopqrstuvwxyz".chars() {
         let up = low.to_ascii_uppercase();

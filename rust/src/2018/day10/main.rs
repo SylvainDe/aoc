@@ -15,8 +15,8 @@ fn get_input_from_str(string: &str) -> InputContent {
             Regex::new(r"^position=<\s*(-?\d+),\s*(-?\d+)> velocity=<\s*(-?\d+),\s*(-?\d+)>$")
                 .unwrap();
     }
-    for s in string.lines() {
-        dbg!(RE.captures(s).unwrap());
+    for _s in string.lines() {
+        //dbg!(RE.captures(s).unwrap());
     }
     0
 }
