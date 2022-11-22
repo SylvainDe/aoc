@@ -98,6 +98,7 @@ Day   <span class="leaderboard-daydesc-first">    Time   Rank  Score</span>   <s
  11       &gt;24h  14873      0       &gt;24h  14348      0
   8       &gt;24h  20335      0       &gt;24h  19771      0
   7       &gt;24h  22679      0       &gt;24h  17767      0
+  6       &gt;24h  25791      0       &gt;24h  24648      0
   5       &gt;24h  29587      0       &gt;24h  27991      0
   4       &gt;24h  32621      0       &gt;24h  29278      0
   3       &gt;24h  34223      0       &gt;24h  25371      0
