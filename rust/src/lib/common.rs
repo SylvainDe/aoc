@@ -149,7 +149,6 @@ pub mod assembunny2016 {
     type Int = i32;
     type InputContent = Vec<Instruction>;
 
-    // TODO: Put in common with assembunny logic for day 12
     #[derive(Debug, Eq, Ord, PartialEq, PartialOrd, Clone)]
     pub enum Instruction {
         Copy(String, String),
