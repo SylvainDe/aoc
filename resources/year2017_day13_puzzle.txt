@@ -5,7 +5,7 @@
 <title>Day 13 - Advent of Code 2017</title>
 <!--[if lt IE 9]><script src="/static/html5.js"></script><![endif]-->
 <link href='//fonts.googleapis.com/css?family=Source+Code+Pro:300&subset=latin,latin-ext' rel='stylesheet' type='text/css'/>
-<link rel="stylesheet" type="text/css" href="/static/style.css?29"/>
+<link rel="stylesheet" type="text/css" href="/static/style.css?30"/>
 <link rel="stylesheet alternate" type="text/css" href="/static/highcontrast.css?0" title="High Contrast"/>
 <link rel="shortcut icon" href="/favicon.png"/>
 <script>window.addEventListener('click', function(e,s,r){if(e.target.nodeName==='CODE'&&e.detail===3){s=window.getSelection();s.removeAllRanges();r=document.createRange();r.selectNodeContents(e.target);s.addRange(r);}});</script>
@@ -247,11 +247,122 @@ Picosecond 6:
 <p>The <em>severity</em> of getting caught on a layer is equal to its <em>depth</em> multiplied by its <em>range</em>. (Ignore layers in which you do not get caught.) The severity of the whole trip is the sum of these values.  In the example above, the trip severity is <code>0*3 + 6*4 = <em>24</em></code>.</p>
 <p>Given the details of the firewall you've recorded, if you leave immediately, <em>what is the severity of your whole trip</em>?</p>
 </article>
-<p>To begin, <a href="13/input" target="_blank">get your puzzle input</a>.</p>
-<form method="post" action="13/answer"><input type="hidden" name="level" value="1"/><p>Answer: <input type="text" name="answer" autocomplete="off"/> <input type="submit" value="[Submit]"/></p></form>
+<p>Your puzzle answer was <code>1900</code>.</p><article class="day-desc"><h2 id="part2">--- Part Two ---</h2><p>Now, you need to pass through the firewall without being caught - easier said than done.</p>
+<p>You can't control the <span title="Seriously, what network stack doesn't let you adjust the speed of light?">speed of the packet</span>, but you can <em>delay</em> it any number of picoseconds. For each picosecond you delay the packet before beginning your trip, all security scanners move one step. You're not in the firewall during this time; you don't enter layer <code>0</code> until you stop delaying the packet.</p>
+<p>In the example above, if you delay <code>10</code> picoseconds (picoseconds <code>0</code> - <code>9</code>), you won't get caught:</p>
+<pre><code>State after delaying:
+ 0   1   2   3   4   5   6
+[ ] [S] ... ... [ ] ... [ ]
+[ ] [ ]         [ ]     [ ]
+[S]             [S]     [S]
+                [ ]     [ ]
+
+Picosecond 10:
+ 0   1   2   3   4   5   6
+( ) [S] ... ... [ ] ... [ ]
+[ ] [ ]         [ ]     [ ]
+[S]             [S]     [S]
+                [ ]     [ ]
+
+ 0   1   2   3   4   5   6
+( ) [ ] ... ... [ ] ... [ ]
+[S] [S]         [S]     [S]
+[ ]             [ ]     [ ]
+                [ ]     [ ]
+
+
+Picosecond 11:
+ 0   1   2   3   4   5   6
+[ ] ( ) ... ... [ ] ... [ ]
+[S] [S]         [S]     [S]
+[ ]             [ ]     [ ]
+                [ ]     [ ]
+
+ 0   1   2   3   4   5   6
+[S] (S) ... ... [S] ... [S]
+[ ] [ ]         [ ]     [ ]
+[ ]             [ ]     [ ]
+                [ ]     [ ]
+
+
+Picosecond 12:
+ 0   1   2   3   4   5   6
+[S] [S] (.) ... [S] ... [S]
+[ ] [ ]         [ ]     [ ]
+[ ]             [ ]     [ ]
+                [ ]     [ ]
+
+ 0   1   2   3   4   5   6
+[ ] [ ] (.) ... [ ] ... [ ]
+[S] [S]         [S]     [S]
+[ ]             [ ]     [ ]
+                [ ]     [ ]
+
+
+Picosecond 13:
+ 0   1   2   3   4   5   6
+[ ] [ ] ... (.) [ ] ... [ ]
+[S] [S]         [S]     [S]
+[ ]             [ ]     [ ]
+                [ ]     [ ]
+
+ 0   1   2   3   4   5   6
+[ ] [S] ... (.) [ ] ... [ ]
+[ ] [ ]         [ ]     [ ]
+[S]             [S]     [S]
+                [ ]     [ ]
+
+
+Picosecond 14:
+ 0   1   2   3   4   5   6
+[ ] [S] ... ... ( ) ... [ ]
+[ ] [ ]         [ ]     [ ]
+[S]             [S]     [S]
+                [ ]     [ ]
+
+ 0   1   2   3   4   5   6
+[ ] [ ] ... ... ( ) ... [ ]
+[S] [S]         [ ]     [ ]
+[ ]             [ ]     [ ]
+                [S]     [S]
+
+
+Picosecond 15:
+ 0   1   2   3   4   5   6
+[ ] [ ] ... ... [ ] (.) [ ]
+[S] [S]         [ ]     [ ]
+[ ]             [ ]     [ ]
+                [S]     [S]
+
+ 0   1   2   3   4   5   6
+[S] [S] ... ... [ ] (.) [ ]
+[ ] [ ]         [ ]     [ ]
+[ ]             [S]     [S]
+                [ ]     [ ]
+
+
+Picosecond 16:
+ 0   1   2   3   4   5   6
+[S] [S] ... ... [ ] ... ( )
+[ ] [ ]         [ ]     [ ]
+[ ]             [S]     [S]
+                [ ]     [ ]
+
+ 0   1   2   3   4   5   6
+[ ] [ ] ... ... [ ] ... ( )
+[S] [S]         [S]     [S]
+[ ]             [ ]     [ ]
+                [ ]     [ ]
+</code></pre>
+<p>Because all smaller delays would get you caught, the fewest number of picoseconds you would need to delay to get through safely is <code>10</code>.</p>
+<p><em>What is the fewest number of picoseconds</em> that you need to delay the packet to pass through the firewall without being caught?</p>
+</article>
+<p>Your puzzle answer was <code>3966414</code>.</p><p class="day-success">Both parts of this puzzle are complete! They provide two gold stars: **</p>
+<p>At this point, you should <a href="/2017">return to your Advent calendar</a> and try another puzzle.</p>
+<p>If you still want to see it, you can <a href="13/input" target="_blank">get your puzzle input</a>.</p>
 <p>You can also <span class="share">[Share<span class="share-content">on
-  <a href="https://twitter.com/intent/tweet?text=%22Packet+Scanners%22+%2D+Day+13+%2D+Advent+of+Code+2017&amp;url=https%3A%2F%2Fadventofcode%2Ecom%2F2017%2Fday%2F13&amp;related=ericwastl&amp;hashtags=AdventOfCode" target="_blank">Twitter</a>
-  <a href="javascript:void(0);" onclick="var mastodon_instance=prompt('Mastodon Instance / Server Name?'); if(typeof mastodon_instance==='string' && mastodon_instance.length){this.href='https://'+mastodon_instance+'/share?text=%22Packet+Scanners%22+%2D+Day+13+%2D+Advent+of+Code+2017+%23AdventOfCode+https%3A%2F%2Fadventofcode%2Ecom%2F2017%2Fday%2F13'}else{return false;}" target="_blank">Mastodon</a
+  <a href="https://twitter.com/intent/tweet?text=I%27ve+completed+%22Packet+Scanners%22+%2D+Day+13+%2D+Advent+of+Code+2017&amp;url=https%3A%2F%2Fadventofcode%2Ecom%2F2017%2Fday%2F13&amp;related=ericwastl&amp;hashtags=AdventOfCode" target="_blank">Twitter</a>
+  <a href="javascript:void(0);" onclick="var mastodon_instance=prompt('Mastodon Instance / Server Name?'); if(typeof mastodon_instance==='string' && mastodon_instance.length){this.href='https://'+mastodon_instance+'/share?text=I%27ve+completed+%22Packet+Scanners%22+%2D+Day+13+%2D+Advent+of+Code+2017+%23AdventOfCode+https%3A%2F%2Fadventofcode%2Ecom%2F2017%2Fday%2F13'}else{return false;}" target="_blank">Mastodon</a
 ></span>]</span> this puzzle.</p>
 </main>
 
