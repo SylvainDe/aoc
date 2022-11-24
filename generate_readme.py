@@ -18,7 +18,7 @@ rust_file = "rust/src/{year}/day{day}/main.rs"
 stats_file = "misc/leaderboard_self_{year}.txt"
 
 # Ranges
-year_range = reversed(range(2015, 2022+1))
+year_range = range(2015, 2022+1)
 day_range = range(1, 25+1)
 
 
@@ -156,7 +156,7 @@ class DayData():
 
 
 def format_table_colums(columns, sep="|"):
-    return "{}{}{}\n".format(sep, sep.join(columns), sep)
+    return "{}{}{}\n".format(sep, sep.join(str(c) for c in columns), sep)
 
 
 # Header
@@ -186,15 +186,16 @@ if __name__ == "__main__":
     ################
     years = [YearData(year) for year in year_range]
     years = [y for y in years if y.is_valid()]
-    total_star_count = sum(y.nb_stars for y in years)
 
     ################
     # Format data  #
     ################
     with open(destfile, "w") as f:
         f.write(readme_header)
+
+        # Details for each day
         columns = ["Date", "URLs", "Puzzle & Input", "Stars", "Python", "Rust", "Time part 1", "Time part 2"]
-        for y in years:
+        for y in reversed(years):
             f.write("## {}\n".format(str(y)))
             f.write(format_table_colums(columns))
             f.write(format_table_colums(("---" for _ in columns)))
@@ -202,8 +203,24 @@ if __name__ == "__main__":
                 f.write(format_table_colums(d.get_columns()))
             f.write(format_table_colums(y.get_columns()))
             f.write("\n")
-        f.write("##  Total\n")
-        for y in years:
-            f.write("{year}: {nb_stars} {stars}\n\n".format(year=y, nb_stars=y.nb_stars, stars="*"*y.nb_stars))
-        f.write("Total:    {nb_stars}\n".format(nb_stars=total_star_count))
 
+        # Summary of stars
+        f.write("##  Summary\n")
+        stars_by_day_num = dict()
+        for y in years:
+            for d in y.days:
+                s = d.nb_stars
+                stars_by_day_num.setdefault(d.day, dict())[y.year] = s
+
+        columns = ["Day"] + [str(y.year) for y in years] + ["Total"]
+        f.write(format_table_colums(columns))
+        f.write(format_table_colums(("---" for _ in columns)))
+        for day_num, year_dict in sorted(stars_by_day_num.items()):
+            nb_stars = [year_dict.get(y.year, 0) for y in years]
+            total = sum(nb_stars)
+            values = [day_num] + ["*" * nb for nb in nb_stars] + [str(total) + " " + "*" * total]
+            f.write(format_table_colums(values))
+        nb_stars = [y.nb_stars for y in years]
+        total = sum(nb_stars)
+        values = ["Total"] + nb_stars + [str(total)]
+        f.write(format_table_colums(values))
