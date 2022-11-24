@@ -1,6 +1,6 @@
 """Script to generate README.
 
-Usage: python3 generate_readme.py > README.md
+Usage: python3 generate_readme.py
 """
 import os
 import re
@@ -155,16 +155,9 @@ class DayData():
         ]
 
 
-################
-# Collect data #
-################
-years = [YearData(year) for year in year_range]
-years = [y for y in years if y.is_valid()]
-total_star_count = sum(y.nb_stars for y in years)
+def format_table_colums(columns, sep="|"):
+    return "{}{}{}\n".format(sep, sep.join(columns), sep)
 
-################
-# Format data  #
-################
 
 # Header
 readme_header = """# aoc
@@ -177,27 +170,40 @@ Solutions used to be stored in different repositories for each year limiting the
  - https://github.com/SylvainDe/aoc2021
 
 Solutions are written in Python and/or Rust.
+
 """
 
-# Separator
-sep = "|"
 
-def format_table_colums(columns):
-    return "{}{}{}".format(sep, sep.join(columns), sep)
+if __name__ == "__main__":
+    import sys
+    try:
+        destfile = sys.argv[1]
+    except IndexError:
+        destfile = "README.md"
 
+    ################
+    # Collect data #
+    ################
+    years = [YearData(year) for year in year_range]
+    years = [y for y in years if y.is_valid()]
+    total_star_count = sum(y.nb_stars for y in years)
 
-print(readme_header)
-columns = ["Date", "URLs", "Puzzle & Input", "Stars", "Python", "Rust", "Time part 1", "Time part 2"]
-for y in years:
-    print("## " + str(y))
-    print(format_table_colums(columns))
-    print(format_table_colums(("---" for _ in columns)))
-    for d in y.days:
-        print(format_table_colums(d.get_columns()))
-    print(format_table_colums(y.get_columns()))
-    print()
-print("##  Total")
-for y in years:
-    print("{year}: {nb_stars} {stars}\n".format(year=y, nb_stars=y.nb_stars, stars="*"*y.nb_stars))
-print("Total:    {nb_stars}".format(nb_stars=total_star_count))
+    ################
+    # Format data  #
+    ################
+    with open(destfile, "w") as f:
+        f.write(readme_header)
+        columns = ["Date", "URLs", "Puzzle & Input", "Stars", "Python", "Rust", "Time part 1", "Time part 2"]
+        for y in years:
+            f.write("## {}\n".format(str(y)))
+            f.write(format_table_colums(columns))
+            f.write(format_table_colums(("---" for _ in columns)))
+            for d in y.days:
+                f.write(format_table_colums(d.get_columns()))
+            f.write(format_table_colums(y.get_columns()))
+            f.write("\n")
+        f.write("##  Total\n")
+        for y in years:
+            f.write("{year}: {nb_stars} {stars}\n\n".format(year=y, nb_stars=y.nb_stars, stars="*"*y.nb_stars))
+        f.write("Total:    {nb_stars}\n".format(nb_stars=total_star_count))
 

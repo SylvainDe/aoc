@@ -161,7 +161,7 @@ fi
 
 # Generate README
 if [ "${generate_readme}" = "1" ]; then
-	python3 generate_readme.py > "${readme_file}"
+	python3 generate_readme.py "${readme_file}"
 fi
 
 # Add to git
