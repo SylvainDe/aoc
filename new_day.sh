@@ -66,7 +66,7 @@ puzzle_file="resources/year${year}_day${day}_puzzle.txt"
 input_file="resources/year${year}_day${day}_input.txt"
 stats_file="misc/leaderboard_self_${year}.txt"
 python_script_file="python/${year}/day${day}.py"
-rust_src_file_rel="src/${year}/day${day}/main.rs"
+rust_src_file_rel="src/${year}/day${day}.rs"
 rust_src_file="rust/${rust_src_file_rel}"
 cargo_file="rust/Cargo.toml"
 readme_file="README.md"
@@ -143,7 +143,7 @@ fi
 
 # Create Rust file
 if [ "${create_rust}" = "1" ]; then
-	rust_bin="day${day}_${year}"
+	rust_bin="${year}_day${day}"
 	case "$(cat "${input_file}" | wc -l)" in
 		0|1) rust_template="rust/src/templates/template_one_line.rs";;
 		*)   rust_template="rust/src/templates/template_multi_line.rs";;

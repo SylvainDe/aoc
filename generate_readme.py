@@ -14,7 +14,7 @@ stats_url = "[Stats](https://adventofcode.com/{year}/leaderboard/self)"
 puzzle_file = "resources/year{year}_day{day}_puzzle.txt"
 input_file = "resources/year{year}_day{day}_input.txt"
 python_file = "python/{year}/day{day}.py"
-rust_file = "rust/src/{year}/day{day}/main.rs"
+rust_file = "rust/src/{year}/day{day}.rs"
 stats_file = "misc/leaderboard_self_{year}.txt"
 
 # Ranges
