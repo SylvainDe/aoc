@@ -10,7 +10,7 @@ day="${1:-$real_day}"
 year="${2:-$real_year}"
 
 # Paths and filenames
-bin="day${day}_${year}"
+bin="${year}_day${day}"
 
 # Run cargo commands
 cargo test --lib
