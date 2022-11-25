@@ -144,7 +144,10 @@ fi
 # Create Rust file
 if [ "${create_rust}" = "1" ]; then
 	rust_bin="day${day}_${year}"
-	rust_template="rust/src/template/main.rs"
+	case "$(cat "${input_file}" | wc -l)" in
+		0|1) rust_template="rust/src/templates/template_one_line.rs";;
+		*)   rust_template="rust/src/templates/template_multi_line.rs";;
+	esac
 
 	# Add content in Cargo.toml file
 	cargo_content="[[bin]]\nname = \"${rust_bin}\"\npath = \"${rust_src_file_rel}\"\n\n"

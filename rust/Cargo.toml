@@ -15,8 +15,12 @@ name = "common"
 path = "src/lib/common.rs"
 
 [[bin]]
-name = "template"
-path = "src/template/main.rs"
+name = "template_one_line"
+path = "src/templates/template_one_line.rs"
+
+[[bin]]
+name = "template_multi_line"
+path = "src/templates/template_multi_line.rs"
 
 # 2015
 [[bin]]

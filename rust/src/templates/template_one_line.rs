@@ -1,7 +1,7 @@
 use common::input::get_first_line_from_file;
 use std::time::Instant;
 
-const INPUT_FILEPATH: &str = "../resources/year2016_day13_input.txt";
+const INPUT_FILEPATH: &str = "../resources/yearYYYY_dayDD_input.txt";
 
 type Int = u32;
 type InputContent = String;

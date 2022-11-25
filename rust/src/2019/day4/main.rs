@@ -1,18 +1,17 @@
-use common::input::collect_lines;
-use common::input::get_file_content;
+use common::input::get_first_line_from_file;
 use std::time::Instant;
 
 const INPUT_FILEPATH: &str = "../resources/year2019_day4_input.txt";
 
 type Int = u32;
-type InputContent = Vec<String>;
+type InputContent = String;
 
 fn get_input_from_str(string: &str) -> InputContent {
-    collect_lines(string)
+    string.to_string()
 }
 
 fn get_input_from_file(filepath: &str) -> InputContent {
-    get_input_from_str(&get_file_content(filepath))
+    get_input_from_str(&get_first_line_from_file(filepath))
 }
 
 #[allow(clippy::missing_const_for_fn)]
