@@ -3,7 +3,7 @@ use std::time::Instant;
 
 const INPUT_FILEPATH: &str = "../resources/year2018_day11_input.txt";
 
-type Int = i16;
+type Int = i32;
 type InputContent = usize;
 
 fn get_input_from_str(string: &str) -> InputContent {
@@ -69,48 +69,74 @@ Then each contribution is either counted:
  - (1-0-0+0) = 1 time for a point in the sub-grid
  - (1-1-1+1) = 0 time for a point in the upper-left corner
  - (1-1-0+0) = 0 time for a point in the left corner or upper corner
+
+This principle can be used to compute the values in the cumulative grid:
+
+   c(x,y) = g(x,y) + c(x,y-1) + c(x-1,y) - c(x-1,y-1)
  */
 
-fn part1(serial: InputContent) -> (usize, usize) {
-    // TODO: Use sliding windows for more efficiency
+fn get_max_square(serial: InputContent, square_size: usize) -> (Int, usize, usize) {
     const X_MAX: usize = 300;
-    const Y_MAX: usize = 301;
-    let mut pow: [[Int; Y_MAX + 1]; X_MAX + 1] = [[0; Y_MAX + 1]; X_MAX + 1];
-    #[allow(clippy::needless_range_loop)]
+    const Y_MAX: usize = 300;
+
+    // Compute cumulative grid
+    let mut cum: [[Int; Y_MAX + 1]; X_MAX + 1] = [[0; Y_MAX + 1]; X_MAX + 1];
     for x in 1..=X_MAX {
         for y in 1..=Y_MAX {
-            pow[x][y] = get_power_level(x, y, serial);
+            let pow_x_y = get_power_level(x, y, serial);
+            cum[x][y] = pow_x_y + cum[x - 1][y] + cum[x][y - 1] - cum[x - 1][y - 1];
         }
     }
-    // let mut cum: [[Int; Y_MAX + 1]; X_MAX + 1] = [[0; Y_MAX + 1]; X_MAX + 1];
-    // for x in 1..=X_MAX {
-    //     for y in 1..=Y_MAX {
-    //         cum[x][y] = pow[x][y] + cum[x-1][y] + cum[x][y-1];
-    //     }
-    // }
 
+    // Compute score for windows
     let mut scores = Vec::new();
-    for x in 1..=(X_MAX - 2) {
-        for y in 1..=(Y_MAX - 2) {
-            let s = pow[x][y]
-                + pow[x][y + 1]
-                + pow[x][y + 2]
-                + pow[x + 1][y]
-                + pow[x + 1][y + 1]
-                + pow[x + 1][y + 2]
-                + pow[x + 2][y]
-                + pow[x + 2][y + 1]
-                + pow[x + 2][y + 2];
+    for x in 1..=(X_MAX - square_size + 1) {
+        let (x1, x2) = (x - 1, x + square_size - 1);
+        for y in 1..=(Y_MAX - square_size + 1) {
+            let (y1, y2) = (y - 1, y + square_size - 1);
+            let s = cum[x2][y2] + cum[x1][y1] - cum[x2][y1] - cum[x1][y2];
             scores.push((s, x, y));
         }
     }
-    let (_score, x, y) = scores.iter().max().unwrap();
-    (*x, *y)
+    *scores.iter().max().unwrap()
 }
 
-#[allow(clippy::missing_const_for_fn)]
-fn part2(_arg: InputContent) -> Int {
-    0
+fn get_max_square2(serial: InputContent) -> (Int, usize, usize, usize) {
+    const X_MAX: usize = 300;
+    const Y_MAX: usize = 300;
+
+    // Compute cumulative grid
+    let mut cum: [[Int; Y_MAX + 1]; X_MAX + 1] = [[0; Y_MAX + 1]; X_MAX + 1];
+    for x in 1..=X_MAX {
+        for y in 1..=Y_MAX {
+            let pow_x_y = get_power_level(x, y, serial);
+            cum[x][y] = pow_x_y + cum[x - 1][y] + cum[x][y - 1] - cum[x - 1][y - 1];
+        }
+    }
+
+    // Compute score for windows
+    let mut scores = Vec::new();
+    for square_size in 1..=X_MAX {
+        for x in 1..=(X_MAX - square_size + 1) {
+            let (x1, x2) = (x - 1, x + square_size - 1);
+            for y in 1..=(Y_MAX - square_size + 1) {
+                let (y1, y2) = (y - 1, y + square_size - 1);
+                let s = cum[x2][y2] + cum[x1][y1] - cum[x2][y1] - cum[x1][y2];
+                scores.push((s, x, y, square_size));
+            }
+        }
+    }
+    *scores.iter().max().unwrap()
+}
+
+fn part1(serial: InputContent) -> (usize, usize) {
+    let (_score, x, y) = get_max_square(serial, 3);
+    (x, y)
+}
+
+fn part2(serial: InputContent) -> (usize, usize, usize) {
+    let (_score, x, y, size) = get_max_square2(serial);
+    (x, y, size)
 }
 
 fn main() {
@@ -121,15 +147,14 @@ fn main() {
     assert_eq!(res, (21, 68));
     let res2 = part2(data);
     println!("{:?}", res2);
-    assert_eq!(res2, 0);
+    assert_eq!(res2, (90, 201, 15));
     println!("Elapsed time: {:.2?}", before.elapsed());
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
-
-    const EXAMPLE: &str = "18";
+    const SKIP_SLOW: bool = true;
 
     #[test]
     fn test_power_level() {
@@ -140,13 +165,18 @@ mod tests {
     }
 
     #[test]
-    fn test_part1() {
+    fn test_get_max_square() {
+        assert_eq!(get_max_square(18, 3), (29, 33, 45));
+        assert_eq!(get_max_square(42, 3), (30, 21, 61));
         assert_eq!(part1(18), (33, 45));
         assert_eq!(part1(42), (21, 61));
-    }
-
-    #[test]
-    fn test_part2() {
-        assert_eq!(part2(get_input_from_str(EXAMPLE)), 0);
+        assert_eq!(get_max_square(18, 16), (113, 90, 269));
+        assert_eq!(get_max_square(42, 12), (119, 232, 251));
+        if !SKIP_SLOW {
+            assert_eq!(get_max_square2(18), (113, 90, 269, 16));
+            assert_eq!(get_max_square2(42), (119, 232, 251, 12));
+            assert_eq!(part2(18), (90, 269, 16));
+            assert_eq!(part2(42), (232, 251, 12));
+        }
     }
 }
