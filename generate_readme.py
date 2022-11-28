@@ -6,8 +6,10 @@ import os
 import re
 
 # URLs
+aoc="[Advent of Code](https://adventofcode.com)"
 puzzle_url = "[Problem](https://adventofcode.com/{year}/day/{day})"
 input_url = "[Input](https://adventofcode.com/{year}/day/{day}/input)"
+event_url = "[{year}](https://adventofcode.com/{year})"
 stats_url = "[Stats](https://adventofcode.com/{year}/leaderboard/self)"
 
 # Local files
@@ -24,9 +26,7 @@ day_range = range(1, 25+1)
 
 def file_contains(filepath, string):
     with open(filepath) as f:
-        for line in f:
-            if string in line:
-                return True
+        return any(string in line for line in f)
     return False
 
 
@@ -52,6 +52,7 @@ class YearData():
         self.year = year
         self.stats_url = self.format_str(stats_url)
         self.stats_file = self.format_str(stats_file)
+        self.event_url = self.format_str(event_url)
         try:
             stats = self.extract_stats()
         except FileNotFoundError:
@@ -61,7 +62,7 @@ class YearData():
         self.nb_stars = sum(d.nb_stars for d in days)
 
     def __str__(self):
-        return self.format_str("Year {year}")
+        return self.event_url
 
     def is_valid(self):
         # Any condition can be imagined here (for instance nb of stars)
@@ -99,17 +100,6 @@ class YearData():
                 all_stats[day] = stats
         return all_stats
 
-    def get_columns(self):
-        return [
-            str(self),
-            self.stats_url,
-            format_file(self.stats_file),
-            str(self.nb_stars),
-            "-",
-            "-",
-            "-",
-            "-"
-        ]
 
 class DayData():
     def __init__(self, year, day, stats):
@@ -142,18 +132,6 @@ class DayData():
     def format_str(self, s):
         return s.format(year=self.year, day=self.day)
 
-    def get_columns(self):
-        return [
-            str(self),
-            self.puzzle_url + " " + self.input_url,
-            format_file(self.puzzle_file) + " " + format_file(self.input_file),
-            "*" * self.nb_stars,
-            format_file(self.python_file),
-            format_file(self.rust_file),
-            "-" if self.part1_time is None else self.part1_time,
-            "-" if self.part2_time is None else self.part2_time,
-        ]
-
 
 def format_table_colums(columns, sep="|"):
     return "{}{}{}\n".format(sep, sep.join(str(c) for c in columns), sep)
@@ -162,7 +140,7 @@ def format_table_colums(columns, sep="|"):
 # Header
 readme_header = """# aoc
 
-Solutions for Advent Of Code
+Solutions for {}
 
 Solutions used to be stored in different repositories for each year limiting the code reuse:
  - https://github.com/SylvainDe/aoc2019
@@ -171,7 +149,7 @@ Solutions used to be stored in different repositories for each year limiting the
 
 Solutions are written in Python and/or Rust.
 
-"""
+""".format(aoc)
 
 
 if __name__ == "__main__":
@@ -196,12 +174,30 @@ if __name__ == "__main__":
         # Details for each day
         columns = ["Date", "URLs", "Puzzle & Input", "Stars", "Python", "Rust", "Time part 1", "Time part 2"]
         for y in reversed(years):
-            f.write("## {}\n".format(str(y)))
+            f.write("## {}\n".format(y))
             f.write(format_table_colums(columns))
             f.write(format_table_colums(("---" for _ in columns)))
             for d in y.days:
-                f.write(format_table_colums(d.get_columns()))
-            f.write(format_table_colums(y.get_columns()))
+                f.write(format_table_colums([
+                    d,
+                    "{} {}".format(d.puzzle_url, d.input_url),
+                    "{} {}".format(format_file(d.puzzle_file), format_file(d.input_file)),
+                    "*" * d.nb_stars,
+                    format_file(d.python_file),
+                    format_file(d.rust_file),
+                    "-" if d.part1_time is None else d.part1_time,
+                    "-" if d.part2_time is None else d.part2_time,
+                ]))
+            f.write(format_table_colums([
+                y,
+                y.stats_url,
+                format_file(y.stats_file),
+                y.nb_stars,
+                "-",
+                "-",
+                "-",
+                "-"
+            ]))
             f.write("\n")
 
         # Summary of stars
@@ -212,15 +208,15 @@ if __name__ == "__main__":
                 s = d.nb_stars
                 stars_by_day_num.setdefault(d.day, dict())[y.year] = s
 
-        columns = ["Day"] + [str(y.year) for y in years] + ["Total"]
+        columns = ["Day"] + [y for y in years] + ["Total"]
         f.write(format_table_colums(columns))
         f.write(format_table_colums(("---" for _ in columns)))
         for day_num, year_dict in sorted(stars_by_day_num.items()):
             nb_stars = [year_dict.get(y.year, 0) for y in years]
             total = sum(nb_stars)
-            values = [day_num] + ["*" * nb for nb in nb_stars] + [str(total) + " " + "*" * total]
+            values = [day_num] + ["*" * nb for nb in nb_stars] + ["{:2d}: {}".format(total, "*" * total)]
             f.write(format_table_colums(values))
         nb_stars = [y.nb_stars for y in years]
         total = sum(nb_stars)
-        values = ["Total"] + nb_stars + [str(total)]
+        values = ["Total"] + nb_stars + [total]
         f.write(format_table_colums(values))
