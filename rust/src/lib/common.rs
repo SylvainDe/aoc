@@ -55,7 +55,7 @@ pub mod input {
 }
 
 pub mod point_module {
-    #[derive(Debug, PartialEq, Eq, Hash)]
+    #[derive(Debug, PartialEq, Eq, Hash, Clone, Copy)]
     pub struct Point<T> {
         pub x: T,
         pub y: T,

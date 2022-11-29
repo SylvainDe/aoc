@@ -48,8 +48,8 @@ fn get_input_from_file(filepath: &str) -> InputContent {
 fn build_dependencies(deps: &InputContent) -> HashMap<char, Vec<char>> {
     let mut needs = HashMap::new();
     for Dependency { first, last } in deps {
-        needs.entry(*first).or_insert(Vec::new());
-        needs.entry(*last).or_insert(Vec::new()).push(*first);
+        needs.entry(*first).or_insert_with(Vec::new);
+        needs.entry(*last).or_insert_with(Vec::new).push(*first);
     }
     needs
 }

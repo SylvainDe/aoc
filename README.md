@@ -111,7 +111,7 @@ Solutions are written in Python and/or Rust.
 |2018/12/7|[Problem](https://adventofcode.com/2018/day/7) [Input](https://adventofcode.com/2018/day/7/input)|[puzzle.txt](resources/year2018_day7_puzzle.txt) [input.txt](resources/year2018_day7_input.txt)|**|[-](python/2018/day7.py)|[day7.rs](rust/src/2018/day7.rs)|+24h|+24h|
 |2018/12/8|[Problem](https://adventofcode.com/2018/day/8) [Input](https://adventofcode.com/2018/day/8/input)|[puzzle.txt](resources/year2018_day8_puzzle.txt) [input.txt](resources/year2018_day8_input.txt)|**|[-](python/2018/day8.py)|[day8.rs](rust/src/2018/day8.rs)|+24h|+24h|
 |2018/12/9|[Problem](https://adventofcode.com/2018/day/9) [Input](https://adventofcode.com/2018/day/9/input)|[puzzle.txt](resources/year2018_day9_puzzle.txt) [input.txt](resources/year2018_day9_input.txt)||[-](python/2018/day9.py)|[-](rust/src/2018/day9.rs)|-|-|
-|2018/12/10|[Problem](https://adventofcode.com/2018/day/10) [Input](https://adventofcode.com/2018/day/10/input)|[puzzle.txt](resources/year2018_day10_puzzle.txt) [input.txt](resources/year2018_day10_input.txt)||[-](python/2018/day10.py)|[-](rust/src/2018/day10.rs)|-|-|
+|2018/12/10|[Problem](https://adventofcode.com/2018/day/10) [Input](https://adventofcode.com/2018/day/10/input)|[puzzle.txt](resources/year2018_day10_puzzle.txt) [input.txt](resources/year2018_day10_input.txt)|**|[-](python/2018/day10.py)|[day10.rs](rust/src/2018/day10.rs)|+24h|+24h|
 |2018/12/11|[Problem](https://adventofcode.com/2018/day/11) [Input](https://adventofcode.com/2018/day/11/input)|[puzzle.txt](resources/year2018_day11_puzzle.txt) [input.txt](resources/year2018_day11_input.txt)|**|[-](python/2018/day11.py)|[day11.rs](rust/src/2018/day11.rs)|+24h|+24h|
 |2018/12/12|[Problem](https://adventofcode.com/2018/day/12) [Input](https://adventofcode.com/2018/day/12/input)|[puzzle.txt](resources/year2018_day12_puzzle.txt) [input.txt](resources/year2018_day12_input.txt)||[-](python/2018/day12.py)|[-](rust/src/2018/day12.rs)|-|-|
 |2018/12/13|[Problem](https://adventofcode.com/2018/day/13) [Input](https://adventofcode.com/2018/day/13/input)|[puzzle.txt](resources/year2018_day13_puzzle.txt) [input.txt](resources/year2018_day13_input.txt)||[-](python/2018/day13.py)|[-](rust/src/2018/day13.rs)|-|-|
@@ -127,7 +127,7 @@ Solutions are written in Python and/or Rust.
 |2018/12/23|[Problem](https://adventofcode.com/2018/day/23) [Input](https://adventofcode.com/2018/day/23/input)|[puzzle.txt](resources/year2018_day23_puzzle.txt) [input.txt](resources/year2018_day23_input.txt)||[-](python/2018/day23.py)|[-](rust/src/2018/day23.rs)|-|-|
 |2018/12/24|[Problem](https://adventofcode.com/2018/day/24) [Input](https://adventofcode.com/2018/day/24/input)|[puzzle.txt](resources/year2018_day24_puzzle.txt) [input.txt](resources/year2018_day24_input.txt)||[-](python/2018/day24.py)|[-](rust/src/2018/day24.rs)|-|-|
 |2018/12/25|[Problem](https://adventofcode.com/2018/day/25) [Input](https://adventofcode.com/2018/day/25/input)|[puzzle.txt](resources/year2018_day25_puzzle.txt) [input.txt](resources/year2018_day25_input.txt)||[-](python/2018/day25.py)|[-](rust/src/2018/day25.rs)|-|-|
-|[2018](https://adventofcode.com/2018)|[Stats](https://adventofcode.com/2018/leaderboard/self)|[stats.txt](misc/leaderboard_self_2018.txt)|14|-|-|-|-|
+|[2018](https://adventofcode.com/2018)|[Stats](https://adventofcode.com/2018/leaderboard/self)|[stats.txt](misc/leaderboard_self_2018.txt)|16|-|-|-|-|
 
 ## [2017](https://adventofcode.com/2017)
 |Date|URLs|Puzzle & Input|Stars|Python|Rust|Time part 1|Time part 2|
@@ -231,7 +231,7 @@ Solutions are written in Python and/or Rust.
 |7|**|**|**|**||**|**|12: ************|
 |8|**|**|**|**|**|**|**|14: **************|
 |9|**|**|**||**|**|**|12: ************|
-|10|**|**|||**|**|**|10: **********|
+|10|**|**||**|**|**|**|12: ************|
 |11|||**|**||**|**| 8: ********|
 |12||**|||**|**|**| 8: ********|
 |13||**|**|||**|**| 8: ********|
@@ -247,4 +247,4 @@ Solutions are written in Python and/or Rust.
 |23||**||||**|*| 5: *****|
 |24||**|||**|**|| 6: ******|
 |25||||||**|*| 3: ***|
-|Total|25|42|22|14|28|50|45|226|
+|Total|25|42|22|16|28|50|45|228|

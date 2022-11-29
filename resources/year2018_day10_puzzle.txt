@@ -5,7 +5,7 @@
 <title>Day 10 - Advent of Code 2018</title>
 <!--[if lt IE 9]><script src="/static/html5.js"></script><![endif]-->
 <link href='//fonts.googleapis.com/css?family=Source+Code+Pro:300&subset=latin,latin-ext' rel='stylesheet' type='text/css'/>
-<link rel="stylesheet" type="text/css" href="/static/style.css?29"/>
+<link rel="stylesheet" type="text/css" href="/static/style.css?30"/>
 <link rel="stylesheet alternate" type="text/css" href="/static/highcontrast.css?0" title="High Contrast"/>
 <link rel="shortcut icon" href="/favicon.png"/>
 <script>window.addEventListener('click', function(e,s,r){if(e.target.nodeName==='CODE'&&e.detail===3){s=window.getSelection();s.removeAllRanges();r=document.createRange();r.selectNodeContents(e.target);s.addRange(r);}});</script>
@@ -226,11 +226,15 @@ After 4 seconds:
 <p>After 3 seconds, the message appeared briefly: <code><em>HI</em></code>. Of course, your message will be much longer and will take many more seconds to appear.</p>
 <p><em>What message will eventually appear in the sky?</em></p>
 </article>
-<p>To begin, <a href="10/input" target="_blank">get your puzzle input</a>.</p>
-<form method="post" action="10/answer"><input type="hidden" name="level" value="1"/><p>Answer: <input type="text" name="answer" autocomplete="off"/> <input type="submit" value="[Submit]"/></p></form>
+<p>Your puzzle answer was <code>RLEZNRAN</code>.</p><article class="day-desc"><h2 id="part2">--- Part Two ---</h2><p>Good thing you didn't have to wait, because that would have taken a long time - much longer than the <code><em>3</em></code> seconds in the example above.</p>
+<p>Impressed by your sub-hour communication capabilities, the Elves are curious: <em>exactly how many seconds would they have needed to wait for that message to appear?</em></p>
+</article>
+<p>Your puzzle answer was <code>10240</code>.</p><p class="day-success">Both parts of this puzzle are complete! They provide two gold stars: **</p>
+<p>At this point, you should <a href="/2018">return to your Advent calendar</a> and try another puzzle.</p>
+<p>If you still want to see it, you can <a href="10/input" target="_blank">get your puzzle input</a>.</p>
 <p>You can also <span class="share">[Share<span class="share-content">on
-  <a href="https://twitter.com/intent/tweet?text=%22The+Stars+Align%22+%2D+Day+10+%2D+Advent+of+Code+2018&amp;url=https%3A%2F%2Fadventofcode%2Ecom%2F2018%2Fday%2F10&amp;related=ericwastl&amp;hashtags=AdventOfCode" target="_blank">Twitter</a>
-  <a href="javascript:void(0);" onclick="var mastodon_instance=prompt('Mastodon Instance / Server Name?'); if(typeof mastodon_instance==='string' && mastodon_instance.length){this.href='https://'+mastodon_instance+'/share?text=%22The+Stars+Align%22+%2D+Day+10+%2D+Advent+of+Code+2018+%23AdventOfCode+https%3A%2F%2Fadventofcode%2Ecom%2F2018%2Fday%2F10'}else{return false;}" target="_blank">Mastodon</a
+  <a href="https://twitter.com/intent/tweet?text=I%27ve+completed+%22The+Stars+Align%22+%2D+Day+10+%2D+Advent+of+Code+2018&amp;url=https%3A%2F%2Fadventofcode%2Ecom%2F2018%2Fday%2F10&amp;related=ericwastl&amp;hashtags=AdventOfCode" target="_blank">Twitter</a>
+  <a href="javascript:void(0);" onclick="var mastodon_instance=prompt('Mastodon Instance / Server Name?'); if(typeof mastodon_instance==='string' && mastodon_instance.length){this.href='https://'+mastodon_instance+'/share?text=I%27ve+completed+%22The+Stars+Align%22+%2D+Day+10+%2D+Advent+of+Code+2018+%23AdventOfCode+https%3A%2F%2Fadventofcode%2Ecom%2F2018%2Fday%2F10'}else{return false;}" target="_blank">Mastodon</a
 ></span>]</span> this puzzle.</p>
 </main>
 

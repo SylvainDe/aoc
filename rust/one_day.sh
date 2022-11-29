@@ -14,7 +14,7 @@ bin="${year}_day${day}"
 
 # Run cargo commands
 cargo test --lib
-cargo test --bin "${bin}" -- --nocapture
+cargo test --bin "${bin}" -- --nocapture --test-threads=1
 cargo run --bin "${bin}"
 cargo clippy --bin "${bin}" -- \
     -D clippy::all \
