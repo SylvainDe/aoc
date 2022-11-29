@@ -22,6 +22,10 @@ path = "src/templates/template_one_line.rs"
 name = "template_multi_line"
 path = "src/templates/template_multi_line.rs"
 
+[[bin]]
+name = "template_regex"
+path = "src/templates/template_regex.rs"
+
 # 2015
 [[bin]]
 name = "2015_day1"
