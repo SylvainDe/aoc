@@ -57,10 +57,6 @@ fn get_input_from_str(string: &str) -> InputContent {
     collect_from_lines(string)
 }
 
-fn get_input_from_file(filepath: &str) -> InputContent {
-    get_input_from_str(&get_file_content(filepath))
-}
-
 fn fabric_counter(claims: &InputContent) -> HashMap<(Int, Int), Int> {
     let mut counter = HashMap::new();
     for claim in claims {
@@ -95,7 +91,7 @@ fn part2(claims: &InputContent) -> Int {
 
 fn main() {
     let before = Instant::now();
-    let data = get_input_from_file(INPUT_FILEPATH);
+    let data = get_input_from_str(&get_file_content(INPUT_FILEPATH));
     let res = part1(&data);
     println!("{:?}", res);
     assert_eq!(res, 109_716);

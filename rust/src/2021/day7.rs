@@ -14,10 +14,6 @@ fn get_input_from_str(string: &str) -> InputContent {
         .collect()
 }
 
-fn get_input_from_file(filepath: &str) -> InputContent {
-    get_input_from_str(&get_first_line_from_file(filepath))
-}
-
 fn get_fuel_cost_for_position(positions: &[Int], target: Int) -> Int {
     positions.iter().map(|n| (n - target).abs()).sum()
 }
@@ -78,7 +74,7 @@ fn part2(positions: &InputContent) -> Int {
 
 fn main() {
     let before = Instant::now();
-    let positions = get_input_from_file(INPUT_FILEPATH);
+    let positions = get_input_from_str(&get_first_line_from_file(INPUT_FILEPATH));
     let res = part1(&positions);
     println!("{:?}", res);
     assert_eq!(res, 343_468);

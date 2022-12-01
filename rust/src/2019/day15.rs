@@ -10,10 +10,6 @@ fn get_input_from_str(string: &str) -> InputContent {
     string.to_string()
 }
 
-fn get_input_from_file(filepath: &str) -> InputContent {
-    get_input_from_str(&get_first_line_from_file(filepath))
-}
-
 #[allow(clippy::missing_const_for_fn)]
 fn part1(_arg: &InputContent) -> Int {
     0
@@ -26,7 +22,7 @@ fn part2(_arg: &InputContent) -> Int {
 
 fn main() {
     let before = Instant::now();
-    let data = get_input_from_file(INPUT_FILEPATH);
+    let data = get_input_from_str(&get_first_line_from_file(INPUT_FILEPATH));
     let res = part1(&data);
     println!("{:?}", res);
     assert_eq!(res, 0);

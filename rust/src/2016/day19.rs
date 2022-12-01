@@ -9,10 +9,6 @@ fn get_input_from_str(string: &str) -> Int {
     string.parse().unwrap()
 }
 
-fn get_input_from_file(filepath: &str) -> Int {
-    get_input_from_str(&get_first_line_from_file(filepath))
-}
-
 fn part1(size: Int) -> Int {
     // Naive implementation - "slow" but useful to check assumptions
     // Could be optimised with https://en.wikipedia.org/wiki/Josephus_problem
@@ -44,7 +40,7 @@ fn part2(size: Int) -> Int {
 
 fn main() {
     let before = Instant::now();
-    let data = get_input_from_file(INPUT_FILEPATH);
+    let data = get_input_from_str(&get_first_line_from_file(INPUT_FILEPATH));
     let res = part1(data);
     println!("{:?}", res);
     assert_eq!(res, 1_834_471);

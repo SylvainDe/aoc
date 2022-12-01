@@ -12,10 +12,6 @@ fn get_input_from_str(string: &str) -> Vec<Int> {
         .collect()
 }
 
-fn get_input_from_file(filepath: &str) -> Vec<Int> {
-    get_input_from_str(&get_first_line_from_file(filepath))
-}
-
 fn get_generation_count(fishes: &Vec<Int>, nb_generation: Int) -> Int {
     let mut count = vec![0; 9];
     for f in fishes {
@@ -41,7 +37,7 @@ fn part2(fishes: &Vec<Int>) -> Int {
 
 fn main() {
     let before = Instant::now();
-    let fishes = get_input_from_file(INPUT_FILEPATH);
+    let fishes = get_input_from_str(&get_first_line_from_file(INPUT_FILEPATH));
     let res = part1(&fishes);
     println!("{:?}", res);
     assert_eq!(res, 390_011);

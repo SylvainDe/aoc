@@ -3,10 +3,6 @@ use std::time::Instant;
 
 const INPUT_FILEPATH: &str = "../resources/year2016_day9_input.txt";
 
-fn get_input_from_file(filepath: &str) -> String {
-    get_first_line_from_file(filepath)
-}
-
 // Implement a state machine to avoid performing string manipulation
 #[derive(Debug, PartialEq)]
 enum State {
@@ -87,7 +83,7 @@ fn part2(s: &str) -> u64 {
 
 fn main() {
     let before = Instant::now();
-    let data = get_input_from_file(INPUT_FILEPATH);
+    let data = get_first_line_from_file(INPUT_FILEPATH);
     let res = part1(&data);
     println!("{:?}", res);
     assert_eq!(res, 99145);

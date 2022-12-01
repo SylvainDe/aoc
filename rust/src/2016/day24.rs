@@ -31,10 +31,6 @@ fn get_input_from_str(string: &str) -> Graph {
     build_graph(string)
 }
 
-fn get_input_from_file(filepath: &str) -> Graph {
-    get_input_from_str(&get_file_content(filepath))
-}
-
 fn neighbours(p: &Point) -> Vec<Point> {
     let (x, y) = p;
     vec![(x + 1, *y), (x - 1, *y), (*x, y + 1), (*x, y - 1)]
@@ -120,7 +116,7 @@ fn part2(g: &Graph) -> Int {
 
 fn main() {
     let before = Instant::now();
-    let data = get_input_from_file(INPUT_FILEPATH);
+    let data = get_input_from_str(&get_file_content(INPUT_FILEPATH));
     let res = part1(&data);
     println!("{:?}", res);
     assert_eq!(res, 462);

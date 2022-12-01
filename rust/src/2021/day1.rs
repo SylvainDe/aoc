@@ -12,10 +12,6 @@ fn get_input_from_str(string: &str) -> InputContent {
     collect_from_lines(string)
 }
 
-fn get_input_from_file(filepath: &str) -> InputContent {
-    get_input_from_str(&get_file_content(filepath))
-}
-
 fn part1(depths: &InputContent) -> usize {
     depths.iter().tuple_windows().filter(|(a, b)| a < b).count()
 }
@@ -33,7 +29,7 @@ fn part2(depths: &InputContent) -> usize {
 
 fn main() {
     let before = Instant::now();
-    let numbers = get_input_from_file(INPUT_FILEPATH);
+    let numbers = get_input_from_str(&get_file_content(INPUT_FILEPATH));
     let res = part1(&numbers);
     println!("{:?}", res);
     assert_eq!(res, 1832);

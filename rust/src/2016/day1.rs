@@ -54,10 +54,6 @@ fn get_input_from_str(string: &str) -> InputContent {
         .collect()
 }
 
-fn get_input_from_file(filepath: &str) -> InputContent {
-    get_input_from_str(&get_first_line_from_file(filepath))
-}
-
 // TODO: Define logic in https://doc.rust-lang.org/std/iter/fn.from_fn.html ?
 fn part1(arg: &InputContent) -> Int {
     let mut x: Int = 0;
@@ -101,7 +97,7 @@ fn part2(arg: &InputContent) -> Int {
 
 fn main() {
     let before = Instant::now();
-    let data = get_input_from_file(INPUT_FILEPATH);
+    let data = get_input_from_str(&get_first_line_from_file(INPUT_FILEPATH));
     let res = part1(&data);
     println!("{:?}", res);
     assert_eq!(res, 226);

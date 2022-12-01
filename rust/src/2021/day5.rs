@@ -33,10 +33,6 @@ fn get_input_from_str(string: &str) -> InputContent {
     collect_from_lines(string)
 }
 
-fn get_input_from_file(filepath: &str) -> InputContent {
-    get_input_from_str(&get_file_content(filepath))
-}
-
 #[allow(clippy::similar_names)]
 fn count_intersection(vents: &Vec<Vent>, diagonal: bool) -> usize {
     let mut point_counter = HashMap::new();
@@ -80,7 +76,7 @@ fn part2(vents: &InputContent) -> usize {
 
 fn main() {
     let before = Instant::now();
-    let vents = get_input_from_file(INPUT_FILEPATH);
+    let vents = get_input_from_str(&get_file_content(INPUT_FILEPATH));
     let res = part1(&vents);
     println!("{:?}", res);
     assert_eq!(res, 6225);

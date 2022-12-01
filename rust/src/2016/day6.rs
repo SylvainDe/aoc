@@ -11,10 +11,6 @@ fn get_input_from_str(string: &str) -> InputContent {
     string.lines().map(|l| l.chars().collect()).collect()
 }
 
-fn get_input_from_file(filepath: &str) -> InputContent {
-    get_input_from_str(&get_file_content(filepath))
-}
-
 fn transpose(v: &InputContent) -> InputContent {
     assert!(!v.is_empty());
     let len = v[0].len();
@@ -62,7 +58,7 @@ fn part2(arg: &InputContent) -> String {
 
 fn main() {
     let before = Instant::now();
-    let data = get_input_from_file(INPUT_FILEPATH);
+    let data = get_input_from_str(&get_file_content(INPUT_FILEPATH));
     let res = part1(&data);
     println!("{:?}", res);
     assert_eq!(res, "xdkzukcf");

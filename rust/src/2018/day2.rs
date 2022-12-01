@@ -13,10 +13,6 @@ fn get_input_from_str(string: &str) -> InputContent {
     collect_lines(string)
 }
 
-fn get_input_from_file(filepath: &str) -> InputContent {
-    get_input_from_str(&get_file_content(filepath))
-}
-
 fn count(s: &str) -> HashMap<char, Int> {
     let mut counter = HashMap::new();
     for c in s.chars() {
@@ -56,7 +52,7 @@ fn part2(strings: &InputContent) -> String {
 
 fn main() {
     let before = Instant::now();
-    let data = get_input_from_file(INPUT_FILEPATH);
+    let data = get_input_from_str(&get_file_content(INPUT_FILEPATH));
     let res = part1(&data);
     println!("{:?}", res);
     assert_eq!(res, 7657);

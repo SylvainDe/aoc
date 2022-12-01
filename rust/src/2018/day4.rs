@@ -86,10 +86,6 @@ fn get_input_from_str(string: &str) -> InputContent {
     entries
 }
 
-fn get_input_from_file(filepath: &str) -> InputContent {
-    get_input_from_str(&get_file_content(filepath))
-}
-
 fn part1(events: &InputContent) -> Int {
     for _e in events {}
     0
@@ -102,7 +98,7 @@ fn part2(_arg: &InputContent) -> Int {
 
 fn main() {
     let before = Instant::now();
-    let data = get_input_from_file(INPUT_FILEPATH);
+    let data = get_input_from_str(&get_file_content(INPUT_FILEPATH));
     let res = part1(&data);
     println!("{:?}", res);
     assert_eq!(res, 0);

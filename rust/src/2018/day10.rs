@@ -50,10 +50,6 @@ fn get_input_from_str(string: &str) -> InputContent {
     collect_from_lines(string)
 }
 
-fn get_input_from_file(filepath: &str) -> InputContent {
-    get_input_from_str(&get_file_content(filepath))
-}
-
 fn get_positions(stars: &InputContent, steps: Int) -> Vec<(Int, Int)> {
     stars
         .iter()
@@ -119,7 +115,7 @@ fn part2(stars: &InputContent) -> Int {
 
 fn main() {
     let before = Instant::now();
-    let data = get_input_from_file(INPUT_FILEPATH);
+    let data = get_input_from_str(&get_file_content(INPUT_FILEPATH));
     let res = part1(&data);
     println!("{}", res);
     let res2 = part2(&data);

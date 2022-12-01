@@ -10,10 +10,6 @@ fn get_input_from_str(string: &str) -> InputContent {
     string.parse().unwrap()
 }
 
-fn get_input_from_file(filepath: &str) -> InputContent {
-    get_input_from_str(&get_first_line_from_file(filepath))
-}
-
 fn get_power_level(x: usize, y: usize, serial: InputContent) -> Int {
     let rack_id = x + 10;
     let power = (rack_id * y + serial) * rack_id;
@@ -141,7 +137,7 @@ fn part2(serial: InputContent) -> (usize, usize, usize) {
 
 fn main() {
     let before = Instant::now();
-    let data = get_input_from_file(INPUT_FILEPATH);
+    let data = get_input_from_str(&get_first_line_from_file(INPUT_FILEPATH));
     let res = part1(data);
     println!("{:?}", res);
     assert_eq!(res, (21, 68));

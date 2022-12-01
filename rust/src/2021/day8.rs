@@ -32,10 +32,6 @@ fn get_input_from_str(string: &str) -> InputContent {
     collect_from_lines(string)
 }
 
-fn get_input_from_file(filepath: &str) -> InputContent {
-    get_input_from_str(&get_file_content(filepath))
-}
-
 const RAW_SEGMENTS: [[bool; 7]; 10] = [
     [true, true, true, false, true, true, true],
     [false, false, true, false, false, true, false],
@@ -80,7 +76,7 @@ fn part2(entries: &InputContent) -> Int {
 
 fn main() {
     let before = Instant::now();
-    let entries = get_input_from_file(INPUT_FILEPATH);
+    let entries = get_input_from_str(&get_file_content(INPUT_FILEPATH));
     let res = part1(&entries);
     println!("{:?}", res);
     assert_eq!(res, 449);

@@ -17,10 +17,6 @@ fn get_input_from_str(string: &str) -> InputContent {
     string.lines().map(parse_integer_list).collect()
 }
 
-fn get_input_from_file(filepath: &str) -> InputContent {
-    get_input_from_str(&get_file_content(filepath))
-}
-
 fn is_triangle(nbs: &[Int]) -> bool {
     let mut sorted = nbs.to_owned();
     sorted.sort_unstable();
@@ -54,7 +50,7 @@ fn part2(arg: &InputContent) -> usize {
 
 fn main() {
     let before = Instant::now();
-    let data = get_input_from_file(INPUT_FILEPATH);
+    let data = get_input_from_str(&get_file_content(INPUT_FILEPATH));
     let res = part1(&data);
     println!("{:?}", res);
     assert_eq!(res, 993);

@@ -11,10 +11,6 @@ fn get_input_from_str(string: &str) -> InputContent {
     string.split('\t').map(|s| s.parse().unwrap()).collect()
 }
 
-fn get_input_from_file(filepath: &str) -> InputContent {
-    get_input_from_str(&get_first_line_from_file(filepath))
-}
-
 #[allow(clippy::cast_sign_loss)]
 fn get_cycle_information(blocks: &InputContent) -> (usize, usize) {
     let l = blocks.len();
@@ -53,7 +49,7 @@ fn part2(blocks: &InputContent) -> usize {
 
 fn main() {
     let before = Instant::now();
-    let data = get_input_from_file(INPUT_FILEPATH);
+    let data = get_input_from_str(&get_first_line_from_file(INPUT_FILEPATH));
     let res = part1(&data);
     println!("{:?}", res);
     assert_eq!(res, 6681);

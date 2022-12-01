@@ -11,10 +11,6 @@ fn get_input_from_str(string: &str) -> InputContent {
     collect_lines(string)
 }
 
-fn get_input_from_file(filepath: &str) -> InputContent {
-    get_input_from_str(&get_file_content(filepath))
-}
-
 type Keypad = Vec<String>;
 type KeypadGraph = HashMap<(char /*Position*/, char /*Direction*/), char /*New position*/>;
 
@@ -78,7 +74,7 @@ fn part2(instructions: &InputContent) -> String {
 
 fn main() {
     let before = Instant::now();
-    let data = get_input_from_file(INPUT_FILEPATH);
+    let data = get_input_from_str(&get_file_content(INPUT_FILEPATH));
     let res = part1(&data);
     println!("{:?}", res);
     assert_eq!(res, "53255");

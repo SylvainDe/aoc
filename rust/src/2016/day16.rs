@@ -6,10 +6,6 @@ const INPUT_FILEPATH: &str = "../resources/year2016_day16_input.txt";
 const SKIP_SLOW: bool = true;
 type InputContent = String;
 
-fn get_input_from_file(filepath: &str) -> InputContent {
-    get_first_line_from_file(filepath)
-}
-
 fn generate_data(initial_state: &str, len: usize) -> String {
     let mut res = initial_state.chars().collect::<Vec<char>>();
     while res.len() < len {
@@ -55,7 +51,7 @@ fn part2(arg: &InputContent) -> String {
 
 fn main() {
     let before = Instant::now();
-    let data = get_input_from_file(INPUT_FILEPATH);
+    let data = get_first_line_from_file(INPUT_FILEPATH);
     let res = part1(&data);
     println!("{:?}", res);
     assert_eq!(res, "10101001010100001");

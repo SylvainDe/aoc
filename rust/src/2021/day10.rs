@@ -11,10 +11,6 @@ fn get_input_from_str(string: &str) -> InputContent {
     collect_lines(string)
 }
 
-fn get_input_from_file(filepath: &str) -> InputContent {
-    get_input_from_str(&get_file_content(filepath))
-}
-
 #[derive(Debug, PartialEq)]
 enum ParseResult {
     Success,
@@ -99,7 +95,7 @@ fn part2(strings: &InputContent) -> Int {
 
 fn main() {
     let before = Instant::now();
-    let strings = get_input_from_file(INPUT_FILEPATH);
+    let strings = get_input_from_str(&get_file_content(INPUT_FILEPATH));
     let res = part1(&strings);
     println!("{:?}", res);
     assert_eq!(res, 339_411);

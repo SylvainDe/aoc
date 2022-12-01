@@ -50,10 +50,6 @@ fn get_input_from_str(string: &str) -> InputContent {
     collect_from_lines(string)
 }
 
-fn get_input_from_file(filepath: &str) -> InputContent {
-    get_input_from_str(&get_file_content(filepath))
-}
-
 fn part1(commands: &InputContent) -> Int {
     let (mut depth, mut position): (Int, Int) = (0, 0);
     for Command { action, value } in commands {
@@ -83,7 +79,7 @@ fn part2(commands: &InputContent) -> Int {
 
 fn main() {
     let before = Instant::now();
-    let commands = get_input_from_file(INPUT_FILEPATH);
+    let commands = get_input_from_str(&get_file_content(INPUT_FILEPATH));
     let res = part1(&commands);
     println!("{:?}", res);
     assert_eq!(res, 1_670_340);

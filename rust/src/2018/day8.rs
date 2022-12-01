@@ -13,10 +13,6 @@ fn get_input_from_str(string: &str) -> InputContent {
         .collect()
 }
 
-fn get_input_from_file(filepath: &str) -> InputContent {
-    get_input_from_str(&get_first_line_from_file(filepath))
-}
-
 fn compute_scores(nbs: &[Int], part1: bool) -> (Int, &[Int]) {
     //dbg!("start", nbs.len());
     let nb_child = nbs[0];
@@ -58,7 +54,7 @@ fn part2(nbs: &InputContent) -> Int {
 
 fn main() {
     let before = Instant::now();
-    let data = get_input_from_file(INPUT_FILEPATH);
+    let data = get_input_from_str(&get_first_line_from_file(INPUT_FILEPATH));
     let res = part1(&data);
     println!("{:?}", res);
     assert_eq!(res, 40848);

@@ -9,10 +9,6 @@ fn get_input_from_str(string: &str) -> String {
     string.to_string()
 }
 
-fn get_input_from_file(filepath: &str) -> String {
-    get_input_from_str(&get_first_line_from_file(filepath))
-}
-
 fn parse_str(string: &str) -> (Int, Int) {
     #[derive(Debug, PartialEq)]
     enum State {
@@ -60,7 +56,7 @@ fn part2(string: &str) -> Int {
 
 fn main() {
     let before = Instant::now();
-    let data = get_input_from_file(INPUT_FILEPATH);
+    let data = get_input_from_str(&get_first_line_from_file(INPUT_FILEPATH));
     let res = part1(&data);
     println!("{:?}", res);
     assert_eq!(res, 16869);

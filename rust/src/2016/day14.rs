@@ -6,10 +6,6 @@ const INPUT_FILEPATH: &str = "../resources/year2016_day14_input.txt";
 
 const SKIP_SLOW: bool = true;
 
-fn get_input_from_file(filepath: &str) -> String {
-    get_first_line_from_file(filepath)
-}
-
 fn get_hash(salt: &str, index: usize, stretched: bool) -> String {
     let nb = if stretched { 2017 } else { 1 };
     let mut s = format!("{}{}", salt, index);
@@ -78,7 +74,7 @@ fn part2(salt: &str) -> usize {
 
 fn main() {
     let before = Instant::now();
-    let data = get_input_from_file(INPUT_FILEPATH);
+    let data = get_first_line_from_file(INPUT_FILEPATH);
     //dbg!(&data);
     let res = part1(&data);
     println!("{:?}", res);

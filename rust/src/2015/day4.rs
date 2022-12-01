@@ -6,10 +6,6 @@ const INPUT_FILEPATH: &str = "../resources/year2015_day4_input.txt";
 type Int = u32;
 const SKIP_SLOW: bool = true;
 
-fn get_input_from_file(filepath: &str) -> String {
-    get_first_line_from_file(filepath)
-}
-
 fn digest_starts_with(data: &str, prefix: &str) -> bool {
     let digest = format!("{:?}", md5::compute(data));
     digest.starts_with(prefix)
@@ -35,7 +31,7 @@ fn part2(input: &str) -> Int {
 
 fn main() {
     let before = Instant::now();
-    let data = get_input_from_file(INPUT_FILEPATH);
+    let data = get_first_line_from_file(INPUT_FILEPATH);
     let res = part1(&data);
     println!("{:?}", res);
     assert_eq!(res, 282_749);

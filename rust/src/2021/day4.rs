@@ -44,10 +44,6 @@ fn get_input_from_str(string: &str) -> InputContent {
     BingoGame { numbers, grids }
 }
 
-fn get_input_from_file(filepath: &str) -> InputContent {
-    get_input_from_str(&get_file_content(filepath))
-}
-
 #[derive(Debug, PartialEq, Clone)]
 enum BingoState {
     InProgress,
@@ -123,7 +119,7 @@ fn part2(bingo: &InputContent) -> Int {
 
 fn main() {
     let before = Instant::now();
-    let bingo = get_input_from_file(INPUT_FILEPATH);
+    let bingo = get_input_from_str(&get_file_content(INPUT_FILEPATH));
     let res = part1(&bingo);
     println!("{:?}", res);
     assert_eq!(res, 50008);

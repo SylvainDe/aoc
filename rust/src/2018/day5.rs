@@ -7,10 +7,6 @@ const INPUT_FILEPATH: &str = "../resources/year2018_day5_input.txt";
 
 type Int = usize;
 
-fn get_input_from_file(filepath: &str) -> String {
-    get_first_line_from_file(filepath)
-}
-
 fn reduce(string: &str) -> String {
     let mut reactors = HashSet::new();
     // Compute pairs
@@ -49,7 +45,7 @@ fn part2(string: &str) -> Int {
 
 fn main() {
     let before = Instant::now();
-    let data = get_input_from_file(INPUT_FILEPATH);
+    let data = get_first_line_from_file(INPUT_FILEPATH);
     let res = part1(&data);
     println!("{:?}", res);
     assert_eq!(res, 10638);
