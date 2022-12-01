@@ -2,17 +2,54 @@
 import datetime
 
 
-def get_xxx_from_file(file_path="../../resources/year2022_day1_input.txt"):
+def get_elves_from_lines(lines):
+    elves = []
+    elf = []
+    for line in lines:
+        if line:
+            elf.append(int(line))
+        else:
+            elves.append(elf)
+            elf = []
+    if elf:
+        elves.append(elf)
+    return elves
+
+
+def get_elves_from_file(file_path="../../resources/year2022_day1_input.txt"):
     with open(file_path) as f:
-        return [l.strip() for l in f]
+        return get_elves_from_lines([l.strip() for l in f])
+
+
+def max_elf(elves, nb=1):
+    calories = sorted(sum(elf) for elf in elves)
+    top = calories[-nb:]
+    return sum(top) 
 
 
 def run_tests():
-    xxx = ""
+    elves = get_elves_from_lines("""1000
+2000
+3000
+
+4000
+
+5000
+6000
+
+7000
+8000
+9000
+
+10000""".splitlines())
+    assert max_elf(elves, 1) == 24000
+    assert max_elf(elves, 3) == 45000
 
 
 def get_solutions():
-    xxx = get_xxx_from_file()
+    elves = get_elves_from_file()
+    print(max_elf(elves, 1))
+    print(max_elf(elves, 3))
 
 
 if __name__ == "__main__":
