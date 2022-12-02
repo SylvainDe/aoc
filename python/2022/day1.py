@@ -48,8 +48,8 @@ def run_tests():
 
 def get_solutions():
     elves = get_elves_from_file()
-    print(max_elf(elves, 1))
-    print(max_elf(elves, 3))
+    print(max_elf(elves, 1) == 68467)
+    print(max_elf(elves, 3) == 203420)
 
 
 if __name__ == "__main__":
