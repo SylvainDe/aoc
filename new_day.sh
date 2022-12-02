@@ -170,11 +170,7 @@ fi
 # Add to git
 if [ "${git_add}" = "1" ]; then
 	git status
-	# TODO: Some files may be created in a new folder which needs to be added
-	# as well. Other files should not have their folder added automatically.
-	for f in "${puzzle_file}" "${input_file}" "${stats_file}" "${python_script_file}" "${rust_src_file}" "${cargo_file}" "${readme_file}"; do
-		echo "${f} not done yet"
-		# git add "${f}"
-	done
+	git add "${puzzle_file}" "${input_file}" "${stats_file}" "${python_script_file}" "${rust_src_file}" "${cargo_file}" "${readme_file}"
 	git status
+	echo "Commit with: 'git commit -m \"Year ${year} - Day ${day} - Getting started\"'"
 fi
