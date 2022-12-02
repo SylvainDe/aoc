@@ -13,6 +13,7 @@ Solutions are written in Python and/or Rust.
 |Date|URLs|Puzzle & Input|Stars|Python|Rust|Time part 1|Time part 2|
 |---|---|---|---|---|---|---|---|
 |2022/12/1|[Problem](https://adventofcode.com/2022/day/1) [Input](https://adventofcode.com/2022/day/1/input)|[puzzle.txt](resources/year2022_day1_puzzle.txt) [input.txt](resources/year2022_day1_input.txt)|**|[day1.py](python/2022/day1.py)|[-](rust/src/2022/day1.rs)|02:08:00|02:10:42|
+|2022/12/2|[Problem](https://adventofcode.com/2022/day/2) [Input](https://adventofcode.com/2022/day/2/input)|[puzzle.txt](resources/year2022_day2_puzzle.txt) [input.txt](resources/year2022_day2_input.txt)||[-](python/2022/day2.py)|[-](rust/src/2022/day2.rs)|-|-|
 |[2022](https://adventofcode.com/2022)|[Stats](https://adventofcode.com/2022/leaderboard/self)|[stats.txt](misc/leaderboard_self_2022.txt)|2|-|-|-|-|
 
 ## [2021](https://adventofcode.com/2021)
