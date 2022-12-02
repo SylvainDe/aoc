@@ -44,9 +44,9 @@ cd "$(dirname "$0")"
 # Check workspace status
 if [ "${git_add}" = "1" ] && [ -n "$(git status --porcelain)" ];
 then
+	git status
 	git_add="0"
 	echo "Git workspace is not clean - git commands will be skipped"
-	git status
 fi
 
 # Open pages
@@ -77,22 +77,24 @@ get_url_and_save() {
 	dest="${2}"
 	overwrite="${3}"
 	cleanup="${4}"
-	echo "About to save ${url} in ${dest}"
+	# echo "About to save ${url} in ${dest}"
 	mkdir -p $(dirname "${dest}")
 	if [ "${overwrite}" == "0" -a -f "${dest}" ]; then
 		echo "File ${dest} already exists - ignored."
 	elif [ -z "${AOC_SESSION_COOKIE}" ]; then
 		# Create empty file
 		touch "${dest}"
+		echo "Empty file ${dest} created"
 	else
-		echo "Cookie session AOC_SESSION_COOKIE used to get file at url ${url}"
+		# echo "Cookie session AOC_SESSION_COOKIE used to get file at url ${url}"
 		# Get file
-		curl "${url}" -H "cookie: session=${AOC_SESSION_COOKIE}" -o "${dest}"
+		curl -s "${url}" -H "cookie: session=${AOC_SESSION_COOKIE}" -o "${dest}"
 		if [ "${cleanup}" == "1" ]; then
 			# Lines that keep changing (and are not so relevant)
 			sed -i '/div id="sponsor"/d' "${dest}"  # Random sponsor
 			sed -i '/class="title-global"/d' "${dest}"  # Random header, stars count
 		fi
+		echo "Url ${url} saved in ${dest}"
 	fi
 }
 
@@ -128,7 +130,7 @@ create_code_from_template() {
 open_file_in_editor() {
 	filename="${1}"
 	if [ -z "${editor}" ]; then
-		echo "No editor set - ignored."
+		echo "No editor set to open ${filename} - ignored."
 	else
 		"${editor}" "${filename}"
 	fi
@@ -151,13 +153,13 @@ if [ "${create_rust}" = "1" ]; then
 
 	# Add content in Cargo.toml file
 	cargo_content="[[bin]]\nname = \"${rust_bin}\"\npath = \"${rust_src_file_rel}\"\n\n"
-	echo -e "Add the following content to ${cargo_file}:\n${cargo_content}"
-	grep "${rust_bin}" "${cargo_file}" || sed -i "s#.*See more keys#${cargo_content}&#g" "${cargo_file}"
+	# echo -e "Add the following content to ${cargo_file}:\n${cargo_content}"
+	grep -q "${rust_bin}" "${cargo_file}" || sed -i "s#.*See more keys#${cargo_content}&#g" "${cargo_file}"
 
 	create_code_from_template "${rust_template}" "${rust_src_file}" "${overwrite_rust}"
 
 	# Instruction to run cargo
-	echo """(cd rust && cargo run --bin "${rust_bin}")"""
+	# echo """(cd rust && cargo run --bin "${rust_bin}")"""
 
 	open_file_in_editor "${rust_src_file}"
 fi
