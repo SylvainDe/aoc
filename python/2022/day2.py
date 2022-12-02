@@ -8,7 +8,8 @@ def get_guide_from_str(string):
 
 def get_guide_from_file(file_path="../../resources/year2022_day2_input.txt"):
     with open(file_path) as f:
-        return [tuple(l.strip().split(" ")) for l in f]
+        return get_guide_from_str(f.read())
+
 
 SHAPE_SCORE = {
     'A': 1, # Rock
@@ -34,16 +35,14 @@ def part1(guide):
     return sum(score1(*g) for g in guide)
 
 
-
 def score2(p, outcome):
     outcome_values = {
         'X': 1,  # Loss
         'Y': 0,  # Draw
         'Z': 2,  # Win
     }
-    s1 = SHAPE_SCORE[p]
     outcome_val = outcome_values[outcome]
-    s2 = (s1 - outcome_val -1 ) % 3 + 1
+    s2 = (SHAPE_SCORE[p] - outcome_val -1 ) % 3 + 1
     return s2 + OUTCOME_SCORE[outcome_val]
 
 def part2(guide):

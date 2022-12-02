@@ -24,7 +24,7 @@ def get_elves_from_file(file_path="../../resources/year2022_day1_input.txt"):
 def max_elf(elves, nb=1):
     calories = sorted(sum(elf) for elf in elves)
     top = calories[-nb:]
-    return sum(top) 
+    return sum(top)
 
 
 def run_tests():
