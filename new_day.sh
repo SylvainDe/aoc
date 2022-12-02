@@ -62,9 +62,9 @@ fi
 source ~/aoc_cookie_session.sh 2> /dev/null
 
 # Paths
-puzzle_file="resources/year${year}_day${day}_puzzle.txt"
+puzzle_file="resources/year${year}_day${day}_puzzle.html"
 input_file="resources/year${year}_day${day}_input.txt"
-stats_file="misc/leaderboard_self_${year}.txt"
+stats_file="misc/leaderboard_self_${year}.html"
 python_script_file="python/${year}/day${day}.py"
 rust_src_file_rel="src/${year}/day${day}.rs"
 rust_src_file="rust/${rust_src_file_rel}"

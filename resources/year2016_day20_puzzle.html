@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+<meta charset="utf-8"/>
+<title>Day 20 - Advent of Code 2016</title>
+<!--[if lt IE 9]><script src="/static/html5.js"></script><![endif]-->
+<link href='//fonts.googleapis.com/css?family=Source+Code+Pro:300&subset=latin,latin-ext' rel='stylesheet' type='text/css'/>
+<link rel="stylesheet" type="text/css" href="/static/style.css?30"/>
+<link rel="stylesheet alternate" type="text/css" href="/static/highcontrast.css?0" title="High Contrast"/>
+<link rel="shortcut icon" href="/favicon.png"/>
+<script>window.addEventListener('click', function(e,s,r){if(e.target.nodeName==='CODE'&&e.detail===3){s=window.getSelection();s.removeAllRanges();r=document.createRange();r.selectNodeContents(e.target);s.addRange(r);}});</script>
+</head><!--
+
+
+
+
+Oh, hello!  Funny seeing you here.
+
+I appreciate your enthusiasm, but you aren't going to find much down here.
+There certainly aren't clues to any of the puzzles.  The best surprises don't
+even appear in the source until you unlock them for real.
+
+Please be careful with automated requests; I'm not a massive company, and I can
+only take so much traffic.  Please be considerate so that everyone gets to play.
+
+If you're curious about how Advent of Code works, it's running on some custom
+Perl code. Other than a few integrations (auth, analytics, social media), I
+built the whole thing myself, including the design, animations, prose, and all
+of the puzzles.
+
+The puzzles are most of the work; preparing a new calendar and a new set of
+puzzles each year takes all of my free time for 4-5 months. A lot of effort
+went into building this thing - I hope you're enjoying playing it as much as I
+enjoyed making it for you!
+
+If you'd like to hang out, I'm @ericwastl on Twitter.
+
+- Eric Wastl
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-->
+<body>
+
+<div id="sidebar">
+</div><!--/sidebar-->
+
+<main>
+<article class="day-desc"><h2>--- Day 20: Firewall Rules ---</h2><p>You'd like to set up a small hidden computer here so you can use it to <span title="I'll create a GUI interface using Visual Basic... see if I can track an IP address.">get back into the network</span> later. However, the corporate firewall only allows communication with certain external <a href="https://en.wikipedia.org/wiki/IPv4#Addressing">IP addresses</a>.</p>
+<p>You've retrieved the list of blocked IPs from the firewall, but the list seems to be messy and poorly maintained, and it's not clear which IPs are allowed. Also, rather than being written in <a href="https://en.wikipedia.org/wiki/Dot-decimal_notation">dot-decimal</a> notation, they are written as plain <a href="https://en.wikipedia.org/wiki/32-bit">32-bit integers</a>, which can have any value from <code>0</code> through <code>4294967295</code>, inclusive.</p>
+<p>For example, suppose only the values <code>0</code> through <code>9</code> were valid, and that you retrieved the following blacklist:</p>
+<pre><code>5-8
+0-2
+4-7
+</code></pre>
+<p>The blacklist specifies ranges of IPs (inclusive of both the start and end value) that are <em>not</em> allowed. Then, the only IPs that this firewall allows are <code>3</code> and <code>9</code>, since those are the only numbers not in any range.</p>
+<p>Given the list of blocked IPs you retrieved from the firewall (your puzzle input), <em>what is the lowest-valued IP</em> that is not blocked?</p>
+</article>
+<p>Your puzzle answer was <code>19449262</code>.</p><article class="day-desc"><h2 id="part2">--- Part Two ---</h2><p><em>How many IPs</em> are allowed by the blacklist?</p>
+</article>
+<p>Your puzzle answer was <code>119</code>.</p><p class="day-success">Both parts of this puzzle are complete! They provide two gold stars: **</p>
+<p>At this point, you should <a href="/2016">return to your Advent calendar</a> and try another puzzle.</p>
+<p>If you still want to see it, you can <a href="20/input" target="_blank">get your puzzle input</a>.</p>
+<p>You can also <span class="share">[Share<span class="share-content">on
+  <a href="https://twitter.com/intent/tweet?text=I%27ve+completed+%22Firewall+Rules%22+%2D+Day+20+%2D+Advent+of+Code+2016&amp;url=https%3A%2F%2Fadventofcode%2Ecom%2F2016%2Fday%2F20&amp;related=ericwastl&amp;hashtags=AdventOfCode" target="_blank">Twitter</a>
+  <a href="javascript:void(0);" onclick="var mastodon_instance=prompt('Mastodon Instance / Server Name?'); if(typeof mastodon_instance==='string' && mastodon_instance.length){this.href='https://'+mastodon_instance+'/share?text=I%27ve+completed+%22Firewall+Rules%22+%2D+Day+20+%2D+Advent+of+Code+2016+%23AdventOfCode+https%3A%2F%2Fadventofcode%2Ecom%2F2016%2Fday%2F20'}else{return false;}" target="_blank">Mastodon</a
+></span>]</span> this puzzle.</p>
+</main>
+
+<!-- ga -->
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-69522494-1', 'auto');
+ga('set', 'anonymizeIp', true);
+ga('send', 'pageview');
+</script>
+<!-- /ga -->
+</body>
+</html>

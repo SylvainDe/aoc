@@ -13,11 +13,11 @@ event_url = "[{year}](https://adventofcode.com/{year})"
 stats_url = "[Stats](https://adventofcode.com/{year}/leaderboard/self)"
 
 # Local files
-puzzle_file = "resources/year{year}_day{day}_puzzle.txt"
+puzzle_file = "resources/year{year}_day{day}_puzzle.html"
 input_file = "resources/year{year}_day{day}_input.txt"
 python_file = "python/{year}/day{day}.py"
 rust_file = "rust/src/{year}/day{day}.rs"
-stats_file = "misc/leaderboard_self_{year}.txt"
+stats_file = "misc/leaderboard_self_{year}.html"
 
 # Ranges
 year_range = range(2015, 2022+1)
