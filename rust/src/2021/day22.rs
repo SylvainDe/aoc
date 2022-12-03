@@ -69,9 +69,12 @@ fn perform_instructions_naive(instructions: &InputContent) -> usize {
         z2,
     } in instructions
     {
-        for x in max(*x1, -50)..=min(*x2, 50) {
-            for y in max(*y1, -50)..=min(*y2, 50) {
-                for z in max(*z1, -50)..=min(*z2, 50) {
+        let (x_min, x_max) = (max(*x1, -50), min(*x2, 50));
+        let (y_min, y_max) = (max(*y1, -50), min(*y2, 50));
+        let (z_min, z_max) = (max(*z1, -50), min(*z2, 50));
+        for x in x_min..=x_max {
+            for y in y_min..=y_max {
+                for z in z_min..=z_max {
                     let c = (x, y, z);
                     if *on {
                         cubes.insert(c);
@@ -89,10 +92,46 @@ fn perform_instructions_naive(instructions: &InputContent) -> usize {
 fn _perform_instructions_optimised(_instructions: &InputContent) -> usize {
     // A possible and logical optimisation is not to keep track of individual
     // cubes but instead track of cuboids as large as possible.
-    // The main issue is computing intersections/unions of cuboids. The
-    // idea is to split cuboids into disjoints smaller cuboids such the
-    // unions/intersections are trivial.
+    // The main issue is computing sum/differences of cuboids.
+    // Note:
+    //  - The idea is to split cuboids into disjoints smaller cuboids such
+    // the operations are trivial.
+    //  - the initial logic is about both sum and differences but
+    // the analysis can be limited to differences: to compute A + B, one can
+    // compute: (A - B) (the sub-cuboids of A disjoint from B) and then add B
+    // (this may not be fully optimal as it may lead to more splits than needed
+    // but this is probably good enough)
+    //  - it is probably logic easier to work with [close, open) ranges rather
+    // than [close, close] (see https://fhur.me/posts/always-use-closed-open-intervals)
+    //
+    // Lets's see how things work in 2D: _split_1d.
     0
+}
+
+const fn value_in_range(val: Int, x: Int, y: Int) -> bool {
+    x <= val && val < y
+}
+
+fn _split_1d(x1: Int, x2: Int, y1: Int, y2: Int) -> Vec<(Int, Int, bool, bool)> {
+    // Return list of disjoint sets with a boolean to know whether the chunk
+    // belong to x or y
+    // dbg!(x1, x2, y1, y2);
+    assert!(x1 <= x2);
+    assert!(y1 <= y2);
+    let mut ret = Vec::<(Int, Int, bool, bool)>::new();
+    let mut points = vec![x1, x2, y1, y2];
+    points.sort_unstable();
+    for win in points.windows(2) {
+        let (a, b) = (win[0], win[1]);
+        if a < b {
+            let in_x = value_in_range(a, x1, x2);
+            let in_y = value_in_range(a, y1, y2);
+            if in_x || in_y {
+                ret.push((a, b, in_x, in_y));
+            }
+        }
+    }
+    ret
 }
 
 fn part1(instructions: &InputContent) -> usize {
@@ -224,6 +263,58 @@ off x=-93533..-4276,y=-16170..68771,z=-104985..-24507";
                 z2: 16,
             })
         );
+    }
+
+    #[test]
+    fn test_split_1d() {
+        // Disjoint
+        assert_eq!(
+            _split_1d(1, 3, 4, 6),
+            vec![(1, 3, true, false,), (4, 6, false, true,),]
+        );
+        assert_eq!(
+            _split_1d(1, 4, 4, 6),
+            vec![(1, 4, true, false,), (4, 6, false, true,),]
+        );
+        assert_eq!(
+            _split_1d(4, 6, 1, 3),
+            vec![(1, 3, false, true,), (4, 6, true, false,),]
+        );
+        // Full overlap
+        assert_eq!(
+            _split_1d(1, 6, 2, 5),
+            vec![
+                (1, 2, true, false,),
+                (2, 5, true, true,),
+                (5, 6, true, false,),
+            ]
+        );
+        assert_eq!(
+            _split_1d(2, 5, 1, 6),
+            vec![
+                (1, 2, false, true,),
+                (2, 5, true, true,),
+                (5, 6, false, true,),
+            ]
+        );
+        // Partial overlap
+        assert_eq!(
+            _split_1d(1, 6, 3, 8),
+            vec![
+                (1, 3, true, false,),
+                (3, 6, true, true,),
+                (6, 8, false, true,),
+            ]
+        );
+        assert_eq!(
+            _split_1d(3, 8, 1, 6),
+            vec![
+                (1, 3, false, true,),
+                (3, 6, true, true,),
+                (6, 8, true, false,),
+            ]
+        );
+        // Edge cases ?
     }
 
     #[test]
