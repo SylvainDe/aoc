@@ -34,8 +34,8 @@ def format_file(filepath):
     if not os.path.isfile(filepath):
         return ""
     name_shown = os.path.basename(filepath)
-    if filepath.endswith("puzzle.txt"):
-        name_shown = "puzzle.txt"
+    if filepath.endswith("puzzle.html"):
+        name_shown = "puzzle.html"
     elif filepath.endswith("input.txt"):
         name_shown = "input.txt"
     elif filepath.startswith("misc/leaderboard_self_"):
