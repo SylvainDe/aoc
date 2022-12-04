@@ -9,8 +9,11 @@ use std::collections::HashSet;
 use std::time::Instant;
 
 const INPUT_FILEPATH: &str = "../resources/year2021_day22_input.txt";
+const SKIP_SLOW: bool = true;
 
-type Int = i32;
+type Int = i64;
+type Range = (Int, Int);
+type Cuboid = (Range, Range, Range);
 
 #[derive(Debug, PartialEq)]
 struct Instruction {
@@ -88,10 +91,9 @@ fn perform_instructions_naive(instructions: &InputContent) -> usize {
     cubes.len()
 }
 
-#[allow(clippy::missing_const_for_fn)]
-fn _perform_instructions_optimised(_instructions: &InputContent) -> usize {
-    // A possible and logical optimisation is not to keep track of individual
-    // cubes but instead track of cuboids as large as possible.
+fn perform_instructions_optimised(instructions: &InputContent) -> Int {
+    // An optimisation is not to keep track of individual cubes but instead
+    // track of cuboids as large as possible.
     // The main issue is computing sum/differences of cuboids.
     // Note:
     //  - The idea is to split cuboids into disjoints smaller cuboids such
@@ -104,30 +106,86 @@ fn _perform_instructions_optimised(_instructions: &InputContent) -> usize {
     //  - it is probably logic easier to work with [close, open) ranges rather
     // than [close, close] (see https://fhur.me/posts/always-use-closed-open-intervals)
     //
-    // Lets's see how things work in 2D: _split_1d.
-    0
+    // TODO: This is not quite fast enough due due to the amount of smaller
+    // cuboids we handle. Maybe we could try to re-joint parts of splitted cuboids.
+    let mut original_cuboids = Vec::<Cuboid>::new();
+    for Instruction {
+        on,
+        x1,
+        x2,
+        y1,
+        y2,
+        z1,
+        z2,
+    } in instructions
+    {
+        dbg!(x1, original_cuboids.len());
+        let c2 = ((*x1, *x2 + 1), (*y1, *y2 + 1), (*z1, *z2 + 1)); // Convert to [close, open)
+        let mut diff = Vec::new();
+        for c1 in &original_cuboids {
+            for (c, in1, in2) in split_3d(*c1, c2) {
+                if !in2 {
+                    assert!(in1);
+                    diff.push(c);
+                }
+            }
+        }
+        if *on {
+            diff.push(c2);
+        }
+        original_cuboids = diff;
+    }
+    original_cuboids.iter().map(|c| cuboid_vol(*c)).sum()
 }
 
-const fn value_in_range(val: Int, x: Int, y: Int) -> bool {
+const fn value_in_range(val: Int, (x, y): Range) -> bool {
     x <= val && val < y
 }
 
-fn _split_1d(x1: Int, x2: Int, y1: Int, y2: Int) -> Vec<(Int, Int, bool, bool)> {
-    // Return list of disjoint sets with a boolean to know whether the chunk
-    // belong to x or y
-    // dbg!(x1, x2, y1, y2);
-    assert!(x1 <= x2);
-    assert!(y1 <= y2);
-    let mut ret = Vec::<(Int, Int, bool, bool)>::new();
-    let mut points = vec![x1, x2, y1, y2];
+const fn range_len((x, y): Range) -> Int {
+    y - x
+}
+
+const fn cuboid_vol((r1, r2, r3): Cuboid) -> Int {
+    range_len(r1) * range_len(r2) * range_len(r3)
+}
+
+fn split_1d((beg1, end1): Range, (beg2, end2): Range) -> Vec<(Range, bool, bool)> {
+    // Return list of disjoint sets with booleans to know whether the chunk
+    // belong to range 1 and/or range 2
+    // dbg!(beg1, end1, beg2, end2);
+    assert!(beg1 <= end1);
+    assert!(beg2 <= end2);
+    let mut ret = Vec::new();
+    let mut points = vec![beg1, end1, beg2, end2];
     points.sort_unstable();
     for win in points.windows(2) {
-        let (a, b) = (win[0], win[1]);
-        if a < b {
-            let in_x = value_in_range(a, x1, x2);
-            let in_y = value_in_range(a, y1, y2);
-            if in_x || in_y {
-                ret.push((a, b, in_x, in_y));
+        let (beg, end) = (win[0], win[1]);
+        if beg < end {
+            let in1 = value_in_range(beg, (beg1, end1));
+            let in2 = value_in_range(beg, (beg2, end2));
+            if in1 || in2 {
+                ret.push(((beg, end), in1, in2));
+            }
+        }
+    }
+    ret
+}
+
+#[allow(clippy::similar_names)]
+fn split_3d((rx1, ry1, rz1): Cuboid, (rx2, ry2, rz2): Cuboid) -> Vec<(Cuboid, bool, bool)> {
+    let x_split = split_1d(rx1, rx2);
+    let y_split = split_1d(ry1, ry2);
+    let z_split = split_1d(rz1, rz2);
+    let mut ret = Vec::new();
+    for (rx, x_in_1, x_in_2) in &x_split {
+        for (ry, y_in_1, y_in_2) in &y_split {
+            for (rz, z_in_1, z_in_2) in &z_split {
+                let in1 = *x_in_1 && *y_in_1 && *z_in_1;
+                let in2 = *x_in_2 && *y_in_2 && *z_in_2;
+                if in1 || in2 {
+                    ret.push(((*rx, *ry, *rz), in1, in2));
+                }
             }
         }
     }
@@ -138,9 +196,8 @@ fn part1(instructions: &InputContent) -> usize {
     perform_instructions_naive(instructions)
 }
 
-#[allow(clippy::missing_const_for_fn)]
-fn part2(_arg: &InputContent) -> Int {
-    0
+fn part2(instructions: &InputContent) -> Int {
+    perform_instructions_optimised(instructions)
 }
 
 fn main() {
@@ -149,9 +206,11 @@ fn main() {
     let res = part1(&data);
     println!("{:?}", res);
     assert_eq!(res, 503_864);
-    let res2 = part2(&data);
-    println!("{:?}", res2);
-    assert_eq!(res2, 0);
+    if !SKIP_SLOW {
+        let res2 = part2(&data);
+        println!("{:?}", res2);
+        assert_eq!(res2, 1255547543528356);
+    }
     println!("Elapsed time: {:.2?}", before.elapsed());
 }
 
@@ -268,52 +327,83 @@ off x=-93533..-4276,y=-16170..68771,z=-104985..-24507";
     #[test]
     fn test_split_1d() {
         // Disjoint
+        let r1 = (1, 3);
+        let r2 = (4, 6);
         assert_eq!(
-            _split_1d(1, 3, 4, 6),
-            vec![(1, 3, true, false,), (4, 6, false, true,),]
+            split_1d(r1, r2),
+            vec![(r1, true, false,), (r2, false, true,),]
         );
         assert_eq!(
-            _split_1d(1, 4, 4, 6),
-            vec![(1, 4, true, false,), (4, 6, false, true,),]
+            split_1d(r2, r1),
+            vec![(r1, false, true,), (r2, true, false,),]
         );
+        let r1 = (4, 6);
+        let r2 = (1, 3);
         assert_eq!(
-            _split_1d(4, 6, 1, 3),
-            vec![(1, 3, false, true,), (4, 6, true, false,),]
+            split_1d(r1, r2),
+            vec![(r2, false, true,), (r1, true, false,),]
         );
+        // Equal
+        let r1 = (4, 6);
+        assert_eq!(split_1d(r1, r1), vec![(r1, true, true,)]);
         // Full overlap
+        let r1 = (1, 6);
+        let r2 = (2, 5);
         assert_eq!(
-            _split_1d(1, 6, 2, 5),
+            split_1d(r1, r2),
             vec![
-                (1, 2, true, false,),
-                (2, 5, true, true,),
-                (5, 6, true, false,),
+                ((1, 2), true, false,),
+                (r2, true, true,),
+                ((5, 6), true, false,),
             ]
         );
         assert_eq!(
-            _split_1d(2, 5, 1, 6),
+            split_1d(r2, r1),
             vec![
-                (1, 2, false, true,),
-                (2, 5, true, true,),
-                (5, 6, false, true,),
+                ((1, 2), false, true,),
+                (r2, true, true,),
+                ((5, 6), false, true,),
             ]
         );
         // Partial overlap
+        let r1 = (1, 6);
+        let r2 = (3, 8);
         assert_eq!(
-            _split_1d(1, 6, 3, 8),
+            split_1d(r1, r2),
             vec![
-                (1, 3, true, false,),
-                (3, 6, true, true,),
-                (6, 8, false, true,),
+                ((1, 3), true, false,),
+                ((3, 6), true, true,),
+                ((6, 8), false, true,),
             ]
         );
         assert_eq!(
-            _split_1d(3, 8, 1, 6),
+            split_1d(r2, r1),
             vec![
-                (1, 3, false, true,),
-                (3, 6, true, true,),
-                (6, 8, true, false,),
+                ((1, 3), false, true,),
+                ((3, 6), true, true,),
+                ((6, 8), true, false,),
             ]
         );
+        // Edge cases ?
+    }
+
+    #[test]
+    fn test_split_3d() {
+        // Disjoint
+        let c1 = ((1, 3), (2, 4), (3, 5));
+        let c2 = ((4, 8), (5, 9), (6, 10));
+        assert_eq!(split_3d(c1, c2), vec![(c1, true, false), (c2, false, true)]);
+        // Equal
+        let c1 = ((1, 3), (2, 4), (3, 5));
+        assert_eq!(split_3d(c1, c1), vec![(c1, true, true)]);
+        // Full overlap
+        let c1 = ((1, 13), (2, 14), (3, 15));
+        let c2 = ((4, 8), (5, 9), (6, 10));
+        let ret = split_3d(c1, c2);
+        assert_eq!(ret.len(), 27);
+        assert!(ret.contains(&(c2, true, true)));
+        // Partial overlap
+        // TODO
         // Edge cases ?
     }
 
@@ -325,6 +415,8 @@ off x=-93533..-4276,y=-16170..68771,z=-104985..-24507";
     }
     #[test]
     fn test_part2() {
-        assert_eq!(part2(&get_input_from_str(EXAMPLE3)), 0);
+        if !SKIP_SLOW {
+            assert_eq!(part2(&get_input_from_str(EXAMPLE3)), 2758514936282235);
+        }
     }
 }
