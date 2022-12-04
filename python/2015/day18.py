@@ -2,13 +2,21 @@
 import datetime
 
 
+def get_xxx_from_line(string):
+    return string
+
+def get_xxx_from_lines(string):
+    return [get_xxx_from_line(l) for l in string.splitlines()]
+
 def get_xxx_from_file(file_path="../../resources/year2015_day18_input.txt"):
     with open(file_path) as f:
-        return [l.strip() for l in f]
+        return get_xxx_from_lines(f.read())
 
 
 def run_tests():
-    xxx = ""
+    xxx = get_xxx_from_lines("""abc
+def
+ghi""")
 
 
 def get_solutions():

@@ -10,7 +10,8 @@ for y in $(seq 2015 2021); do
 done
 
 # Current year
-for d in $(seq 1 2); do
+y="2022"
+for d in $(seq 1 4); do
 	echo "$d $y"
 	# ./new_day.sh "${d}" "${y}"
 done
