@@ -56,9 +56,24 @@ fn part1(identifiers: &InputContent) -> Int {
         .sum()
 }
 
-#[allow(clippy::missing_const_for_fn)]
-fn part2(_arg: &InputContent) -> Int {
-    0
+fn part2(identifiers: &InputContent) -> Int {
+    identifiers
+        .iter()
+        .map(
+            |Identiers {
+                 id1_beg,
+                 id1_end,
+                 id2_beg,
+                 id2_end,
+             }| {
+                if (id1_beg > id2_end) || (id2_beg > id1_end) {
+                    0
+                } else {
+                    1
+                }
+            },
+        )
+        .sum()
 }
 
 fn main() {
@@ -69,7 +84,7 @@ fn main() {
     assert_eq!(res, 518);
     let res2 = part2(&data);
     println!("{:?}", res2);
-    assert_eq!(res2, 0);
+    assert_eq!(res2, 909);
     println!("Elapsed time: {:.2?}", before.elapsed());
 }
 
@@ -105,6 +120,6 @@ mod tests {
 
     #[test]
     fn test_part2() {
-        assert_eq!(part2(&get_input_from_str(EXAMPLE)), 0);
+        assert_eq!(part2(&get_input_from_str(EXAMPLE)), 4);
     }
 }
