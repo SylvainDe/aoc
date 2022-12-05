@@ -34,6 +34,18 @@ def part1(input_):
             stack_dst.append(stack_src.pop(-1))
     return "".join(stacks[k][-1] for k in sorted(stacks.keys()))
 
+
+def part2(input_):
+    original_stacks, instructions = input_
+    stacks = {k: list(v) for k, v in original_stacks.items()}
+    for nb, src, dst in instructions:
+        stack_src, stack_dst = stacks[src], stacks[dst]
+        popped = [stack_src.pop(-1) for _ in range(nb)]
+        for add in reversed(popped):
+            stack_dst.append(add)
+    return "".join(stacks[k][-1] for k in sorted(stacks.keys()))
+
+
 def run_tests():
     input_ = get_input_from_lines("""    [D]    
 [N] [C]    
@@ -45,10 +57,12 @@ move 3 from 1 to 3
 move 2 from 2 to 1
 move 1 from 1 to 2""")
     assert part1(input_) == "CMZ"
+    assert part2(input_) == "MCD"
 
 def get_solutions():
     input_ = get_input_from_file()
     print(part1(input_) == "VQZNJMWTR")
+    print(part2(input_) == "NLCDCLVMQ")
 
 
 if __name__ == "__main__":
