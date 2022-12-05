@@ -9,11 +9,11 @@ use std::collections::HashSet;
 use std::time::Instant;
 
 const INPUT_FILEPATH: &str = "../resources/year2021_day22_input.txt";
-const SKIP_SLOW: bool = true;
 
 type Int = i64;
 type Range = (Int, Int);
 type Cuboid = (Range, Range, Range);
+type SignedCuboid = (bool, Cuboid);
 
 #[derive(Debug, PartialEq)]
 struct Instruction {
@@ -105,10 +105,8 @@ fn perform_instructions_optimised(instructions: &InputContent) -> Int {
     // but this is probably good enough)
     //  - it is probably logic easier to work with [close, open) ranges rather
     // than [close, close] (see https://fhur.me/posts/always-use-closed-open-intervals)
-    //
-    // TODO: This is not quite fast enough due due to the amount of smaller
-    // cuboids we handle. Maybe we could try to re-joint parts of splitted cuboids.
-    let mut original_cuboids = Vec::<Cuboid>::new();
+    // This is not fast enough - see perform_instructions_optimised2
+    let mut original_cuboids = Vec::new();
     for Instruction {
         on,
         x1,
@@ -136,6 +134,41 @@ fn perform_instructions_optimised(instructions: &InputContent) -> Int {
         original_cuboids = diff;
     }
     original_cuboids.iter().map(|c| cuboid_vol(*c)).sum()
+}
+
+fn perform_instructions_optimised2(instructions: &InputContent) -> Int {
+    // Optimisation over perform_instructions_optimised:
+    // Instead of splitting cuboids in smaller cuboids (each split leading to
+    // up to 27 cuboids), we could keep track of "negative" cuboids.
+    let mut signed_cuboids: Vec<SignedCuboid> = Vec::new();
+    for Instruction {
+        on,
+        x1,
+        x2,
+        y1,
+        y2,
+        z1,
+        z2,
+    } in instructions
+    {
+        let c2 = ((*x1, *x2 + 1), (*y1, *y2 + 1), (*z1, *z2 + 1)); // Convert to [close, open)
+        let mut to_add = Vec::new();
+        for (s1, c1) in &signed_cuboids {
+            if let Some(inter) = intersection_3d(*c1, c2) {
+                to_add.push((!s1, inter));
+            }
+        }
+        if *on {
+            to_add.push((true, c2));
+        }
+        for c in to_add {
+            signed_cuboids.push(c);
+        }
+    }
+    signed_cuboids
+        .iter()
+        .map(|(s, c)| cuboid_vol(*c) * if *s { 1 } else { -1 })
+        .sum()
 }
 
 const fn value_in_range(val: Int, (x, y): Range) -> bool {
@@ -172,6 +205,23 @@ fn split_1d((beg1, end1): Range, (beg2, end2): Range) -> Vec<(Range, bool, bool)
     ret
 }
 
+fn intersection_1d((beg1, end1): Range, (beg2, end2): Range) -> Option<Range> {
+    // Return list of disjoint sets with booleans to know whether the chunk
+    // belong to range 1 and/or range 2
+    // dbg!(beg1, end1, beg2, end2);
+    assert!(beg1 <= end1);
+    assert!(beg2 <= end2);
+    let mut points = vec![beg1, end1, beg2, end2];
+    points.sort_unstable();
+    for win in points.windows(2) {
+        let (beg, end) = (win[0], win[1]);
+        if beg < end && value_in_range(beg, (beg1, end1)) && value_in_range(beg, (beg2, end2)) {
+            return Some((beg, end));
+        }
+    }
+    None
+}
+
 #[allow(clippy::similar_names)]
 fn split_3d((rx1, ry1, rz1): Cuboid, (rx2, ry2, rz2): Cuboid) -> Vec<(Cuboid, bool, bool)> {
     let x_split = split_1d(rx1, rx2);
@@ -192,12 +242,24 @@ fn split_3d((rx1, ry1, rz1): Cuboid, (rx2, ry2, rz2): Cuboid) -> Vec<(Cuboid, bo
     ret
 }
 
+#[allow(clippy::similar_names)]
+fn intersection_3d((rx1, ry1, rz1): Cuboid, (rx2, ry2, rz2): Cuboid) -> Option<Cuboid> {
+    if let Some(rx) = intersection_1d(rx1, rx2) {
+        if let Some(ry) = intersection_1d(ry1, ry2) {
+            if let Some(rz) = intersection_1d(rz1, rz2) {
+                return Some((rx, ry, rz));
+            }
+        }
+    }
+    None
+}
+
 fn part1(instructions: &InputContent) -> usize {
     perform_instructions_naive(instructions)
 }
 
 fn part2(instructions: &InputContent) -> Int {
-    perform_instructions_optimised(instructions)
+    perform_instructions_optimised2(instructions)
 }
 
 fn main() {
@@ -206,11 +268,9 @@ fn main() {
     let res = part1(&data);
     println!("{:?}", res);
     assert_eq!(res, 503_864);
-    if !SKIP_SLOW {
-        let res2 = part2(&data);
-        println!("{:?}", res2);
-        assert_eq!(res2, 1255547543528356);
-    }
+    let res2 = part2(&data);
+    println!("{:?}", res2);
+    assert_eq!(res2, 1_255_547_543_528_356);
     println!("Elapsed time: {:.2?}", before.elapsed());
 }
 
@@ -218,6 +278,7 @@ fn main() {
 mod tests {
     use super::*;
 
+    const SKIP_SLOW: bool = true;
     const EXAMPLE: &str = "on x=10..12,y=10..12,z=10..12
 on x=11..13,y=11..13,z=11..13
 off x=9..11,y=9..11,z=9..11
@@ -408,6 +469,50 @@ off x=-93533..-4276,y=-16170..68771,z=-104985..-24507";
     }
 
     #[test]
+    fn test_intersection_1d() {
+        // Disjoint
+        let r1 = (1, 3);
+        let r2 = (4, 6);
+        assert_eq!(intersection_1d(r1, r2), None);
+        assert_eq!(intersection_1d(r2, r1), None);
+        let r1 = (4, 6);
+        let r2 = (1, 3);
+        assert_eq!(intersection_1d(r1, r2), None);
+        // Equal
+        let r1 = (4, 6);
+        assert_eq!(intersection_1d(r1, r1), Some(r1));
+        // Full overlap
+        let r1 = (1, 6);
+        let r2 = (2, 5);
+        assert_eq!(intersection_1d(r1, r2), Some(r2));
+        assert_eq!(intersection_1d(r2, r1), Some(r2));
+        // Partial overlap
+        let r1 = (1, 6);
+        let r2 = (3, 8);
+        assert_eq!(intersection_1d(r1, r2), Some((3, 6)));
+        assert_eq!(intersection_1d(r2, r1), Some((3, 6)));
+        // Edge cases ?
+    }
+
+    #[test]
+    fn test_intersection_3d() {
+        // Disjoint
+        let c1 = ((1, 3), (2, 4), (3, 5));
+        let c2 = ((4, 8), (5, 9), (6, 10));
+        assert_eq!(intersection_3d(c1, c2), None);
+        // Equal
+        let c1 = ((1, 3), (2, 4), (3, 5));
+        assert_eq!(intersection_3d(c1, c1), Some(c1));
+        // Full overlap
+        let c1 = ((1, 13), (2, 14), (3, 15));
+        let c2 = ((4, 8), (5, 9), (6, 10));
+        assert_eq!(intersection_3d(c1, c2), Some(c2));
+        // Partial overlap
+        // TODO
+        // Edge cases ?
+    }
+
+    #[test]
     fn test_part1() {
         assert_eq!(part1(&get_input_from_str(EXAMPLE)), 39);
         assert_eq!(part1(&get_input_from_str(EXAMPLE2)), 590784);
@@ -415,8 +520,11 @@ off x=-93533..-4276,y=-16170..68771,z=-104985..-24507";
     }
     #[test]
     fn test_part2() {
+        let input = get_input_from_str(EXAMPLE3);
+        assert_eq!(perform_instructions_optimised2(&input), 2758514936282235);
         if !SKIP_SLOW {
-            assert_eq!(part2(&get_input_from_str(EXAMPLE3)), 2758514936282235);
+            assert_eq!(perform_instructions_optimised(&input), 2758514936282235);
+            assert_eq!(part2(&input), 2758514936282235);
         }
     }
 }
