@@ -1,31 +1,32 @@
 use common::input::get_first_line_from_file;
+use std::collections::HashSet;
 use std::time::Instant;
 
 const INPUT_FILEPATH: &str = "../resources/year2022_day6_input.txt";
 
 type Int = u32;
-type InputContent = String;
 
-fn get_input_from_str(string: &str) -> InputContent {
-    string.to_string()
+fn part1(s: &str) -> usize {
+    for (i, w) in s.chars().collect::<Vec<char>>().windows(4).enumerate() {
+        let s = w.iter().copied().collect::<HashSet<char>>();
+        if s.len() == 4 {
+            return i + 4;
+        }
+    }
+    panic!("Unexpected");
 }
 
 #[allow(clippy::missing_const_for_fn)]
-fn part1(_arg: &InputContent) -> Int {
-    0
-}
-
-#[allow(clippy::missing_const_for_fn)]
-fn part2(_arg: &InputContent) -> Int {
+fn part2(_arg: &str) -> Int {
     0
 }
 
 fn main() {
     let before = Instant::now();
-    let data = get_input_from_str(&get_first_line_from_file(INPUT_FILEPATH));
+    let data = get_first_line_from_file(INPUT_FILEPATH);
     let res = part1(&data);
     println!("{:?}", res);
-    assert_eq!(res, 0);
+    assert_eq!(res, 1850);
     let res2 = part2(&data);
     println!("{:?}", res2);
     assert_eq!(res2, 0);
@@ -36,15 +37,17 @@ fn main() {
 mod tests {
     use super::*;
 
-    const EXAMPLE: &str = "";
-
     #[test]
     fn test_part1() {
-        assert_eq!(part1(&get_input_from_str(EXAMPLE)), 0);
+        assert_eq!(part1("mjqjpqmgbljsphdztnvjfqwrcgsmlb"), 7);
+        assert_eq!(part1("bvwbjplbgvbhsrlpgdmjqwftvncz"), 5);
+        assert_eq!(part1("nppdvjthqldpwncqszvftbrmjlhg"), 6);
+        assert_eq!(part1("nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg"), 10);
+        assert_eq!(part1("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw"), 11);
     }
 
     #[test]
     fn test_part2() {
-        assert_eq!(part2(&get_input_from_str(EXAMPLE)), 0);
+        assert_eq!(part2(""), 0);
     }
 }
