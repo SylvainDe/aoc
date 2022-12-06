@@ -2,25 +2,33 @@
 import datetime
 
 
-def get_xxx_from_line(string):
-    return string
-
-def get_xxx_from_lines(string):
-    return [get_xxx_from_line(l) for l in string.splitlines()]
-
-def get_xxx_from_file(file_path="../../resources/year2022_day6_input.txt"):
+def get_signal_from_file(file_path="../../resources/year2022_day6_input.txt"):
     with open(file_path) as f:
-        return get_xxx_from_lines(f.read())
+        for l in f:
+            return l
 
+def get_marker(signal, winsize):
+    for i in range(len(signal)):
+        if len(set(signal[i:i+winsize])) == winsize:
+            return i + winsize
 
 def run_tests():
-    xxx = get_xxx_from_lines("""abc
-def
-ghi""")
+    assert get_marker("mjqjpqmgbljsphdztnvjfqwrcgsmlb", winsize=4) == 7
+    assert get_marker("bvwbjplbgvbhsrlpgdmjqwftvncz", winsize=4) == 5
+    assert get_marker("nppdvjthqldpwncqszvftbrmjlhg", winsize=4) == 6
+    assert get_marker("nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg", winsize=4) == 10
+    assert get_marker("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw", winsize=4) == 11
+    assert get_marker("mjqjpqmgbljsphdztnvjfqwrcgsmlb", winsize=14) == 19
+    assert get_marker("bvwbjplbgvbhsrlpgdmjqwftvncz", winsize=14) == 23
+    assert get_marker("nppdvjthqldpwncqszvftbrmjlhg", winsize=14) == 23
+    assert get_marker("nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg", winsize=14) == 29
+    assert get_marker("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw", winsize=14) == 26
 
 
 def get_solutions():
-    xxx = get_xxx_from_file()
+    signal = get_signal_from_file()
+    print(get_marker(signal, winsize=4) == 1850)
+    print(get_marker(signal, winsize=14) == 2823)
 
 
 if __name__ == "__main__":
