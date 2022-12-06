@@ -9,6 +9,7 @@ use std::collections::HashSet;
 use std::time::Instant;
 
 const INPUT_FILEPATH: &str = "../resources/year2021_day22_input.txt";
+const SKIP_SLOW: bool = true;
 
 type Int = i64;
 type Range = (Int, Int);
@@ -91,6 +92,7 @@ fn perform_instructions_naive(instructions: &InputContent) -> usize {
     cubes.len()
 }
 
+#[allow(dead_code)]
 fn perform_instructions_optimised(instructions: &InputContent) -> Int {
     // An optimisation is not to keep track of individual cubes but instead
     // track of cuboids as large as possible.
@@ -117,7 +119,6 @@ fn perform_instructions_optimised(instructions: &InputContent) -> Int {
         z2,
     } in instructions
     {
-        dbg!(x1, original_cuboids.len());
         let c2 = ((*x1, *x2 + 1), (*y1, *y2 + 1), (*z1, *z2 + 1)); // Convert to [close, open)
         let mut diff = Vec::new();
         for c1 in &original_cuboids {
@@ -183,10 +184,10 @@ const fn cuboid_vol((r1, r2, r3): Cuboid) -> Int {
     range_len(r1) * range_len(r2) * range_len(r3)
 }
 
+#[allow(dead_code)]
 fn split_1d((beg1, end1): Range, (beg2, end2): Range) -> Vec<(Range, bool, bool)> {
     // Return list of disjoint sets with booleans to know whether the chunk
     // belong to range 1 and/or range 2
-    // dbg!(beg1, end1, beg2, end2);
     assert!(beg1 <= end1);
     assert!(beg2 <= end2);
     let mut ret = Vec::new();
@@ -208,7 +209,6 @@ fn split_1d((beg1, end1): Range, (beg2, end2): Range) -> Vec<(Range, bool, bool)
 fn intersection_1d((beg1, end1): Range, (beg2, end2): Range) -> Option<Range> {
     // Return list of disjoint sets with booleans to know whether the chunk
     // belong to range 1 and/or range 2
-    // dbg!(beg1, end1, beg2, end2);
     assert!(beg1 <= end1);
     assert!(beg2 <= end2);
     let mut points = vec![beg1, end1, beg2, end2];
@@ -222,6 +222,7 @@ fn intersection_1d((beg1, end1): Range, (beg2, end2): Range) -> Option<Range> {
     None
 }
 
+#[allow(dead_code)]
 #[allow(clippy::similar_names)]
 fn split_3d((rx1, ry1, rz1): Cuboid, (rx2, ry2, rz2): Cuboid) -> Vec<(Cuboid, bool, bool)> {
     let x_split = split_1d(rx1, rx2);
@@ -268,9 +269,11 @@ fn main() {
     let res = part1(&data);
     println!("{:?}", res);
     assert_eq!(res, 503_864);
-    let res2 = part2(&data);
-    println!("{:?}", res2);
-    assert_eq!(res2, 1_255_547_543_528_356);
+    if !SKIP_SLOW {
+        let res2 = part2(&data);
+        println!("{:?}", res2);
+        assert_eq!(res2, 1_255_547_543_528_356);
+    }
     println!("Elapsed time: {:.2?}", before.elapsed());
 }
 
@@ -278,7 +281,6 @@ fn main() {
 mod tests {
     use super::*;
 
-    const SKIP_SLOW: bool = true;
     const EXAMPLE: &str = "on x=10..12,y=10..12,z=10..12
 on x=11..13,y=11..13,z=11..13
 off x=9..11,y=9..11,z=9..11
