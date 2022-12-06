@@ -17,6 +17,7 @@ Solutions are written in Python and/or Rust.
 |2022/12/3|[Problem](https://adventofcode.com/2022/day/3) [Input](https://adventofcode.com/2022/day/3/input)|[puzzle.html](resources/year2022_day3_puzzle.html) [input.txt](resources/year2022_day3_input.txt)|**|[day3.py](python/2022/day3.py)|[day3.rs](rust/src/2022/day3.rs)|02:11:57|02:29:29|
 |2022/12/4|[Problem](https://adventofcode.com/2022/day/4) [Input](https://adventofcode.com/2022/day/4/input)|[puzzle.html](resources/year2022_day4_puzzle.html) [input.txt](resources/year2022_day4_input.txt)|**|[day4.py](python/2022/day4.py)|[day4.rs](rust/src/2022/day4.rs)|03:31:25|03:37:36|
 |2022/12/5|[Problem](https://adventofcode.com/2022/day/5) [Input](https://adventofcode.com/2022/day/5/input)|[puzzle.html](resources/year2022_day5_puzzle.html) [input.txt](resources/year2022_day5_input.txt)|**|[day5.py](python/2022/day5.py)|[-](rust/src/2022/day5.rs)|02:54:10|02:57:32|
+|2022/12/6|[Problem](https://adventofcode.com/2022/day/6) [Input](https://adventofcode.com/2022/day/6/input)|[puzzle.html](resources/year2022_day6_puzzle.html) [input.txt](resources/year2022_day6_input.txt)||[-](python/2022/day6.py)|[-](rust/src/2022/day6.rs)|-|-|
 |[2022](https://adventofcode.com/2022)|[Stats](https://adventofcode.com/2022/leaderboard/self)|[stats.txt](misc/leaderboard_self_2022.html)|10|-|-|-|-|
 
 ## [2021](https://adventofcode.com/2021)
