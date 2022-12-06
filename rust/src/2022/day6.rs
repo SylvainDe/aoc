@@ -4,21 +4,27 @@ use std::time::Instant;
 
 const INPUT_FILEPATH: &str = "../resources/year2022_day6_input.txt";
 
-type Int = u32;
-
-fn part1(s: &str) -> usize {
-    for (i, w) in s.chars().collect::<Vec<char>>().windows(4).enumerate() {
+fn get_different_char(s: &str, winsize: usize) -> usize {
+    for (i, w) in s
+        .chars()
+        .collect::<Vec<char>>()
+        .windows(winsize)
+        .enumerate()
+    {
         let s = w.iter().copied().collect::<HashSet<char>>();
-        if s.len() == 4 {
-            return i + 4;
+        if s.len() == winsize {
+            return i + winsize;
         }
     }
     panic!("Unexpected");
 }
 
-#[allow(clippy::missing_const_for_fn)]
-fn part2(_arg: &str) -> Int {
-    0
+fn part1(s: &str) -> usize {
+    get_different_char(s, 4)
+}
+
+fn part2(s: &str) -> usize {
+    get_different_char(s, 14)
 }
 
 fn main() {
@@ -29,7 +35,7 @@ fn main() {
     assert_eq!(res, 1850);
     let res2 = part2(&data);
     println!("{:?}", res2);
-    assert_eq!(res2, 0);
+    assert_eq!(res2, 2823);
     println!("Elapsed time: {:.2?}", before.elapsed());
 }
 
@@ -48,6 +54,10 @@ mod tests {
 
     #[test]
     fn test_part2() {
-        assert_eq!(part2(""), 0);
+        assert_eq!(part2("mjqjpqmgbljsphdztnvjfqwrcgsmlb"), 19);
+        assert_eq!(part2("bvwbjplbgvbhsrlpgdmjqwftvncz"), 23);
+        assert_eq!(part2("nppdvjthqldpwncqszvftbrmjlhg"), 23);
+        assert_eq!(part2("nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg"), 29);
+        assert_eq!(part2("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw"), 26);
     }
 }
