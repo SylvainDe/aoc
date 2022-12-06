@@ -24,26 +24,21 @@ def get_input_from_file(file_path="../../resources/year2022_day5_input.txt"):
     with open(file_path) as f:
         return get_input_from_lines(f.read())
 
-
-def part1(input_):
-    original_stacks, instructions = input_
-    stacks = {k: list(v) for k, v in original_stacks.items()}
-    for nb, src, dst in instructions:
-        stack_src, stack_dst = stacks[src], stacks[dst]
-        for _ in range(nb):
-            stack_dst.append(stack_src.pop(-1))
-    return "".join(stacks[k][-1] for k in sorted(stacks.keys()))
-
-
-def part2(input_):
+def do_crane_operations(input_, is_fifo):
     original_stacks, instructions = input_
     stacks = {k: list(v) for k, v in original_stacks.items()}
     for nb, src, dst in instructions:
         stack_src, stack_dst = stacks[src], stacks[dst]
         popped = [stack_src.pop(-1) for _ in range(nb)]
-        for add in reversed(popped):
-            stack_dst.append(add)
+        stack_dst.extend(popped if is_fifo else reversed(popped))
     return "".join(stacks[k][-1] for k in sorted(stacks.keys()))
+
+def part1(input_):
+    return do_crane_operations(input_, is_fifo=True)
+
+
+def part2(input_):
+    return do_crane_operations(input_, is_fifo=False)
 
 
 def run_tests():
