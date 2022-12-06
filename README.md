@@ -46,7 +46,7 @@ Solutions are written in Python and/or Rust.
 |2021/12/21|[Problem](https://adventofcode.com/2021/day/21) [Input](https://adventofcode.com/2021/day/21/input)|[puzzle.html](resources/year2021_day21_puzzle.html) [input.txt](resources/year2021_day21_input.txt)|**|[day21.py](python/2021/day21.py)|[-](rust/src/2021/day21.rs)|02:44:55|05:42:55|
 |2021/12/22|[Problem](https://adventofcode.com/2021/day/22) [Input](https://adventofcode.com/2021/day/22/input)|[puzzle.html](resources/year2021_day22_puzzle.html) [input.txt](resources/year2021_day22_input.txt)|**|[day22.py](python/2021/day22.py)|[day22.rs](rust/src/2021/day22.rs)|02:50:38|+24h|
 |2021/12/23|[Problem](https://adventofcode.com/2021/day/23) [Input](https://adventofcode.com/2021/day/23/input)|[puzzle.html](resources/year2021_day23_puzzle.html) [input.txt](resources/year2021_day23_input.txt)|*|[day23.py](python/2021/day23.py)|[-](rust/src/2021/day23.rs)|+24h|-|
-|2021/12/24|[Problem](https://adventofcode.com/2021/day/24) [Input](https://adventofcode.com/2021/day/24/input)|[puzzle.html](resources/year2021_day24_puzzle.html) [input.txt](resources/year2021_day24_input.txt)||[day24.py](python/2021/day24.py)|[-](rust/src/2021/day24.rs)|-|-|
+|2021/12/24|[Problem](https://adventofcode.com/2021/day/24) [Input](https://adventofcode.com/2021/day/24/input)|[puzzle.html](resources/year2021_day24_puzzle.html) [input.txt](resources/year2021_day24_input.txt)||[day24.py](python/2021/day24.py)|[day24.rs](rust/src/2021/day24.rs)|-|-|
 |2021/12/25|[Problem](https://adventofcode.com/2021/day/25) [Input](https://adventofcode.com/2021/day/25/input)|[puzzle.html](resources/year2021_day25_puzzle.html) [input.txt](resources/year2021_day25_input.txt)|*|[day25.py](python/2021/day25.py)|[-](rust/src/2021/day25.rs)|+24h|-|
 |[2021](https://adventofcode.com/2021)|[Stats](https://adventofcode.com/2021/leaderboard/self)|[stats.txt](misc/leaderboard_self_2021.html)|46|-|-|-|-|
 
@@ -152,7 +152,7 @@ Solutions are written in Python and/or Rust.
 |2017/12/7|[Problem](https://adventofcode.com/2017/day/7) [Input](https://adventofcode.com/2017/day/7/input)|[puzzle.html](resources/year2017_day7_puzzle.html) [input.txt](resources/year2017_day7_input.txt)|**|[day7.py](python/2017/day7.py)|[-](rust/src/2017/day7.rs)|+24h|+24h|
 |2017/12/8|[Problem](https://adventofcode.com/2017/day/8) [Input](https://adventofcode.com/2017/day/8/input)|[puzzle.html](resources/year2017_day8_puzzle.html) [input.txt](resources/year2017_day8_input.txt)|**|[day8.py](python/2017/day8.py)|[-](rust/src/2017/day8.rs)|+24h|+24h|
 |2017/12/9|[Problem](https://adventofcode.com/2017/day/9) [Input](https://adventofcode.com/2017/day/9/input)|[puzzle.html](resources/year2017_day9_puzzle.html) [input.txt](resources/year2017_day9_input.txt)|**|[-](python/2017/day9.py)|[day9.rs](rust/src/2017/day9.rs)|+24h|+24h|
-|2017/12/10|[Problem](https://adventofcode.com/2017/day/10) [Input](https://adventofcode.com/2017/day/10/input)|[puzzle.html](resources/year2017_day10_puzzle.html) [input.txt](resources/year2017_day10_input.txt)||[-](python/2017/day10.py)|[-](rust/src/2017/day10.rs)|-|-|
+|2017/12/10|[Problem](https://adventofcode.com/2017/day/10) [Input](https://adventofcode.com/2017/day/10/input)|[puzzle.html](resources/year2017_day10_puzzle.html) [input.txt](resources/year2017_day10_input.txt)|*|[day10.py](python/2017/day10.py)|[-](rust/src/2017/day10.rs)|+24h|-|
 |2017/12/11|[Problem](https://adventofcode.com/2017/day/11) [Input](https://adventofcode.com/2017/day/11/input)|[puzzle.html](resources/year2017_day11_puzzle.html) [input.txt](resources/year2017_day11_input.txt)|**|[day11.py](python/2017/day11.py)|[-](rust/src/2017/day11.rs)|+24h|+24h|
 |2017/12/12|[Problem](https://adventofcode.com/2017/day/12) [Input](https://adventofcode.com/2017/day/12/input)|[puzzle.html](resources/year2017_day12_puzzle.html) [input.txt](resources/year2017_day12_input.txt)||[-](python/2017/day12.py)|[-](rust/src/2017/day12.rs)|-|-|
 |2017/12/13|[Problem](https://adventofcode.com/2017/day/13) [Input](https://adventofcode.com/2017/day/13/input)|[puzzle.html](resources/year2017_day13_puzzle.html) [input.txt](resources/year2017_day13_input.txt)|**|[-](python/2017/day13.py)|[day13.rs](rust/src/2017/day13.rs)|+24h|+24h|
@@ -168,7 +168,7 @@ Solutions are written in Python and/or Rust.
 |2017/12/23|[Problem](https://adventofcode.com/2017/day/23) [Input](https://adventofcode.com/2017/day/23/input)|[puzzle.html](resources/year2017_day23_puzzle.html) [input.txt](resources/year2017_day23_input.txt)||[-](python/2017/day23.py)|[-](rust/src/2017/day23.rs)|-|-|
 |2017/12/24|[Problem](https://adventofcode.com/2017/day/24) [Input](https://adventofcode.com/2017/day/24/input)|[puzzle.html](resources/year2017_day24_puzzle.html) [input.txt](resources/year2017_day24_input.txt)||[-](python/2017/day24.py)|[-](rust/src/2017/day24.rs)|-|-|
 |2017/12/25|[Problem](https://adventofcode.com/2017/day/25) [Input](https://adventofcode.com/2017/day/25/input)|[puzzle.html](resources/year2017_day25_puzzle.html) [input.txt](resources/year2017_day25_input.txt)||[-](python/2017/day25.py)|[-](rust/src/2017/day25.rs)|-|-|
-|[2017](https://adventofcode.com/2017)|[Stats](https://adventofcode.com/2017/leaderboard/self)|[stats.txt](misc/leaderboard_self_2017.html)|22|-|-|-|-|
+|[2017](https://adventofcode.com/2017)|[Stats](https://adventofcode.com/2017/leaderboard/self)|[stats.txt](misc/leaderboard_self_2017.html)|23|-|-|-|-|
 
 ## [2016](https://adventofcode.com/2016)
 |Date|URLs|Puzzle & Input|Stars|Python|Rust|Time part 1|Time part 2|
@@ -242,7 +242,7 @@ Solutions are written in Python and/or Rust.
 |7|**|**|**|**||**|**||12: ************|
 |8|**|**|**|**|**|**|**||14: **************|
 |9|**|**|**||**|**|**||12: ************|
-|10|**|**||**|**|**|**||12: ************|
+|10|**|**|*|**|**|**|**||13: *************|
 |11|||**|**||**|**|| 8: ********|
 |12||**|||**|**|**|| 8: ********|
 |13||**|**|||**|**|| 8: ********|
@@ -258,4 +258,4 @@ Solutions are written in Python and/or Rust.
 |23||**||||**|*|| 5: *****|
 |24||**|||**|**||| 6: ******|
 |25||||||**|*|| 3: ***|
-|Total|25|42|22|16|28|50|46|12|241|
+|Total|25|42|23|16|28|50|46|12|242|
