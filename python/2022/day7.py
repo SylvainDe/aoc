@@ -8,30 +8,28 @@ def get_lines_from_file(file_path="../../resources/year2022_day7_input.txt"):
 
 def get_list_of_files(lines):
     files = dict()
-    pwd = []
+    cwd = []
     for l in lines:
         chunks = l.split(" ")
         if chunks[0] == "$":
-            # Command 
+            # Command
             cmd = chunks[1]
             if cmd == "cd":
                 arg = chunks[2]
                 if arg == "/":
-                    pwd.clear()
+                    cwd.clear()
                 elif arg == "..":
-                    pwd.pop()
+                    cwd.pop()
                 else:
-                    pwd.append(arg)
-            elif cmd == "ls":
-                pass
+                    cwd.append(arg)
             else:
-                assert False
+                assert cmd == "ls"
         elif chunks[0] == "dir":
             pass
         else:
             size, name = chunks
             size = int(size)
-            files[tuple(pwd + [name])] = size
+            files[tuple(cwd + [name])] = size
     return files
 
 def find_directories(files):
@@ -40,28 +38,28 @@ def find_directories(files):
         for i in range(len(path)-1):
             dir_path = path[:i+1]
             directories[dir_path] += size
-    return directories 
+    return directories
 
 def find_biggest_small_directories(lines):
     files = get_list_of_files(lines)
-    directories = find_directories(files)
-    small_dirs = collections.Counter({
+    small_dirs = {
         name:size
-        for name, size in directories.items()
-        if size < 100000})
+        for name, size in find_directories(files).items()
+        if size < 100000
+    }
     return sum(small_dirs.values())
 
 def find_dir_to_remove(lines, total_space=70000000, need=30000000):
     files = get_list_of_files(lines)
     space_used = sum(files.values())
     free_space = total_space - space_used
-    space_to_free = need - free_space 
+    space_to_free = need - free_space
     assert space_to_free >= 0
-    directories = find_directories(files)
     big_dirs = collections.Counter({
         name:size
-        for name, size in directories.items()
-        if size >= space_to_free})
+        for name, size in find_directories(files).items()
+        if size >= space_to_free
+    })
     return big_dirs.most_common()[-1][-1]
 
 def run_tests():
