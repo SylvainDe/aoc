@@ -83,9 +83,9 @@ def run_tests():
 def get_solutions():
     grid = get_grid_from_file()
     points = dict(points_iter(grid))
-    print(shortest_path(points))
+    print(shortest_path(points) == 824)
     points2 = multiply_points(points, 5)
-    print(shortest_path(points2))
+    print(shortest_path(points2) == 3063)
 
 
 if __name__ == "__main__":

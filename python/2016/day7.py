@@ -48,8 +48,8 @@ def run_tests():
 
 def get_solutions():
     ips = get_ip_from_file()
-    print(sum(support_tls(ip) for ip in ips))
-    print(sum(support_ssl(ip) for ip in ips))
+    print(sum(support_tls(ip) for ip in ips) == 105)
+    print(sum(support_ssl(ip) for ip in ips) == 258)
 
 
 if __name__ == "__main__":

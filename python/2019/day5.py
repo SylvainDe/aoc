@@ -9,8 +9,8 @@ def run_tests():
 
 def get_solutions():
     intcode = int_code.get_intcode_from_file("../../resources/year2019_day5_input.txt")
-    print(int_code.run_diagnostic(intcode, input_=1))
-    print(int_code.run_diagnostic(intcode, input_=5))
+    print(int_code.run_diagnostic(intcode, input_=1) == 9938601)
+    print(int_code.run_diagnostic(intcode, input_=5) == 4283952)
 
 
 if __name__ == "__main__":

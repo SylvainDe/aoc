@@ -46,8 +46,8 @@ def run_tests():
 
 def get_solutions():
     spreadsheet = get_spreadsheet_from_file()
-    print(get_checksum(spreadsheet))
-    print(get_div_sum(spreadsheet))
+    print(get_checksum(spreadsheet) == 34581)
+    print(get_div_sum(spreadsheet) == 214)
 
 
 if __name__ == "__main__":

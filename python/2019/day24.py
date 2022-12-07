@@ -180,10 +180,10 @@ def run_tests():
 def get_solutions():
     # Part 1
     bugs = get_bugs_from_file()
-    print(first_repeated_layout(bugs))
+    print(first_repeated_layout(bugs) == 32506911)
     # Part 2
     bugs = get_bugs_from_file(make_point_func=make_point3d)
-    print(len(get_bugs_after_n_generations(bugs, 200, neighbours3d)))
+    print(len(get_bugs_after_n_generations(bugs, 200, neighbours3d)) == 2025)
 
 
 if __name__ == "__main__":

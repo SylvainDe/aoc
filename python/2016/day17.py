@@ -78,8 +78,8 @@ def run_tests():
 
 def get_solutions():
     passcode = get_passcode_from_file()
-    print(shortest_path(passcode))
-    print(longest_path(passcode))
+    print(shortest_path(passcode) == "RDDRLDRURD")
+    print(longest_path(passcode) == 448)
 
 
 if __name__ == "__main__":

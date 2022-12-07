@@ -66,8 +66,8 @@ def run_tests():
 
 def get_solutions():
     sequence = get_sequence_from_file()
-    print(dist(destination(sequence)))
-    print(dist(double_visit(sequence)))
+    print(dist(destination(sequence)) == 226)
+    print(dist(double_visit(sequence)) == 79)
 
 
 if __name__ == "__main__":

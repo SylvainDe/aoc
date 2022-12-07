@@ -157,8 +157,8 @@ def get_solutions():
     nb_common = 12
     info = get_info_from_file()
     converted_points, converted_scanners = convert_points(info, nb_common)
-    print(len(converted_points))
-    print(get_max_distance(converted_scanners))
+    print(len(converted_points) == 454)
+    print(get_max_distance(converted_scanners) == 10813)
 
 
 if __name__ == "__main__":

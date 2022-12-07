@@ -95,8 +95,8 @@ def run_tests():
 
 def get_solutions():
     number = get_number_from_file()
-    print(shortest_path((1, 1), (31, 39), number))
-    print(len(reachable((1, 1), number, 50)))
+    print(shortest_path((1, 1), (31, 39), number) == 92)
+    print(len(reachable((1, 1), number, 50)) == 124)
 
 
 if __name__ == "__main__":

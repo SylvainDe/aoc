@@ -38,8 +38,8 @@ def run_tests():
 
 def get_solutions():
     boxes = get_boxes_from_file()
-    print(get_checksum(boxes))
-    print(find_common_chars(boxes))
+    print(get_checksum(boxes) == 7657)
+    print(find_common_chars(boxes) == "ivjhcadokeltwgsfsmqwrbnuy")
 
 
 if __name__ == "__main__":

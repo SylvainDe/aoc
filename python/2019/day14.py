@@ -140,8 +140,8 @@ def run_tests():
 
 def get_solutions():
     reactions = get_reactions_from_file()
-    print(ore_to_make_product(reactions))
-    print(max_fuel_prod(reactions))
+    print(ore_to_make_product(reactions) == 261960)
+    print(max_fuel_prod(reactions) == 4366186)
 
 
 if __name__ == "__main__":

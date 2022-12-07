@@ -102,8 +102,8 @@ def run_tests():
 def get_solutions():
     map_ = get_map_from_file()
     graph = build_graph(map_)
-    print(get_nb_paths(graph))
-    print(get_nb_paths(graph, 1))
+    print(get_nb_paths(graph) == 3000)
+    print(get_nb_paths(graph, 1) == 74222)
 
 
 if __name__ == "__main__":

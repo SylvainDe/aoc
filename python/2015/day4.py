@@ -26,8 +26,8 @@ def run_tests():
 
 def get_solutions():
     key = get_key_from_file()
-    print(get_coin(key))
-    print(get_coin(key, 6))
+    print(get_coin(key) == 282749)
+    print(get_coin(key, 6) == 9962624)
 
 
 if __name__ == "__main__":

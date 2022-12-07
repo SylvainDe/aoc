@@ -56,8 +56,8 @@ def run_tests():
 
 def get_solutions():
     wires = get_wires_from_file()
-    print(get_crossing_min_distance(wires))
-    print(get_crossing_min_delay(wires))
+    print(get_crossing_min_distance(wires) == 1084)
+    print(get_crossing_min_delay(wires) == 9240)
 
 
 if __name__ == "__main__":

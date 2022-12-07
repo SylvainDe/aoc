@@ -74,11 +74,11 @@ def run_tests():
 
 def get_solutions():
     diag = get_diag_from_file()
-    print(get_power_consumption(diag))
-    print(get_life_support_rating(diag))
+    print(get_power_consumption(diag) == 1307354)
+    print(get_life_support_rating(diag) == 482500)
     diag = get_diag_from_file("day3_input2.txt")
-    print(get_power_consumption(diag))
-    print(get_life_support_rating(diag))
+    print(get_power_consumption(diag) == 3912944)
+    print(get_life_support_rating(diag) == 4996233)
 
 
 if __name__ == "__main__":

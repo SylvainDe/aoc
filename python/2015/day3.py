@@ -46,8 +46,8 @@ def run_tests():
 
 def get_solutions():
     instructions = get_instructions_from_file()
-    print(get_nb_houses(instructions))
-    print(get_nb_houses_with_robo(instructions))
+    print(get_nb_houses(instructions) == 2081)
+    print(get_nb_houses_with_robo(instructions) == 2341)
 
 
 if __name__ == "__main__":

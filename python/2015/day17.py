@@ -38,8 +38,8 @@ def run_tests():
 
 def get_solutions():
     containers = get_containers_from_file()
-    print(get_nb_ways(150, containers))
-    print(get_nb_ways2(150, containers))
+    print(get_nb_ways(150, containers) == 1304)
+    print(get_nb_ways2(150, containers) == 18)
 
 
 if __name__ == "__main__":

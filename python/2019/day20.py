@@ -293,8 +293,8 @@ def run_tests():
 
 def get_solutions():
     grid = get_grid_from_file()
-    print(solve_maze(grid))
-    print(solve_maze2(grid))
+    print(solve_maze(grid) == 432)
+    print(solve_maze2(grid) == 5214)
 
 
 if __name__ == "__main__":

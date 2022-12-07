@@ -92,8 +92,8 @@ def run_tests():
 
 def get_solutions():
     grid = get_grid_from_file()
-    print(part1(grid))
-    print(part2(grid))
+    print(part1(grid) == 566)
+    print(part2(grid) == 891684)
 
 
 if __name__ == "__main__":

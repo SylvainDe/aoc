@@ -22,8 +22,8 @@ def run_tests():
 
 def get_solutions():
     depths = get_depths_from_file()
-    print(get_nb_increments(depths))
-    print(get_nb_increments(depths, 3))
+    print(get_nb_increments(depths) == 1832)
+    print(get_nb_increments(depths, 3) == 1858)
 
 
 if __name__ == "__main__":

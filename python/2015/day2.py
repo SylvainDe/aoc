@@ -35,8 +35,8 @@ def run_tests():
 
 def get_solutions():
     dimensions = get_dimensions_from_file()
-    print(sum(get_surface(dim) for dim in dimensions))
-    print(sum(get_length(dim) for dim in dimensions))
+    print(sum(get_surface(dim) for dim in dimensions) == 1586300)
+    print(sum(get_length(dim) for dim in dimensions) == 3737498)
 
 
 if __name__ == "__main__":

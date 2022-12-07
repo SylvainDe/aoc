@@ -84,8 +84,8 @@ def run_tests():
 
 def get_solutions():
     lines = get_lines_from_file()
-    print(get_corruption_final_score(lines))
-    print(get_completion_final_score(lines))
+    print(get_corruption_final_score(lines) == 339411)
+    print(get_completion_final_score(lines) == 2289754624)
 
 
 if __name__ == "__main__":

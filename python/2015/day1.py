@@ -35,8 +35,8 @@ def run_tests():
 
 def get_solutions():
     instructions = get_instructions_from_file()
-    print(get_final_floor(instructions))
-    print(get_position_to_basement(instructions))
+    print(get_final_floor(instructions) == 232)
+    print(get_position_to_basement(instructions) == 1783)
 
 
 if __name__ == "__main__":

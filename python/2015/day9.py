@@ -54,8 +54,8 @@ def get_solutions():
     info = get_info_from_file()
     graph = build_graph(info)
     routes = get_routes(graph)
-    print(min(d for path, d in routes))
-    print(max(d for path, d in routes))
+    print(min(d for path, d in routes) == 207)
+    print(max(d for path, d in routes) == 804)
 
 
 if __name__ == "__main__":

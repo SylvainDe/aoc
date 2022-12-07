@@ -79,8 +79,8 @@ def run_tests():
 
 def get_solutions():
     instructions = get_instructions_from_file()
-    print(follow_instructions(keypad, instructions, start))
-    print(follow_instructions(keypad2, instructions, start2))
+    print(follow_instructions(keypad, instructions, start) == "53255")
+    print(follow_instructions(keypad2, instructions, start2) == "7423A")
 
 
 if __name__ == "__main__":

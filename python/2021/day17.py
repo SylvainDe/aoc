@@ -483,8 +483,8 @@ def run_tests():
 def get_solutions():
     target_area = get_target_area_from_file()
     velocities_found = find_velocities(target_area)
-    print(select_highest(velocities_found))
-    print(len(velocities_found))
+    print(select_highest(velocities_found) == 9730)
+    print(len(velocities_found) == 4110)
 
 
 if __name__ == "__main__":

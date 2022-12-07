@@ -60,7 +60,7 @@ def run_tests():
 def get_solutions():
     instructions = get_instructions_from_file()
     ret = apply_instructions(instructions, width=50, height=6)
-    print(len(ret))
+    print(len(ret) == 116)
     show_pixels(ret, width=50, height=6)
 
 

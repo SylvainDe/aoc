@@ -66,8 +66,8 @@ def run_tests():
 
 def get_solutions():
     reindeers = get_reindeers_from_file()
-    print(max(get_distance(r, 2503) for r in reindeers))
-    print(max(get_scores(reindeers, 2503)))
+    print(max(get_distance(r, 2503) for r in reindeers) == 2696)
+    print(max(get_scores(reindeers, 2503)) == 1084)
 
 
 if __name__ == "__main__":

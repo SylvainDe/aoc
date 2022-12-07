@@ -96,8 +96,8 @@ CN -> C""".splitlines()
 
 def get_solutions():
     template, rules = get_info_from_file()
-    print(get_quantity(template, rules, 10))
-    print(get_fast_quantity(template, rules, 40))
+    print(get_quantity(template, rules, 10) == 2375)
+    print(get_fast_quantity(template, rules, 40) == 1976896901756)
 
 
 if __name__ == "__main__":

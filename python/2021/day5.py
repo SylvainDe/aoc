@@ -58,8 +58,8 @@ def run_tests():
 
 def get_solutions():
     vents = get_vents_from_file()
-    print(get_lines_overlaps(vents))
-    print(get_lines_overlaps(vents, True))
+    print(get_lines_overlaps(vents) == 6225)
+    print(get_lines_overlaps(vents, True) == 22116)
 
 
 if __name__ == "__main__":

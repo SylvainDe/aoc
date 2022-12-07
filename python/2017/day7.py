@@ -81,8 +81,8 @@ def run_tests():
 
 def get_solutions():
     prog = get_prog_from_file()
-    print(get_bottom(prog))
-    print(get_wrong_disc(prog))
+    print(get_bottom(prog) == "mwzaxaj")
+    print(get_wrong_disc(prog) == 1219)
 
 
 if __name__ == "__main__":

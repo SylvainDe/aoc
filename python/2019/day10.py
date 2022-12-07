@@ -128,8 +128,8 @@ def run_tests():
 def get_solutions():
     grid = get_grid_from_file()
     count, p = get_best_asteroid_count(grid)
-    print(count)
-    print(vaporise(grid, p, 200))
+    print(count == 256)
+    print(vaporise(grid, p, 200) == 1707)
 
 
 if __name__ == "__main__":

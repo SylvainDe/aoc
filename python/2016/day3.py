@@ -23,7 +23,7 @@ def run_tests():
 
 def get_solutions():
     triangles = get_triangles_from_file()
-    print(sum(triangle_is_possible(t) for t in triangles))
+    print(sum(triangle_is_possible(t) for t in triangles) == 993)
 
     s = 0
     triangles_iter = iter(triangles)
@@ -35,7 +35,7 @@ def get_solutions():
                 s += triangle_is_possible(t)
         except StopIteration:
             break
-    print(s)
+    print(s == 1849)
 
 
 if __name__ == "__main__":

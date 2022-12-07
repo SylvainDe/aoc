@@ -104,8 +104,8 @@ def run_tests():
 
 def get_solutions():
     pos = get_pos_from_file()
-    print(simulation(pos, 1000))
-    print(simulation2(pos))
+    print(simulation(pos, 1000) == 9958)
+    print(simulation2(pos) == 318382803780324)
 
 
 if __name__ == "__main__":

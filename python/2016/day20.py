@@ -49,8 +49,8 @@ def run_tests():
 
 def get_solutions():
     ip_range = get_ip_range_from_file()
-    print(lowest_ip(ip_range))
-    print(nb_ip(ip_range, 4294967295))
+    print(lowest_ip(ip_range) == 19449262)
+    print(nb_ip(ip_range, 4294967295) == 119)
 
 
 if __name__ == "__main__":

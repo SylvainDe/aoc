@@ -111,8 +111,8 @@ def run_tests():
 
 def get_solutions():
     n = get_int_from_file()
-    print(distance_to_center(n))
-    print(part2(n))
+    print(distance_to_center(n) == 326)
+    print(part2(n) == 363010)
 
 
 if __name__ == "__main__":

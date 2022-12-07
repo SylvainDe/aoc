@@ -39,7 +39,7 @@ def get_solutions():
         for n1, n2 in itertools.product(nodes, nodes)
         if n1.used != 0 and n1 != n2 and n1.used <= n2.available
     ]
-    print(len(pairs))
+    print(len(pairs) == 952)
 
 
 if __name__ == "__main__":

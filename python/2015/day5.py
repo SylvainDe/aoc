@@ -57,8 +57,8 @@ def run_tests():
 
 def get_solutions():
     strings = get_strings_from_file()
-    print(sum(is_nice(s) for s in strings))
-    print(sum(is_nice2(s) for s in strings))
+    print(sum(is_nice(s) for s in strings) == 236)
+    print(sum(is_nice2(s) for s in strings) == 51)
 
 
 if __name__ == "__main__":

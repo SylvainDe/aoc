@@ -58,8 +58,8 @@ def run_tests():
 
 def get_solutions():
     crabs = get_crabs_from_file()
-    print(get_best_position_dist1(crabs))
-    print(get_best_position_dist2(crabs))
+    print(get_best_position_dist1(crabs) == 343468)
+    print(get_best_position_dist2(crabs) == 96086265)
 
 
 if __name__ == "__main__":

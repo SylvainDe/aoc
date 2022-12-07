@@ -37,8 +37,8 @@ def run_tests():
 
 def get_solutions():
     modules = get_modules_from_file()
-    print(get_full_fuel_requirement(modules))
-    print(get_full_fuel_requirement2(modules))
+    print(get_full_fuel_requirement(modules) == 3414791)
+    print(get_full_fuel_requirement2(modules) == 5119312)
 
 
 if __name__ == "__main__":

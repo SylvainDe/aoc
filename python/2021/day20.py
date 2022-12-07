@@ -116,9 +116,9 @@ def run_tests():
 def get_solutions():
     algo, points = get_info_from_file()
     points2 = enhance_n(points, algo, 2)
-    print(len(points2))
+    print(len(points2) == 5884)
     points50 = enhance_n(points, algo, 50)
-    print(len(points50))
+    print(len(points50) == 19043)
 
 
 if __name__ == "__main__":

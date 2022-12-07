@@ -491,7 +491,7 @@ def run_tests():
 def get_solutions():
     interval = (-50, 50)
     instructions = get_instructions_from_file()
-    print(follow_instructions(instructions, interval))
+    print(follow_instructions(instructions, interval) == 503864)
 
 
 if __name__ == "__main__":

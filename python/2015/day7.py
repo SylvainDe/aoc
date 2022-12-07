@@ -89,10 +89,10 @@ def run_tests():
 def get_solutions():
     wires = get_wires_from_file()
     val_a = eval_wire("a", wires)
-    print(val_a)
+    print(val_a == 16076)
     wires["b"] = str(val_a)
     val_a2 = eval_wire("a", wires)
-    print(val_a2)
+    print(val_a2 == 2797)  # Happens to be wrong ?!
 
 
 if __name__ == "__main__":

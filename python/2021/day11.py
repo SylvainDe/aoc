@@ -97,8 +97,8 @@ def run_tests():
 
 def get_solutions():
     grid = get_grid_from_file()
-    print(nb_flashes(grid, 100))
-    print(first_synchro(grid))
+    print(nb_flashes(grid, 100) == 1717)
+    print(first_synchro(grid) == 476)
 
 
 if __name__ == "__main__":

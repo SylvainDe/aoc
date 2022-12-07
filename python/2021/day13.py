@@ -163,7 +163,7 @@ def run_tests():
 
 def get_solutions():
     dots, folds = get_info_from_file()
-    print(len(apply_folds(dots, [folds[0]])))
+    print(len(apply_folds(dots, [folds[0]])) == 678)
     show_dots(apply_folds(dots, folds))
 
 

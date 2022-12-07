@@ -42,8 +42,8 @@ def run_tests():
 
 def get_solutions():
     door_id = get_door_id_from_file()
-    print(compute_password(door_id))
-    print(compute_password2(door_id))
+    print(compute_password(door_id) == "c6697b55")
+    print(compute_password2(door_id) == "8c35d1ab")
 
 
 if __name__ == "__main__":

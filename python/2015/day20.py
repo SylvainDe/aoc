@@ -150,7 +150,7 @@ def run_tests():
 
 def get_solutions():
     input_value = get_input_value_from_file()
-    print(get_lowest_house_with_presents(input_value))
+    print(get_lowest_house_with_presents(input_value) == 665280)
 
 
 if __name__ == "__main__":

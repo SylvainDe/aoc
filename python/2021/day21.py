@@ -90,8 +90,8 @@ def run_tests():
 
 def get_solutions():
     positions = get_positions_from_file()
-    print(game(positions))
-    print(game2(positions))
+    print(game(positions) == 1004670)
+    print(game2(positions) == 492043106122795)
 
 
 if __name__ == "__main__":

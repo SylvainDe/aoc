@@ -28,8 +28,8 @@ def run_tests():
 
 def get_solutions():
     passphrases = get_passphrases_from_file()
-    print(sum(passphrase_is_valid(s) for s in passphrases))
-    print(sum(passphrase_is_valid2(s) for s in passphrases))
+    print(sum(passphrase_is_valid(s) for s in passphrases) == 451)
+    print(sum(passphrase_is_valid2(s) for s in passphrases) == 223)
 
 
 if __name__ == "__main__":

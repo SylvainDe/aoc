@@ -55,8 +55,8 @@ def run_tests():
 
 def get_solutions():
     fishes = get_fishes_from_file()
-    print(len(n_generations(fishes, 80)))
-    print(n_generations_from_count(fishes, 256))
+    print(len(n_generations(fishes, 80)) == 390011)
+    print(n_generations_from_count(fishes, 256) == 1746710169834)
 
 
 if __name__ == "__main__":

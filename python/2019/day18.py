@@ -88,7 +88,6 @@ def get_all_keys(maze):
         seen[state] = dist
         assert -len(keys_found) == nb_keys
         if len(keys_found) == nb_keys_to_find:
-            print(dist, keys_found)
             return dist
         for k_pos, d, new_key in distances_to_keys(maze, pos, keys_found):
             assert new_key not in keys_found

@@ -362,7 +362,7 @@ def part2(orders):
 
 def get_solutions():
     orders = get_orders_from_file()
-    print(part1(orders))
+    print(part1(orders) == 7860)
     # print(part2(orders)) - not fast enough >_<
 
 

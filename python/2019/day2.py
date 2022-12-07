@@ -24,8 +24,8 @@ def part2(intcode):
 
 def get_solutions():
     intcode = int_code.get_intcode_from_file("../../resources/year2019_day2_input.txt")
-    print(part1(intcode))
-    print(part2(intcode))
+    print(part1(intcode) == 5534943)
+    print(part2(intcode) == 7603)
 
 
 if __name__ == "__main__":

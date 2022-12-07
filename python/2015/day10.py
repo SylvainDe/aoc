@@ -41,8 +41,8 @@ def run_tests():
 
 def get_solutions():
     seq = get_string_from_file()
-    print(len(repeated_look_and_say(seq, 40)))
-    print(len(repeated_look_and_say(seq, 50)))
+    print(len(repeated_look_and_say(seq, 40)) == 252594)
+    print(len(repeated_look_and_say(seq, 50)) == 3579328)
 
 
 if __name__ == "__main__":

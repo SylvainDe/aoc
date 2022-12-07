@@ -51,10 +51,10 @@ def run_tests():
 
 def get_solutions():
     discs = get_discs_from_file()
-    print(get_press_time(discs))
+    print(get_press_time(discs) == 203660)
     new_number = max(d.number for d in discs) + 1
     discs2 = discs + [Disc(new_number, 11, 0)]
-    print(get_press_time(discs2))
+    print(get_press_time(discs2) == 2408135)
 
 
 if __name__ == "__main__":

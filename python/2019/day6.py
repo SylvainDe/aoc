@@ -72,8 +72,8 @@ def run_tests():
 def get_solutions():
     orbits = get_orbits_from_file()
     graph = build_graph(orbits)
-    print(count_distance(graph))
-    print(distance_to_santa(graph))
+    print(count_distance(graph) == 268504)
+    print(distance_to_santa(graph) == 409)
 
 
 if __name__ == "__main__":

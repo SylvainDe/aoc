@@ -88,8 +88,8 @@ def run_tests():
 
 def get_solutions():
     instructions = get_instructions_from_file()
-    print(len(apply_instructions(instructions)))
-    print(sum(apply_instructions2(instructions).values()))
+    print(len(apply_instructions(instructions)) == 377891)
+    print(sum(apply_instructions2(instructions).values()) == 14110788)
 
 
 if __name__ == "__main__":

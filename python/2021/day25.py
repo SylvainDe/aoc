@@ -107,7 +107,7 @@ def run_tests():
 def get_solutions():
     sea = get_sea_from_file()
     info = get_info_from_sea_grid(sea)
-    print(next_steps(info))
+    print(next_steps(info) == 523)
 
 
 if __name__ == "__main__":

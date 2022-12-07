@@ -77,7 +77,7 @@ def get_solutions():
     comp, out = follow_instructions(instructions)
     for bot, low, high in comp:
         if (low, high) == (17, 61):
-            print(bot)
+            print(bot == 101)
             break
     else:
         assert False
@@ -85,7 +85,7 @@ def get_solutions():
     for chips in [out[0], out[1], out[2]]:
         (val,) = chips
         mult *= val
-    print(mult)
+    print(mult == 37789)
 
 
 if __name__ == "__main__":

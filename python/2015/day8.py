@@ -49,8 +49,8 @@ def run_tests():
 
 def get_solutions():
     strings = get_strings_from_file()
-    print(sum(get_str_len_diff_decode(s) for s in strings))
-    print(sum(get_str_len_diff_encode(s) for s in strings))
+    print(sum(get_str_len_diff_decode(s) for s in strings) == 1342)
+    print(sum(get_str_len_diff_encode(s) for s in strings) == 2074)
 
 
 if __name__ == "__main__":

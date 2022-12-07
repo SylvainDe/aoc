@@ -207,8 +207,8 @@ def run_tests():
 def get_solutions():
     pairs = get_pairs_from_file()
     pair = add_pairs(pairs)
-    print(magnitude(pair))
-    print(max(magnitude(add_pair(a, b)) for a, b in itertools.permutations(pairs, 2)))
+    print(magnitude(pair) == 4480)
+    print(max(magnitude(add_pair(a, b)) for a, b in itertools.permutations(pairs, 2)) == 4676)
 
 
 if __name__ == "__main__":

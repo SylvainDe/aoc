@@ -166,8 +166,8 @@ def run_tests():
 def get_solutions():
     s = get_str_from_file()
     p = parse_packet(get_bits_from_str(s))
-    print(sum_version_numbers(p))
-    print(eval_packet(p))
+    print(sum_version_numbers(p) == 875)
+    print(eval_packet(p) == 1264857437203)
 
 
 if __name__ == "__main__":

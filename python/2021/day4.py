@@ -49,8 +49,8 @@ def run_tests():
 def get_solutions():
     bingo = get_bingo_from_file()
     bingo_scores = list(play_bingo(bingo))
-    print(bingo_scores[0])
-    print(bingo_scores[-1])
+    print(bingo_scores[0] == 50008)
+    print(bingo_scores[-1] == 17408)
 
 
 if __name__ == "__main__":

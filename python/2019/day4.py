@@ -39,8 +39,8 @@ def run_tests():
 
 def get_solutions():
     input_range = 172930, 683082
-    print(len(list(get_passwords(input_range, is_valid))))
-    print(len(list(get_passwords(input_range, is_valid2))))
+    print(len(list(get_passwords(input_range, is_valid))) == 1675)
+    print(len(list(get_passwords(input_range, is_valid2))) == 1142)
 
 
 if __name__ == "__main__":

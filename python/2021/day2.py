@@ -51,8 +51,8 @@ def run_tests():
 
 def get_solutions():
     commands = get_commands_from_file()
-    print(get_final_position(commands))
-    print(get_final_position2(commands))
+    print(get_final_position(commands) == 1670340)
+    print(get_final_position2(commands) == 1954293920)
 
 
 if __name__ == "__main__":

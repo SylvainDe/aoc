@@ -58,11 +58,14 @@ def run_tests():
 
 def get_solutions():
     rooms = get_rooms_from_file()
-    print(sum(room.sector for room in rooms if is_real(room)))
+    print(sum(room.sector for room in rooms if is_real(room)) == 245102)
     for room in rooms:
         d = decrypt_name(room)
         if "north" in d:
-            print(room.sector)
+            print(room.sector == 324)
+            break
+    else:
+        assert False
 
 
 if __name__ == "__main__":

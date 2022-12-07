@@ -29,8 +29,8 @@ def run_tests():
 
 def get_solutions():
     freqs = get_freq_from_file()
-    print(get_resulting_freq(freqs))
-    print(get_first_repetition(freqs))
+    print(get_resulting_freq(freqs) == 587)
+    print(get_first_repetition(freqs) == 83130)
 
 
 if __name__ == "__main__":

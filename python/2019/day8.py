@@ -50,7 +50,7 @@ def run_tests():
 def get_solutions():
     image = get_image_from_file()
     width, height = 25, 6
-    print(find_number1(image, width, height))
+    print(find_number1(image, width, height) == 2032)
     print(get_image(image, width, height).replace("0", " "))
 
 

@@ -30,8 +30,8 @@ def run_tests():
 
 def get_solutions():
     line = get_line_from_file()
-    print(get_solution(line, 1))
-    print(get_solution(line))
+    print(get_solution(line, 1) == 1069)
+    print(get_solution(line) == 1268)
 
 
 if __name__ == "__main__":

@@ -265,7 +265,7 @@ def run_tests():
 
 def get_solutions():
     points, moving_parts = get_points_from_file()
-    print(organise(points, moving_parts))
+    print(organise(points, moving_parts) == 11320)
 
 
 if __name__ == "__main__":

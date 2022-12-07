@@ -146,8 +146,8 @@ def run_tests():
 
 def get_solutions():
     signals = get_signals_from_file()
-    print(decode_signals(signals))
-    print(decode_signals2(signals))
+    print(decode_signals(signals) == 449)
+    print(decode_signals2(signals) == 968175)
 
 
 if __name__ == "__main__":
