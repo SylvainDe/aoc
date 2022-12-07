@@ -1,14 +1,14 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
-
+import operator
 
 max_val = 65535
 
 binary_ops = {
-    " AND ": lambda x, y: x & y,
-    " OR ": lambda x, y: x | y,
-    " LSHIFT ": lambda x, y: x << y,
-    " RSHIFT ": lambda x, y: x >> y,
+    " AND ": operator.and_,
+    " OR ": operator.or_,
+    " LSHIFT ": operator.lshift,
+    " RSHIFT ": operator.rshift,
 }
 
 unary_ops = {"NOT ": lambda x: max_val - x}
