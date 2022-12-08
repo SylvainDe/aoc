@@ -160,7 +160,7 @@ Solutions are written in Python and/or Rust.
 |2017/12/13|[Problem](https://adventofcode.com/2017/day/13) [Input](https://adventofcode.com/2017/day/13/input)|[puzzle.html](resources/year2017_day13_puzzle.html) [input.txt](resources/year2017_day13_input.txt)|**|[-](python/2017/day13.py)|[day13.rs](rust/src/2017/day13.rs)|+24h|+24h|
 |2017/12/14|[Problem](https://adventofcode.com/2017/day/14) [Input](https://adventofcode.com/2017/day/14/input)|[puzzle.html](resources/year2017_day14_puzzle.html) [input.txt](resources/year2017_day14_input.txt)||[-](python/2017/day14.py)|[-](rust/src/2017/day14.rs)|-|-|
 |2017/12/15|[Problem](https://adventofcode.com/2017/day/15) [Input](https://adventofcode.com/2017/day/15/input)|[puzzle.html](resources/year2017_day15_puzzle.html) [input.txt](resources/year2017_day15_input.txt)||[-](python/2017/day15.py)|[-](rust/src/2017/day15.rs)|-|-|
-|2017/12/16|[Problem](https://adventofcode.com/2017/day/16) [Input](https://adventofcode.com/2017/day/16/input)|[puzzle.html](resources/year2017_day16_puzzle.html) [input.txt](resources/year2017_day16_input.txt)||[-](python/2017/day16.py)|[-](rust/src/2017/day16.rs)|-|-|
+|2017/12/16|[Problem](https://adventofcode.com/2017/day/16) [Input](https://adventofcode.com/2017/day/16/input)|[puzzle.html](resources/year2017_day16_puzzle.html) [input.txt](resources/year2017_day16_input.txt)|**|[day16.py](python/2017/day16.py)|[-](rust/src/2017/day16.rs)|+24h|+24h|
 |2017/12/17|[Problem](https://adventofcode.com/2017/day/17) [Input](https://adventofcode.com/2017/day/17/input)|[puzzle.html](resources/year2017_day17_puzzle.html) [input.txt](resources/year2017_day17_input.txt)||[-](python/2017/day17.py)|[-](rust/src/2017/day17.rs)|-|-|
 |2017/12/18|[Problem](https://adventofcode.com/2017/day/18) [Input](https://adventofcode.com/2017/day/18/input)|[puzzle.html](resources/year2017_day18_puzzle.html) [input.txt](resources/year2017_day18_input.txt)||[-](python/2017/day18.py)|[-](rust/src/2017/day18.rs)|-|-|
 |2017/12/19|[Problem](https://adventofcode.com/2017/day/19) [Input](https://adventofcode.com/2017/day/19/input)|[puzzle.html](resources/year2017_day19_puzzle.html) [input.txt](resources/year2017_day19_input.txt)||[-](python/2017/day19.py)|[-](rust/src/2017/day19.rs)|-|-|
@@ -170,7 +170,7 @@ Solutions are written in Python and/or Rust.
 |2017/12/23|[Problem](https://adventofcode.com/2017/day/23) [Input](https://adventofcode.com/2017/day/23/input)|[puzzle.html](resources/year2017_day23_puzzle.html) [input.txt](resources/year2017_day23_input.txt)||[-](python/2017/day23.py)|[-](rust/src/2017/day23.rs)|-|-|
 |2017/12/24|[Problem](https://adventofcode.com/2017/day/24) [Input](https://adventofcode.com/2017/day/24/input)|[puzzle.html](resources/year2017_day24_puzzle.html) [input.txt](resources/year2017_day24_input.txt)||[-](python/2017/day24.py)|[-](rust/src/2017/day24.rs)|-|-|
 |2017/12/25|[Problem](https://adventofcode.com/2017/day/25) [Input](https://adventofcode.com/2017/day/25/input)|[puzzle.html](resources/year2017_day25_puzzle.html) [input.txt](resources/year2017_day25_input.txt)||[-](python/2017/day25.py)|[-](rust/src/2017/day25.rs)|-|-|
-|[2017](https://adventofcode.com/2017)|[Stats](https://adventofcode.com/2017/leaderboard/self)|[stats.txt](misc/leaderboard_self_2017.html)|26|-|-|-|-|
+|[2017](https://adventofcode.com/2017)|[Stats](https://adventofcode.com/2017/leaderboard/self)|[stats.txt](misc/leaderboard_self_2017.html)|28|-|-|-|-|
 
 ## [2016](https://adventofcode.com/2016)
 |Date|URLs|Puzzle & Input|Stars|Python|Rust|Time part 1|Time part 2|
@@ -250,7 +250,7 @@ Solutions are written in Python and/or Rust.
 |13||**|**|||**|**|| 8: ********|
 |14|**|**|||**|**|**||10: **********|
 |15||**||||**|**|| 6: ******|
-|16||**||||**|**|| 6: ******|
+|16||**|**|||**|**|| 8: ********|
 |17|**|**||||**|**|| 8: ********|
 |18||**|||*|**|**|| 7: *******|
 |19||*||||**|**|| 5: *****|
@@ -260,4 +260,4 @@ Solutions are written in Python and/or Rust.
 |23||**||||**|*|| 5: *****|
 |24||**|||**|**||| 6: ******|
 |25||||||**|*|| 3: ***|
-|Total|25|42|26|16|28|50|46|16|249|
+|Total|25|42|28|16|28|50|46|16|251|
