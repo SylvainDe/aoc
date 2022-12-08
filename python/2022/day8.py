@@ -30,8 +30,6 @@ def visible_positions(trees):
                 if val > maxsofar:
                     visible.add((i,j))
                 maxsofar = max(val, maxsofar)
-#    for i, row in enumerate(trees):
-#        print("".join((str(val) if (i,j) in visible else " ") for j, val in enumerate(row)))
     return len(visible)
 
 def scenic_score(trees):
@@ -40,23 +38,23 @@ def scenic_score(trees):
     for i, row in enumerate(trees):
         for j, val in enumerate(row):
             view_right, view_left, view_top, view_bottom = 0, 0, 0, 0
-            for val2 in row[j+1:]:
+            before, after = reversed(row[:j]), row[j+1:]
+            for val2 in after:
                 view_right += 1
                 if val2 >= val:
                     break
-            for val2 in reversed(row[:j]):
+            for val2 in before:
                 view_left += 1
                 if val2 >= val:
                     break
-            for i2 in reversed(range(i)):
-                val2 = trees[i2][j]
+            before, after = reversed(trees[:i]), trees[i+1:]
+            for row2 in before:
                 view_top += 1
-                if val2 >= val:
+                if row2[j] >= val:
                     break
-            for i2 in range(i+1, len(trees)):
-                val2 = trees[i2][j]
+            for row2 in after:
                 view_bottom += 1
-                if val2 >= val:
+                if row2[j] >= val:
                     break
             scores.append(view_right * view_left * view_top * view_bottom)
     return max(scores)
