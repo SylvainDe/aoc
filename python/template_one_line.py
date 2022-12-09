@@ -5,7 +5,7 @@ import datetime
 def get_xxx_from_line(string):
     return string
 
-def get_xxx_from_file(file_path="../../resources/year2019_day21_input.txt"):
+def get_xxx_from_file(file_path="../../resources/yearYYYY_dayDD_input.txt"):
     with open(file_path) as f:
         for l in f:
             return get_xxx_from_line(l.strip())

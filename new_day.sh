@@ -136,9 +136,15 @@ open_file_in_editor() {
 	fi
 }
 
+# Count lines in input files to use the most relevant template
+nb_lines="$(cat "${input_file}" | wc -l)"
+
 # Create Python file
 if [ "${create_python}" = "1" ]; then
-	python_template="python/day_template.py"
+	case "${nb_lines}" in
+		0|1) python_template="python/template_one_line.py";;
+		*)   python_template="python/template_multi_line";;
+	esac
 	create_code_from_template "${python_template}" "${python_script_file}" "${overwrite_python}"
 	open_file_in_editor "${python_script_file}"
 fi
@@ -146,7 +152,7 @@ fi
 # Create Rust file
 if [ "${create_rust}" = "1" ]; then
 	rust_bin="${year}_day${day}"
-	case "$(cat "${input_file}" | wc -l)" in
+	case "${nb_lines}" in
 		0|1) rust_template="rust/src/templates/template_one_line.rs";;
 		*)   rust_template="rust/src/templates/template_multi_line.rs";;
 	esac

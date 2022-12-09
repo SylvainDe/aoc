@@ -5,18 +5,14 @@ import datetime
 def get_xxx_from_line(string):
     return string
 
-def get_xxx_from_lines(string):
-    return [get_xxx_from_line(l) for l in string.splitlines()]
-
 def get_xxx_from_file(file_path="../../resources/year2019_day13_input.txt"):
     with open(file_path) as f:
-        return get_xxx_from_lines(f.read())
+        for l in f:
+            return get_xxx_from_line(l.strip())
 
 
 def run_tests():
-    xxx = get_xxx_from_lines("""abc
-def
-ghi""")
+    xxx = get_xxx_from_line("abc")
 
 
 def get_solutions():
