@@ -29,39 +29,43 @@ def sign(x):
     return 0
 
 
+def add_tuple(t1, t2):
+    return tuple(i + j for i, j in zip(t1, t2))
+
+
+def follow(head, tail):
+    hx, hy = head
+    tx, ty = tail
+    t_pos = { tail }
+    while abs(hx - tx) > 1 or abs(hy - ty) > 1:
+       tx += sign(hx-tx)
+       ty += sign(hy-ty)
+       t_pos.add((tx, ty))
+    return (tx, ty), t_pos
+
+
 def part1(directions):
-    hx, hy, tx, ty = [0] * 4
-    t_seen = { (tx, ty) }
-    for (tdx, tdy), step in directions:
+    head_tuple = (0, 0)
+    tail_tuple = head_tuple
+    t_seen = { tail_tuple }
+    for tuple_dir, step in directions:
         for _ in range(step):
-            hx += tdx
-            hy += tdy
-            while abs(hx - tx) > 1 or abs(hy - ty) > 1:
-                tx += sign(hx-tx)
-                ty += sign(hy-ty)
-                t_seen.add((tx, ty))
+            head_tuple = add_tuple(head_tuple, tuple_dir)
+            tail_tuple, new_pos = follow(head_tuple, tail_tuple)
+            t_seen.update(new_pos)
     return len(t_seen)
 
 
 def part2(directions):
     rope = [(0, 0) for _ in range(10)]
-    t_seen = { (0, 0) }
-    for (tdx, tdy), step in directions:
+    t_seen = set()
+    for tuple_dir, step in directions:
         for _ in range(step):
-            hx, hy = rope[0]
-            hx += tdx
-            hy += tdy
-            rope[0] = hx, hy
+            rope[0] = add_tuple(rope[0], tuple_dir)
             for i in range(1, len(rope)):
-                is_last = i == len(rope) - 1
-                hx, hy = rope[i-1]
-                tx, ty = rope[i]
-                while abs(hx - tx) > 1 or abs(hy - ty) > 1:
-                    tx += sign(hx-tx)
-                    ty += sign(hy-ty)
-                    if is_last:
-                        t_seen.add((tx, ty))
-                rope[i] = tx, ty
+                rope[i], new_pos = follow(rope[i-1], rope[i])
+                if i == len(rope) - 1:
+                    t_seen.update(new_pos)
     return len(t_seen)
 
 
