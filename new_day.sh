@@ -143,7 +143,7 @@ nb_lines="$(cat "${input_file}" | wc -l)"
 if [ "${create_python}" = "1" ]; then
 	case "${nb_lines}" in
 		0|1) python_template="python/template_one_line.py";;
-		*)   python_template="python/template_multi_line";;
+		*)   python_template="python/template_multi_line.py";;
 	esac
 	create_code_from_template "${python_template}" "${python_script_file}" "${overwrite_python}"
 	open_file_in_editor "${python_script_file}"
