@@ -41,13 +41,8 @@ def find_directories(files):
     return directories
 
 def find_biggest_small_directories(lines):
-    files = get_list_of_files(lines)
-    small_dirs = {
-        name:size
-        for name, size in find_directories(files).items()
-        if size < 100000
-    }
-    return sum(small_dirs.values())
+    directories = find_directories(get_list_of_files(lines))
+    return sum(size for size in directories.values() if size < 100000)
 
 def find_dir_to_remove(lines, total_space=70000000, need=30000000):
     files = get_list_of_files(lines)
@@ -55,12 +50,8 @@ def find_dir_to_remove(lines, total_space=70000000, need=30000000):
     free_space = total_space - space_used
     space_to_free = need - free_space
     assert space_to_free >= 0
-    big_dirs = collections.Counter({
-        name:size
-        for name, size in find_directories(files).items()
-        if size >= space_to_free
-    })
-    return big_dirs.most_common()[-1][-1]
+    directories = find_directories(files)
+    return min(size for size in directories.values() if size >= space_to_free)
 
 def run_tests():
     lines = """$ cd /

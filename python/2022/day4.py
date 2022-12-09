@@ -14,12 +14,12 @@ def get_ids_from_file(file_path="../../resources/year2022_day4_input.txt"):
         return get_ids_from_lines(f.read())
 
 def nb_fully_contains(ids):
-    return sum((a <= c and d <= b) or
-               (c <= a and b <= d)
+    return sum((a <= c <= d <= b) or
+               (c <= a <= b <= d)
                for a, b, c, d in ids)
 
 def nb_overlap(ids):
-    return sum(not((a > d) or (c > b)) for a, b, c, d in ids)
+    return sum(a <= d and b >= c for a, b, c, d in ids)
 
 def run_tests():
     ids = get_ids_from_lines("""2-4,6-8
