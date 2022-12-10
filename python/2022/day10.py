@@ -23,35 +23,32 @@ def get_instruction_from_file(file_path="../../resources/year2022_day10_input.tx
 
 def execute(instructions):
     x = 1
-    yield x
+    xs = [x]
     for (nb_cycle, val) in instructions:
-        for _ in range(nb_cycle):
-            yield x
+        xs.extend([x] * nb_cycle)
         x += val
-
+    return xs
 
 def part1(instructions):
-    indexed_values = list(enumerate(execute(instructions)))
-    return sum(i * val
-               for i, val in
-               indexed_values[20::40])
+    indexed_values = list(enumerate(execute(instructions)))[20::40]
+    return sum(i * val for i, val in indexed_values)
 
 
 def part2(instructions, width=40):
     crt = []
-    for i, x in enumerate(list(execute(instructions))[1:]):
+    for i, x in enumerate(execute(instructions)[1:]):
         crt_pos = i % width
         if crt_pos == 0:
             crt.append("\n")
-        drawn = abs(crt_pos - x) <= 1
-        crt.append("#" if drawn else ".")
+        pixel_in_sprite = abs(crt_pos - x) <= 1
+        crt.append("#" if pixel_in_sprite else ".")
     return "".join(crt)
 
 def run_tests():
     instructions = get_instructions_from_lines("""noop
 addx 3
 addx -5""")
-    assert list(execute(instructions)) == [1, 1, 1, 1, 4, 4]
+    assert execute(instructions) == [1, 1, 1, 1, 4, 4]
     instructions = get_instructions_from_lines("""addx 15
 addx -11
 addx 6
