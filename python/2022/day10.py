@@ -2,25 +2,218 @@
 import datetime
 
 
-def get_xxx_from_line(string):
-    return string
+def get_instruction_from_line(string):
+    if string == "noop":
+        return ("noop", 0)
+    else:
+        left, mid, right = string.partition(" ")
+        return (left, int(right))
 
-def get_xxx_from_lines(string):
-    return [get_xxx_from_line(l) for l in string.splitlines()]
 
-def get_xxx_from_file(file_path="../../resources/year2022_day10_input.txt"):
+def get_instructions_from_lines(string):
+    return [get_instruction_from_line(l) for l in string.splitlines()]
+
+
+def get_instruction_from_file(file_path="../../resources/year2022_day10_input.txt"):
     with open(file_path) as f:
-        return get_xxx_from_lines(f.read())
+        return get_instructions_from_lines(f.read())
 
+
+def execute(instructions):
+    x = 1
+    for (ins, val) in instructions:
+        yield x
+        if ins == "addx":
+            yield x
+            x += val
+
+
+def part1(instructions):
+    return sum(i * val
+               for i, val in
+               list(enumerate(execute(instructions), start=1))[20-1::40])
+
+
+def part2(instructions, width=40):
+    crt = []
+    for i, x in enumerate(execute(instructions)):
+        crt_pos = i % width
+        if crt_pos == 0:
+            crt.append("\n")
+        drawn = abs(crt_pos - x) <= 1
+        crt.append("#" if drawn else ".")
+    return "".join(crt)
 
 def run_tests():
-    xxx = get_xxx_from_lines("""abc
-def
-ghi""")
-
+    instructions = get_instructions_from_lines("""noop
+addx 3
+addx -5""")
+    assert list(execute(instructions)) == [1, 1, 1, 4, 4]
+    instructions = get_instructions_from_lines("""addx 15
+addx -11
+addx 6
+addx -3
+addx 5
+addx -1
+addx -8
+addx 13
+addx 4
+noop
+addx -1
+addx 5
+addx -1
+addx 5
+addx -1
+addx 5
+addx -1
+addx 5
+addx -1
+addx -35
+addx 1
+addx 24
+addx -19
+addx 1
+addx 16
+addx -11
+noop
+noop
+addx 21
+addx -15
+noop
+noop
+addx -3
+addx 9
+addx 1
+addx -3
+addx 8
+addx 1
+addx 5
+noop
+noop
+noop
+noop
+noop
+addx -36
+noop
+addx 1
+addx 7
+noop
+noop
+noop
+addx 2
+addx 6
+noop
+noop
+noop
+noop
+noop
+addx 1
+noop
+noop
+addx 7
+addx 1
+noop
+addx -13
+addx 13
+addx 7
+noop
+addx 1
+addx -33
+noop
+noop
+noop
+addx 2
+noop
+noop
+noop
+addx 8
+noop
+addx -1
+addx 2
+addx 1
+noop
+addx 17
+addx -9
+addx 1
+addx 1
+addx -3
+addx 11
+noop
+noop
+addx 1
+noop
+addx 1
+noop
+noop
+addx -13
+addx -19
+addx 1
+addx 3
+addx 26
+addx -30
+addx 12
+addx -1
+addx 3
+addx 1
+noop
+noop
+noop
+addx -9
+addx 18
+addx 1
+addx 2
+noop
+noop
+addx 9
+noop
+noop
+noop
+addx -1
+addx 2
+addx -37
+addx 1
+addx 3
+noop
+addx 15
+addx -21
+addx 22
+addx -6
+addx 1
+noop
+addx 2
+addx 1
+noop
+addx -10
+noop
+noop
+addx 20
+addx 1
+addx 2
+addx 2
+addx -6
+addx -11
+noop
+noop
+noop""")
+    assert part1(instructions) == 13140
+    assert part2(instructions) == """
+##..##..##..##..##..##..##..##..##..##..
+###...###...###...###...###...###...###.
+####....####....####....####....####....
+#####.....#####.....#####.....#####.....
+######......######......######......####
+#######.......#######.......#######....."""
 
 def get_solutions():
-    xxx = get_xxx_from_file()
+    instructions = get_instruction_from_file()
+    print(part1(instructions) == 17180)
+    print(part2(instructions) == """
+###..####.#..#.###..###..#....#..#.###..
+#..#.#....#..#.#..#.#..#.#....#..#.#..#.
+#..#.###..####.#..#.#..#.#....#..#.###..
+###..#....#..#.###..###..#....#..#.#..#.
+#.#..#....#..#.#....#.#..#....#..#.#..#.
+#..#.####.#..#.#....#..#.####..##..###..""")
 
 
 if __name__ == "__main__":
