@@ -3,11 +3,13 @@ import datetime
 
 
 def get_instruction_from_line(string):
+    # Tuple (nb_cycle, added value)
     if string == "noop":
-        return ("noop", 0)
+        return (1, 0)
     else:
         left, mid, right = string.partition(" ")
-        return (left, int(right))
+        assert mid == " "
+        return (2, int(right))
 
 
 def get_instructions_from_lines(string):
@@ -21,22 +23,23 @@ def get_instruction_from_file(file_path="../../resources/year2022_day10_input.tx
 
 def execute(instructions):
     x = 1
-    for (ins, val) in instructions:
-        yield x
-        if ins == "addx":
+    yield x
+    for (nb_cycle, val) in instructions:
+        for _ in range(nb_cycle):
             yield x
-            x += val
+        x += val
 
 
 def part1(instructions):
+    indexed_values = list(enumerate(execute(instructions)))
     return sum(i * val
                for i, val in
-               list(enumerate(execute(instructions), start=1))[20-1::40])
+               indexed_values[20::40])
 
 
 def part2(instructions, width=40):
     crt = []
-    for i, x in enumerate(execute(instructions)):
+    for i, x in enumerate(list(execute(instructions))[1:]):
         crt_pos = i % width
         if crt_pos == 0:
             crt.append("\n")
@@ -48,7 +51,7 @@ def run_tests():
     instructions = get_instructions_from_lines("""noop
 addx 3
 addx -5""")
-    assert list(execute(instructions)) == [1, 1, 1, 4, 4]
+    assert list(execute(instructions)) == [1, 1, 1, 1, 4, 4]
     instructions = get_instructions_from_lines("""addx 15
 addx -11
 addx 6
