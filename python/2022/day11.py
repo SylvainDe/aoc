@@ -4,26 +4,11 @@ import datetime
 import re
 import operator
 import functools
-
-def gcd(a, b):
-    """Computes gcd for 2 numbers."""
-    while b:
-        a, b = b, a % b
-    return a
-
-def lcm(a, b):
-    """Computes lcm for 2 numbers."""
-    return a * b // gcd(a, b)
-
-
-def lcmm(*args):
-    """Computes lcm for numbers."""
-    return functools.reduce(lcm, args)
+import math
 
 operations = {
     "*": operator.mul,
     "+": operator.add,
-    "-": operator.sub,
 }
 
 def get_operation_from_string(string):
@@ -35,9 +20,12 @@ def get_operation_from_string(string):
 
 MonkeyInput = collections.namedtuple("MonkeyInput", ("id", "start_items", "operation", "div", "if_true", "if_false"))
 
-
 # "'Monkey 0:\n  Starting items: 79, 98\n  Operation: new = old * 19\n  Test: divisible by 23\n    If true: throw to monkey 2\n    If false: throw to monkey 3'"
-monkey_re = re.compile(r"^Monkey (\d+):\n  Starting items: (.*)\n  Operation: new = (.*)\n  Test: divisible by (\d+)\n    If true: throw to monkey (\d+)\n    If false: throw to monkey (\d+)$")
+monkey_re = re.compile(r"^Monkey (\d+):\n  Starting items: (.*)\n"
+                       r"  Operation: new = (.*)\n"
+                       r"  Test: divisible by (\d+)\n"
+                       r"    If true: throw to monkey (\d+)\n"
+                       r"    If false: throw to monkey (\d+)$")
 
 
 def get_monkey_from_string(string):
@@ -59,17 +47,22 @@ def get_monkey_from_file(file_path="../../resources/year2022_day11_input.txt"):
 
 def lcm(a, b):
     """Computes lcm for 2 numbers."""
-    return a * b // gcd(a, b)
+    return a * b // math.gcd(a, b)
 
 
 def lcmm(*args):
     """Computes lcm for numbers."""
     return functools.reduce(lcm, args)
 
-def play_monkey_rounds(monkeys, nb_round, worry_div=None):
-    monkey_items = { m.id: list(m.start_items) for m in monkeys }
-    if worry_div is None:
+
+def play_monkey_rounds(monkeys, is_part1):
+    if is_part1:
+        nb_round = 20
+        worry_div = 3
+    else:
+        nb_round=10000
         worry_mod = lcmm(*[m.div for m in monkeys])
+    monkey_items = { m.id: list(m.start_items) for m in monkeys }
     counter = collections.Counter()
     for i in range(nb_round):
         for m in monkeys:
@@ -78,10 +71,10 @@ def play_monkey_rounds(monkeys, nb_round, worry_div=None):
             counter[m.id] += len(lst)
             for worry in lst:
                 worry = m.operation(worry)
-                if worry_div is None:
-                    worry = worry % worry_mod
+                if is_part1:
+                    worry //= worry_div
                 else:
-                    worry = worry // worry_div
+                    worry %= worry_mod
                 dest = m.if_false if worry % m.div else m.if_true
                 monkey_items[dest].append(worry)
     (id1, nb1), (id2, nb2) = counter.most_common(2)
@@ -116,13 +109,13 @@ Monkey 3:
   Test: divisible by 17
     If true: throw to monkey 0
     If false: throw to monkey 1""")
-    assert play_monkey_rounds(monkeys, 20, 3) == 10605
-    assert play_monkey_rounds(monkeys, 10000, None) == 2713310158
+    assert play_monkey_rounds(monkeys, is_part1=True) == 10605
+    assert play_monkey_rounds(monkeys, is_part1=False) == 2713310158
 
 def get_solutions():
     monkeys = get_monkey_from_file()
-    print(play_monkey_rounds(monkeys, 20, 3) == 64032)
-    print(play_monkey_rounds(monkeys, 10000, None) == 12729522272)
+    print(play_monkey_rounds(monkeys, is_part1=True) == 64032)
+    print(play_monkey_rounds(monkeys, is_part1=False) == 12729522272)
 
 if __name__ == "__main__":
     begin = datetime.datetime.now()
