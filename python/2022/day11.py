@@ -29,14 +29,32 @@ def get_monkey_from_string(string):
     m_id, div_test, if_true, if_false = (int(s) for s in (m_id, div_test, if_true, if_false))
     items = tuple(int(c) for c in items.split(", "))
     operation = get_operation_from_string(operation)
+    assert m_id not in (if_true, if_false)
     return MonkeyInput(m_id, items, operation, div_test, if_true, if_false)
 
 def get_monkeys_from_lines(string):
     return [get_monkey_from_string(l) for l in string.split("\n\n")]
 
+
 def get_monkey_from_file(file_path="../../resources/year2022_day11_input.txt"):
     with open(file_path) as f:
         return get_monkeys_from_lines(f.read())
+
+
+def play_monkey_rounds(monkeys, nb_round=1):
+    monkey_items = { m.id: list(m.start_items) for m in monkeys }
+    counter = collections.Counter()
+    for _ in range(nb_round):
+        for m in monkeys:
+            lst = monkey_items[m.id]
+            monkey_items[m.id] = []
+            counter[m.id] += len(lst)
+            for worry in lst:
+                worry = m.operation(worry) // 3
+                dest = m.if_false if worry % m.div else m.if_true
+                monkey_items[dest].append(worry)
+    (id1, nb1), (id2, nb2) = counter.most_common(2)
+    return nb1 * nb2
 
 
 def run_tests():
@@ -67,12 +85,11 @@ Monkey 3:
   Test: divisible by 17
     If true: throw to monkey 0
     If false: throw to monkey 1""")
-    print(monkeys)
+    assert play_monkey_rounds(monkeys, 20) == 10605
 
 def get_solutions():
     monkeys = get_monkey_from_file()
-    print(monkeys)
-
+    print(play_monkey_rounds(monkeys, 20) == 64032)
 
 if __name__ == "__main__":
     begin = datetime.datetime.now()
