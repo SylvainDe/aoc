@@ -23,14 +23,15 @@ def get_info_from_file(file_path="../../resources/year2021_day13_input.txt"):
         return get_info_from_lines(f)
 
 
-def show_dots(dots):
+def get_paper(dots):
     x_vals = {d[0] for d in dots}
     y_vals = {d[1] for d in dots}
     x_range = list(range(min(x_vals), 1 + max(x_vals)))
     y_range = list(range(min(y_vals), 1 + max(y_vals)))
+    lst = []
     for y in y_range:
-        print("".join("#" if (x, y) in dots else "." for x in x_range))
-    print()
+        lst.append("".join("#" if (x, y) in dots else "." for x in x_range))
+    return "\n".join(lst)
 
 
 def fold_val(val, line):
@@ -164,7 +165,13 @@ def run_tests():
 def get_solutions():
     dots, folds = get_info_from_file()
     print(len(apply_folds(dots, [folds[0]])) == 678)
-    show_dots(apply_folds(dots, folds))
+    print(get_paper(apply_folds(dots, folds)) == """\
+####..##..####.#..#.#....#..#.####.####
+#....#..#.#....#..#.#....#..#....#.#...
+###..#....###..####.#....####...#..###.
+#....#....#....#..#.#....#..#..#...#...
+#....#..#.#....#..#.#....#..#.#....#...
+####..##..#....#..#.####.#..#.####.#...""")
 
 
 if __name__ == "__main__":

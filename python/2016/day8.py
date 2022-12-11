@@ -7,10 +7,11 @@ def get_instructions_from_file(file_path="../../resources/year2016_day8_input.tx
         return [l.strip() for l in f]
 
 
-def show_pixels(pixels, width, height):
+def get_screen_display(pixels, width, height):
+    lst = []
     for y in range(height):
-        print("".join("#" if (x, y) in pixels else "." for x in range(width)))
-    print()
+        lst.append("".join("#" if (x, y) in pixels else "." for x in range(width)))
+    return "\n".join(lst)
 
 
 def apply_instruction(instruction, pixels, width, height):
@@ -61,7 +62,13 @@ def get_solutions():
     instructions = get_instructions_from_file()
     ret = apply_instructions(instructions, width=50, height=6)
     print(len(ret) == 116)
-    show_pixels(ret, width=50, height=6)
+    print(get_screen_display(ret, width=50, height=6) == """\
+#..#.###...##....##.####.#....###...##..####.####.
+#..#.#..#.#..#....#.#....#....#..#.#..#.#.......#.
+#..#.#..#.#..#....#.###..#....###..#....###....#..
+#..#.###..#..#....#.#....#....#..#.#....#.....#...
+#..#.#....#..#.#..#.#....#....#..#.#..#.#....#....
+.##..#.....##...##..#....####.###...##..####.####.""")
 
 
 if __name__ == "__main__":
