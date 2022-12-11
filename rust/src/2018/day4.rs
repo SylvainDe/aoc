@@ -3,6 +3,7 @@ use common::input::get_file_content;
 use core::str::FromStr;
 use lazy_static::lazy_static;
 use regex::Regex;
+use std::collections::HashMap;
 use std::time::Instant;
 
 const INPUT_FILEPATH: &str = "../resources/year2018_day4_input.txt";
@@ -31,7 +32,7 @@ impl FromStr for Action {
     }
 }
 
-#[derive(Debug, Eq, Ord, PartialEq, PartialOrd)]
+#[derive(Debug, Eq, Ord, PartialEq, PartialOrd, Hash, Clone, Copy)]
 struct Timestamp {
     year: Int,
     month: Int,
@@ -86,14 +87,64 @@ fn get_input_from_str(string: &str) -> InputContent {
     entries
 }
 
-fn part1(events: &InputContent) -> Int {
-    for _e in events {}
-    0
+fn find_sleeping_guard(events: &InputContent, is_part1: bool) -> Int {
+    let mut guard = None;
+    let mut sleep_start = None;
+    let mut sleeps_total = HashMap::new();
+    let mut sleeps_per_guard_per_min = HashMap::new();
+    let mut sleeps_per_guard_and_min = HashMap::new();
+    for e in events {
+        match e.action {
+            Action::ShiftBegins(id) => guard = Some(id),
+            Action::FallsAsleep => sleep_start = Some(e.timestamp),
+            Action::WakesUp => {
+                let guard = guard.unwrap();
+                let start = sleep_start.unwrap();
+                let end = e.timestamp;
+                // Assume many things about time values
+                let nb_year = end.year - start.year;
+                let nb_month = 12 * nb_year + end.month - start.month;
+                let nb_day = 30 * nb_month + end.day - start.day;
+                let nb_hour = 24 * nb_day + end.hour - start.hour;
+                let nb_min = 60 * nb_hour + end.minute - start.minute;
+                let total_count = sleeps_total.entry(guard).or_insert(0);
+                *total_count += nb_min;
+                let count_per_min = sleeps_per_guard_per_min
+                    .entry(guard)
+                    .or_insert_with(HashMap::new);
+                for min in start.minute..start.minute + nb_min {
+                    let count = count_per_min.entry(min).or_insert(0);
+                    *count += 1;
+                    let count = sleeps_per_guard_and_min.entry((guard, min)).or_insert(0);
+                    *count += 1;
+                }
+            }
+        }
+    }
+    if is_part1 {
+        let guard = sleeps_total.iter().max_by_key(|entry| entry.1).unwrap().0;
+        let minute = sleeps_per_guard_per_min[guard]
+            .iter()
+            .max_by_key(|entry| entry.1)
+            .unwrap()
+            .0;
+        guard * minute
+    } else {
+        let (guard, minute) = sleeps_per_guard_and_min
+            .iter()
+            .max_by_key(|entry| entry.1)
+            .unwrap()
+            .0;
+        guard * minute
+    }
 }
 
-#[allow(clippy::trivially_copy_pass_by_ref, clippy::missing_const_for_fn)]
-fn part2(_arg: &InputContent) -> Int {
-    0
+fn part1(events: &InputContent) -> Int {
+    find_sleeping_guard(events, true)
+}
+
+fn part2(events: &InputContent) -> Int {
+    find_sleeping_guard(events, false)
 }
 
 fn main() {
@@ -101,10 +152,10 @@ fn main() {
     let data = get_input_from_str(&get_file_content(INPUT_FILEPATH));
     let res = part1(&data);
     println!("{:?}", res);
-    assert_eq!(res, 0);
+    assert_eq!(res, 12504);
     let res2 = part2(&data);
     println!("{:?}", res2);
-    assert_eq!(res2, 0);
+    assert_eq!(res2, 139_543);
     println!("Elapsed time: {:.2?}", before.elapsed());
 }
 
@@ -170,11 +221,11 @@ mod tests {
 
     #[test]
     fn test_part1() {
-        assert_eq!(part1(&get_input_from_str(EXAMPLE)), 0);
+        assert_eq!(part1(&get_input_from_str(EXAMPLE)), 240);
     }
 
     #[test]
     fn test_part2() {
-        assert_eq!(part2(&get_input_from_str(EXAMPLE)), 0);
+        assert_eq!(part2(&get_input_from_str(EXAMPLE)), 4455);
     }
 }
