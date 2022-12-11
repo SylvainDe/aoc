@@ -3,6 +3,22 @@ import collections
 import datetime
 import re
 import operator
+import functools
+
+def gcd(a, b):
+    """Computes gcd for 2 numbers."""
+    while b:
+        a, b = b, a % b
+    return a
+
+def lcm(a, b):
+    """Computes lcm for 2 numbers."""
+    return a * b // gcd(a, b)
+
+
+def lcmm(*args):
+    """Computes lcm for numbers."""
+    return functools.reduce(lcm, args)
 
 operations = {
     "*": operator.mul,
@@ -41,16 +57,31 @@ def get_monkey_from_file(file_path="../../resources/year2022_day11_input.txt"):
         return get_monkeys_from_lines(f.read())
 
 
-def play_monkey_rounds(monkeys, nb_round=1):
+def lcm(a, b):
+    """Computes lcm for 2 numbers."""
+    return a * b // gcd(a, b)
+
+
+def lcmm(*args):
+    """Computes lcm for numbers."""
+    return functools.reduce(lcm, args)
+
+def play_monkey_rounds(monkeys, nb_round, worry_div=None):
     monkey_items = { m.id: list(m.start_items) for m in monkeys }
+    if worry_div is None:
+        worry_mod = lcmm(*[m.div for m in monkeys])
     counter = collections.Counter()
-    for _ in range(nb_round):
+    for i in range(nb_round):
         for m in monkeys:
             lst = monkey_items[m.id]
             monkey_items[m.id] = []
             counter[m.id] += len(lst)
             for worry in lst:
-                worry = m.operation(worry) // 3
+                worry = m.operation(worry)
+                if worry_div is None:
+                    worry = worry % worry_mod
+                else:
+                    worry = worry // worry_div
                 dest = m.if_false if worry % m.div else m.if_true
                 monkey_items[dest].append(worry)
     (id1, nb1), (id2, nb2) = counter.most_common(2)
@@ -85,11 +116,13 @@ Monkey 3:
   Test: divisible by 17
     If true: throw to monkey 0
     If false: throw to monkey 1""")
-    assert play_monkey_rounds(monkeys, 20) == 10605
+    assert play_monkey_rounds(monkeys, 20, 3) == 10605
+    assert play_monkey_rounds(monkeys, 10000, None) == 2713310158
 
 def get_solutions():
     monkeys = get_monkey_from_file()
-    print(play_monkey_rounds(monkeys, 20) == 64032)
+    print(play_monkey_rounds(monkeys, 20, 3) == 64032)
+    print(play_monkey_rounds(monkeys, 10000, None) == 12729522272)
 
 if __name__ == "__main__":
     begin = datetime.datetime.now()
