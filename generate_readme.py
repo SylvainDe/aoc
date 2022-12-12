@@ -184,7 +184,7 @@ if __name__ == "__main__":
         f.write(readme_header)
 
         # Details for each day
-        columns = ["Date", "URLs", "Puzzle & Input", "Stars", "Python", "Rust", "Time part 1", "Time part 2"]
+        columns = ["Day", "URLs", "Puzzle & Input", "Stars", "Python", "Rust", "Time part 1", "Time part 2"]
         for y in reversed(years):
             f.write("## {}\n".format(y))
             f.write(format_table_colums(columns))
