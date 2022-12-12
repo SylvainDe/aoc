@@ -49,6 +49,25 @@ def get_path(grid, start, dest):
                     queue.append((d+1, pos2))
 
 
+def get_path2(grid, dest):
+    pos = dest
+    distances = dict()
+    queue = collections.deque([(0, pos)])
+    neighbours = [(-1, 0), (+1, 0), (0, -1), (0, +1)]
+    while queue:
+        d, pos = queue.popleft()
+        if pos in distances and distances[pos] <= d:
+            continue
+        distances[pos] = d
+        x, y = pos
+        val = grid[pos]
+        for dx, dy in neighbours:
+            pos2 = x + dx, y + dy
+            if pos2 in grid:
+                val2 = grid[pos2]
+                if val2 + 1 >= val:
+                    queue.append((d+1, pos2))
+    return min(d for pos, d in distances.items() if grid[pos] == 0)
 
 
 def run_tests():
@@ -58,10 +77,13 @@ accszExk
 acctuvwj
 abdefghi""")
     assert get_path(grid, start, dest) == 31
+    assert get_path2(grid, dest) == 29
+
 
 def get_solutions():
     grid, start, dest = get_grid_from_file()
     print(get_path(grid, start, dest) == 423)
+    print(get_path2(grid, dest) == 416)
 
 
 if __name__ == "__main__":
