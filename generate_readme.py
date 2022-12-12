@@ -109,6 +109,7 @@ class DayData():
         self.input_url = self.format_str(input_url)
         self.puzzle_file = self.format_str(puzzle_file)
         self.input_file = self.format_str(input_file)
+        self.title = self.get_title()
         self.python_file = self.format_str(python_file)
         self.rust_file = self.format_str(rust_file)
         self.nb_stars = 0
@@ -123,7 +124,7 @@ class DayData():
         self.nb_stars = (self.part1_time is not None) + (self.part2_time is not None)
 
     def __str__(self):
-        return self.format_str("{year}/12/{day}")
+        return self.title if self.title is not None else self.format_str("{year}/12/{day}")
 
     def is_valid(self):
         # Any condition can be imagined here (for instance nb of stars)
@@ -132,6 +133,17 @@ class DayData():
     def format_str(self, s):
         return s.format(year=self.year, day=self.day)
 
+    def get_title(self):
+        title_re = re.compile(r"^<article class.*<h2>--- (?P<title>.*) ---<")
+        try:
+            with open(self.puzzle_file) as f:
+                for line in f:
+                    m = title_re.match(line)
+                    if m is not None:
+                        return m.groupdict()["title"]
+        except FileNotFoundError:
+            pass
+        return None
 
 def format_table_colums(columns, sep="|"):
     return "{}{}{}\n".format(sep, sep.join(str(c) for c in columns), sep)
