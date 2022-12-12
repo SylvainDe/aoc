@@ -55,6 +55,9 @@ pub mod input {
 }
 
 pub mod point_module {
+    use std::ops::{Add, Sub};
+    use std::str::FromStr;
+
     #[derive(Debug, PartialEq, Eq, Hash, Clone, Copy)]
     pub struct Point<T> {
         pub x: T,
@@ -64,7 +67,6 @@ pub mod point_module {
     #[derive(Debug, PartialEq, Eq, Hash)]
     pub struct FromStrError;
 
-    use std::str::FromStr;
     impl<T: std::str::FromStr> Point<T> {
         #[allow(clippy::result_unit_err, clippy::missing_errors_doc)]
         pub fn from_str_with_param(s: &str, separator: &str) -> Result<Self, FromStrError> {
@@ -84,6 +86,29 @@ pub mod point_module {
                 x: x.parse().map_err(|_| {})?,
                 y: y.parse().map_err(|_| {})?,
             })
+        }
+    }
+
+    // Directly copied from https://doc.rust-lang.org/std/ops/index.html
+    impl<T: Add<Output = T>> Add for Point<T> {
+        type Output = Self;
+
+        fn add(self, other: Self) -> Self {
+            Self {
+                x: self.x + other.x,
+                y: self.y + other.y,
+            }
+        }
+    }
+
+    impl<T: Sub<Output = T>> Sub for Point<T> {
+        type Output = Self;
+
+        fn sub(self, other: Self) -> Self {
+            Self {
+                x: self.x - other.x,
+                y: self.y - other.y,
+            }
         }
     }
 }
@@ -140,6 +165,18 @@ mod tests_point {
         assert!(Point::<i32>::from_str("9 4").is_err());
         assert!(Point::<i32>::from_str("9,4").is_err());
         assert!(Point::<i32>::from_str("9,four").is_err());
+    }
+
+    #[test]
+    fn point_operations() {
+        assert_eq!(
+            Point { x: 3, y: 3 },
+            Point { x: 1, y: 0 } + Point { x: 2, y: 3 }
+        );
+        assert_eq!(
+            Point { x: -1, y: -3 },
+            Point { x: 1, y: 0 } - Point { x: 2, y: 3 }
+        );
     }
 }
 

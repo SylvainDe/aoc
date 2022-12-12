@@ -10,13 +10,14 @@ def get_grid_from_lines(string):
     grid = dict()
     for i, l in enumerate(string.splitlines()):
         for j, val in enumerate(l):
+            pos = (i, j);
             if val == "S":
-                start = (i, j)
+                start = pos
                 val = "a"
             elif val == "E":
-                dest = (i, j)
+                dest = pos
                 val = "z"
-            grid[(i, j)] = ord(val) - ord('a')
+            grid[pos] = ord(val) - ord('a')
     assert start is not None
     assert dest is not None
     return grid, start, dest
@@ -27,14 +28,15 @@ def get_grid_from_file(file_path="../../resources/year2022_day12_input.txt"):
         return get_grid_from_lines(f.read())
 
 
+def get_neighbours(x, y):
+    return ((x + dx, y + dy) for (dx, dy) in ((-1, 0), (+1, 0), (0, -1), (0, +1)))
+
+
 def get_accessible_neighbours(grid, uphill):
-    neighbours = [(-1, 0), (+1, 0), (0, -1), (0, +1)]
     access = dict()
     for pos, val in grid.items():
         d = access.setdefault(pos, dict())
-        x, y = pos
-        for dx, dy in neighbours:
-            pos2 = (x + dx, y + dy)
+        for pos2 in get_neighbours(*pos):
             val2 = grid.get(pos2)
             if val2 is not None and \
                ((val2 <= val + 1) if uphill else (val2 + 1 >= val)):
