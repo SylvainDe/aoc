@@ -134,7 +134,7 @@ class DayData():
         return s.format(year=self.year, day=self.day)
 
     def get_title(self):
-        title_re = re.compile(r"^<article class.*<h2>--- (?P<title>.*) ---<")
+        title_re = re.compile(r".*<article class.*<h2>--- (?P<title>.*) ---<")
         try:
             with open(self.puzzle_file) as f:
                 for line in f:
