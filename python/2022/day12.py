@@ -36,9 +36,9 @@ def get_accessible_neighbours(grid, uphill):
         for dx, dy in neighbours:
             pos2 = (x + dx, y + dy)
             val2 = grid.get(pos2)
-            if val2 is not None:
-                if (val2 <= val + 1) if uphill else (val2 + 1 >= val):
-                    d[pos2] = 1
+            if val2 is not None and \
+               ((val2 <= val + 1) if uphill else (val2 + 1 >= val)):
+                d[pos2] = 1
     return access
 
 
@@ -50,8 +50,7 @@ def get_distances(grid, start, uphill):
         d, pos = queue.popleft()
         if pos not in distances or distances[pos] > d:
             distances[pos] = d
-            for pos2, d2 in neigh.get(pos, dict()).items():
-                queue.append((d+d2, pos2))
+            queue.extend((d+d2, pos2) for pos2, d2 in neigh[pos].items())
     return distances
 
 
@@ -60,8 +59,8 @@ def get_path(grid, start, dest):
 
 
 def get_path2(grid, dest):
-    distances = get_distances(grid, dest, uphill=False)
-    return min(d for pos, d in distances.items() if grid[pos] == 0)
+    return min(d for pos, d in get_distances(grid, dest, uphill=False).items()
+               if grid[pos] == 0)
 
 
 def run_tests():
