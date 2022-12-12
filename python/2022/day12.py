@@ -27,46 +27,40 @@ def get_grid_from_file(file_path="../../resources/year2022_day12_input.txt"):
         return get_grid_from_lines(f.read())
 
 
-def get_path(grid, start, dest):
-    pos = start
-    distances = dict()
-    queue = collections.deque([(0, pos)])
+def get_accessible_neighbours(grid, uphill):
     neighbours = [(-1, 0), (+1, 0), (0, -1), (0, +1)]
+    access = dict()
+    for pos, val in grid.items():
+        d = access.setdefault(pos, dict())
+        x, y = pos
+        for dx, dy in neighbours:
+            pos2 = (x + dx, y + dy)
+            val2 = grid.get(pos2)
+            if val2 is not None:
+                if (val2 <= val + 1) if uphill else (val2 + 1 >= val):
+                    d[pos2] = 1
+    return access
+
+
+def get_distances(grid, start, uphill):
+    distances = dict()
+    queue = collections.deque([(0, start)])
+    neigh = get_accessible_neighbours(grid, uphill)
     while queue:
         d, pos = queue.popleft()
-        if pos in distances and distances[pos] <= d:
-            continue
-        distances[pos] = d
-        if pos == dest:
-            return d
-        x, y = pos
-        val = grid[pos]
-        for dx, dy in neighbours:
-            pos2 = x + dx, y + dy
-            if pos2 in grid:
-                val2 = grid[pos2]
-                if val2 <= val + 1:
-                    queue.append((d+1, pos2))
+        if pos not in distances or distances[pos] > d:
+            distances[pos] = d
+            for pos2, d2 in neigh.get(pos, dict()).items():
+                queue.append((d+d2, pos2))
+    return distances
+
+
+def get_path(grid, start, dest):
+    return get_distances(grid, start, uphill=True)[dest]
 
 
 def get_path2(grid, dest):
-    pos = dest
-    distances = dict()
-    queue = collections.deque([(0, pos)])
-    neighbours = [(-1, 0), (+1, 0), (0, -1), (0, +1)]
-    while queue:
-        d, pos = queue.popleft()
-        if pos in distances and distances[pos] <= d:
-            continue
-        distances[pos] = d
-        x, y = pos
-        val = grid[pos]
-        for dx, dy in neighbours:
-            pos2 = x + dx, y + dy
-            if pos2 in grid:
-                val2 = grid[pos2]
-                if val2 + 1 >= val:
-                    queue.append((d+1, pos2))
+    distances = get_distances(grid, dest, uphill=False)
     return min(d for pos, d in distances.items() if grid[pos] == 0)
 
 
