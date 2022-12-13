@@ -1,10 +1,11 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
 import functools
+import ast
+
 
 def get_packets_from_line(string):
-    p1, p2 = string.split("\n")
-    return (eval(p1), eval(p2))
+    return tuple(ast.literal_eval(s) for s in string.split("\n"))
 
 def get_packets_from_lines(string):
     return [get_packets_from_line(l.strip()) for l in string.split("\n\n")]
@@ -36,7 +37,7 @@ def part1(packets):
     return sum(i for (i, pair) in enumerate(packets, start=1) if cmp_func(*pair) == 1)
 
 def part2(packets):
-     div1, div2 = (eval(p) for p in ("[[2]]", "[[6]]"))
+     div1, div2 = (ast.literal_eval(p) for p in ("[[2]]", "[[6]]"))
      all_packets = [div1, div2]
      for pair in packets:
          all_packets.extend(pair)
