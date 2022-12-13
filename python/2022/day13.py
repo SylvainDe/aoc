@@ -1,6 +1,6 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
-
+import functools
 
 def get_packets_from_line(string):
     p1, p2 = string.split("\n")
@@ -13,27 +13,35 @@ def get_packets_from_file(file_path="../../resources/year2022_day13_input.txt"):
     with open(file_path) as f:
         return get_packets_from_lines(f.read())
 
-def right_order(p1, p2):
+def cmp_func(p1, p2):
     t1, t2 = type(p1), type(p2)
     if (t1, t2) == (int, int):
         if p1 != p2:
-            return p1 < p2
+            return 1 if p1 < p2 else -1
     elif (t1, t2) == (list, list):
         for v1, v2 in zip(p1, p2):
-            order = right_order(v1, v2)
-            if order is not None:
+            order = cmp_func(v1, v2)
+            if order != 0:
                 return order
         l1, l2 = len(p1), len(p2)
         if l1 != l2:
-            return l1 < l2
+            return 1 if l1 < l2 else -1
     elif (t1, t2) == (list, int):
-        return right_order(p1, [p2])
+        return cmp_func(p1, [p2])
     elif (t1, t2) == (int, list):
-        return right_order([p1], p2)
-    return None
+        return cmp_func([p1], p2)
+    return 0
 
 def part1(packets):
-    return sum(i for (i, (p1, p2)) in enumerate(packets, start=1) if right_order(p1, p2))
+    return sum(i for (i, pair) in enumerate(packets, start=1) if cmp_func(*pair) == 1)
+
+def part2(packets):
+     div1, div2 = (eval(p) for p in ("[[2]]", "[[6]]"))
+     all_packets = [div1, div2]
+     for pair in packets:
+         all_packets.extend(pair)
+     sorted_packets = sorted(all_packets, key=functools.cmp_to_key(cmp_func), reverse=True)
+     return (1 + sorted_packets.index(div1)) * (1 + sorted_packets.index(div2))
 
 def run_tests():
     packets = get_packets_from_lines("""[1,1,3,1,1]
@@ -59,12 +67,14 @@ def run_tests():
 
 [1,[2,[3,[4,[5,6,7]]]],8,9]
 [1,[2,[3,[4,[5,6,0]]]],8,9]""")
-    print(part1(packets))
+    assert part1(packets) == 13
+    assert part2(packets) == 140
 
 
 def get_solutions():
     packets = get_packets_from_file()
-    print(part1(packets))
+    print(part1(packets) == 5185)
+    print(part2(packets) == 23751)
 
 if __name__ == "__main__":
     begin = datetime.datetime.now()
