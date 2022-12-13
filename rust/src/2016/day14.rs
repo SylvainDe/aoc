@@ -43,15 +43,10 @@ fn produce_key(salt: &str, index_wanted: usize, stretched: bool) -> usize {
             stretched,
         )));
         // Find first triplet
-        if let Some((c, _)) = reps.get(i).unwrap().iter().find(|(_, cnt)| cnt >= &3) {
-            for j in i + 1..=i + 1000 {
+        if let Some((c, _)) = reps[i].iter().find(|(_, cnt)| cnt >= &3) {
+            for j in reps.iter().take(i + 1000 + 1).skip(i + 1) {
                 // Find corresponding sequence of 5
-                if reps
-                    .get(j)
-                    .unwrap()
-                    .iter()
-                    .any(|(c2, cnt2)| c == c2 && cnt2 >= &5)
-                {
+                if j.iter().any(|(c2, cnt2)| c == c2 && cnt2 >= &5) {
                     nb_found += 1;
                     if nb_found == index_wanted {
                         return i;

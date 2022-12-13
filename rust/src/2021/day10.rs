@@ -203,10 +203,10 @@ mod tests {
 
     #[test]
     fn test_completion_score_for_missing() {
-        assert_eq!(completion_score_for_missing("}}]])})]"), 288957);
+        assert_eq!(completion_score_for_missing("}}]])})]"), 288_957);
         assert_eq!(completion_score_for_missing(")}>]})"), 5566);
-        assert_eq!(completion_score_for_missing("}}>}>))))"), 1480781);
-        assert_eq!(completion_score_for_missing("]]}}]}]}>"), 995444);
+        assert_eq!(completion_score_for_missing("}}>}>))))"), 1_480_781);
+        assert_eq!(completion_score_for_missing("]]}}]}]}>"), 995_444);
         assert_eq!(completion_score_for_missing("])}>"), 294);
     }
 
@@ -217,6 +217,6 @@ mod tests {
 
     #[test]
     fn test_part2() {
-        assert_eq!(part2(&get_input_from_str(EXAMPLE)), 288957);
+        assert_eq!(part2(&get_input_from_str(EXAMPLE)), 288_957);
     }
 }

@@ -97,10 +97,7 @@ fn compute_best_path(g: &Graph, return_to_origin: bool) -> Int {
             }
             let mut points2 = points.clone();
             points2.push(start);
-            distances.push(Reverse((
-                d + interesting_dist.get(&(last, &start)).unwrap(),
-                points2,
-            )));
+            distances.push(Reverse((d + interesting_dist[&(last, &start)], points2)));
         }
     }
     0

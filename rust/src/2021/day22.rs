@@ -517,16 +517,22 @@ off x=-93533..-4276,y=-16170..68771,z=-104985..-24507";
     #[test]
     fn test_part1() {
         assert_eq!(part1(&get_input_from_str(EXAMPLE)), 39);
-        assert_eq!(part1(&get_input_from_str(EXAMPLE2)), 590784);
-        assert_eq!(part1(&get_input_from_str(EXAMPLE3)), 474140);
+        assert_eq!(part1(&get_input_from_str(EXAMPLE2)), 590_784);
+        assert_eq!(part1(&get_input_from_str(EXAMPLE3)), 474_140);
     }
     #[test]
     fn test_part2() {
         let input = get_input_from_str(EXAMPLE3);
-        assert_eq!(perform_instructions_optimised2(&input), 2758514936282235);
+        assert_eq!(
+            perform_instructions_optimised2(&input),
+            2_758_514_936_282_235
+        );
         if !SKIP_SLOW {
-            assert_eq!(perform_instructions_optimised(&input), 2758514936282235);
-            assert_eq!(part2(&input), 2758514936282235);
+            assert_eq!(
+                perform_instructions_optimised(&input),
+                2_758_514_936_282_235
+            );
+            assert_eq!(part2(&input), 2_758_514_936_282_235);
         }
     }
 }

@@ -115,7 +115,7 @@ pub mod point_module {
 
 #[cfg(test)]
 mod tests_input {
-    use crate::input::*;
+    use crate::input::{get_first_line, get_first_line_from_file};
 
     #[test]
     fn test_get_first_line() {
@@ -204,33 +204,27 @@ pub mod assembunny2016 {
                 Some(&cmd) => match cmd {
                     "inc" => {
                         if chunks.len() == 2 {
-                            return Ok(Self::Increase((*chunks.get(1).unwrap()).to_string()));
+                            return Ok(Self::Increase(chunks[1].to_string()));
                         }
                     }
                     "dec" => {
                         if chunks.len() == 2 {
-                            return Ok(Self::Decrease((*chunks.get(1).unwrap()).to_string()));
+                            return Ok(Self::Decrease(chunks[1].to_string()));
                         }
                     }
                     "tgl" => {
                         if chunks.len() == 2 {
-                            return Ok(Self::Toggle((*chunks.get(1).unwrap()).to_string()));
+                            return Ok(Self::Toggle(chunks[1].to_string()));
                         }
                     }
                     "cpy" => {
                         if chunks.len() == 3 {
-                            return Ok(Self::Copy(
-                                (*chunks.get(1).unwrap()).to_string(),
-                                (*chunks.get(2).unwrap()).to_string(),
-                            ));
+                            return Ok(Self::Copy(chunks[1].to_string(), chunks[2].to_string()));
                         }
                     }
                     "jnz" => {
                         if chunks.len() == 3 {
-                            return Ok(Self::Jump(
-                                (*chunks.get(1).unwrap()).to_string(),
-                                (*chunks.get(2).unwrap()).to_string(),
-                            ));
+                            return Ok(Self::Jump(chunks[1].to_string(), chunks[2].to_string()));
                         }
                     }
                     _ => (),
@@ -303,13 +297,13 @@ pub mod assembunny2016 {
             }
             cnt += 1;
         }
-        *env.get("a").unwrap()
+        env["a"]
     }
 }
 
 #[cfg(test)]
 mod tests_assembunny2016 {
-    use crate::assembunny2016::*;
+    use crate::assembunny2016::{run_instructions, Instruction};
     use crate::input::collect_from_lines;
     use core::str::FromStr;
 

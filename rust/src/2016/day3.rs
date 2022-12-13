@@ -20,7 +20,7 @@ fn get_input_from_str(string: &str) -> InputContent {
 fn is_triangle(nbs: &[Int]) -> bool {
     let mut sorted = nbs.to_owned();
     sorted.sort_unstable();
-    if let [a, b, c] = &sorted[..] {
+    if let [a, b, c] = &*sorted {
         if a + b > *c {
             return true;
         }

@@ -68,7 +68,7 @@ mod tests {
         assert_eq!(get_generation_count(&input, 8), 10);
         assert_eq!(get_generation_count(&input, 18), 26);
         assert_eq!(get_generation_count(&input, 80), 5934);
-        assert_eq!(get_generation_count(&input, 256), 26984457539);
+        assert_eq!(get_generation_count(&input, 256), 26_984_457_539);
     }
 
     #[test]
@@ -78,6 +78,6 @@ mod tests {
 
     #[test]
     fn test_part2() {
-        assert_eq!(part2(&get_input_from_str(EXAMPLE)), 26984457539);
+        assert_eq!(part2(&get_input_from_str(EXAMPLE)), 26_984_457_539);
     }
 }

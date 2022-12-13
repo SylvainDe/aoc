@@ -9,22 +9,41 @@ real_year=$(date "+%Y")
 day="${1:-$real_day}"
 year="${2:-$real_year}"
 
-# Paths and filenames
+# Option to fix things automatically (at your own risk)
+autofix="1"
+fix_options="--allow-dirty --allow-staged"
+
+# Bin name
 bin="${year}_day${day}"
 
+# Clippy options
+clippy_checks="-D clippy::all
+-D clippy::correctness
+-D clippy::suspicious
+-D clippy::style
+-D clippy::complexity
+-D clippy::perf
+-D clippy::pedantic
+-D clippy::cargo
+-D clippy::nursery"
+clippy_fix_checks="-D clippy::restriction -A clippy::implicit_return"
+
 # Run cargo commands
+if [ "${autofix}" = "1" ]; then
+    cargo fix ${fix_options} --lib
+    cargo fix ${fix_options} --bin "${bin}"
+fi
 cargo test --lib
 cargo test --bin "${bin}" -- --nocapture --test-threads=1
 cargo run --bin "${bin}"
-cargo clippy --bin "${bin}" -- \
-    -D clippy::all \
-    -D clippy::correctness \
-    -D clippy::suspicious \
-    -D clippy::style \
-    -D clippy::complexity \
-    -D clippy::perf \
-    -D clippy::pedantic \
-    -D clippy::cargo \
-    -D clippy::nursery
+if [ "${autofix}" = "1" ]; then
+    cargo clippy --fix ${fix_options} --lib          -- ${clippy_checks} ${clippy_fix_checks}
+    cargo clippy --fix ${fix_options} --bin "${bin}" -- ${clippy_checks} ${clippy_fix_checks}
+fi
+cargo clippy --lib          -- ${clippy_checks}
+cargo clippy --bin "${bin}" -- ${clippy_checks}
+if [ "${autofix}" = "1" ]; then
+    cargo fmt
+fi
 cargo fmt --check
 

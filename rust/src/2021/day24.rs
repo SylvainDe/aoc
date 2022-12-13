@@ -24,14 +24,14 @@ impl FromStr for Instruction {
             None => (),
             Some(&cmd) => match chunks.len() {
                 2 => {
-                    let arg1 = (*chunks.get(1).unwrap()).to_string();
+                    let arg1 = chunks[1].to_string();
                     if cmd == "inp" {
                         return Ok(Self::Input(arg1));
                     }
                 }
                 3 => {
-                    let arg1 = (*chunks.get(1).unwrap()).to_string();
-                    let arg2 = (*chunks.get(2).unwrap()).to_string();
+                    let arg1 = chunks[1].to_string();
+                    let arg2 = chunks[2].to_string();
                     match cmd {
                         "add" => {
                             return Ok(Self::BinaryOp(arg1, arg2, |a1, a2| a1 + a2));
@@ -168,15 +168,15 @@ mod w 2";
     #[test]
     fn test_run_instructions() {
         let input1 = get_input_from_str(EXAMPLE1);
-        assert_eq!(run_instructions(&input1, &vec![3]), (0, -3, 0, 0));
+        assert_eq!(run_instructions(&input1, &[3]), (0, -3, 0, 0));
         assert_eq!(run_instructions_on_nb(&input1, 3), (0, -3, 0, 0));
         let input2 = get_input_from_str(EXAMPLE2);
-        assert_eq!(run_instructions(&input2, &vec![3, 9]), (0, 9, 0, 1));
+        assert_eq!(run_instructions(&input2, &[3, 9]), (0, 9, 0, 1));
         assert_eq!(run_instructions_on_nb(&input2, 39), (0, 9, 0, 1));
-        assert_eq!(run_instructions(&input2, &vec![3, 8]), (0, 8, 0, 0));
+        assert_eq!(run_instructions(&input2, &[3, 8]), (0, 8, 0, 0));
         assert_eq!(run_instructions_on_nb(&input2, 38), (0, 8, 0, 0));
         let input3 = get_input_from_str(EXAMPLE3);
-        assert_eq!(run_instructions(&input3, &vec![7]), (0, 1, 1, 1));
+        assert_eq!(run_instructions(&input3, &[7]), (0, 1, 1, 1));
         assert_eq!(run_instructions_on_nb(&input3, 7), (0, 1, 1, 1));
     }
 

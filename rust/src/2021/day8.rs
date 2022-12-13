@@ -104,7 +104,7 @@ gcafb gcf dcaebfg ecagb gf abcdeg gaef cafbge fdbac fegbdc | fgae cfgab fg bagce
 
     #[test]
     fn test_entry_from_str() {
-        assert_eq!(Entry::from_str("acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | cdfeb fcadb cdfeb cdbaf"), Ok(Entry { signals: ["acedgfb", "cdfbe", "gcdfa", "fbcad", "dab", "cefabd", "cdfgeb", "eafb", "cagedb", "ab"].map(|s| s.to_owned()).to_vec(), output: ["cdfeb", "fcadb", "cdfeb", "cdbaf"].map(|s| s.to_owned()).to_vec() }));
+        assert_eq!(Entry::from_str("acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | cdfeb fcadb cdfeb cdbaf"), Ok(Entry { signals: ["acedgfb", "cdfbe", "gcdfa", "fbcad", "dab", "cefabd", "cdfgeb", "eafb", "cagedb", "ab"].map(ToOwned::to_owned).to_vec(), output: ["cdfeb", "fcadb", "cdfeb", "cdbaf"].map(ToOwned::to_owned).to_vec() }));
     }
 
     #[test]
