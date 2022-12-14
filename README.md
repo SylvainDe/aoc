@@ -25,6 +25,7 @@ Solutions are written in Python and/or Rust.
 |Day 11: Monkey in the Middle|[Problem](https://adventofcode.com/2022/day/11) [Input](https://adventofcode.com/2022/day/11/input)|[puzzle.html](resources/year2022_day11_puzzle.html) [input.txt](resources/year2022_day11_input.txt)|**|[day11.py](python/2022/day11.py)|[-](rust/src/2022/day11.rs)|03:06:34|04:15:35|
 |Day 12: Hill Climbing Algorithm|[Problem](https://adventofcode.com/2022/day/12) [Input](https://adventofcode.com/2022/day/12/input)|[puzzle.html](resources/year2022_day12_puzzle.html) [input.txt](resources/year2022_day12_input.txt)|**|[day12.py](python/2022/day12.py)|[day12.rs](rust/src/2022/day12.rs)|00:54:16|01:00:09|
 |Day 13: Distress Signal|[Problem](https://adventofcode.com/2022/day/13) [Input](https://adventofcode.com/2022/day/13/input)|[puzzle.html](resources/year2022_day13_puzzle.html) [input.txt](resources/year2022_day13_input.txt)|**|[day13.py](python/2022/day13.py)|[-](rust/src/2022/day13.rs)|02:58:00|03:07:48|
+|Day 14: Regolith Reservoir|[Problem](https://adventofcode.com/2022/day/14) [Input](https://adventofcode.com/2022/day/14/input)|[puzzle.html](resources/year2022_day14_puzzle.html) [input.txt](resources/year2022_day14_input.txt)||[-](python/2022/day14.py)|[-](rust/src/2022/day14.rs)|-|-|
 |[2022](https://adventofcode.com/2022)|[Stats](https://adventofcode.com/2022/leaderboard/self)|[stats.txt](misc/leaderboard_self_2022.html)|26|-|-|-|-|
 
 ## [2021](https://adventofcode.com/2021)
