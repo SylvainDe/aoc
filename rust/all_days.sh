@@ -14,8 +14,31 @@ clippy_checks="-D clippy::all
 -D clippy::perf
 -D clippy::pedantic
 -D clippy::cargo
--D clippy::nursery"
-clippy_fix_checks="-D clippy::restriction -A clippy::implicit_return"
+-D clippy::nursery
+-D clippy::restriction
+-A clippy::indexing_slicing
+-A clippy::integer_arithmetic
+-A clippy::modulo_arithmetic
+-A clippy::default_numeric_fallback
+-A clippy::implicit_return
+-A clippy::missing_inline_in_public_items
+-A clippy::unwrap_used
+-A clippy::expect_used
+-A clippy::missing_docs_in_private_items
+-A clippy::pattern_type_mismatch
+-A clippy::exhaustive_enums
+-A clippy::exhaustive_structs
+-A clippy::map_err_ignore
+-A clippy::as_conversions
+-A clippy::shadow_reuse
+-A clippy::shadow_unrelated
+-A clippy::shadow_same
+-A clippy::else_if_without_else
+-A clippy::use_debug
+-A clippy::panic
+-A clippy::print_stdout
+-A clippy::integer_division
+-A clippy::string_slice"
 
 # Run cargo commands
 if [ "${autofix}" = "1" ]; then
@@ -32,7 +55,7 @@ do
 done
 
 if [ "${autofix}" = "1" ]; then
-    cargo clippy --fix ${fix_options} -- ${clippy_checks} ${clippy_fix_checks}
+    cargo clippy --fix ${fix_options} -- ${clippy_checks}
 fi
 cargo clippy -- ${clippy_checks}
 

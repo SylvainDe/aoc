@@ -102,7 +102,7 @@ fn find_pattern(stars: &InputContent) -> (String, Int) {
             return (s, i);
         }
     }
-    ("Not found".to_string(), 0)
+    ("Not found".to_owned(), 0)
 }
 
 fn part1(stars: &InputContent) -> String {
@@ -184,7 +184,7 @@ position=<-3,  6> velocity=< 2, -1>";
 #...#...#.
 #...#...#.
 #...#..###"
-                    .to_string()
+                    .to_owned()
             )
         );
     }

@@ -6,7 +6,7 @@ const INPUT_FILEPATH: &str = "../resources/year2017_day9_input.txt";
 type Int = u32;
 
 fn get_input_from_str(string: &str) -> String {
-    string.to_string()
+    string.to_owned()
 }
 
 fn parse_str(string: &str) -> (Int, Int) {

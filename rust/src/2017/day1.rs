@@ -7,7 +7,7 @@ type Int = u32;
 type InputContent = String;
 
 fn get_input_from_str(string: &str) -> InputContent {
-    string.to_string()
+    string.to_owned()
 }
 
 #[allow(clippy::missing_const_for_fn)]

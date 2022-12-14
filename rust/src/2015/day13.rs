@@ -32,8 +32,8 @@ impl FromStr for HappinessCondition {
             -1
         };
         Ok(Self {
-            name1: get_field("name1")?.as_str().to_string(),
-            name2: get_field("name2")?.as_str().to_string(),
+            name1: get_field("name1")?.as_str().to_owned(),
+            name2: get_field("name2")?.as_str().to_owned(),
             nb: direction * get_field("nb")?.as_str().parse::<Int>().map_err(|_| {})?,
         })
     }
@@ -92,8 +92,8 @@ David would gain 41 happiness units by sitting next to Carol.";
                 "Alice would gain 54 happiness units by sitting next to Bob."
             ),
             Ok(HappinessCondition {
-                name1: "Alice".to_string(),
-                name2: "Bob".to_string(),
+                name1: "Alice".to_owned(),
+                name2: "Bob".to_owned(),
                 nb: 54
             })
         );
@@ -102,8 +102,8 @@ David would gain 41 happiness units by sitting next to Carol.";
                 "Alice would lose 2 happiness units by sitting next to David."
             ),
             Ok(HappinessCondition {
-                name1: "Alice".to_string(),
-                name2: "David".to_string(),
+                name1: "Alice".to_owned(),
+                name2: "David".to_owned(),
                 nb: -2
             })
         );

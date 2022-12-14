@@ -52,7 +52,7 @@ fn syntax_error_score(s: &str) -> Int {
             '>' => 25137,
             _ => panic!("Unexpected value {}", c),
         },
-        _ => 0,
+        ParseResult::Success | ParseResult::Incomplete(_) => 0,
     }
 }
 
@@ -78,7 +78,7 @@ fn completion_score_for_missing(s: &str) -> Int {
 fn completion_score(s: &str) -> Int {
     match parse_string(s) {
         ParseResult::Incomplete(missing) => completion_score_for_missing(&missing),
-        _ => 0,
+        ParseResult::Success | ParseResult::Corrupted(_) => 0,
     }
 }
 
@@ -169,27 +169,27 @@ mod tests {
         // Complete by adding }}]])})]
         assert_eq!(
             parse_string("[({(<(())[]>[[{[]{<()<>>"),
-            ParseResult::Incomplete("}}]])})]".to_string())
+            ParseResult::Incomplete("}}]])})]".to_owned())
         );
         // Complete by adding )}>]})
         assert_eq!(
             parse_string("[(()[<>])]({[<{<<[]>>("),
-            ParseResult::Incomplete(")}>]})".to_string())
+            ParseResult::Incomplete(")}>]})".to_owned())
         );
         // Complete by adding }}>}>))))
         assert_eq!(
             parse_string("(((({<>}<{<{<>}{[]{[]{}"),
-            ParseResult::Incomplete("}}>}>))))".to_string())
+            ParseResult::Incomplete("}}>}>))))".to_owned())
         );
         // Complete by adding ]]}}]}]}>
         assert_eq!(
             parse_string("{<[[]]>}<{[{[{[]{()[[[]"),
-            ParseResult::Incomplete("]]}}]}]}>".to_string())
+            ParseResult::Incomplete("]]}}]}]}>".to_owned())
         );
         // Complete by adding ])}>
         assert_eq!(
             parse_string("<{([{{}}[<[[[<>{}]]]>[]]"),
-            ParseResult::Incomplete("])}>".to_string())
+            ParseResult::Incomplete("])}>".to_owned())
         );
     }
 

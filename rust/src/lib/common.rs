@@ -12,7 +12,7 @@ pub mod input {
             None => "",
             Some(l) => l,
         }
-        .to_string()
+        .to_owned()
     }
 
     #[must_use]
@@ -204,27 +204,27 @@ pub mod assembunny2016 {
                 Some(&cmd) => match cmd {
                     "inc" => {
                         if chunks.len() == 2 {
-                            return Ok(Self::Increase(chunks[1].to_string()));
+                            return Ok(Self::Increase(chunks[1].to_owned()));
                         }
                     }
                     "dec" => {
                         if chunks.len() == 2 {
-                            return Ok(Self::Decrease(chunks[1].to_string()));
+                            return Ok(Self::Decrease(chunks[1].to_owned()));
                         }
                     }
                     "tgl" => {
                         if chunks.len() == 2 {
-                            return Ok(Self::Toggle(chunks[1].to_string()));
+                            return Ok(Self::Toggle(chunks[1].to_owned()));
                         }
                     }
                     "cpy" => {
                         if chunks.len() == 3 {
-                            return Ok(Self::Copy(chunks[1].to_string(), chunks[2].to_string()));
+                            return Ok(Self::Copy(chunks[1].to_owned(), chunks[2].to_owned()));
                         }
                     }
                     "jnz" => {
                         if chunks.len() == 3 {
-                            return Ok(Self::Jump(chunks[1].to_string(), chunks[2].to_string()));
+                            return Ok(Self::Jump(chunks[1].to_owned(), chunks[2].to_owned()));
                         }
                     }
                     _ => (),
@@ -261,23 +261,23 @@ pub mod assembunny2016 {
     pub fn run_instructions(instructions: &InputContent, a_value: Int, c_value: Int) -> Int {
         let mut instructions = instructions.clone();
         let mut env = HashMap::from([
-            ("a".to_string(), a_value),
-            ("b".to_string(), 0),
-            ("c".to_string(), c_value),
-            ("d".to_string(), 0),
+            ("a".to_owned(), a_value),
+            ("b".to_owned(), 0),
+            ("c".to_owned(), c_value),
+            ("d".to_owned(), 0),
         ]);
         let mut cnt = 0;
         while let Some(ins) = instructions.get(cnt as usize) {
             match ins {
                 Instruction::Copy(x, y) => {
                     let x = eval_string(x, &env);
-                    env.insert(y.to_string(), x);
+                    env.insert(y.clone(), x);
                 }
                 Instruction::Increase(x) => {
-                    env.entry(x.to_string()).and_modify(|e| *e += 1);
+                    env.entry(x.clone()).and_modify(|e| *e += 1);
                 }
                 Instruction::Decrease(x) => {
-                    env.entry(x.to_string()).and_modify(|e| *e -= 1);
+                    env.entry(x.clone()).and_modify(|e| *e -= 1);
                 }
                 Instruction::Toggle(x) => {
                     let x = eval_string(x, &env);
@@ -326,23 +326,23 @@ dec a";
     fn test_instruction_from_str() {
         assert_eq!(
             Instruction::from_str("cpy 41 a"),
-            Ok(Instruction::Copy("41".to_string(), "a".to_string()))
+            Ok(Instruction::Copy("41".to_owned(), "a".to_owned()))
         );
         assert_eq!(
             Instruction::from_str("jnz a 2"),
-            Ok(Instruction::Jump("a".to_string(), "2".to_string()))
+            Ok(Instruction::Jump("a".to_owned(), "2".to_owned()))
         );
         assert_eq!(
             Instruction::from_str("inc a"),
-            Ok(Instruction::Increase("a".to_string()))
+            Ok(Instruction::Increase("a".to_owned()))
         );
         assert_eq!(
             Instruction::from_str("dec a"),
-            Ok(Instruction::Decrease("a".to_string()))
+            Ok(Instruction::Decrease("a".to_owned()))
         );
         assert_eq!(
             Instruction::from_str("tgl a"),
-            Ok(Instruction::Toggle("a".to_string()))
+            Ok(Instruction::Toggle("a".to_owned()))
         );
         assert!(Instruction::from_str("").is_err());
         assert!(Instruction::from_str("abc").is_err());

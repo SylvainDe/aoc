@@ -24,14 +24,14 @@ impl FromStr for Instruction {
             None => (),
             Some(&cmd) => match chunks.len() {
                 2 => {
-                    let arg1 = chunks[1].to_string();
+                    let arg1 = chunks[1].to_owned();
                     if cmd == "inp" {
                         return Ok(Self::Input(arg1));
                     }
                 }
                 3 => {
-                    let arg1 = chunks[1].to_string();
-                    let arg2 = chunks[2].to_string();
+                    let arg1 = chunks[1].to_owned();
+                    let arg2 = chunks[2].to_owned();
                     match cmd {
                         "add" => {
                             return Ok(Self::BinaryOp(arg1, arg2, |a1, a2| a1 + a2));
@@ -89,20 +89,20 @@ fn run_instructions_on_nb(instructions: &InputContent, input: u64) -> (Int, Int,
 
 fn run_instructions(instructions: &InputContent, input: &[Int]) -> (Int, Int, Int, Int) {
     let mut env: HashMap<String, Int> = HashMap::from([
-        ("w".to_string(), 0),
-        ("x".to_string(), 0),
-        ("y".to_string(), 0),
-        ("z".to_string(), 0),
+        ("w".to_owned(), 0),
+        ("x".to_owned(), 0),
+        ("y".to_owned(), 0),
+        ("z".to_owned(), 0),
     ]);
     let mut input_iter = input.iter();
     for ins in instructions {
         match ins {
             Instruction::Input(s1) => {
-                env.insert(s1.to_string(), *input_iter.next().unwrap());
+                env.insert(s1.clone(), *input_iter.next().unwrap());
             }
             Instruction::BinaryOp(s1, s2, f) => {
                 let res = f(eval_string(s1, &env), eval_string(s2, &env));
-                env.insert(s1.to_string(), res);
+                env.insert(s1.clone(), res);
             }
         }
     }

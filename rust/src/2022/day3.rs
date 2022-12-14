@@ -78,12 +78,12 @@ mod tests {
     const EXAMPLE: &str = "";
 
     #[test]
-    fn test_double_compartment_priority() {
+    const fn test_double_compartment_priority() {
         // TODO
     }
 
     #[test]
-    fn test_badge_priority() {
+    const fn test_badge_priority() {
         // TODO
     }
 
