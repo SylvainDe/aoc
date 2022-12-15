@@ -21,38 +21,34 @@ def distance(pos1, pos2):
     x2, y2 = pos2
     return abs(x1 - x2) + abs(y1 - y2)
 
-def get_pos_without_beacons(sensors, y_arg=10):
+def get_pos_without_beacons(sensors, y_arg):
     points = set()
-    beacon_pos = set()
     for s, b in sensors:
-        beacon_pos.add(b)
         sx, sy = s
         closest = (sx, y_arg)
         d_b = distance(s, b)
         d_closest = distance(s, closest)
         l = d_b - d_closest
         if l >= 0:
-            for dx in range(l+1):
-                p = (sx-dx, y_arg)
-                assert distance(s, p) <= d_b
-                points.add(p) 
+            for dx in range(-l, l+1):
                 p = (sx+dx, y_arg)
                 assert distance(s, p) <= d_b
                 points.add(p)
-    points = {p for p in points if p not in beacon_pos}
-    return len(points)
+    return len(points - set(b for s, b in sensors))
 
-def get_pos_with_beacons_naive(sensors, val_max=20):
+
+def get_pos_with_beacons_naive(sensors, val_max):
+    sensors_dist = { s: distance(s, b) for s, b in sensors }
     for x in range(val_max+1):
         for y in range(val_max+1):
             p = (x, y)
-            for s, b in sensors:
-                d = distance(s, b)
+            for s, d in sensors_dist.items():
                 d2 = distance(s, p)
                 if d2 <= d:
                     break
             else:
                 return x * 4000000 + y
+
 
 def run_tests():
     sensors = get_sensor_from_lines("""Sensor at x=2, y=18: closest beacon is at x=-2, y=15
