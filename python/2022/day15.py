@@ -1,6 +1,7 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
 import re
+import itertools
 
 # Sensor at x=2, y=18: closest beacon is at x=-2, y=15
 sensors_re = re.compile(r"Sensor at x=(-?\d+), y=(-?\d+): closest beacon is at x=(-?\d+), y=(-?\d+)")
@@ -30,54 +31,48 @@ def get_pos_without_beacons(sensors, y_arg):
         d_closest = distance(s, closest)
         l = d_b - d_closest
         if l >= 0:
-            for dx in range(-l, l+1):
-                p = (sx+dx, y_arg)
-                assert distance(s, p) <= d_b
-                points.add(p)
+            new_points = [(sx+dx, y_arg) for dx in range(-l, l+1)]
+            # for p in new_points:
+            #     assert distance(s, p) <= d_b
+            points.update(new_points)
     return len(points - set(b for s, b in sensors))
 
 
 def get_pos_with_beacons_naive(sensors, val_max):
     sensors_dist = { s: distance(s, b) for s, b in sensors }
-    for x in range(val_max+1):
-        for y in range(val_max+1):
-            p = (x, y)
-            for s, d in sensors_dist.items():
-                d2 = distance(s, p)
-                if d2 <= d:
-                    break
-            else:
-                return x * 4000000 + y
+    for p in itertools.product(range(val_max+1), repeat=2):
+        if all(distance(s, p) > d for s, d in sensors_dist.items()):
+            x, y = p
+            return x * 4000000 + y
+
+
+def get_manhattan_circle(center, radius):
+    x, y = center
+    points = set()
+    for i in range(radius+1):
+       # Note: tiny overlap which could probably be optimised with better code
+       points.add((i+x, y+radius-i))  # upper-right
+       points.add((i+x, y-radius+i))  # upper-left
+       points.add((i+x-radius, y+i))  # lower-right
+       points.add((i+x-radius, y-i))  # lower-left
+    # for p in points:
+    #     assert distance(center, p) == radius
+    return points
+
 
 def get_pos_with_beacons(sensors, val_max):
     # Assume we'll be at the intersection of at least 3 squares/circles
     sensors_dist = { s: distance(s, b) for s, b in sensors }
     points = dict()
-    for (x, y), d in sensors_dist.items():
-        d2 = d+1
-        for i in range(d+1):
-            p = (x+i, y+d2-i)
-#            assert distance((x, y), p) == d2
-            points.setdefault(p, set()).add((x, y))
-
-            p = (x+i, y-d2+i)
-#            assert distance((x, y), p) == d2
-            points.setdefault(p, set()).add((x, y))
-
-            p = (x-d2+i, y+i)
-#            assert distance((x, y), p) == d2
-            points.setdefault(p, set()).add((x, y))
-
-            p = (x+d2-i, y+i)
-#            assert distance((x, y), p) == d2
-            points.setdefault(p, set()).add((x, y))
-    for (x, y), lst in points.items():
+    for s, d in sensors_dist.items():
+        for p in get_manhattan_circle(s, d+1):
+            points.setdefault(p, set()).add(s)
+    for pos, lst in points.items():
+        x, y = pos
         if 0 <= x <= val_max and 0 <= y <= val_max and len(lst) >= 3:
-            for s, d in sensors_dist.items():
-                if distance(s, (x, y)) <= d:
-                    break
-            else:
+            if all(distance(s, pos) > d for s, d in sensors_dist.items()):
                 return x * 4000000 + y
+
 
 def run_tests():
     sensors = get_sensor_from_lines("""Sensor at x=2, y=18: closest beacon is at x=-2, y=15
@@ -96,13 +91,14 @@ Sensor at x=14, y=3: closest beacon is at x=15, y=3
 Sensor at x=20, y=1: closest beacon is at x=15, y=3""")
     assert get_pos_without_beacons(sensors, y_arg=10) == 26
     assert get_pos_with_beacons_naive(sensors, val_max=20) == 56000011
+    assert get_manhattan_circle((100, 200), 5) == set([(95, 200), (96, 199), (96, 201), (97, 198), (97, 202), (98, 197), (98, 203), (99, 196), (99, 204), (100, 195), (100, 205), (101, 196), (101, 204), (102, 197), (102, 203), (103, 198), (103, 202), (104, 199), (104, 201), (105, 200)])
     assert get_pos_with_beacons(sensors, val_max=20) == 56000011
 
 
 def get_solutions():
     sensors = get_sensor_from_file()
-    print(get_pos_without_beacons(sensors, y_arg=2000000))
-    # print(get_pos_with_beacons(sensors, val_max=4000000)) - still a bit slow...
+    print(get_pos_without_beacons(sensors, y_arg=2000000) == 4811413)
+    # print(get_pos_with_beacons(sensors, val_max=4000000) == 13171855019123) # Still a bit slow :(
 
 
 if __name__ == "__main__":
