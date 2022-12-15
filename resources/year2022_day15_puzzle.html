@@ -181,11 +181,17 @@ Sensor at x=20, y=1: closest beacon is at x=15, y=3
 <p>In this example, in the row where <code>y=10</code>, there are <code><em>26</em></code> positions where a beacon cannot be present.</p>
 <p>Consult the report from the sensors you just deployed. <em>In the row where <code>y=2000000</code>, how many positions cannot contain a beacon?</em></p>
 </article>
-<p>To begin, <a href="15/input" target="_blank">get your puzzle input</a>.</p>
-<form method="post" action="15/answer"><input type="hidden" name="level" value="1"/><p>Answer: <input type="text" name="answer" autocomplete="off"/> <input type="submit" value="[Submit]"/></p></form>
+<p>Your puzzle answer was <code>4811413</code>.</p><p class="day-success">The first half of this puzzle is complete! It provides one gold star: *</p>
+<article class="day-desc"><h2 id="part2">--- Part Two ---</h2><p>Your handheld device indicates that the distress signal is coming from a beacon nearby. The distress beacon is not detected by any sensor, but the distress beacon must have <code>x</code> and <code>y</code> coordinates each no lower than <code>0</code> and no larger than <code>4000000</code>.</p>
+<p>To isolate the distress beacon's signal, you need to determine its <em>tuning frequency</em>, which can be found by multiplying its <code>x</code> coordinate by <code>4000000</code> and then adding its <code>y</code> coordinate.</p>
+<p>In the example above, the search space is smaller: instead, the <code>x</code> and <code>y</code> coordinates can each be at most <code>20</code>. With this reduced search area, there is only a single position that could have a beacon: <code>x=14, y=11</code>. The tuning frequency for this distress beacon is <code><em>56000011</em></code>.</p>
+<p>Find the only possible position for the distress beacon. <em>What is its tuning frequency?</em></p>
+</article>
+<form method="post" action="15/answer"><input type="hidden" name="level" value="2"/><p>Answer: <input type="text" name="answer" autocomplete="off"/> <input type="submit" value="[Submit]"/></p></form>
+<p>Although it hasn't changed, you can still <a href="15/input" target="_blank">get your puzzle input</a>.</p>
 <p>You can also <span class="share">[Share<span class="share-content">on
-  <a href="https://twitter.com/intent/tweet?text=%22Beacon+Exclusion+Zone%22+%2D+Day+15+%2D+Advent+of+Code+2022&amp;url=https%3A%2F%2Fadventofcode%2Ecom%2F2022%2Fday%2F15&amp;related=ericwastl&amp;hashtags=AdventOfCode" target="_blank">Twitter</a>
-  <a href="javascript:void(0);" onclick="var mastodon_instance=prompt('Mastodon Instance / Server Name?'); if(typeof mastodon_instance==='string' && mastodon_instance.length){this.href='https://'+mastodon_instance+'/share?text=%22Beacon+Exclusion+Zone%22+%2D+Day+15+%2D+Advent+of+Code+2022+%23AdventOfCode+https%3A%2F%2Fadventofcode%2Ecom%2F2022%2Fday%2F15'}else{return false;}" target="_blank">Mastodon</a
+  <a href="https://twitter.com/intent/tweet?text=I%27ve+completed+Part+One+of+%22Beacon+Exclusion+Zone%22+%2D+Day+15+%2D+Advent+of+Code+2022&amp;url=https%3A%2F%2Fadventofcode%2Ecom%2F2022%2Fday%2F15&amp;related=ericwastl&amp;hashtags=AdventOfCode" target="_blank">Twitter</a>
+  <a href="javascript:void(0);" onclick="var mastodon_instance=prompt('Mastodon Instance / Server Name?'); if(typeof mastodon_instance==='string' && mastodon_instance.length){this.href='https://'+mastodon_instance+'/share?text=I%27ve+completed+Part+One+of+%22Beacon+Exclusion+Zone%22+%2D+Day+15+%2D+Advent+of+Code+2022+%23AdventOfCode+https%3A%2F%2Fadventofcode%2Ecom%2F2022%2Fday%2F15'}else{return false;}" target="_blank">Mastodon</a
 ></span>]</span> this puzzle.</p>
 </main>
 
