@@ -1,3 +1,4 @@
+// vi: set shiftwidth=4 tabstop=4 expandtab:
 use common::assembunny2016::run_instructions;
 use common::assembunny2016::Instruction;
 use common::input::collect_from_lines;

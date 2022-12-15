@@ -1,4 +1,5 @@
 // First line
+// vi: set shiftwidth=4 tabstop=4 expandtab:
 
 pub mod input {
     use std::borrow::ToOwned;

@@ -10,7 +10,7 @@ day="${1:-$real_day}"
 year="${2:-$real_year}"
 
 # Option to fix things automatically (at your own risk)
-autofix="1"
+autofix="0"
 fix_options="--allow-dirty --allow-staged"
 
 # Bin name

@@ -2,7 +2,7 @@ set -x
 set -e
 
 # Option to fix things automatically (at your own risk)
-autofix="1"
+autofix="0"
 fix_options="--allow-dirty --allow-staged"
 
 # Clippy options

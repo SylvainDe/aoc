@@ -1,3 +1,4 @@
+// vi: set shiftwidth=4 tabstop=4 expandtab:
 use common::input::get_first_line_from_file;
 use lazy_static::lazy_static;
 use regex::Regex;

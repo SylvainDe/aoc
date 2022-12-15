@@ -1,3 +1,4 @@
+// vi: set shiftwidth=4 tabstop=4 expandtab:
 use common::input::collect_from_lines;
 use common::input::get_file_content;
 use itertools::Itertools;

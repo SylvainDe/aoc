@@ -1,3 +1,4 @@
+// vi: set shiftwidth=4 tabstop=4 expandtab:
 use common::input::get_file_content;
 use common::point_module;
 use std::collections::HashMap;
