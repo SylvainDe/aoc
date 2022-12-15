@@ -134,11 +134,40 @@ bbb.ffff<em>F</em>f
 <p>In this example, the areas of coordinates A, B, C, and F are infinite - while not shown here, their areas extend forever outside the visible grid. However, the areas of coordinates D and E are finite: D is closest to 9 locations, and E is closest to 17 (both including the coordinate's location itself).  Therefore, in this example, the size of the largest area is <em>17</em>.</p>
 <p><em>What is the size of the largest area</em> that isn't infinite?</p>
 </article>
-<p>To begin, <a href="6/input" target="_blank">get your puzzle input</a>.</p>
-<form method="post" action="6/answer"><input type="hidden" name="level" value="1"/><p>Answer: <input type="text" name="answer" autocomplete="off"/> <input type="submit" value="[Submit]"/></p></form>
+<p>Your puzzle answer was <code>4186</code>.</p><article class="day-desc"><h2 id="part2">--- Part Two ---</h2><p>On the other hand, <em>if the coordinates are safe</em>, maybe the best you can do is try to find a <em>region</em> near as many coordinates as possible.</p>
+<p>For example, suppose you want the sum of the <a href="https://en.wikipedia.org/wiki/Taxicab_geometry">Manhattan distance</a> to all of the coordinates to be <em>less than 32</em>.  For each location, add up the distances to all of the given coordinates; if the total of those distances is less than 32, that location is within the desired region. Using the same coordinates as above, the resulting region looks like this:</p>
+<pre><code>..........
+.A........
+..........
+...#<em>#</em>#..C.
+..#D###...
+..###E#...
+.B.###....
+..........
+..........
+........F.
+</code></pre>
+<p>In particular, consider the highlighted location <code>4,3</code> located at the top middle of the region. Its calculation is as follows, where <code>abs()</code> is the <a href="https://en.wikipedia.org/wiki/Absolute_value">absolute value</a> function:</p>
+<ul>
+<li>Distance to coordinate A: <code>abs(4-1) + abs(3-1) = &nbsp;5</code></li>
+<li>Distance to coordinate B: <code>abs(4-1) + abs(3-6) = &nbsp;6</code></li>
+<li>Distance to coordinate C: <code>abs(4-8) + abs(3-3) = &nbsp;4</code></li>
+<li>Distance to coordinate D: <code>abs(4-3) + abs(3-4) = &nbsp;2</code></li>
+<li>Distance to coordinate E: <code>abs(4-5) + abs(3-5) = &nbsp;3</code></li>
+<li>Distance to coordinate F: <code>abs(4-8) + abs(3-9) = 10</code></li>
+<li>Total distance: <code>5 + 6 + 4 + 2 + 3 + 10 = 30</code></li>
+</ul>
+<p>Because the total distance to all coordinates (<code>30</code>) is less than 32, the location is <em>within</em> the region.</p>
+<p>This region, which also includes coordinates D and E, has a total size of <em>16</em>.</p>
+<p>Your actual region will need to be much larger than this example, though, instead including all locations with a total distance of less than <em>10000</em>.</p>
+<p><em>What is the size of the region containing all locations which have a total distance to all given coordinates of less than 10000?</em></p>
+</article>
+<p>Your puzzle answer was <code>45509</code>.</p><p class="day-success">Both parts of this puzzle are complete! They provide two gold stars: **</p>
+<p>At this point, you should <a href="/2018">return to your Advent calendar</a> and try another puzzle.</p>
+<p>If you still want to see it, you can <a href="6/input" target="_blank">get your puzzle input</a>.</p>
 <p>You can also <span class="share">[Share<span class="share-content">on
-  <a href="https://twitter.com/intent/tweet?text=%22Chronal+Coordinates%22+%2D+Day+6+%2D+Advent+of+Code+2018&amp;url=https%3A%2F%2Fadventofcode%2Ecom%2F2018%2Fday%2F6&amp;related=ericwastl&amp;hashtags=AdventOfCode" target="_blank">Twitter</a>
-  <a href="javascript:void(0);" onclick="var mastodon_instance=prompt('Mastodon Instance / Server Name?'); if(typeof mastodon_instance==='string' && mastodon_instance.length){this.href='https://'+mastodon_instance+'/share?text=%22Chronal+Coordinates%22+%2D+Day+6+%2D+Advent+of+Code+2018+%23AdventOfCode+https%3A%2F%2Fadventofcode%2Ecom%2F2018%2Fday%2F6'}else{return false;}" target="_blank">Mastodon</a
+  <a href="https://twitter.com/intent/tweet?text=I%27ve+completed+%22Chronal+Coordinates%22+%2D+Day+6+%2D+Advent+of+Code+2018&amp;url=https%3A%2F%2Fadventofcode%2Ecom%2F2018%2Fday%2F6&amp;related=ericwastl&amp;hashtags=AdventOfCode" target="_blank">Twitter</a>
+  <a href="javascript:void(0);" onclick="var mastodon_instance=prompt('Mastodon Instance / Server Name?'); if(typeof mastodon_instance==='string' && mastodon_instance.length){this.href='https://'+mastodon_instance+'/share?text=I%27ve+completed+%22Chronal+Coordinates%22+%2D+Day+6+%2D+Advent+of+Code+2018+%23AdventOfCode+https%3A%2F%2Fadventofcode%2Ecom%2F2018%2Fday%2F6'}else{return false;}" target="_blank">Mastodon</a
 ></span>]</span> this puzzle.</p>
 </main>
 
