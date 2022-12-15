@@ -49,6 +49,35 @@ def get_pos_with_beacons_naive(sensors, val_max):
             else:
                 return x * 4000000 + y
 
+def get_pos_with_beacons(sensors, val_max):
+    # Assume we'll be at the intersection of at least 3 squares/circles
+    sensors_dist = { s: distance(s, b) for s, b in sensors }
+    points = dict()
+    for (x, y), d in sensors_dist.items():
+        d2 = d+1
+        for i in range(d+1):
+            p = (x+i, y+d2-i)
+#            assert distance((x, y), p) == d2
+            points.setdefault(p, set()).add((x, y))
+
+            p = (x+i, y-d2+i)
+#            assert distance((x, y), p) == d2
+            points.setdefault(p, set()).add((x, y))
+
+            p = (x-d2+i, y+i)
+#            assert distance((x, y), p) == d2
+            points.setdefault(p, set()).add((x, y))
+
+            p = (x+d2-i, y+i)
+#            assert distance((x, y), p) == d2
+            points.setdefault(p, set()).add((x, y))
+    for (x, y), lst in points.items():
+        if 0 <= x <= val_max and 0 <= y <= val_max and len(lst) >= 3:
+            for s, d in sensors_dist.items():
+                if distance(s, (x, y)) <= d:
+                    break
+            else:
+                return x * 4000000 + y
 
 def run_tests():
     sensors = get_sensor_from_lines("""Sensor at x=2, y=18: closest beacon is at x=-2, y=15
@@ -67,12 +96,13 @@ Sensor at x=14, y=3: closest beacon is at x=15, y=3
 Sensor at x=20, y=1: closest beacon is at x=15, y=3""")
     assert get_pos_without_beacons(sensors, y_arg=10) == 26
     assert get_pos_with_beacons_naive(sensors, val_max=20) == 56000011
+    assert get_pos_with_beacons(sensors, val_max=20) == 56000011
 
 
 def get_solutions():
     sensors = get_sensor_from_file()
     print(get_pos_without_beacons(sensors, y_arg=2000000))
-#    print(get_pos_with_beacons_naive(sensors, val_max=4000000))
+    # print(get_pos_with_beacons(sensors, val_max=4000000)) - still a bit slow...
 
 
 if __name__ == "__main__":
