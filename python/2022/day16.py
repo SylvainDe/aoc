@@ -24,7 +24,7 @@ def get_valves_from_file(file_path="../../resources/year2022_day16_input.txt"):
 
 
 def release_pressure(valves, start_time=30, start_pos="AA"):
-    sorted_valves = sorted((v.flow, v.id) for v in valves)
+    sorted_valves = sorted(((v.flow, v.id) for v in valves), reverse=True)
     valves = { v.id: v for v in valves }
     heap = [(0, -start_time, tuple(), start_pos)] # (-pressure, time, open, path, pos)
     max_pressure = 0
@@ -32,16 +32,17 @@ def release_pressure(valves, start_time=30, start_pos="AA"):
         n_pressure, n_time, open_, pos = heapq.heappop(heap)
         pressure = -n_pressure
         time = -n_time
-        valve = valves[pos]
         if time <= 0:
             continue
+        valve = valves[pos]
         open_set = set(open_)
         rem_time = time - 1
         if pressure > max_pressure:
             max_pressure = pressure
-        still_closed = [f for f, id_ in sorted_valves if id_ not in open_set]
-        max_reachable = sum(t * f for t, f in zip(reversed(range(rem_time%2, rem_time+1, 2)), reversed(still_closed)))
-        if pressure + max_reachable < max_pressure:
+        still_closed = (f for f, id_ in sorted_valves if id_ not in open_set)
+        usable_times = reversed(range(rem_time%2, rem_time+1, 2))
+        max_reachable = sum(t * f for t, f in zip(usable_times, still_closed))
+        if pressure + max_reachable <= max_pressure:
             continue
         # Open at current position
         if valve.id not in open_set and valve.flow:
@@ -75,10 +76,12 @@ Valve HH has flow rate=22; tunnel leads to valve GG
 Valve II has flow rate=0; tunnels lead to valves AA, JJ
 Valve JJ has flow rate=21; tunnel leads to valve II""")
     assert release_pressure(valves) == 1651
+    # print(release_pressure_with_elephant(valves))
 
 def get_solutions():
     valves = get_valves_from_file()
-    # print(release_pressure(valves)) - super slow :(
+    print(release_pressure(valves) == 1737)
+    # print(release_pressure_with_elephant(valves))
 
 
 if __name__ == "__main__":
