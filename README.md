@@ -27,8 +27,8 @@ Solutions are written in Python and/or Rust.
 |Day 13: Distress Signal|[Problem](https://adventofcode.com/2022/day/13) [Input](https://adventofcode.com/2022/day/13/input)|[puzzle.html](resources/year2022_day13_puzzle.html) [input.txt](resources/year2022_day13_input.txt)|**|[day13.py](python/2022/day13.py)|[-](rust/src/2022/day13.rs)|02:58:00|03:07:48|
 |Day 14: Regolith Reservoir|[Problem](https://adventofcode.com/2022/day/14) [Input](https://adventofcode.com/2022/day/14/input)|[puzzle.html](resources/year2022_day14_puzzle.html) [input.txt](resources/year2022_day14_input.txt)|**|[day14.py](python/2022/day14.py)|[-](rust/src/2022/day14.rs)|02:47:59|02:52:12|
 |Day 15: Beacon Exclusion Zone|[Problem](https://adventofcode.com/2022/day/15) [Input](https://adventofcode.com/2022/day/15/input)|[puzzle.html](resources/year2022_day15_puzzle.html) [input.txt](resources/year2022_day15_input.txt)|**|[day15.py](python/2022/day15.py)|[-](rust/src/2022/day15.rs)|00:22:29|01:24:20|
-|Day 16: Proboscidea Volcanium|[Problem](https://adventofcode.com/2022/day/16) [Input](https://adventofcode.com/2022/day/16/input)|[puzzle.html](resources/year2022_day16_puzzle.html) [input.txt](resources/year2022_day16_input.txt)|*|[day16.py](python/2022/day16.py)|[-](rust/src/2022/day16.rs)|01:18:59|-|
-|[2022](https://adventofcode.com/2022)|[Stats](https://adventofcode.com/2022/leaderboard/self)|[stats.txt](misc/leaderboard_self_2022.html)|31|-|-|-|-|
+|Day 16: Proboscidea Volcanium|[Problem](https://adventofcode.com/2022/day/16) [Input](https://adventofcode.com/2022/day/16/input)|[puzzle.html](resources/year2022_day16_puzzle.html) [input.txt](resources/year2022_day16_input.txt)|**|[day16.py](python/2022/day16.py)|[-](rust/src/2022/day16.rs)|01:18:59|03:30:54|
+|[2022](https://adventofcode.com/2022)|[Stats](https://adventofcode.com/2022/leaderboard/self)|[stats.txt](misc/leaderboard_self_2022.html)|32|-|-|-|-|
 
 ## [2021](https://adventofcode.com/2021)
 |Day|URLs|Puzzle & Input|Stars|Python|Rust|Time part 1|Time part 2|
@@ -258,7 +258,7 @@ Solutions are written in Python and/or Rust.
 |13||**|**|||**|**|**|10: **********|
 |14|**|**|||**|**|**|**|12: ************|
 |15||**||||**|**|**| 8: ********|
-|16||**|**|||**|**|*| 9: *********|
+|16||**|**|||**|**|**|10: **********|
 |17|**|**||||**|**|| 8: ********|
 |18||**|||*|**|**|| 7: *******|
 |19||*||||**|**|| 5: *****|
@@ -268,4 +268,4 @@ Solutions are written in Python and/or Rust.
 |23||**||||**|*|| 5: *****|
 |24||**|||**|**||| 6: ******|
 |25||||||**|*|| 3: ***|
-|Total|25|42|28|20|28|50|46|31|270|
+|Total|25|42|28|20|28|50|46|32|271|
