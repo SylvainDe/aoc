@@ -73,7 +73,7 @@ def can_take_pos(fallen_rocks, rock, x, y):
     return all(0 <= sr[1] < WIDTH and sr not in fallen_rocks
                for sr in shift_rock(rock, x, y))
 
-def simulate(streams, nb_rocks):
+def simulate(streams, nb_rocks, skip_optim=False):
     # Cycle stream and rock
     stream_iter = itertools.cycle(enumerate(streams))
     rock_iter = itertools.cycle(enumerate(ROCKS))
@@ -83,10 +83,10 @@ def simulate(streams, nb_rocks):
     heights = dict()
     for i, (rock_idx, r) in zip(range(nb_rocks), rock_iter):
         max_x = max(r[0] for r in fallen_rocks)
-        last_level = tuple((max_x, y) in fallen_rocks for y in range(WIDTH))
+        last_level = tuple((x, y) in fallen_rocks for y in range(WIDTH) for x in range(max_x - 6, max_x))
         indices = (rock_idx, stream_idx, last_level)
         heights[i] = max_x
-        if indices in indices_seen:
+        if not skip_optim and indices in indices_seen:
             #      i2   i
             # |-----|---|---| ... |---|-|
             #    A    B   B         B  C
@@ -99,10 +99,10 @@ def simulate(streams, nb_rocks):
             nb_cycles, rem = divmod(after_i2, cycle)
             height_cycle = heights[i] - heights[i2]
             res = nb_cycles * height_cycle + heights[i2 + rem]
-            print("Index", i, "and", i2, "look similar. We have a cycle of length", cycle)
-            print("We have", nb_cycles, "full cycles and", rem, "are remaining")
-            print("A cycle has height", height_cycle, "for a result", res)
-            print()
+            # print("Index", i, "and", i2, "look similar. We have a cycle of length", cycle)
+            # print("We have", nb_cycles, "full cycles and", rem, "are remaining")
+            # print("A cycle has height", height_cycle, "for a result for ", nb_rocks, "of", res)
+            # print()
             return res
         indices_seen[indices] = i
         x, y = max_x + 1 + 3, 2
@@ -124,14 +124,21 @@ def simulate(streams, nb_rocks):
 
 def run_tests():
     streams = get_streams_from_line(">>><<><>><<<>><>>><<<>>><<<><<<>><>><<>>")
+    assert simulate(streams, 2022, skip_optim=True) == 3068
     assert simulate(streams, 2022) == 3068
+    # Test that optimisation seems to work on arbitrary values
+    # for i in (2023, 2050, 2080): #range(2022, 2080):
+    #     assert simulate(streams, i) == simulate(streams, i, skip_optim=True)
     assert simulate(streams, 1000000000000) == 1514285714288
 
 
 def get_solutions():
     streams = get_streams_from_file()
     print(simulate(streams, 2022) == 3175)
-    print(simulate(streams, 1000000000000)) # WRONG
+    # Test that optimisation seems to work on arbitrary values
+    # for i in range(2178, 2230):
+    #     assert simulate(streams, i) == simulate(streams, i, skip_optim=True)
+    print(simulate(streams, 1000000000000) == 1555113636385)
 
 if __name__ == "__main__":
     begin = datetime.datetime.now()
