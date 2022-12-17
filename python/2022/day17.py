@@ -74,16 +74,42 @@ def can_take_pos(fallen_rocks, rock, x, y):
                for sr in shift_rock(rock, x, y))
 
 def simulate(streams, nb_rocks):
-    # Cycle stream and rock - maybe we could find LCM for optimisation
-    stream_iter = itertools.cycle(streams)
-    rock_iter = itertools.cycle(ROCKS)
+    # Cycle stream and rock
+    stream_iter = itertools.cycle(enumerate(streams))
+    rock_iter = itertools.cycle(enumerate(ROCKS))
     fallen_rocks = set((0, j) for j in range(WIDTH))
-    for _, r in zip(range(nb_rocks), rock_iter):
+    stream_idx = None
+    indices_seen = dict()
+    heights = dict()
+    for i, (rock_idx, r) in zip(range(nb_rocks), rock_iter):
         max_x = max(r[0] for r in fallen_rocks)
+        last_level = tuple((max_x, y) in fallen_rocks for y in range(WIDTH))
+        indices = (rock_idx, stream_idx, last_level)
+        heights[i] = max_x
+        if indices in indices_seen:
+            #      i2   i
+            # |-----|---|---| ... |---|-|
+            #    A    B   B         B  C
+            # A: time to reach beginning of cycle
+            # B: full cycles
+            # C: remaining
+            i2 = indices_seen[indices]
+            cycle = i - i2
+            after_i2 = nb_rocks - i2
+            nb_cycles, rem = divmod(after_i2, cycle)
+            height_cycle = heights[i] - heights[i2]
+            res = nb_cycles * height_cycle + heights[i2 + rem]
+            print("Index", i, "and", i2, "look similar. We have a cycle of length", cycle)
+            print("We have", nb_cycles, "full cycles and", rem, "are remaining")
+            print("A cycle has height", height_cycle, "for a result", res)
+            print()
+            return res
+        indices_seen[indices] = i
         x, y = max_x + 1 + 3, 2
         while True:
             # Stream
-            dy = STREAM_DIR[next(stream_iter)]
+            stream_idx, c = next(stream_iter)
+            dy = STREAM_DIR[c]
             if can_take_pos(fallen_rocks, r, x, y + dy):
                 y += dy
             # Fall
@@ -99,11 +125,13 @@ def simulate(streams, nb_rocks):
 def run_tests():
     streams = get_streams_from_line(">>><<><>><<<>><>>><<<>>><<<><<<>><>><<>>")
     assert simulate(streams, 2022) == 3068
+    assert simulate(streams, 1000000000000) == 1514285714288
 
 
 def get_solutions():
     streams = get_streams_from_file()
     print(simulate(streams, 2022) == 3175)
+    print(simulate(streams, 1000000000000)) # WRONG
 
 if __name__ == "__main__":
     begin = datetime.datetime.now()
