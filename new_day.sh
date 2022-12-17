@@ -20,6 +20,7 @@ overwrite_input="0"
 
 get_puzzle="1"
 overwrite_puzzle="1"
+extract_answers="1"
 
 get_stats="1"
 overwrite_stats="1"
@@ -64,6 +65,7 @@ source ~/aoc_cookie_session.sh 2> /dev/null
 # Paths
 puzzle_file="resources/year${year}_day${day}_puzzle.html"
 input_file="resources/year${year}_day${day}_input.txt"
+answer_file="resources/year${year}_day${day}_answer.txt"
 stats_file="misc/leaderboard_self_${year}.html"
 python_script_file="python/${year}/day${day}.py"
 rust_src_file_rel="src/${year}/day${day}.rs"
@@ -106,6 +108,9 @@ if [ "${get_stats}" = "1" ]; then
 fi
 if [ "${get_input}" = "1" ]; then
 	get_url_and_save "${input_url}" "${input_file}" "${overwrite_input}" "0"
+fi
+if [ "${extract_answers}" = "1" ]; then
+    sed -n "s/<p>Your puzzle answer was <code>\([0-9A-Za-z]*\)<\/code>\..*/\1/gp" "${puzzle_file}" | tee "${answer_file}"
 fi
 
 create_code_from_template() {
@@ -178,7 +183,7 @@ fi
 # Add to git
 if [ "${git_add}" = "1" ]; then
 	git status
-	git add "${puzzle_file}" "${input_file}" "${stats_file}" "${python_script_file}" "${rust_src_file}" "${cargo_file}" "${readme_file}"
+	git add "${puzzle_file}" "${input_file}" "${answer_file}" "${stats_file}" "${python_script_file}" "${rust_src_file}" "${cargo_file}" "${readme_file}"
 	git status
 	echo "Commit with: 'git commit -m \"Year ${year} - Day ${day} - Getting started\"'"
 fi
