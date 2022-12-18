@@ -29,6 +29,7 @@ Solutions are written in Python and/or Rust.
 |Day 15: Beacon Exclusion Zone|[Problem](https://adventofcode.com/2022/day/15) [Input](https://adventofcode.com/2022/day/15/input)|[puzzle.html](resources/year2022_day15_puzzle.html) [input.txt](resources/year2022_day15_input.txt)|**|[day15.py](python/2022/day15.py)|[-](rust/src/2022/day15.rs)|00:22:29|01:24:20|
 |Day 16: Proboscidea Volcanium|[Problem](https://adventofcode.com/2022/day/16) [Input](https://adventofcode.com/2022/day/16/input)|[puzzle.html](resources/year2022_day16_puzzle.html) [input.txt](resources/year2022_day16_input.txt)|**|[day16.py](python/2022/day16.py)|[-](rust/src/2022/day16.rs)|01:18:59|03:30:54|
 |Day 17: Pyroclastic Flow|[Problem](https://adventofcode.com/2022/day/17) [Input](https://adventofcode.com/2022/day/17/input)|[puzzle.html](resources/year2022_day17_puzzle.html) [input.txt](resources/year2022_day17_input.txt)|**|[day17.py](python/2022/day17.py)|[-](rust/src/2022/day17.rs)|13:12:59|17:21:10|
+|Day 18: Boiling Boulders|[Problem](https://adventofcode.com/2022/day/18) [Input](https://adventofcode.com/2022/day/18/input)|[puzzle.html](resources/year2022_day18_puzzle.html) [input.txt](resources/year2022_day18_input.txt)||[-](python/2022/day18.py)|[-](rust/src/2022/day18.rs)|-|-|
 |[2022](https://adventofcode.com/2022)|[Stats](https://adventofcode.com/2022/leaderboard/self)|[stats.txt](misc/leaderboard_self_2022.html)|34|-|-|-|-|
 
 ## [2021](https://adventofcode.com/2021)
