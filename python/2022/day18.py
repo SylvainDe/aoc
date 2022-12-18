@@ -7,29 +7,21 @@ def get_cube_from_line(string):
     return tuple(int(s) for s in string.split(","))
 
 def get_cubes_from_lines(string):
-    return [get_cube_from_line(l) for l in string.splitlines()]
+    return set(get_cube_from_line(l) for l in string.splitlines())
 
 def get_cubes_from_file(file_path="../../resources/year2022_day18_input.txt"):
     with open(file_path) as f:
         return get_cubes_from_lines(f.read())
-
-
-def get_surface_area(cubes):
-    cubes = set(cubes)
-    surface = 6 * len(cubes)
-    for (x, y, z) in cubes:
-        for (dx, dy, dz) in ((1, 0, 0), (0, 1, 0), (0, 0, 1)):
-            if (x+dx, y+dy, z+dz) in cubes:
-                surface -= 2
-    return surface
 
 def get_neighbours(cube):
     x, y, z = cube
     return ((x+dx, y+dy, z+dz)
             for dx, dy, dz in ((1, 0, 0), (0, 1, 0), (0, 0, 1), (-1, 0, 0), (0, -1, 0), (0, 0, -1)))
 
+def get_surface_area(cubes):
+    return 6 * len(cubes) - sum(c2 in cubes for c in cubes for c2 in get_neighbours(c))
+
 def get_exterior_surface_area(cubes):
-    cubes = set(cubes)
     xs = set(c[0] for c in cubes)
     ys = set(c[1] for c in cubes)
     zs = set(c[2] for c in cubes)
