@@ -1,8 +1,11 @@
 // vi: set shiftwidth=4 tabstop=4 expandtab:
+use common::input::check_answer;
+use common::input::get_answers;
 use common::input::get_first_line_from_file;
 use std::time::Instant;
 
 const INPUT_FILEPATH: &str = "../resources/year2018_day11_input.txt";
+const ANSWERS_FILEPATH: &str = "../resources/year2018_day11_answer.txt";
 
 type Int = i32;
 type InputContent = usize;
@@ -139,12 +142,12 @@ fn part2(serial: InputContent) -> (usize, usize, usize) {
 fn main() {
     let before = Instant::now();
     let data = get_input_from_str(&get_first_line_from_file(INPUT_FILEPATH));
+    let (ans, ans2) = get_answers(ANSWERS_FILEPATH);
+    let solved = true;
     let res = part1(data);
-    println!("{:?}", res);
-    assert_eq!(res, (21, 68));
+    check_answer(&format!("{},{}", res.0, res.1), ans, solved);
     let res2 = part2(data);
-    println!("{:?}", res2);
-    assert_eq!(res2, (90, 201, 15));
+    check_answer(&format!("{},{},{}", res2.0, res2.1, res2.2), ans2, solved);
     println!("Elapsed time: {:.2?}", before.elapsed());
 }
 

@@ -1,5 +1,7 @@
 // vi: set shiftwidth=4 tabstop=4 expandtab:
+use common::input::check_answer;
 use common::input::collect_from_lines;
+use common::input::get_answers;
 use common::input::get_file_content;
 use core::str::FromStr;
 use itertools::iproduct;
@@ -9,6 +11,7 @@ use std::collections::HashMap;
 use std::time::Instant;
 
 const INPUT_FILEPATH: &str = "../resources/year2018_day3_input.txt";
+const ANSWERS_FILEPATH: &str = "../resources/year2018_day3_answer.txt";
 
 type Int = u32;
 
@@ -93,12 +96,12 @@ fn part2(claims: &InputContent) -> Int {
 fn main() {
     let before = Instant::now();
     let data = get_input_from_str(&get_file_content(INPUT_FILEPATH));
+    let (ans, ans2) = get_answers(ANSWERS_FILEPATH);
+    let solved = true;
     let res = part1(&data);
-    println!("{:?}", res);
-    assert_eq!(res, 109_716);
+    check_answer(&res.to_string(), ans, solved);
     let res2 = part2(&data);
-    println!("{:?}", res2);
-    assert_eq!(res2, 124);
+    check_answer(&res2.to_string(), ans2, solved);
     println!("Elapsed time: {:.2?}", before.elapsed());
 }
 

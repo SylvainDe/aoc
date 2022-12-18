@@ -1,9 +1,12 @@
 // vi: set shiftwidth=4 tabstop=4 expandtab:
+use common::input::check_answer;
+use common::input::get_answers;
 use common::input::get_first_line_from_file;
 use itertools::Itertools;
 use std::time::Instant;
 
 const INPUT_FILEPATH: &str = "../resources/year2016_day14_input.txt";
+const ANSWERS_FILEPATH: &str = "../resources/year2016_day14_answer.txt";
 
 const SKIP_SLOW: bool = true;
 
@@ -71,14 +74,13 @@ fn part2(salt: &str) -> usize {
 fn main() {
     let before = Instant::now();
     let data = get_first_line_from_file(INPUT_FILEPATH);
-    //dbg!(&data);
+    let (ans, ans2) = get_answers(ANSWERS_FILEPATH);
+    let solved = true;
     let res = part1(&data);
-    println!("{:?}", res);
-    assert_eq!(res, 18626);
+    check_answer(&res.to_string(), ans, solved);
     if !SKIP_SLOW {
         let res2 = part2(&data);
-        println!("{:?}", res2);
-        assert_eq!(res2, 20092);
+        check_answer(&res2.to_string(), ans2, solved);
     }
     println!("Elapsed time: {:.2?}", before.elapsed());
 }

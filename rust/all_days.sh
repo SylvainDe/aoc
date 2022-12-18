@@ -1,4 +1,4 @@
-set -x
+#set -x
 set -e
 
 # Option to fix things automatically (at your own risk)

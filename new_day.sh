@@ -110,7 +110,7 @@ if [ "${get_input}" = "1" ]; then
 	get_url_and_save "${input_url}" "${input_file}" "${overwrite_input}" "0"
 fi
 if [ "${extract_answers}" = "1" ]; then
-    sed -n "s/<p>Your puzzle answer was <code>\([0-9A-Za-z]*\)<\/code>\..*/\1/gp" "${puzzle_file}" | tee "${answer_file}"
+    sed -n "s/<p>Your puzzle answer was <code>\([0-9A-Za-z,]*\)<\/code>\..*/\1/gp" "${puzzle_file}" | tee "${answer_file}"
 fi
 
 create_code_from_template() {
@@ -127,9 +127,11 @@ create_code_from_template() {
 	mkdir -p $(dirname "${dest}")
 	# Create script file based on template
 	cp "${template}" "${dest}"
-	# Update file example used
+	# Update file examples used
 	input_example="resources/yearYYYY_dayDD_input.txt"
+	answer_example="resources/yearYYYY_dayDD_answer.txt"
 	sed -i "s#${input_example}#${input_file}#g" "${dest}"
+	sed -i "s#${answer_example}#${answer_file}#g" "${dest}"
 }
 
 open_file_in_editor() {

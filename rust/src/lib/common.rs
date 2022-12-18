@@ -53,6 +53,36 @@ pub mod input {
     {
         string.lines().map(|l| A::from_str(l).unwrap()).collect()
     }
+
+    #[must_use]
+    pub fn get_answers(filepath: &str) -> (Option<String>, Option<String>) {
+        match fs::read_to_string(filepath) {
+            Ok(s) => {
+                let v: Vec<String> = s.lines().map(ToOwned::to_owned).collect();
+                (v.get(0).cloned(), v.get(1).cloned())
+            }
+            Err(_) => (None, None),
+        }
+    }
+
+    /// # Panics
+    ///
+    /// Will panic if answers do not match in strict mode
+    pub fn check_answer(result: &str, expected: Option<String>, is_strict: bool) {
+        match expected {
+            None => println!("Result: {}", result),
+            Some(expected_res) => {
+                if is_strict {
+                    // println!("Answer: {} (expected: {})", result, expected_res);
+                    assert_eq!(result, expected_res);
+                } else if result == expected_res {
+                    println!("Correct answer: {}", result);
+                } else {
+                    println!("Incorrect answer: {} (expected {})", result, expected_res);
+                }
+            }
+        }
+    }
 }
 
 pub mod point_module {

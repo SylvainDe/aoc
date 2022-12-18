@@ -1,8 +1,11 @@
 // vi: set shiftwidth=4 tabstop=4 expandtab:
+use common::input::check_answer;
+use common::input::get_answers;
 use common::input::get_first_line_from_file;
 use std::time::Instant;
 
 const INPUT_FILEPATH: &str = "../resources/year2016_day16_input.txt";
+const ANSWERS_FILEPATH: &str = "../resources/year2016_day16_answer.txt";
 
 const SKIP_SLOW: bool = true;
 type InputContent = String;
@@ -53,13 +56,13 @@ fn part2(arg: &InputContent) -> String {
 fn main() {
     let before = Instant::now();
     let data = get_first_line_from_file(INPUT_FILEPATH);
+    let (ans, ans2) = get_answers(ANSWERS_FILEPATH);
+    let solved = true;
     let res = part1(&data);
-    println!("{:?}", res);
-    assert_eq!(res, "10101001010100001");
+    check_answer(&res, ans, solved);
     if !SKIP_SLOW {
         let res2 = part2(&data);
-        println!("{:?}", res2);
-        assert_eq!(res2, "10100001110101001");
+        check_answer(&res2, ans2, solved);
     }
     println!("Elapsed time: {:.2?}", before.elapsed());
 }

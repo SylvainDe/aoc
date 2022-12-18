@@ -11,7 +11,7 @@ done
 
 # Current year
 y="2022"
-for d in $(seq 1 17); do
+for d in $(seq 1 18); do
 	echo "$d $y"
 	# ./new_day.sh "${d}" "${y}"
 done
