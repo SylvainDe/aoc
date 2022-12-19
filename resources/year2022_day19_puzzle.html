@@ -248,11 +248,214 @@ The new geode-cracking robot is ready; you now have 2 of them.
 <p>Determine the <em>quality level</em> of each blueprint by <em>multiplying that blueprint's ID number</em> with the largest number of geodes that can be opened in 24 minutes using that blueprint. In this example, the first blueprint has ID 1 and can open 9 geodes, so its quality level is <code><em>9</em></code>. The second blueprint has ID 2 and can open 12 geodes, so its quality level is <code><em>24</em></code>. Finally, if you <em>add up the quality levels</em> of all of the blueprints in the list, you get <code><em>33</em></code>.</p>
 <p>Determine the quality level of each blueprint using the largest number of geodes it could produce in 24 minutes. <em>What do you get if you add up the quality level of all of the blueprints in your list?</em></p>
 </article>
-<p>To begin, <a href="19/input" target="_blank">get your puzzle input</a>.</p>
-<form method="post" action="19/answer"><input type="hidden" name="level" value="1"/><p>Answer: <input type="text" name="answer" autocomplete="off"/> <input type="submit" value="[Submit]"/></p></form>
+<p>Your puzzle answer was <code>960</code>.</p><p class="day-success">The first half of this puzzle is complete! It provides one gold star: *</p>
+<article class="day-desc"><h2 id="part2">--- Part Two ---</h2><p>While you were choosing the best blueprint, the elephants found some food on their own, so you're not in as much of a hurry; you figure you probably have <em>32 minutes</em> before the wind changes direction again and you'll need to get out of range of the erupting volcano.</p>
+<p>Unfortunately, one of the elephants <em>ate most of your blueprint list</em>! Now, only the first three blueprints in your list are intact.</p>
+<p>In 32 minutes, the largest number of geodes blueprint 1 (from the example above) can open is <code><em>56</em></code>. One way to achieve that is:</p>
+<pre><code>== Minute 1 ==
+1 ore-collecting robot collects 1 ore; you now have 1 ore.
+
+== Minute 2 ==
+1 ore-collecting robot collects 1 ore; you now have 2 ore.
+
+== Minute 3 ==
+1 ore-collecting robot collects 1 ore; you now have 3 ore.
+
+== Minute 4 ==
+1 ore-collecting robot collects 1 ore; you now have 4 ore.
+
+== Minute 5 ==
+Spend 4 ore to start building an ore-collecting robot.
+1 ore-collecting robot collects 1 ore; you now have 1 ore.
+The new ore-collecting robot is ready; you now have 2 of them.
+
+== Minute 6 ==
+2 ore-collecting robots collect 2 ore; you now have 3 ore.
+
+== Minute 7 ==
+Spend 2 ore to start building a clay-collecting robot.
+2 ore-collecting robots collect 2 ore; you now have 3 ore.
+The new clay-collecting robot is ready; you now have 1 of them.
+
+== Minute 8 ==
+Spend 2 ore to start building a clay-collecting robot.
+2 ore-collecting robots collect 2 ore; you now have 3 ore.
+1 clay-collecting robot collects 1 clay; you now have 1 clay.
+The new clay-collecting robot is ready; you now have 2 of them.
+
+== Minute 9 ==
+Spend 2 ore to start building a clay-collecting robot.
+2 ore-collecting robots collect 2 ore; you now have 3 ore.
+2 clay-collecting robots collect 2 clay; you now have 3 clay.
+The new clay-collecting robot is ready; you now have 3 of them.
+
+== Minute 10 ==
+Spend 2 ore to start building a clay-collecting robot.
+2 ore-collecting robots collect 2 ore; you now have 3 ore.
+3 clay-collecting robots collect 3 clay; you now have 6 clay.
+The new clay-collecting robot is ready; you now have 4 of them.
+
+== Minute 11 ==
+Spend 2 ore to start building a clay-collecting robot.
+2 ore-collecting robots collect 2 ore; you now have 3 ore.
+4 clay-collecting robots collect 4 clay; you now have 10 clay.
+The new clay-collecting robot is ready; you now have 5 of them.
+
+== Minute 12 ==
+Spend 2 ore to start building a clay-collecting robot.
+2 ore-collecting robots collect 2 ore; you now have 3 ore.
+5 clay-collecting robots collect 5 clay; you now have 15 clay.
+The new clay-collecting robot is ready; you now have 6 of them.
+
+== Minute 13 ==
+Spend 2 ore to start building a clay-collecting robot.
+2 ore-collecting robots collect 2 ore; you now have 3 ore.
+6 clay-collecting robots collect 6 clay; you now have 21 clay.
+The new clay-collecting robot is ready; you now have 7 of them.
+
+== Minute 14 ==
+Spend 3 ore and 14 clay to start building an obsidian-collecting robot.
+2 ore-collecting robots collect 2 ore; you now have 2 ore.
+7 clay-collecting robots collect 7 clay; you now have 14 clay.
+The new obsidian-collecting robot is ready; you now have 1 of them.
+
+== Minute 15 ==
+2 ore-collecting robots collect 2 ore; you now have 4 ore.
+7 clay-collecting robots collect 7 clay; you now have 21 clay.
+1 obsidian-collecting robot collects 1 obsidian; you now have 1 obsidian.
+
+== Minute 16 ==
+Spend 3 ore and 14 clay to start building an obsidian-collecting robot.
+2 ore-collecting robots collect 2 ore; you now have 3 ore.
+7 clay-collecting robots collect 7 clay; you now have 14 clay.
+1 obsidian-collecting robot collects 1 obsidian; you now have 2 obsidian.
+The new obsidian-collecting robot is ready; you now have 2 of them.
+
+== Minute 17 ==
+Spend 3 ore and 14 clay to start building an obsidian-collecting robot.
+2 ore-collecting robots collect 2 ore; you now have 2 ore.
+7 clay-collecting robots collect 7 clay; you now have 7 clay.
+2 obsidian-collecting robots collect 2 obsidian; you now have 4 obsidian.
+The new obsidian-collecting robot is ready; you now have 3 of them.
+
+== Minute 18 ==
+2 ore-collecting robots collect 2 ore; you now have 4 ore.
+7 clay-collecting robots collect 7 clay; you now have 14 clay.
+3 obsidian-collecting robots collect 3 obsidian; you now have 7 obsidian.
+
+== Minute 19 ==
+Spend 3 ore and 14 clay to start building an obsidian-collecting robot.
+2 ore-collecting robots collect 2 ore; you now have 3 ore.
+7 clay-collecting robots collect 7 clay; you now have 7 clay.
+3 obsidian-collecting robots collect 3 obsidian; you now have 10 obsidian.
+The new obsidian-collecting robot is ready; you now have 4 of them.
+
+== Minute 20 ==
+Spend 2 ore and 7 obsidian to start building a geode-cracking robot.
+2 ore-collecting robots collect 2 ore; you now have 3 ore.
+7 clay-collecting robots collect 7 clay; you now have 14 clay.
+4 obsidian-collecting robots collect 4 obsidian; you now have 7 obsidian.
+The new geode-cracking robot is ready; you now have 1 of them.
+
+== Minute 21 ==
+Spend 3 ore and 14 clay to start building an obsidian-collecting robot.
+2 ore-collecting robots collect 2 ore; you now have 2 ore.
+7 clay-collecting robots collect 7 clay; you now have 7 clay.
+4 obsidian-collecting robots collect 4 obsidian; you now have 11 obsidian.
+1 geode-cracking robot cracks 1 geode; you now have 1 open geode.
+The new obsidian-collecting robot is ready; you now have 5 of them.
+
+== Minute 22 ==
+Spend 2 ore and 7 obsidian to start building a geode-cracking robot.
+2 ore-collecting robots collect 2 ore; you now have 2 ore.
+7 clay-collecting robots collect 7 clay; you now have 14 clay.
+5 obsidian-collecting robots collect 5 obsidian; you now have 9 obsidian.
+1 geode-cracking robot cracks 1 geode; you now have 2 open geodes.
+The new geode-cracking robot is ready; you now have 2 of them.
+
+== Minute 23 ==
+Spend 2 ore and 7 obsidian to start building a geode-cracking robot.
+2 ore-collecting robots collect 2 ore; you now have 2 ore.
+7 clay-collecting robots collect 7 clay; you now have 21 clay.
+5 obsidian-collecting robots collect 5 obsidian; you now have 7 obsidian.
+2 geode-cracking robots crack 2 geodes; you now have 4 open geodes.
+The new geode-cracking robot is ready; you now have 3 of them.
+
+== Minute 24 ==
+Spend 2 ore and 7 obsidian to start building a geode-cracking robot.
+2 ore-collecting robots collect 2 ore; you now have 2 ore.
+7 clay-collecting robots collect 7 clay; you now have 28 clay.
+5 obsidian-collecting robots collect 5 obsidian; you now have 5 obsidian.
+3 geode-cracking robots crack 3 geodes; you now have 7 open geodes.
+The new geode-cracking robot is ready; you now have 4 of them.
+
+== Minute 25 ==
+2 ore-collecting robots collect 2 ore; you now have 4 ore.
+7 clay-collecting robots collect 7 clay; you now have 35 clay.
+5 obsidian-collecting robots collect 5 obsidian; you now have 10 obsidian.
+4 geode-cracking robots crack 4 geodes; you now have 11 open geodes.
+
+== Minute 26 ==
+Spend 2 ore and 7 obsidian to start building a geode-cracking robot.
+2 ore-collecting robots collect 2 ore; you now have 4 ore.
+7 clay-collecting robots collect 7 clay; you now have 42 clay.
+5 obsidian-collecting robots collect 5 obsidian; you now have 8 obsidian.
+4 geode-cracking robots crack 4 geodes; you now have 15 open geodes.
+The new geode-cracking robot is ready; you now have 5 of them.
+
+== Minute 27 ==
+Spend 2 ore and 7 obsidian to start building a geode-cracking robot.
+2 ore-collecting robots collect 2 ore; you now have 4 ore.
+7 clay-collecting robots collect 7 clay; you now have 49 clay.
+5 obsidian-collecting robots collect 5 obsidian; you now have 6 obsidian.
+5 geode-cracking robots crack 5 geodes; you now have 20 open geodes.
+The new geode-cracking robot is ready; you now have 6 of them.
+
+== Minute 28 ==
+2 ore-collecting robots collect 2 ore; you now have 6 ore.
+7 clay-collecting robots collect 7 clay; you now have 56 clay.
+5 obsidian-collecting robots collect 5 obsidian; you now have 11 obsidian.
+6 geode-cracking robots crack 6 geodes; you now have 26 open geodes.
+
+== Minute 29 ==
+Spend 2 ore and 7 obsidian to start building a geode-cracking robot.
+2 ore-collecting robots collect 2 ore; you now have 6 ore.
+7 clay-collecting robots collect 7 clay; you now have 63 clay.
+5 obsidian-collecting robots collect 5 obsidian; you now have 9 obsidian.
+6 geode-cracking robots crack 6 geodes; you now have 32 open geodes.
+The new geode-cracking robot is ready; you now have 7 of them.
+
+== Minute 30 ==
+Spend 2 ore and 7 obsidian to start building a geode-cracking robot.
+2 ore-collecting robots collect 2 ore; you now have 6 ore.
+7 clay-collecting robots collect 7 clay; you now have 70 clay.
+5 obsidian-collecting robots collect 5 obsidian; you now have 7 obsidian.
+7 geode-cracking robots crack 7 geodes; you now have 39 open geodes.
+The new geode-cracking robot is ready; you now have 8 of them.
+
+== Minute 31 ==
+Spend 2 ore and 7 obsidian to start building a geode-cracking robot.
+2 ore-collecting robots collect 2 ore; you now have 6 ore.
+7 clay-collecting robots collect 7 clay; you now have 77 clay.
+5 obsidian-collecting robots collect 5 obsidian; you now have 5 obsidian.
+8 geode-cracking robots crack 8 geodes; you now have 47 open geodes.
+The new geode-cracking robot is ready; you now have 9 of them.
+
+== Minute 32 ==
+2 ore-collecting robots collect 2 ore; you now have 8 ore.
+7 clay-collecting robots collect 7 clay; you now have 84 clay.
+5 obsidian-collecting robots collect 5 obsidian; you now have 10 obsidian.
+9 geode-cracking robots crack 9 geodes; you now have 56 open geodes.
+</code></pre>
+<p>However, blueprint 2 from the example above is still better; using it, the largest number of geodes you could open in 32 minutes is <code><em>62</em></code>.</p>
+<p>You <em>no longer have enough blueprints to worry about quality levels</em>. Instead, for each of the first three blueprints, determine the largest number of geodes you could open; then, multiply these three values together.</p>
+<p>Don't worry about quality levels; instead, just determine the largest number of geodes you could open using each of the first three blueprints. <em>What do you get if you multiply these numbers together?</em></p>
+</article>
+<form method="post" action="19/answer"><input type="hidden" name="level" value="2"/><p>Answer: <input type="text" name="answer" autocomplete="off"/> <input type="submit" value="[Submit]"/></p></form>
+<p>Although it hasn't changed, you can still <a href="19/input" target="_blank">get your puzzle input</a>.</p>
 <p>You can also <span class="share">[Share<span class="share-content">on
-  <a href="https://twitter.com/intent/tweet?text=%22Not+Enough+Minerals%22+%2D+Day+19+%2D+Advent+of+Code+2022&amp;url=https%3A%2F%2Fadventofcode%2Ecom%2F2022%2Fday%2F19&amp;related=ericwastl&amp;hashtags=AdventOfCode" target="_blank">Twitter</a>
-  <a href="javascript:void(0);" onclick="var mastodon_instance=prompt('Mastodon Instance / Server Name?'); if(typeof mastodon_instance==='string' && mastodon_instance.length){this.href='https://'+mastodon_instance+'/share?text=%22Not+Enough+Minerals%22+%2D+Day+19+%2D+Advent+of+Code+2022+%23AdventOfCode+https%3A%2F%2Fadventofcode%2Ecom%2F2022%2Fday%2F19'}else{return false;}" target="_blank">Mastodon</a
+  <a href="https://twitter.com/intent/tweet?text=I%27ve+completed+Part+One+of+%22Not+Enough+Minerals%22+%2D+Day+19+%2D+Advent+of+Code+2022&amp;url=https%3A%2F%2Fadventofcode%2Ecom%2F2022%2Fday%2F19&amp;related=ericwastl&amp;hashtags=AdventOfCode" target="_blank">Twitter</a>
+  <a href="javascript:void(0);" onclick="var mastodon_instance=prompt('Mastodon Instance / Server Name?'); if(typeof mastodon_instance==='string' && mastodon_instance.length){this.href='https://'+mastodon_instance+'/share?text=I%27ve+completed+Part+One+of+%22Not+Enough+Minerals%22+%2D+Day+19+%2D+Advent+of+Code+2022+%23AdventOfCode+https%3A%2F%2Fadventofcode%2Ecom%2F2022%2Fday%2F19'}else{return false;}" target="_blank">Mastodon</a
 ></span>]</span> this puzzle.</p>
 </main>
 
