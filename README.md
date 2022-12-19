@@ -240,8 +240,8 @@ Solutions are written in Python and/or Rust.
 |Day 22: Wizard Simulator 20XX|[Problem](https://adventofcode.com/2015/day/22) [Input](https://adventofcode.com/2015/day/22/input)|[puzzle.html](resources/year2015_day22_puzzle.html) [input.txt](resources/year2015_day22_input.txt)||[-](python/2015/day22.py)|[-](rust/src/2015/day22.rs)|-|-|
 |Day 23: Opening the Turing Lock|[Problem](https://adventofcode.com/2015/day/23) [Input](https://adventofcode.com/2015/day/23/input)|[puzzle.html](resources/year2015_day23_puzzle.html) [input.txt](resources/year2015_day23_input.txt)||[-](python/2015/day23.py)|[-](rust/src/2015/day23.rs)|-|-|
 |Day 24: It Hangs in the Balance|[Problem](https://adventofcode.com/2015/day/24) [Input](https://adventofcode.com/2015/day/24/input)|[puzzle.html](resources/year2015_day24_puzzle.html) [input.txt](resources/year2015_day24_input.txt)||[-](python/2015/day24.py)|[-](rust/src/2015/day24.rs)|-|-|
-|Day 25: Let It Snow|[Problem](https://adventofcode.com/2015/day/25) [Input](https://adventofcode.com/2015/day/25/input)|[puzzle.html](resources/year2015_day25_puzzle.html) [input.txt](resources/year2015_day25_input.txt)||[-](python/2015/day25.py)|[-](rust/src/2015/day25.rs)|-|-|
-|[2015](https://adventofcode.com/2015)|[Stats](https://adventofcode.com/2015/leaderboard/self)|[stats.txt](misc/leaderboard_self_2015.html)|27|-|-|-|-|
+|Day 25: Let It Snow|[Problem](https://adventofcode.com/2015/day/25) [Input](https://adventofcode.com/2015/day/25/input)|[puzzle.html](resources/year2015_day25_puzzle.html) [input.txt](resources/year2015_day25_input.txt)|*|[day25.py](python/2015/day25.py)|[-](rust/src/2015/day25.rs)|+24h|-|
+|[2015](https://adventofcode.com/2015)|[Stats](https://adventofcode.com/2015/leaderboard/self)|[stats.txt](misc/leaderboard_self_2015.html)|28|-|-|-|-|
 
 ##  Summary
 |Day|[2015](https://adventofcode.com/2015)|[2016](https://adventofcode.com/2016)|[2017](https://adventofcode.com/2017)|[2018](https://adventofcode.com/2018)|[2019](https://adventofcode.com/2019)|[2020](https://adventofcode.com/2020)|[2021](https://adventofcode.com/2021)|[2022](https://adventofcode.com/2022)|Total|
@@ -270,5 +270,5 @@ Solutions are written in Python and/or Rust.
 |22||*|||*|**|**|| 6: ******|
 |23||**||||**|*|| 5: *****|
 |24||**|||**|**||| 6: ******|
-|25||||||**|*|| 3: ***|
-|Total|27|42|28|20|28|50|46|38|279|
+|25|*|||||**|*|| 4: ****|
+|Total|28|42|28|20|28|50|46|38|280|
