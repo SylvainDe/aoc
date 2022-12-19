@@ -18,9 +18,54 @@ def get_blueprints_from_file(file_path="../../resources/year2022_day19_input.txt
     with open(file_path) as f:
         return get_blueprints_from_lines(f.read())
 
+def get_find_max_geodes(bp, time=24):
+    queue = collections.deque([(time, 0, 0, 0, 0, 1, 0, 0, 0)]) # time, ore, clay, obsidian, geode, ore_robot, clay_robot, obsidian_robot, geode_robot
+    max_geode = 0
+    while queue:
+        time, ore, clay, obsidian, geode, ore_robot, clay_robot, obsidian_robot, geode_robot = queue.popleft()
+        assert all(v >= 0 for v in (time, ore, clay, obsidian, geode))
+        if time == 0:
+            max_geode = max(geode, max_geode)
+            continue
+        time2 = time - 1
+        ore += ore_robot
+        clay += clay_robot
+        obsidian += obsidian_robot
+        geode += geode_robot
+        # TODO: Optimisation, cut any non-relevant branches in the seach space
+        queue.append((time2, ore, clay, obsidian, geode, ore_robot, clay_robot, obsidian_robot, geode_robot))
+        ore_rem = ore - bp.ore_robot_ore
+        if ore_rem >= 0:
+            queue.append((time2, ore_rem, clay, obsidian, geode, ore_robot+1, clay_robot, obsidian_robot, geode_robot))
+        ore_rem = ore - bp.clay_robot_ore
+        if ore_rem >= 0:
+            queue.append((time2, ore_rem, clay, obsidian, geode, ore_robot, clay_robot+1, obsidian_robot, geode_robot))
+        ore_rem, clay_rem = ore - bp.obsidian_robot_ore, clay - bp.obsidian_robot_clay
+        if ore_rem >= 0 and clay_rem >= 0:
+            queue.append((time2, ore_rem, clay_rem, obsidian, geode, ore_robot, clay_robot, obsidian_robot+1, geode_robot))
+        ore_rem, obs_rem = ore - bp.geode_robot_ore, obsidian - bp.geode_robot_obsidian
+        if ore_rem >= 0 and obs_rem >= 0:
+            queue.append((time2, ore_rem, clay, obs_rem, geode, ore_robot, clay_robot, obsidian_robot, geode_robot+1))
+    return max_geode
+
 def run_tests():
     blueprints = get_blueprints_from_lines("""Blueprint 1: Each ore robot costs 4 ore. Each clay robot costs 2 ore. Each obsidian robot costs 3 ore and 14 clay. Each geode robot costs 2 ore and 7 obsidian.
 Blueprint 2: Each ore robot costs 2 ore. Each clay robot costs 3 ore. Each obsidian robot costs 3 ore and 8 clay. Each geode robot costs 3 ore and 12 obsidian.""")
+    # print(get_find_max_geodes(blueprints[0], time=4))
+    # print(get_find_max_geodes(blueprints[0], time=5))
+    # print(get_find_max_geodes(blueprints[0], time=6))
+    # print(get_find_max_geodes(blueprints[0], time=7))
+    # print(get_find_max_geodes(blueprints[0], time=8))
+    # print(get_find_max_geodes(blueprints[0], time=9))
+    # print(get_find_max_geodes(blueprints[0], time=10))
+    # print(get_find_max_geodes(blueprints[0], time=11))
+    # print(get_find_max_geodes(blueprints[0], time=12))
+    # print(get_find_max_geodes(blueprints[0], time=13))
+    # print(get_find_max_geodes(blueprints[0], time=14))
+    # print(get_find_max_geodes(blueprints[0], time=15))
+    # print(get_find_max_geodes(blueprints[0], time=16))
+    # print(get_find_max_geodes(blueprints[0]))
+    # print(get_find_max_geodes(blueprints[1]))
 
 
 def get_solutions():
