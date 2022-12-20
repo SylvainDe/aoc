@@ -31,8 +31,8 @@ Solutions are written in Python and/or Rust.
 |Day 17: Pyroclastic Flow|[Problem](https://adventofcode.com/2022/day/17) [Input](https://adventofcode.com/2022/day/17/input)|[puzzle.html](resources/year2022_day17_puzzle.html) [input.txt](resources/year2022_day17_input.txt)|**|[day17.py](python/2022/day17.py)|[-](rust/src/2022/day17.rs)|13:12:59|17:21:10|
 |Day 18: Boiling Boulders|[Problem](https://adventofcode.com/2022/day/18) [Input](https://adventofcode.com/2022/day/18/input)|[puzzle.html](resources/year2022_day18_puzzle.html) [input.txt](resources/year2022_day18_input.txt)|**|[day18.py](python/2022/day18.py)|[-](rust/src/2022/day18.rs)|02:44:09|03:25:07|
 |Day 19: Not Enough Minerals|[Problem](https://adventofcode.com/2022/day/19) [Input](https://adventofcode.com/2022/day/19/input)|[puzzle.html](resources/year2022_day19_puzzle.html) [input.txt](resources/year2022_day19_input.txt)|**|[day19.py](python/2022/day19.py)|[-](rust/src/2022/day19.rs)|06:58:21|08:44:04|
-|Day 20: Grove Positioning System|[Problem](https://adventofcode.com/2022/day/20) [Input](https://adventofcode.com/2022/day/20/input)|[puzzle.html](resources/year2022_day20_puzzle.html) [input.txt](resources/year2022_day20_input.txt)|*|[day20.py](python/2022/day20.py)|[-](rust/src/2022/day20.rs)|04:36:12|-|
-|[2022](https://adventofcode.com/2022)|[Stats](https://adventofcode.com/2022/leaderboard/self)|[stats.txt](misc/leaderboard_self_2022.html)|39|-|-|-|-|
+|Day 20: Grove Positioning System|[Problem](https://adventofcode.com/2022/day/20) [Input](https://adventofcode.com/2022/day/20/input)|[puzzle.html](resources/year2022_day20_puzzle.html) [input.txt](resources/year2022_day20_input.txt)|**|[day20.py](python/2022/day20.py)|[-](rust/src/2022/day20.rs)|04:36:12|04:48:02|
+|[2022](https://adventofcode.com/2022)|[Stats](https://adventofcode.com/2022/leaderboard/self)|[stats.txt](misc/leaderboard_self_2022.html)|40|-|-|-|-|
 
 ## [2021](https://adventofcode.com/2021)
 |Day|URLs|Puzzle & Input|Stars|Python|Rust|Time part 1|Time part 2|
@@ -266,10 +266,10 @@ Solutions are written in Python and/or Rust.
 |17|**|**||||**|**|**|10: **********|
 |18||**|||*|**|**|**| 9: *********|
 |19||*||||**|**|**| 7: *******|
-|20|*|**|||**|**|**|*|10: **********|
+|20|*|**|||**|**|**|**|11: ***********|
 |21|**|||||**|**|| 6: ******|
 |22||*|||*|**|**|| 6: ******|
 |23||**||||**|*|| 5: *****|
 |24||**|||**|**||| 6: ******|
 |25|*|||||**|*|| 4: ****|
-|Total|28|42|28|20|28|50|46|39|281|
+|Total|28|42|28|20|28|50|46|40|282|

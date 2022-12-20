@@ -16,18 +16,32 @@ def move(src, shift, lst):
     lst.insert(dst, val)
     return lst # Only to make testing easier
 
-def mix(numbers):
+def mix(numbers, key, nb_mix):
+    numbers = [key * n for n in numbers]
     # Add index to numbers for tracking
     indexed_numbers = list(enumerate(numbers))
     mixed_numbers = list(indexed_numbers)
     assert id(indexed_numbers) != id(mixed_numbers)
-    for val in indexed_numbers:
+    for val in indexed_numbers * nb_mix:
         src = mixed_numbers.index(val)
         move(src, val[1], mixed_numbers)
-    mixed_numbers = [v[1] for v in mixed_numbers]
-    idx = mixed_numbers.index(0)
+    # TODO: The mixing logic looks wrong on the example provided but
+    # the result is not affected...
+    # if len(mixed_numbers) < 10:
+    #     print([v[1] for v in mixed_numbers])
+    return groove([v[1] for v in mixed_numbers])
+
+def groove(numbers):
+    idx = numbers.index(0)
     l = len(numbers)
-    return sum(mixed_numbers[(i+idx)%l] for i in (1000, 2000, 3000))
+    return sum(numbers[(i+idx)%l] for i in (1000, 2000, 3000))
+
+def mix1(numbers):
+    return mix(numbers, 1, 1)
+
+def mix2(numbers):
+    return mix(numbers, 811589153, 10)
+
 
 def run_tests():
     # Small tests
@@ -67,11 +81,13 @@ def run_tests():
 -2
 0
 4""")
-    assert mix(numbers) == 3
+    assert mix1(numbers) == 3
+    assert mix2(numbers) == 1623178306
 
 def get_solutions():
     numbers = get_numbers_from_file()
-    print(mix(numbers) == 3466)
+    print(mix1(numbers) == 3466)
+    print(mix2(numbers) == 9995532008348)
 
 
 if __name__ == "__main__":
