@@ -31,6 +31,7 @@ Solutions are written in Python and/or Rust.
 |Day 17: Pyroclastic Flow|[Problem](https://adventofcode.com/2022/day/17) [Input](https://adventofcode.com/2022/day/17/input)|[puzzle.html](resources/year2022_day17_puzzle.html) [input.txt](resources/year2022_day17_input.txt)|**|[day17.py](python/2022/day17.py)|[-](rust/src/2022/day17.rs)|13:12:59|17:21:10|
 |Day 18: Boiling Boulders|[Problem](https://adventofcode.com/2022/day/18) [Input](https://adventofcode.com/2022/day/18/input)|[puzzle.html](resources/year2022_day18_puzzle.html) [input.txt](resources/year2022_day18_input.txt)|**|[day18.py](python/2022/day18.py)|[-](rust/src/2022/day18.rs)|02:44:09|03:25:07|
 |Day 19: Not Enough Minerals|[Problem](https://adventofcode.com/2022/day/19) [Input](https://adventofcode.com/2022/day/19/input)|[puzzle.html](resources/year2022_day19_puzzle.html) [input.txt](resources/year2022_day19_input.txt)|**|[day19.py](python/2022/day19.py)|[-](rust/src/2022/day19.rs)|06:58:21|08:44:04|
+|Day 20: Grove Positioning System|[Problem](https://adventofcode.com/2022/day/20) [Input](https://adventofcode.com/2022/day/20/input)|[puzzle.html](resources/year2022_day20_puzzle.html) [input.txt](resources/year2022_day20_input.txt)||[-](python/2022/day20.py)|[-](rust/src/2022/day20.rs)|-|-|
 |[2022](https://adventofcode.com/2022)|[Stats](https://adventofcode.com/2022/leaderboard/self)|[stats.txt](misc/leaderboard_self_2022.html)|38|-|-|-|-|
 
 ## [2021](https://adventofcode.com/2021)
