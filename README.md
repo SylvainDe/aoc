@@ -241,7 +241,7 @@ Solutions are written in Python and/or Rust.
 |Day 22: Wizard Simulator 20XX|[Problem](https://adventofcode.com/2015/day/22) [Input](https://adventofcode.com/2015/day/22/input)|[puzzle.html](resources/year2015_day22_puzzle.html) [input.txt](resources/year2015_day22_input.txt)||[-](python/2015/day22.py)|[-](rust/src/2015/day22.rs)|-|-|
 |Day 23: Opening the Turing Lock|[Problem](https://adventofcode.com/2015/day/23) [Input](https://adventofcode.com/2015/day/23/input)|[puzzle.html](resources/year2015_day23_puzzle.html) [input.txt](resources/year2015_day23_input.txt)||[-](python/2015/day23.py)|[-](rust/src/2015/day23.rs)|-|-|
 |Day 24: It Hangs in the Balance|[Problem](https://adventofcode.com/2015/day/24) [Input](https://adventofcode.com/2015/day/24/input)|[puzzle.html](resources/year2015_day24_puzzle.html) [input.txt](resources/year2015_day24_input.txt)||[-](python/2015/day24.py)|[-](rust/src/2015/day24.rs)|-|-|
-|Day 25: Let It Snow|[Problem](https://adventofcode.com/2015/day/25) [Input](https://adventofcode.com/2015/day/25/input)|[puzzle.html](resources/year2015_day25_puzzle.html) [input.txt](resources/year2015_day25_input.txt)|*|[day25.py](python/2015/day25.py)|[-](rust/src/2015/day25.rs)|+24h|-|
+|Day 25: Let It Snow|[Problem](https://adventofcode.com/2015/day/25) [Input](https://adventofcode.com/2015/day/25/input)|[puzzle.html](resources/year2015_day25_puzzle.html) [input.txt](resources/year2015_day25_input.txt)|*|[day25.py](python/2015/day25.py)|[day25.rs](rust/src/2015/day25.rs)|+24h|-|
 |[2015](https://adventofcode.com/2015)|[Stats](https://adventofcode.com/2015/leaderboard/self)|[stats.txt](misc/leaderboard_self_2015.html)|28|-|-|-|-|
 
 ##  Summary
