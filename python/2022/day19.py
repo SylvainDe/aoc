@@ -57,15 +57,29 @@ def get_max_geodes(bp, time):
         geode2 = geode + geode_robot
         # First optimisation: do not buy a robot if we produce enough of the corresponding ressource
         # TODO: This is not quite fast enough :(
-        queue.append((time2, ore2, clay2, obsidian2, geode2, ore_robot, clay_robot, obsidian_robot, geode_robot))
-        if ore_robot < max_ore_cost and ore >= bp.ore_robot_ore:
-            queue.append((time2, ore2 - bp.ore_robot_ore, clay2, obsidian2, geode2, ore_robot+1, clay_robot, obsidian_robot, geode_robot))
-        if clay_robot < max_clay_cost and ore >= bp.clay_robot_ore:
-            queue.append((time2, ore2 - bp.clay_robot_ore, clay2, obsidian2, geode2, ore_robot, clay_robot+1, obsidian_robot, geode_robot))
-        if obsidian_robot < max_obs_cost and ore >= bp.obsidian_robot_ore and clay >= bp.obsidian_robot_clay:
-            queue.append((time2, ore2 - bp.obsidian_robot_ore, clay2 - bp.obsidian_robot_clay, obsidian2, geode2, ore_robot, clay_robot, obsidian_robot+1, geode_robot))
+        miss_resources = False
+        if ore_robot < max_ore_cost:
+            if ore >= bp.ore_robot_ore:
+                queue.append((time2, ore2 - bp.ore_robot_ore, clay2, obsidian2, geode2, ore_robot+1, clay_robot, obsidian_robot, geode_robot))
+            else:
+                miss_resources = True
+        if clay_robot < max_clay_cost:
+            if ore >= bp.clay_robot_ore:
+                queue.append((time2, ore2 - bp.clay_robot_ore, clay2, obsidian2, geode2, ore_robot, clay_robot+1, obsidian_robot, geode_robot))
+            else:
+                miss_resources = True
+        if obsidian_robot < max_obs_cost:
+            if ore >= bp.obsidian_robot_ore and clay >= bp.obsidian_robot_clay:
+                queue.append((time2, ore2 - bp.obsidian_robot_ore, clay2 - bp.obsidian_robot_clay, obsidian2, geode2, ore_robot, clay_robot, obsidian_robot+1, geode_robot))
+            else:
+                miss_resources = True
         if ore >= bp.geode_robot_ore and obsidian >= bp.geode_robot_obsidian:
             queue.append((time2, ore2 - bp.geode_robot_ore, clay2, obsidian2 - bp.geode_robot_obsidian, geode2, ore_robot, clay_robot, obsidian_robot, geode_robot+1))
+        else:
+            miss_resources = True
+        if miss_resources: # Waiting only makes sense if resources are missing to buy something needed
+            queue.append((time2, ore2, clay2, obsidian2, geode2, ore_robot, clay_robot, obsidian_robot, geode_robot))
+
     return max_geode
 
 def get_quality_level(bp):
