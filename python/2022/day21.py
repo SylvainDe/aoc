@@ -8,7 +8,17 @@ operations = {
     "+": operator.add,
     "-": operator.sub,
     "/": operator.floordiv,
-    "=": operator.mul,
+}
+
+inverses = {
+    # A + B = x is also A = x - B or B = x - A
+    operator.add: lambda left, right, expr: ((expr, operator.sub, right), (expr, operator.sub, left)),
+    # A // B = x is also A = x * B or B = A // x
+    operator.floordiv: lambda left, right, expr: ((expr, operator.mul, right), (left, operator.floordiv, expr)),
+    # A - B = x is also A = x + B or B = A - x
+    operator.sub: lambda left, right, expr: ((expr, operator.add, right), (left, operator.sub, expr)),
+    # A * B = x is also A = x // B or B = x // A
+    operator.mul: lambda left, right, expr: ((expr, operator.floordiv, right), (expr, operator.floordiv, left)),
 }
 
 def get_monkey_from_line(string):
@@ -16,10 +26,7 @@ def get_monkey_from_line(string):
     name, mid, expr = string.partition(sep)
     assert mid == sep
     expr = expr.split(" ")
-    if len(expr) == 1:
-        expr = int(expr[0])
-    else:
-        expr = (expr[0], operations[expr[1]], expr[2])
+    expr = int(expr[0]) if len(expr) == 1 else (expr[0], operations[expr[1]], expr[2])
     return name, expr
 
 def get_monkeys_from_lines(string):
@@ -29,13 +36,28 @@ def get_monkeys_from_file(file_path="../../resources/year2022_day21_input.txt"):
     with open(file_path) as f:
         return get_monkeys_from_lines(f.read())
 
+def eval_expr(expr, values):
+    if type(expr) == int:
+        return expr
+    left, func, right = expr
+    if type(left) != int:
+        left = values.get(left)
+    if left is None:
+        return None
+    if type(right) != int:
+        right = values.get(right)
+    if right is None:
+        return None
+    return func(left, right)
+
 def get_values(monkey_dict):
-    deps = dict()
+    deps = collections.defaultdict(set)
     for name, exprs in monkey_dict.items():
         for expr in exprs:
             if type(expr) != int:
-                deps.setdefault(expr[0], []).append(name)
-                deps.setdefault(expr[2], []).append(name)
+                left, _, right = expr
+                deps[left].add(name)
+                deps[right].add(name)
     values = dict()
     queue = collections.deque(monkey_dict.keys())
     while queue:
@@ -45,59 +67,35 @@ def get_values(monkey_dict):
         exprs = monkey_dict[name]
         expr_value = None
         for expr in exprs:
-            if type(expr) == int:
-                expr_value = expr
-            else:
-                left, func, right = expr
-                if type(left) != int:
-                    left = values.get(left)
-                if type(right) != int:
-                    right = values.get(right)
-                if left is not None and right is not None:
-                    expr_value = func(left, right)
+            expr_value = eval_expr(expr, values)
             if expr_value is not None:
                 break
         if expr_value is not None:
             values[name] = expr_value
-            queue.extend(deps.get(name, []))
+            new_values = deps[name]
             # If name was expressed in different way, let's add the corresponding expressions
             for expr2 in exprs:
                 if expr2 != expr:
                     left2, func2, right2 = expr2
-                    if func2 == operator.eq:
-                        assert expr_value == 1  # We would not learn much from an inequality
-                        monkey_dict.setdefault(left2, []).append((right2, operator.add, 0))
-                        monkey_dict.setdefault(right2, []).append((left2, operator.add, 0))
-                    elif func2 == operator.add:
-                        monkey_dict.setdefault(left2, []).append((expr_value, operator.sub, right2))
-                        monkey_dict.setdefault(right2, []).append((expr_value, operator.sub, left2))
-                    elif func2 == operator.floordiv:
-                        monkey_dict.setdefault(left2, []).append((expr_value, operator.mul, right2))
-                        monkey_dict.setdefault(right2, []).append((left2, operator.floordiv, expr_value))
-                    elif func2 == operator.sub:
-                        monkey_dict.setdefault(left2, []).append((expr_value, operator.add, right2))
-                        monkey_dict.setdefault(right2, []).append((left2, operator.sub, expr_value))
-                    elif func2 == operator.mul:
-                        monkey_dict.setdefault(left2, []).append((expr_value, operator.floordiv, right2))
-                        monkey_dict.setdefault(right2, []).append((expr_value, operator.floordiv, left2))
-                    else:
-                        print(func2)
-                        assert False
-                    queue.extend((left2, right2))
-                    deps.setdefault(right2, []).append(left2)
-                    deps.setdefault(left2, []).append(right2)
+                    new_left, new_right = inverses[func2](left2, right2, expr_value)
+                    monkey_dict.setdefault(left2, []).append(new_left)
+                    monkey_dict.setdefault(right2, []).append(new_right)
+                    deps[right2].add(left2)
+                    deps[left2].add(right2)
+                    new_values.add(left2)
+                    new_values.add(right2)
+            queue.extend(new_values)
     return values
 
 def get_root_value(monkeys):
     monkey_dict = { name: [expr] for name, expr in monkeys }
     return get_values(monkey_dict)["root"]
 
-
 def get_hmn_value(monkeys):
     monkey_dict = { name: [expr] for name, expr in monkeys }
     monkey_dict.pop("humn")
     left, _, right = monkey_dict.pop("root")[0]
-    monkey_dict["root"] = [1, (left, operator.eq, right)]
+    monkey_dict["root"] = [0, (left, operator.sub, right)]
     return get_values(monkey_dict)["humn"]
 
 
