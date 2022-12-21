@@ -40,7 +40,7 @@ def format_file(filepath):
         name_shown = "input.txt"
     elif filepath.startswith("misc/leaderboard_self_"):
         name_shown = "stats.txt"
-    elif filepath.endswith(".py") and file_contains(filepath, "xxx = get_xxx_from_file"):
+    elif filepath.endswith(".py") and file_contains(filepath, "def get_xxx_from_line"):
         name_shown = "-"
     elif filepath.endswith(".rs") and file_contains(filepath, "fn part1(_arg"):
         name_shown = "-"
