@@ -50,7 +50,10 @@ def eval_expr(expr, values):
         return None
     return func(left, right)
 
-def get_values(monkey_dict):
+def get_values(monkey_lst):
+    monkey_dict = dict()
+    for name, expr in monkey_lst:
+        monkey_dict.setdefault(name, []).append(expr)
     deps = collections.defaultdict(set)
     for name, exprs in monkey_dict.items():
         for expr in exprs:
@@ -64,39 +67,37 @@ def get_values(monkey_dict):
         name = queue.popleft()
         if name in values:
             continue
-        exprs = monkey_dict[name]
-        expr_value = None
-        for expr in exprs:
+        for expr in monkey_dict[name]:
             expr_value = eval_expr(expr, values)
             if expr_value is not None:
+                values[name] = expr_value
+                queue.extend(deps[name])
                 break
-        if expr_value is not None:
-            values[name] = expr_value
-            new_values = deps[name]
-            # If name was expressed in different way, let's add the corresponding expressions
-            for expr2 in exprs:
-                if expr2 != expr:
-                    left2, func2, right2 = expr2
-                    new_left, new_right = inverses[func2](left2, right2, expr_value)
-                    monkey_dict.setdefault(left2, []).append(new_left)
-                    monkey_dict.setdefault(right2, []).append(new_right)
-                    deps[right2].add(left2)
-                    deps[left2].add(right2)
-                    new_values.add(left2)
-                    new_values.add(right2)
-            queue.extend(new_values)
     return values
 
 def get_root_value(monkeys):
-    monkey_dict = { name: [expr] for name, expr in monkeys }
-    return get_values(monkey_dict)["root"]
+    return get_values(monkeys)["root"]
 
 def get_hmn_value(monkeys):
-    monkey_dict = { name: [expr] for name, expr in monkeys }
-    monkey_dict.pop("humn")
-    left, _, right = monkey_dict.pop("root")[0]
-    monkey_dict["root"] = [0, (left, operator.sub, right)]
-    return get_values(monkey_dict)["humn"]
+    lst = []
+    # Tweak content of list to convey all the relationships between values
+    for name, expr in monkeys:
+        if name == "humn":
+            continue
+        elif type(expr) == int:
+            lst.append((name, expr))
+        else:
+            left, func, right = expr
+            # Express the relation in different ways
+            if name == "root":
+                expr = 0
+                new_left, new_right = (right, operator.add, name), (left, operator.add, name)
+            else:
+                new_left, new_right = inverses[func](left, right, name)
+            lst.append((left, new_left))
+            lst.append((right, new_right))
+            lst.append((name, expr))
+    return get_values(lst)["humn"]
 
 
 def run_tests():
