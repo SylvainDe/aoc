@@ -152,8 +152,8 @@ Solutions are written in Python and/or Rust.
 |Day 22: Mode Maze|[Problem](https://adventofcode.com/2018/day/22) [Input](https://adventofcode.com/2018/day/22/input)|[puzzle.html](resources/year2018_day22_puzzle.html) [input.txt](resources/year2018_day22_input.txt)||[-](python/2018/day22.py)|[-](rust/src/2018/day22.rs)|-|-|
 |Day 23: Experimental Emergency Teleportation|[Problem](https://adventofcode.com/2018/day/23) [Input](https://adventofcode.com/2018/day/23/input)|[puzzle.html](resources/year2018_day23_puzzle.html) [input.txt](resources/year2018_day23_input.txt)||[-](python/2018/day23.py)|[-](rust/src/2018/day23.rs)|-|-|
 |Day 24: Immune System Simulator 20XX|[Problem](https://adventofcode.com/2018/day/24) [Input](https://adventofcode.com/2018/day/24/input)|[puzzle.html](resources/year2018_day24_puzzle.html) [input.txt](resources/year2018_day24_input.txt)||[-](python/2018/day24.py)|[-](rust/src/2018/day24.rs)|-|-|
-|Day 25: Four-Dimensional Adventure|[Problem](https://adventofcode.com/2018/day/25) [Input](https://adventofcode.com/2018/day/25/input)|[puzzle.html](resources/year2018_day25_puzzle.html) [input.txt](resources/year2018_day25_input.txt)||[-](python/2018/day25.py)|[-](rust/src/2018/day25.rs)|-|-|
-|[2018](https://adventofcode.com/2018)|[Stats](https://adventofcode.com/2018/leaderboard/self)|[stats.txt](misc/leaderboard_self_2018.html)|20|-|-|-|-|
+|Day 25: Four-Dimensional Adventure|[Problem](https://adventofcode.com/2018/day/25) [Input](https://adventofcode.com/2018/day/25/input)|[puzzle.html](resources/year2018_day25_puzzle.html) [input.txt](resources/year2018_day25_input.txt)|*|[day25.py](python/2018/day25.py)|[-](rust/src/2018/day25.rs)|+24h|-|
+|[2018](https://adventofcode.com/2018)|[Stats](https://adventofcode.com/2018/leaderboard/self)|[stats.txt](misc/leaderboard_self_2018.html)|21|-|-|-|-|
 
 ## [2017](https://adventofcode.com/2017)
 |Day|URLs|Puzzle & Input|Stars|Python|Rust|Time part 1|Time part 2|
@@ -272,5 +272,5 @@ Solutions are written in Python and/or Rust.
 |22||*|||*|**|**|| 6: ******|
 |23||**||||**|*|| 5: *****|
 |24||**|||**|**||| 6: ******|
-|25|*|||||**|*|| 4: ****|
-|Total|28|42|28|20|28|50|46|42|284|
+|25|*|||*||**|*|| 5: *****|
+|Total|28|42|28|21|28|50|46|42|285|
