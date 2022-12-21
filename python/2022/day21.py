@@ -52,15 +52,13 @@ def eval_expr(expr, values):
 
 def get_values(monkey_lst):
     monkey_dict = dict()
+    deps = collections.defaultdict(set)
     for name, expr in monkey_lst:
         monkey_dict.setdefault(name, []).append(expr)
-    deps = collections.defaultdict(set)
-    for name, exprs in monkey_dict.items():
-        for expr in exprs:
-            if type(expr) != int:
-                left, _, right = expr
-                deps[left].add(name)
-                deps[right].add(name)
+        if type(expr) != int:
+            left, _, right = expr
+            deps[left].add(name)
+            deps[right].add(name)
     values = dict()
     queue = collections.deque(monkey_dict.keys())
     while queue:
