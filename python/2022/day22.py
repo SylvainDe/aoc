@@ -40,11 +40,37 @@ def get_notes_from_file(file_path="../../resources/year2022_day22_input.txt"):
     with open(file_path) as f:
         return get_notes_from_lines(f.read())
 
+def show_path(map_, path):
+    copy = dict()
+    for k, v in map_.items():
+        copy[k] = "." if v else "#"
+    for i, pos in enumerate(path):
+        assert map_[pos] == True
+        copy[pos] = str(i%10)
+    copy[pos] = "*"
+    xs = [p[0] for p in copy.keys()]
+    ys = [p[1] for p in copy.keys()]
+    x_range = list(range(min(xs), max(xs) + 1))
+    y_range = list(range(min(ys), max(ys) + 1))
+    for x in x_range:
+        print("".join(copy.get((x, y), ' ') for y in y_range))
+
 def turn(turn, dx, dy):
     if turn == 'L':
         return (-dy, dx)
     assert turn == 'R'
     return (dy, -dx)
+
+def get_start_pos(map_):
+    x = 0  # Top row
+    y = min(j for (i, j), v in map_.items() if i == x and v)
+    assert map_[(x, y)] is True
+    return x, y
+
+def get_map_dim(map_):
+    nb_rows = max(i for i, _ in map_.keys()) + 1
+    nb_col = max(j for _, j in map_.keys()) + 1
+    return nb_rows, nb_col
 
 directions_score = {
     (0, 1):  0,  # Right
@@ -53,28 +79,29 @@ directions_score = {
     (1, 0):  1,  # Down
 }
 
-def follow_notes(notes):
+def follow_notes(notes, show_debug=False):
     map_, path = notes
-    x = 0  # Top row
-    y = min(j for (i, j), v in map_.items() if i == x and v)
-    nb_rows = max(i for i, _ in map_.keys()) + 1
-    nb_col = max(j for _, j in map_.keys()) + 1
-    assert map_[(x, y)] is True
+    x, y = get_start_pos(map_)
+    nb_rows, nb_col = get_map_dim(map_)
     dx, dy = (0, 1)  # Face right
+    debugging_path = [(x, y)]
     for ins in path:
         if ins in ('R', 'L'):
             dx, dy = turn(ins, dx, dy)
         else:
             for _ in range(ins):
                 for i in itertools.count(1):
-                    x2, y2 = (x+i*dx) % nb_rows, (y+i*dy) % nb_col
-                    res = map_.get((x2, y2))
+                    pos2 = (x+i*dx) % nb_rows, (y+i*dy) % nb_col
+                    res = map_.get(pos2)
                     if res is not None:
                         break
                 if res:
-                    x, y = x2, y2
+                    x, y = pos2
+                    debugging_path.append(pos2)
                 else:
                     break
+    if show_debug:
+        show_path(map_, debugging_path)
     return 1000 * (x + 1) + 4 * (y + 1) + directions_score[(dx, dy)]
 
 def run_tests():
