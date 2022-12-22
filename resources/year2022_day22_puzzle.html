@@ -155,11 +155,74 @@ If you'd like to hang out, I'm @ericwastl on Twitter.
 <p>In the above example, the final row is <code>6</code>, the final column is <code>8</code>, and the final facing is <code>0</code>. So, the final password is 1000 * 6 + 4 * 8 + 0: <code><em>6032</em></code>.</p>
 <p>Follow the path given in the monkeys' notes. <em>What is the final password?</em></p>
 </article>
-<p>To begin, <a href="22/input" target="_blank">get your puzzle input</a>.</p>
-<form method="post" action="22/answer"><input type="hidden" name="level" value="1"/><p>Answer: <input type="text" name="answer" autocomplete="off"/> <input type="submit" value="[Submit]"/></p></form>
+<p>Your puzzle answer was <code>66292</code>.</p><p class="day-success">The first half of this puzzle is complete! It provides one gold star: *</p>
+<article class="day-desc"><h2 id="part2">--- Part Two ---</h2><p>As you reach the force field, you think you hear some Elves in the distance. Perhaps they've already arrived?</p>
+<p>You approach the strange <em>input device</em>, but it isn't quite what the monkeys drew in their notes. Instead, you are met with a large <em>cube</em>; each of its six faces is a square of 50x50 tiles.</p>
+<p>To be fair, the monkeys' map <em>does</em> have six 50x50 regions on it. If you were to <em>carefully fold the map</em>, you should be able to shape it into a cube!</p>
+<p>In the example above, the six (smaller, 4x4) faces of the cube are:</p>
+<pre><code>        1111
+        1111
+        1111
+        1111
+222233334444
+222233334444
+222233334444
+222233334444
+        55556666
+        55556666
+        55556666
+        55556666
+</code></pre>
+<p>You still start in the same position and with the same facing as before, but the <em>wrapping</em> rules are different. Now, if you would walk off the board, you instead <em>proceed around the cube</em>. From the perspective of the map, this can look a little strange. In the above example, if you are at A and move to the right, you would arrive at B facing down; if you are at C and move down, you would arrive at D facing up:</p>
+<pre><code>        ...#
+        .#..
+        #...
+        ....
+...#.......#
+........#..<em>A</em>
+..#....#....
+.<em>D</em>........#.
+        ...#..<em>B</em>.
+        .....#..
+        .#......
+        ..<em>C</em>...#.
+</code></pre>
+<p>Walls still block your path, even if they are on a different face of the cube. If you are at E facing up, your movement is blocked by the wall marked by the arrow:</p>
+<pre><code>        ...#
+        .#..
+     <em>--&gt;#</em>...
+        ....
+...#..<em>E</em>....#
+........#...
+..#....#....
+..........#.
+        ...#....
+        .....#..
+        .#......
+        ......#.
+</code></pre>
+<p>Using the same method of drawing the <em>last facing you had</em> with an arrow on each tile you visit, the full path taken by the above example now looks like this:</p>
+<pre><code>        &gt;&gt;v#    
+        .#v.    
+        #.v.    
+        ..v.    
+...#..<em>^</em>...v#    
+.&gt;&gt;&gt;&gt;&gt;^.#.&gt;&gt;    
+.^#....#....    
+.^........#.    
+        ...#..v.
+        .....#v.
+        .#v&lt;&lt;&lt;&lt;.
+        ..v...#.
+</code></pre>
+<p>The final password is still calculated from your final position and facing from the perspective of the map. In this example, the final row is <code>5</code>, the final column is <code>7</code>, and the final facing is <code>3</code>, so the final password is 1000 * 5 + 4 * 7 + 3 = <code><em>5031</em></code>.</p>
+<p>Fold the map into a cube, <em>then</em> follow the path given in the monkeys' notes. <em>What is the final password?</em></p>
+</article>
+<form method="post" action="22/answer"><input type="hidden" name="level" value="2"/><p>Answer: <input type="text" name="answer" autocomplete="off"/> <input type="submit" value="[Submit]"/></p></form>
+<p>Although it hasn't changed, you can still <a href="22/input" target="_blank">get your puzzle input</a>.</p>
 <p>You can also <span class="share">[Share<span class="share-content">on
-  <a href="https://twitter.com/intent/tweet?text=%22Monkey+Map%22+%2D+Day+22+%2D+Advent+of+Code+2022&amp;url=https%3A%2F%2Fadventofcode%2Ecom%2F2022%2Fday%2F22&amp;related=ericwastl&amp;hashtags=AdventOfCode" target="_blank">Twitter</a>
-  <a href="javascript:void(0);" onclick="var mastodon_instance=prompt('Mastodon Instance / Server Name?'); if(typeof mastodon_instance==='string' && mastodon_instance.length){this.href='https://'+mastodon_instance+'/share?text=%22Monkey+Map%22+%2D+Day+22+%2D+Advent+of+Code+2022+%23AdventOfCode+https%3A%2F%2Fadventofcode%2Ecom%2F2022%2Fday%2F22'}else{return false;}" target="_blank">Mastodon</a
+  <a href="https://twitter.com/intent/tweet?text=I%27ve+completed+Part+One+of+%22Monkey+Map%22+%2D+Day+22+%2D+Advent+of+Code+2022&amp;url=https%3A%2F%2Fadventofcode%2Ecom%2F2022%2Fday%2F22&amp;related=ericwastl&amp;hashtags=AdventOfCode" target="_blank">Twitter</a>
+  <a href="javascript:void(0);" onclick="var mastodon_instance=prompt('Mastodon Instance / Server Name?'); if(typeof mastodon_instance==='string' && mastodon_instance.length){this.href='https://'+mastodon_instance+'/share?text=I%27ve+completed+Part+One+of+%22Monkey+Map%22+%2D+Day+22+%2D+Advent+of+Code+2022+%23AdventOfCode+https%3A%2F%2Fadventofcode%2Ecom%2F2022%2Fday%2F22'}else{return false;}" target="_blank">Mastodon</a
 ></span>]</span> this puzzle.</p>
 </main>
 
