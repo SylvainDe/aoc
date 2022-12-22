@@ -66,14 +66,11 @@ def follow_notes(notes):
             dx, dy = turn(ins, dx, dy)
         else:
             for _ in range(ins):
-                x2, y2 = x+dx, y+dy
-                res = map_.get((x2, y2))
-                if res is None:
-                    for i in itertools.count(1):
-                        x2, y2 = (x+i*dx) % nb_rows, (y+i*dy) % nb_col
-                        res = map_.get((x2, y2))
-                        if res is not None:
-                            break
+                for i in itertools.count(1):
+                    x2, y2 = (x+i*dx) % nb_rows, (y+i*dy) % nb_col
+                    res = map_.get((x2, y2))
+                    if res is not None:
+                        break
                 if res:
                     x, y = x2, y2
                 else:
