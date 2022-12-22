@@ -33,8 +33,8 @@ Solutions are written in Python and/or Rust.
 |Day 19: Not Enough Minerals|[Problem](https://adventofcode.com/2022/day/19) [Input](https://adventofcode.com/2022/day/19/input)|[puzzle.html](resources/year2022_day19_puzzle.html) [input.txt](resources/year2022_day19_input.txt)|**|[day19.py](python/2022/day19.py)|[-](rust/src/2022/day19.rs)|06:58:21|08:44:04|
 |Day 20: Grove Positioning System|[Problem](https://adventofcode.com/2022/day/20) [Input](https://adventofcode.com/2022/day/20/input)|[puzzle.html](resources/year2022_day20_puzzle.html) [input.txt](resources/year2022_day20_input.txt)|**|[day20.py](python/2022/day20.py)|[-](rust/src/2022/day20.rs)|04:36:12|04:48:02|
 |Day 21: Monkey Math|[Problem](https://adventofcode.com/2022/day/21) [Input](https://adventofcode.com/2022/day/21/input)|[puzzle.html](resources/year2022_day21_puzzle.html) [input.txt](resources/year2022_day21_input.txt)|**|[day21.py](python/2022/day21.py)|[-](rust/src/2022/day21.rs)|04:55:51|05:59:06|
-|Day 22: Monkey Map|[Problem](https://adventofcode.com/2022/day/22) [Input](https://adventofcode.com/2022/day/22/input)|[puzzle.html](resources/year2022_day22_puzzle.html) [input.txt](resources/year2022_day22_input.txt)|*|[day22.py](python/2022/day22.py)|[-](rust/src/2022/day22.rs)|03:36:57|-|
-|[2022](https://adventofcode.com/2022)|[Stats](https://adventofcode.com/2022/leaderboard/self)|[stats.txt](misc/leaderboard_self_2022.html)|43|-|-|-|-|
+|Day 22: Monkey Map|[Problem](https://adventofcode.com/2022/day/22) [Input](https://adventofcode.com/2022/day/22/input)|[puzzle.html](resources/year2022_day22_puzzle.html) [input.txt](resources/year2022_day22_input.txt)|**|[day22.py](python/2022/day22.py)|[-](rust/src/2022/day22.rs)|03:36:57|15:32:10|
+|[2022](https://adventofcode.com/2022)|[Stats](https://adventofcode.com/2022/leaderboard/self)|[stats.txt](misc/leaderboard_self_2022.html)|44|-|-|-|-|
 
 ## [2021](https://adventofcode.com/2021)
 |Day|URLs|Puzzle & Input|Stars|Python|Rust|Time part 1|Time part 2|
@@ -270,8 +270,8 @@ Solutions are written in Python and/or Rust.
 |19||*||||**|**|**| 7: *******|
 |20|*|**|||**|**|**|**|11: ***********|
 |21|**|||||**|**|**| 8: ********|
-|22||*|||*|**|**|*| 7: *******|
+|22||*|||*|**|**|**| 8: ********|
 |23||**||||**|*|| 5: *****|
 |24||**|||**|**||| 6: ******|
 |25|*|||*||**|*|| 5: *****|
-|Total|28|42|28|21|28|50|46|43|286|
+|Total|28|42|28|21|28|50|46|44|287|
