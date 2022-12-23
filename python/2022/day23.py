@@ -16,23 +16,20 @@ def get_elves_from_file(file_path="../../resources/year2022_day23_input.txt"):
     with open(file_path) as f:
         return get_elves_from_lines(f.read())
 
+r = (0, -1, 1) # "0" must be first
 
 attempts_original = [
     # N
-    tuple((-1, c) for c in (0, -1, 1)),
+    tuple((-1, c) for c in r),
     # S
-    tuple((1, c) for c in (0, -1, 1)),
+    tuple((1, c) for c in r),
     # W
-    tuple((c, -1) for c in (0, -1, 1)),
+    tuple((c, -1) for c in r),
     # E
-    tuple((c, 1) for c in (0, -1, 1)),
+    tuple((c, 1) for c in r),
 ]
 
-def neighbours(pos):
-    x, y = pos
-    for dx, dy in itertools.product((-1, 0, 1), repeat=2):
-        if (dx, dy) != (0, 0):
-            yield x+dx, y+dy 
+neighbours = tuple(t for t in itertools.product(r, repeat=2) if t != (0, 0))
 
 def show_set(s):
     xs = [p[0] for p in s]
@@ -47,21 +44,22 @@ def show_set(s):
 
 def play_rounds(elves, nb_round):
     attempts = collections.deque(attempts_original)
-    show_set(elves)
-    for _ in range(nb_round):
+    for i in itertools.count(start=1) if nb_round is None else range(1, nb_round+1):
         proposals = dict()
         elves2 = set()
-        for x, y in elves:
-            if not any(n in elves for n in neighbours((x, y))):
-                elves2.add((x, y))
+        for pos in elves:
+            x, y = pos
+            if not any((x+dx, y+dy) in elves for dx, dy in neighbours):
+                elves2.add(pos)
             else:
                 for a in attempts:
                     candidates = [(x+dx, y+dy) for dx, dy in a]
                     if not any(c in elves for c in candidates):
-                        proposals.setdefault(candidates[0], []).append((x, y))
+                        proposals.setdefault(candidates[0], []).append(pos)
                         break
                 else:
-                    elves2.add((x, y))
+                    elves2.add(pos)
+        move = False
         for pos, lst in proposals.items():
             if len(lst) > 1:
                 for e in lst:
@@ -70,10 +68,13 @@ def play_rounds(elves, nb_round):
             else:
                 assert pos not in elves2
                 elves2.add(pos)
+                move = True
+        if nb_round is None and not move:
+            return i
         attempts.rotate(-1)
         assert len(elves) == len(elves2)
         elves = elves2
-        # show_set(elves)
+    assert nb_round is not None
     xs = [p[0] for p in elves]
     ys = [p[1] for p in elves]
     return (1 + max(xs) - min(xs)) * (1 + max(ys) - min(ys)) - len(elves)
@@ -99,11 +100,26 @@ def run_tests():
 ..............
 ..............""")
     assert play_rounds(elves, 10) == 110
+    assert play_rounds(elves, None) == 20
 
+    elves = get_elves_from_lines(""".......#......
+....#......#..
+..#.....#.....
+......#.......
+...#....#.#..#
+#.............
+....#.....#...
+..#.....#.....
+....#.#....#..
+.........#....
+....#......#..
+.......#......""")
+    assert play_rounds(elves, None) == 1
 
 def get_solutions():
     elves = get_elves_from_file()
-    print(play_rounds(elves, 10))
+    print(play_rounds(elves, 10) == 4218)
+    print(play_rounds(elves, None) == 976)
 
 
 if __name__ == "__main__":
