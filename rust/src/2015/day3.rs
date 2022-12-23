@@ -21,7 +21,7 @@ fn get_path(input: impl Iterator<Item = char>) -> HashSet<Position> {
             'v' => x -= 1,
             '<' => y -= 1,
             '>' => y += 1,
-            _ => panic!("Unexpected value {}", c),
+            _ => panic!("Unexpected value {c}"),
         }
         pos.insert((x, y));
     }

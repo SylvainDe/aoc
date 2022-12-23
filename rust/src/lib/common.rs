@@ -9,11 +9,7 @@ pub mod input {
 
     #[must_use]
     pub fn get_first_line(string: &str) -> String {
-        match string.lines().next() {
-            None => "",
-            Some(l) => l,
-        }
-        .to_owned()
+        string.lines().next().map_or("", |l| l).to_owned()
     }
 
     #[must_use]
@@ -56,32 +52,29 @@ pub mod input {
 
     #[must_use]
     pub fn get_answers(filepath: &str) -> (Option<String>, Option<String>) {
-        match fs::read_to_string(filepath) {
-            Ok(s) => {
-                let v: Vec<String> = s.lines().map(ToOwned::to_owned).collect();
-                (v.get(0).cloned(), v.get(1).cloned())
-            }
-            Err(_) => (None, None),
-        }
+        fs::read_to_string(filepath).map_or((None, None), |s| {
+            let v: Vec<String> = s.lines().map(ToOwned::to_owned).collect();
+            (v.get(0).cloned(), v.get(1).cloned())
+        })
     }
 
     /// # Panics
     ///
     /// Will panic if answers do not match in strict mode
     pub fn check_answer(result: &str, expected: Option<String>, is_strict: bool) {
-        match expected {
-            None => println!("Result: {}", result),
-            Some(expected_res) => {
+        expected.map_or_else(
+            || println!("Result: {result}"),
+            |expected_res| {
                 if is_strict {
                     // println!("Answer: {} (expected: {})", result, expected_res);
                     assert_eq!(result, expected_res);
                 } else if result == expected_res {
-                    println!("Correct answer: {}", result);
+                    println!("Correct answer: {result}");
                 } else {
-                    println!("Incorrect answer: {} (expected {})", result, expected_res);
+                    println!("Incorrect answer: {result} (expected {expected_res})");
                 }
-            }
-        }
+            },
+        );
     }
 }
 
@@ -278,10 +271,8 @@ pub mod assembunny2016 {
     }
 
     fn eval_string(s: &str, env: &HashMap<String, Int>) -> Int {
-        match s.parse::<Int>() {
-            Ok(n) => n,
-            Err(_) => *env.get(s).unwrap(),
-        }
+        s.parse::<Int>()
+            .map_or_else(|_| *env.get(s).unwrap(), |n| n)
     }
 
     /// # Panics

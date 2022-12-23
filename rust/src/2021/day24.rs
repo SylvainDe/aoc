@@ -50,11 +50,7 @@ impl FromStr for Instruction {
                             return Ok(Self::BinaryOp(arg1, arg2, |a1, a2| a1 % a2));
                         }
                         "eql" => {
-                            return Ok(Self::BinaryOp(
-                                arg1,
-                                arg2,
-                                |a1, a2| if a1 == a2 { 1 } else { 0 },
-                            ));
+                            return Ok(Self::BinaryOp(arg1, arg2, |a1, a2| Int::from(a1 == a2)));
                         }
                         _ => (),
                     }
@@ -68,10 +64,8 @@ impl FromStr for Instruction {
 
 #[allow(dead_code)]
 fn eval_string(s: &str, env: &HashMap<String, Int>) -> Int {
-    match s.parse::<Int>() {
-        Ok(n) => n,
-        Err(_) => *env.get(s).unwrap(),
-    }
+    s.parse::<Int>()
+        .map_or_else(|_| *env.get(s).unwrap(), |n| n)
 }
 
 #[allow(dead_code)]

@@ -17,7 +17,7 @@ fn digest_starts_with(data: &str, prefix: &str) -> bool {
 
 fn find_coin(data: &str, prefix: &str) -> Int {
     for i in 0.. {
-        let s = format!("{}{}", data, i);
+        let s = format!("{data}{i}");
         if digest_starts_with(&s, prefix) {
             return i;
         }

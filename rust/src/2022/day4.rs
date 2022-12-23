@@ -48,13 +48,10 @@ fn part1(identifiers: &InputContent) -> Int {
                  id2_beg,
                  id2_end,
              }| {
-                if (id1_beg <= id2_beg && id2_end <= id1_end)
-                    || (id2_beg <= id1_beg && id1_end <= id2_end)
-                {
-                    1
-                } else {
-                    0
-                }
+                Int::from(
+                    (id1_beg <= id2_beg && id2_end <= id1_end)
+                        || (id2_beg <= id1_beg && id1_end <= id2_end),
+                )
             },
         )
         .sum()
@@ -69,13 +66,7 @@ fn part2(identifiers: &InputContent) -> Int {
                  id1_end,
                  id2_beg,
                  id2_end,
-             }| {
-                if (id1_beg > id2_end) || (id2_beg > id1_end) {
-                    0
-                } else {
-                    1
-                }
-            },
+             }| { Int::from(!((id1_beg > id2_end) || (id2_beg > id1_end))) },
         )
         .sum()
 }

@@ -30,7 +30,7 @@ fn part1(s: &str) -> u32 {
             State::InNbChars => match c {
                 'x' => state = State::InNbRepetition,
                 '0'..='9' => nb_char = 10 * nb_char + (c as u32 - '0' as u32),
-                _ => panic!("Unexpected char {} in state {:?}", c, state),
+                _ => panic!("Unexpected char {c} in state {state:?}"),
             },
             State::InNbRepetition => match c {
                 ')' => {
@@ -44,7 +44,7 @@ fn part1(s: &str) -> u32 {
                     nb_rep = 0;
                 }
                 '0'..='9' => nb_rep = 10 * nb_rep + (c as u32 - '0' as u32),
-                _ => panic!("Unexpected char {} in state {:?}", c, state),
+                _ => panic!("Unexpected char {c} in state {state:?}"),
             },
         }
     }
@@ -66,7 +66,7 @@ fn part2(s: &str) -> u64 {
             State::InNbChars => match c {
                 'x' => state = State::InNbRepetition,
                 '0'..='9' => nb_char = 10 * nb_char + (c as usize - '0' as usize),
-                _ => panic!("Unexpected char {} in state {:?}", c, state),
+                _ => panic!("Unexpected char {c} in state {state:?}"),
             },
             State::InNbRepetition => match c {
                 ')' => {
@@ -77,7 +77,7 @@ fn part2(s: &str) -> u64 {
                     nb_rep = 0;
                 }
                 '0'..='9' => nb_rep = 10 * nb_rep + (c as u64 - '0' as u64),
-                _ => panic!("Unexpected char {} in state {:?}", c, state),
+                _ => panic!("Unexpected char {c} in state {state:?}"),
             },
         }
     }

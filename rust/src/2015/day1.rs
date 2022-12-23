@@ -11,7 +11,7 @@ fn floor_value(c: char) -> i32 {
     match c {
         '(' => 1,
         ')' => -1,
-        _ => panic!("Unexpected value {}", c),
+        _ => panic!("Unexpected value {c}"),
     }
 }
 

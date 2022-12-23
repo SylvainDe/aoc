@@ -54,7 +54,7 @@ fn syntax_error_score(s: &str) -> Int {
             ']' => 57,
             '}' => 1197,
             '>' => 25137,
-            _ => panic!("Unexpected value {}", c),
+            _ => panic!("Unexpected value {c}"),
         },
         ParseResult::Success | ParseResult::Incomplete(_) => 0,
     }
@@ -73,7 +73,7 @@ fn completion_score_for_missing(s: &str) -> Int {
             ']' => 2,
             '}' => 3,
             '>' => 4,
-            _ => panic!("Unexpected value {}", c),
+            _ => panic!("Unexpected value {c}"),
         }
     }
     score

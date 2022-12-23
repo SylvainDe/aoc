@@ -43,7 +43,7 @@ fn part2(string: &str) -> Int {
     // Remove and reduce
     min("abcdefghijklmnopqrstuvwxyz"
         .chars()
-        .map(|low| reduce(&s.replace(low, "").replace(low.to_ascii_uppercase(), "")).len()))
+        .map(|low| reduce(&s.replace([low, low.to_ascii_uppercase()], "")).len()))
     .unwrap()
 }
 

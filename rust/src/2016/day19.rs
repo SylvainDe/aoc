@@ -37,7 +37,7 @@ fn part2(size: Int) -> Int {
         let rm = (i + (v.len() / 2)) % v.len();
         // dbg!(rm, v.len());
         v.remove(rm);
-        let incr = if rm < i { 0 } else { 1 };
+        let incr = usize::from(rm >= i);
         i = (i + incr) % v.len();
     }
     *v.first().unwrap()

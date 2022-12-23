@@ -12,7 +12,7 @@ const SKIP_SLOW: bool = true;
 
 fn get_hash(salt: &str, index: usize, stretched: bool) -> String {
     let nb = if stretched { 2017 } else { 1 };
-    let mut s = format!("{}{}", salt, index);
+    let mut s = format!("{salt}{index}");
     for _ in 0..nb {
         s = format!("{:?}", md5::compute(s));
     }
@@ -41,11 +41,7 @@ fn produce_key(salt: &str, index_wanted: usize, stretched: bool) -> usize {
     }
     for i in 0.. {
         // Compute and add new hash
-        reps.push(find_repetitions(&get_hash(
-            salt,
-            (i + 1000) as usize,
-            stretched,
-        )));
+        reps.push(find_repetitions(&get_hash(salt, i + 1000, stretched)));
         // Find first triplet
         if let Some((c, _)) = reps[i].iter().find(|(_, cnt)| cnt >= &3) {
             for j in reps.iter().take(i + 1000 + 1).skip(i + 1) {
