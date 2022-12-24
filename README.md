@@ -35,6 +35,7 @@ Solutions are written in Python and/or Rust.
 |Day 21: Monkey Math|[Problem](https://adventofcode.com/2022/day/21) [Input](https://adventofcode.com/2022/day/21/input)|[puzzle.html](resources/year2022_day21_puzzle.html) [input.txt](resources/year2022_day21_input.txt)|**|[day21.py](python/2022/day21.py)|[-](rust/src/2022/day21.rs)|04:55:51|05:59:06|
 |Day 22: Monkey Map|[Problem](https://adventofcode.com/2022/day/22) [Input](https://adventofcode.com/2022/day/22/input)|[puzzle.html](resources/year2022_day22_puzzle.html) [input.txt](resources/year2022_day22_input.txt)|**|[day22.py](python/2022/day22.py)|[-](rust/src/2022/day22.rs)|03:36:57|15:32:10|
 |Day 23: Unstable Diffusion|[Problem](https://adventofcode.com/2022/day/23) [Input](https://adventofcode.com/2022/day/23/input)|[puzzle.html](resources/year2022_day23_puzzle.html) [input.txt](resources/year2022_day23_input.txt)|**|[day23.py](python/2022/day23.py)|[-](rust/src/2022/day23.rs)|03:52:13|03:58:57|
+|Day 24: Blizzard Basin|[Problem](https://adventofcode.com/2022/day/24) [Input](https://adventofcode.com/2022/day/24/input)|[puzzle.html](resources/year2022_day24_puzzle.html) [input.txt](resources/year2022_day24_input.txt)||[-](python/2022/day24.py)|[-](rust/src/2022/day24.rs)|-|-|
 |[2022](https://adventofcode.com/2022)|[Stats](https://adventofcode.com/2022/leaderboard/self)|[stats.txt](misc/leaderboard_self_2022.html)|46|-|-|-|-|
 
 ## [2021](https://adventofcode.com/2021)
