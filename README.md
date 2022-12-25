@@ -36,8 +36,8 @@ Solutions are written in Python and/or Rust.
 |Day 22: Monkey Map|[Problem](https://adventofcode.com/2022/day/22) [Input](https://adventofcode.com/2022/day/22/input)|[puzzle.html](resources/year2022_day22_puzzle.html) [input.txt](resources/year2022_day22_input.txt)|**|[day22.py](python/2022/day22.py)|[-](rust/src/2022/day22.rs)|03:36:57|15:32:10|
 |Day 23: Unstable Diffusion|[Problem](https://adventofcode.com/2022/day/23) [Input](https://adventofcode.com/2022/day/23/input)|[puzzle.html](resources/year2022_day23_puzzle.html) [input.txt](resources/year2022_day23_input.txt)|**|[day23.py](python/2022/day23.py)|[-](rust/src/2022/day23.rs)|03:52:13|03:58:57|
 |Day 24: Blizzard Basin|[Problem](https://adventofcode.com/2022/day/24) [Input](https://adventofcode.com/2022/day/24/input)|[puzzle.html](resources/year2022_day24_puzzle.html) [input.txt](resources/year2022_day24_input.txt)|**|[day24.py](python/2022/day24.py)|[-](rust/src/2022/day24.rs)|13:29:12|13:40:01|
-|Day 25: Full of Hot Air|[Problem](https://adventofcode.com/2022/day/25) [Input](https://adventofcode.com/2022/day/25/input)|[puzzle.html](resources/year2022_day25_puzzle.html) [input.txt](resources/year2022_day25_input.txt)||[-](python/2022/day25.py)|[-](rust/src/2022/day25.rs)|-|-|
-|[2022](https://adventofcode.com/2022)|[Stats](https://adventofcode.com/2022/leaderboard/self)|[stats.txt](misc/leaderboard_self_2022.html)|48|-|-|-|-|
+|Day 25: Full of Hot Air|[Problem](https://adventofcode.com/2022/day/25) [Input](https://adventofcode.com/2022/day/25/input)|[puzzle.html](resources/year2022_day25_puzzle.html) [input.txt](resources/year2022_day25_input.txt)|**|[day25.py](python/2022/day25.py)|[-](rust/src/2022/day25.rs)|01:22:31|01:22:39|
+|[2022](https://adventofcode.com/2022)|[Stats](https://adventofcode.com/2022/leaderboard/self)|[stats.txt](misc/leaderboard_self_2022.html)|50|-|-|-|-|
 
 ## [2021](https://adventofcode.com/2021)
 |Day|URLs|Puzzle & Input|Stars|Python|Rust|Time part 1|Time part 2|
@@ -276,5 +276,5 @@ Solutions are written in Python and/or Rust.
 |22||*|||*|**|**|**| 8: ********|
 |23||**||||**|*|**| 7: *******|
 |24||**|||**|**||**| 8: ********|
-|25|*|||*||**|*|| 5: *****|
-|Total|28|42|28|21|28|50|46|48|291|
+|25|*|||*||**|*|**| 7: *******|
+|Total|28|42|28|21|28|50|46|50|293|
