@@ -110,7 +110,7 @@ if [ "${get_input}" = "1" ]; then
 	get_url_and_save "${input_url}" "${input_file}" "${overwrite_input}" "0"
 fi
 if [ "${extract_answers}" = "1" ]; then
-    sed -n "s/<p>Your puzzle answer was <code>\([0-9A-Za-z,]*\)<\/code>\..*/\1/gp" "${puzzle_file}" | tee "${answer_file}"
+    sed -n "s/<p>Your puzzle answer was <code>\([^<]*\)<\/code>\..*/\1/gp" "${puzzle_file}" | tee "${answer_file}"
 fi
 
 create_code_from_template() {

@@ -2,7 +2,7 @@
 set -e
 
 # Previous years
-for y in $(seq 2015 2021); do
+for y in $(seq 2015 2022); do
 	for d in $(seq 1 25); do
 		echo "$d $y"
 		# ./new_day.sh "${d}" "${y}"
@@ -10,8 +10,8 @@ for y in $(seq 2015 2021); do
 done
 
 # Current year
-y="2022"
-for d in $(seq 1 21); do
-	echo "$d $y"
-	# ./new_day.sh "${d}" "${y}"
-done
+# y="2023"
+# for d in $(seq 1 21); do
+# 	echo "$d $y"
+# 	./new_day.sh "${d}" "${y}"
+# done
