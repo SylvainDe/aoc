@@ -1,13 +1,12 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
-import heapq
 import collections
 
 
 def get_grid_from_lines(string):
     start = None
     dest = None
-    grid = dict()
+    grid = {}
     for i, l in enumerate(string.splitlines()):
         for j, val in enumerate(l):
             pos = (i, j)
@@ -33,9 +32,9 @@ def get_neighbours(x, y):
 
 
 def get_accessible_neighbours(grid, uphill):
-    access = dict()
+    access = {}
     for pos, val in grid.items():
-        d = access.setdefault(pos, dict())
+        d = access.setdefault(pos, {})
         for pos2 in get_neighbours(*pos):
             val2 = grid.get(pos2)
             if val2 is not None and (
@@ -46,7 +45,7 @@ def get_accessible_neighbours(grid, uphill):
 
 
 def get_distances(grid, start, uphill):
-    distances = dict()
+    distances = {}
     queue = collections.deque([(0, start)])
     neigh = get_accessible_neighbours(grid, uphill)
     while queue:

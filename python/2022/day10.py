@@ -6,10 +6,9 @@ def get_instruction_from_line(string):
     # Tuple (nb_cycle, added value)
     if string == "noop":
         return (1, 0)
-    else:
-        left, mid, right = string.partition(" ")
-        assert mid == " "
-        return (2, int(right))
+    _, mid, right = string.partition(" ")
+    assert mid == " "
+    return (2, int(right))
 
 
 def get_instructions_from_lines(string):

@@ -15,7 +15,7 @@ def get_power_consumption(diagnostic):
     gamma, epsilon = "", ""
     for i in range(len(diagnostic[0])):
         c = collections.Counter(diag[i] for diag in diagnostic)
-        val, nb = c.most_common(1)[0]
+        val, _ = c.most_common(1)[0]
         gamma += val
         epsilon += other_bit[val]
     return int(gamma, base=2) * int(epsilon, base=2)
@@ -26,7 +26,7 @@ def oxygen_rating(diagnostic, i):
     # Dirty hack to ensure that most_common(2) has something to return
     c["1"] += 0
     c["0"] += 0
-    (val1, nb1), (val2, nb2) = c.most_common(2)
+    (val1, nb1), (_, nb2) = c.most_common(2)
     if nb1 == nb2:
         return "1"
     return val1

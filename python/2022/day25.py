@@ -1,10 +1,9 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
-import itertools
 
 
 def get_strings_from_lines(string):
-    return [l for l in string.splitlines()]
+    return string.splitlines()
 
 
 def get_strings_from_file(file_path="../../resources/year2022_day25_input.txt"):

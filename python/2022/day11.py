@@ -74,7 +74,7 @@ def play_monkey_rounds(monkeys, is_part1):
         worry_mod = lcmm(*[m.div for m in monkeys])
     monkey_items = {m.id: list(m.start_items) for m in monkeys}
     counter = collections.Counter()
-    for i in range(nb_round):
+    for _ in range(nb_round):
         for m in monkeys:
             lst = monkey_items[m.id]
             monkey_items[m.id] = []
@@ -87,7 +87,7 @@ def play_monkey_rounds(monkeys, is_part1):
                     worry %= worry_mod
                 dest = m.if_false if worry % m.div else m.if_true
                 monkey_items[dest].append(worry)
-    (id1, nb1), (id2, nb2) = counter.most_common(2)
+    (_, nb1), (_, nb2) = counter.most_common(2)
     return nb1 * nb2
 
 

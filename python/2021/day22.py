@@ -12,7 +12,7 @@ actions = {
 
 
 def get_range(s):
-    name, middle, values = s.partition("=")
+    _, middle, values = s.partition("=")
     assert middle == "="
     return tuple(int(val) for val in values.split(".."))
 

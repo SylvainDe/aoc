@@ -32,7 +32,7 @@ def perform_step(template, rules):
 
 
 def perform_steps(template, rules, steps):
-    for i in range(steps):
+    for _ in range(steps):
         template = perform_step(template, rules)
     return template
 

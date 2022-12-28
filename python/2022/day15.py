@@ -32,7 +32,7 @@ def distance(pos1, pos2):
 def get_pos_without_beacons(sensors, y_arg):
     points = set()
     for s, b in sensors:
-        sx, sy = s
+        sx, _ = s
         closest = (sx, y_arg)
         d_b = distance(s, b)
         d_closest = distance(s, closest)
@@ -54,6 +54,7 @@ def get_pos_with_beacons_naive(sensors, val_max):
     for p in itertools.product(range(val_max + 1), repeat=2):
         if all(distance(s, p) > d for s, d in sensors_dist.items()):
             return get_freq(*p)
+    return None
 
 
 def get_manhattan_circle(center, radius):
@@ -73,7 +74,7 @@ def get_manhattan_circle(center, radius):
 def get_pos_with_beacons_less_naive(sensors, val_max):
     # Assume we'll be at the (exterior) intersection of at least 3 squares/circles
     sensors_dist = {s: distance(s, b) for s, b in sensors}
-    points = dict()
+    points = {}
     for s, d in sensors_dist.items():
         for p in get_manhattan_circle(s, d + 1):
             points.setdefault(p, set()).add(s)
@@ -82,11 +83,12 @@ def get_pos_with_beacons_less_naive(sensors, val_max):
         if 0 <= x <= val_max and 0 <= y <= val_max and len(lst) >= 3:
             if all(distance(s, pos) > d for s, d in sensors_dist.items()):
                 return get_freq(x, y)
+    return None
 
 
 def show_manhattan_square(center=(3, 4), d=5):
     # For debugging purposes (show and check equations)
-    i, j = center
+    i, _ = center
     points = {center: "#"}
     sides = get_sides(center, d)
     for x in range(i - d - 1, i + d + 1 + 1):
@@ -97,8 +99,8 @@ def show_manhattan_square(center=(3, 4), d=5):
             x = (b2 - b1) / (a1 - a2)
             y = (a1 * b2 - a2 * b1) / (a1 - a2)
             points[(x, y)] = "X"
-    xs = [p[0] for p in points.keys()]
-    ys = [p[1] for p in points.keys()]
+    xs = [p[0] for p in points]
+    ys = [p[1] for p in points]
     x_range = list(range(min(xs), max(xs) + 1))
     y_range = list(range(min(ys), max(ys) + 1))
     for x in x_range:
@@ -146,6 +148,7 @@ def get_pos_with_beacons(sensors, val_max):
             if 0 <= x <= val_max and 0 <= y <= val_max:
                 if all(distance(s, p) > d for s, d in sensors_dist.items()):
                     return get_freq(x, y)
+    return None
 
 
 def run_tests():

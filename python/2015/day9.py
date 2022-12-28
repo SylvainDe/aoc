@@ -26,7 +26,7 @@ def build_graph(info):
 
 def get_routes(graph):
     paths = [([loc], 0) for loc in graph]
-    for i in range(len(graph) - 1):
+    for _ in range(len(graph) - 1):
         paths2 = []
         for path, d in paths:
             last = path[-1]

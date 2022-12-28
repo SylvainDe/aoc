@@ -20,7 +20,7 @@ def get_pair_from_str(s):
                 depth -= 1
             elif c == ",":
                 pair.append((c, depth))
-    assert digits == []
+    assert not digits
     return pair
 
 
@@ -125,7 +125,7 @@ def string_handling_tests():
         "[[9,1],[1,9]]",
     ]
     for s in tests:
-        pair = get_pair_from_str(s)
+        get_pair_from_str(s)
 
 
 def explode_tests():

@@ -30,7 +30,7 @@ def get_valves_from_file(file_path="../../resources/year2022_day16_input.txt"):
 
 def floyd_marshall(valves):
     graph = {v.id: v.tunnels for v in valves}
-    distances = dict()
+    distances = {}
     for src, dsts in graph.items():
         for dst in dsts:
             distances[(src, dst)] = 1
@@ -47,7 +47,6 @@ def floyd_marshall(valves):
 
 
 def floyd_marshall_clean(valves, start_pos):
-    distances = floyd_marshall(valves)
     relevant = set(v.id for v in valves if v.flow > 0)
     clean_distances = {(start_pos, start_pos): 0}
     for (i, j), d in floyd_marshall(valves).items():

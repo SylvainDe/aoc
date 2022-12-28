@@ -1,6 +1,5 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
-import collections
 
 
 def get_lines_from_file(file_path="../../resources/year2021_day10_input.txt"):

@@ -26,7 +26,7 @@ def get_next_line(tiles):
 
 def get_tiles(tiles, rows):
     yield tiles
-    for r in range(rows - 1):
+    for _ in range(rows - 1):
         tiles = get_next_line(tiles)
         yield tiles
 

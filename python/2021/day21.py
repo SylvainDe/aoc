@@ -27,7 +27,7 @@ def game(positions, final_score=1000, rolls=3, sides=100):
     nb_player = len(positions)
     # Shift positions by 1 to go from [1, 10] to [0, 9]
     players = [(pos - 1, 0) for pos in positions]
-    dice = deterministic_dice(100)
+    dice = deterministic_dice(sides)
     for i in itertools.count():
         player = i % nb_player
         pos, score = players[player]
@@ -37,7 +37,7 @@ def game(positions, final_score=1000, rolls=3, sides=100):
         players[player] = (pos, score)
         if score >= final_score:
             nb_rolls = rolls * (i + 1)
-            return min([s for p, s in players]) * nb_rolls
+            return min(s for p, s in players) * nb_rolls
 
 
 def get_sum_quantum_dice(sides, nb_rolls):

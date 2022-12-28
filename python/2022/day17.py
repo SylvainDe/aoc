@@ -9,7 +9,7 @@ STREAM_DIR = {
 
 
 def get_streams_from_line(string):
-    return [c for c in string]
+    return list(string)
 
 
 def get_streams_from_file(file_path="../../resources/year2022_day17_input.txt"):
@@ -87,8 +87,8 @@ def simulate(streams, nb_rocks, skip_optim=False):
     rock_iter = itertools.cycle(enumerate(ROCKS))
     fallen_rocks = set((0, j) for j in range(WIDTH))
     stream_idx = None
-    indices_seen = dict()
-    heights = dict()
+    indices_seen = {}
+    heights = {}
     for i, (rock_idx, r) in zip(range(nb_rocks), rock_iter):
         max_x = max(r[0] for r in fallen_rocks)
         last_level = tuple(

@@ -23,7 +23,7 @@ def apply_instruction(instruction, pixels, width, height):
         return {
             (x % width, y % height) for x in range(int(a)) for y in range(int(b))
         } | pixels
-    elif cmd == "rotate":
+    if cmd == "rotate":
         a = int(instr_lst[2][2:])
         b = int(instr_lst[4])
 
@@ -37,8 +37,7 @@ def apply_instruction(instruction, pixels, width, height):
             ((x + dx * (y == a)) % width, (y + dy * (x == a)) % height)
             for (x, y) in pixels
         }
-    else:
-        assert False
+    assert False
 
 
 def apply_instructions(instructions, width, height):
@@ -55,7 +54,7 @@ def run_tests():
         "rotate row y=0 by 4",
         "rotate column x=1 by 1",
     ]
-    assert len(apply_instructions(instructions, width=7, height=3))
+    assert len(apply_instructions(instructions, width=7, height=3)) == 6
 
 
 def get_solutions():

@@ -31,7 +31,7 @@ def get_map_info_from_file(file_path="../../resources/year2022_day24_input.txt")
 
 
 def show_grid(walls, blizzards, positions):
-    grid = dict()
+    grid = {}
     for w in walls:
         assert w not in grid
         grid[w] = "#"
@@ -62,14 +62,15 @@ def possible_moves(pos):
 
 
 def get_begin_and_end(walls):
-    by_lines = dict()
+    by_lines = {}
     for (i, j) in walls:
         by_lines.setdefault(i, []).append(j)
     lines = by_lines.keys()
     for f in (min, max):
         x = f(lines)
         row = set(by_lines[x])
-        yield x, next(iter(set(range(min(row), max(row) + 1)) - row))
+        val = next(iter(set(range(min(row), max(row) + 1)) - row))
+        yield x, val
 
 
 def get_grid_dim(walls):
@@ -108,6 +109,7 @@ def part1(map_info):
         positions = positions2
         if end in positions:
             return t
+    return None
 
 
 def part2(map_info):
@@ -133,6 +135,7 @@ def part2(map_info):
         positions = positions2
         if (end, True, True) in positions:
             return t
+    return None
 
 
 def run_tests():

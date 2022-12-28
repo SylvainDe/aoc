@@ -9,7 +9,7 @@ def get_lines_from_file(file_path="../../resources/year2022_day7_input.txt"):
 
 
 def get_list_of_files(lines):
-    files = dict()
+    files = {}
     cwd = []
     for l in lines:
         chunks = l.split(" ")

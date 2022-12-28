@@ -24,7 +24,7 @@ def look_and_say(seq):
 
 
 def repeated_look_and_say(seq, n):
-    for i in range(n):
+    for _ in range(n):
         seq = look_and_say(seq)
     return seq
 

@@ -28,13 +28,13 @@ def build_graph(points):
 
 def shortest_path(points):
     entrance = min(points)
-    exit = max(points)
+    exit_ = max(points)
     graph = build_graph(points)
     distances = dict()
     heap = [(0, entrance)]
     while heap:
         d, pos = heapq.heappop(heap)
-        if pos == exit:
+        if pos == exit_:
             return d
         if pos in distances:
             assert d >= distances[pos]

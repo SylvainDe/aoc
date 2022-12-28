@@ -50,7 +50,7 @@ def next_step(grid):
 
 def nb_flashes(grid, n):
     nb_flash = 0
-    for i in range(n):
+    for _ in range(n):
         grid = next_step(grid)
         nb_flash += sum(v == 0 for v in grid.values())
     return nb_flash
@@ -72,8 +72,8 @@ def run_tests():
         "11111",
     ]
     grid = dict(get_grid_from_lines(grid))
-    grid1 = next_step(grid)
-    grid2 = next_step(grid1)
+    # grid1 = next_step(grid)
+    # grid2 = next_step(grid1)
     # show_grid(grid2)
     assert nb_flashes(grid, 2) == 9
 

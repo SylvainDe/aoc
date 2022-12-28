@@ -66,7 +66,7 @@ def run_tests():
     assert directions("hijklDR") == []
     assert directions("hijklDU") == ["R"]
     assert directions("hijklDUR") == []
-    assert shortest_path("hijkl") == None
+    assert shortest_path("hijkl") is None
     assert shortest_path("ihgpwlah") == "DDRRRD"
     assert shortest_path("kglvqrro") == "DDUDRLRRUDRD"
     assert shortest_path("ulqzkmiv") == "DRURDRUDDLLDLUURRDULRLDUUDDDRR"

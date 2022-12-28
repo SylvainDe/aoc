@@ -7,7 +7,7 @@ left_re = r"(.*) \((\d+)\)"
 
 
 def get_program_from_string(s):
-    left, mid, right = s.partition(" -> ")
+    left, _, right = s.partition(" -> ")
     lst = right.split(", ") if right else []
     name, weight = re.match(left_re, left).groups()
     return name, (int(weight), lst)
@@ -42,14 +42,13 @@ def get_wrong_disc(programs):
             c = collections.Counter(subweights)
             if len(c) > 1:
                 # If we have more than 1 weight, we expect a most common one to be correct and another one to exist only once and be wrong
-                (mc, nb_mc), (lc, nb_lc) = c.most_common()
+                (mc, _), (lc, nb_lc) = c.most_common()
                 assert nb_lc == 1
                 # Compute the desired weight based on the actual weight
                 for p, w in subweights_dict.items():
                     if w == lc:
                         return disk_weights[p] + mc - lc
-                else:
-                    assert False, "Did not find weight"
+                assert False, "Did not find weight"
             disk_weights[name] = weight
             weights[name] = weight + sum(subweights)
             unweighted_programs.pop(name)

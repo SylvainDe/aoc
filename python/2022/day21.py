@@ -53,14 +53,14 @@ def get_monkeys_from_file(file_path="../../resources/year2022_day21_input.txt"):
 
 
 def eval_expr(expr, values):
-    if type(expr) == int:
+    if isinstance(expr, int):
         return expr
     left, func, right = expr
-    if type(left) != int:
+    if not isinstance(left, int):
         left = values.get(left)
     if left is None:
         return None
-    if type(right) != int:
+    if not isinstance(right, int):
         right = values.get(right)
     if right is None:
         return None
@@ -68,15 +68,15 @@ def eval_expr(expr, values):
 
 
 def get_values(monkey_lst):
-    monkey_dict = dict()
+    monkey_dict = {}
     deps = collections.defaultdict(set)
     for name, expr in monkey_lst:
         monkey_dict.setdefault(name, []).append(expr)
-        if type(expr) != int:
+        if not isinstance(expr, int):
             left, _, right = expr
             deps[left].add(name)
             deps[right].add(name)
-    values = dict()
+    values = {}
     queue = collections.deque(monkey_dict.keys())
     while queue:
         name = queue.popleft()
@@ -101,7 +101,7 @@ def get_hmn_value(monkeys):
     for name, expr in monkeys:
         if name == "humn":
             continue
-        elif type(expr) == int:
+        if isinstance(expr, int):
             lst.append((name, expr))
         else:
             left, func, right = expr

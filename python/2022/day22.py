@@ -4,7 +4,7 @@ import itertools
 
 
 def get_map_from_lines(string):
-    map_ = dict()
+    map_ = {}
     for i, l in enumerate(string.splitlines()):
         for j, c in enumerate(l):
             pos = (i, j)
@@ -46,15 +46,15 @@ def get_notes_from_file(file_path="../../resources/year2022_day22_input.txt"):
 
 
 def show_path(map_, path):
-    copy = dict()
+    copy = {}
     for k, v in map_.items():
         copy[k] = "." if v else "#"
     for i, pos in enumerate(path):
-        assert map_[pos] == True
+        assert map_[pos]
         copy[pos] = str(i % 10)
     copy[pos] = "*"
-    xs = [p[0] for p in copy.keys()]
-    ys = [p[1] for p in copy.keys()]
+    xs = [p[0] for p in copy]
+    ys = [p[1] for p in copy]
     x_range = list(range(min(xs), max(xs) + 1))
     y_range = list(range(min(ys), max(ys) + 1))
     for x in x_range:
@@ -177,7 +177,7 @@ def run_tests():
     )
     assert follow_notes(notes) == 6032
     side = 4
-    seams = dict()
+    seams = {}
     for i in range(side):
         # Harcode list of seams based on pattern
         #          1111
@@ -213,7 +213,7 @@ def get_solutions():
     notes = get_notes_from_file()
     print(follow_notes(notes) == 66292)
     side = 50
-    seams = dict()
+    seams = {}
     for i in range(side):
         # Harcode list of seams based on pattern
         #    111222

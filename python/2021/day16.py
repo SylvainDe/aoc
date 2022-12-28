@@ -25,7 +25,7 @@ def bits_to_int(bits):
 
 
 def next_n(it, n):
-    for i in range(n):
+    for _ in range(n):
         yield next(it)
 
 
@@ -86,22 +86,21 @@ def eval_packet(packet):
     content = [eval_packet(p) for p in packet.content]
     if type_id == 0:
         return sum(content)
-    elif type_id == 1:
+    if type_id == 1:
         return mult(content)
-    elif type_id == 2:
+    if type_id == 2:
         return min(content)
-    elif type_id == 3:
+    if type_id == 3:
         return max(content)
-    elif type_id == 4:
+    if type_id == 4:
         return packet.value
-    elif type_id == 5:
+    if type_id == 5:
         return content[0] > content[1]
-    elif type_id == 6:
+    if type_id == 6:
         return content[0] < content[1]
-    elif type_id == 7:
+    if type_id == 7:
         return content[0] == content[1]
-    else:
-        assert False
+    assert False
 
 
 def run_tests():

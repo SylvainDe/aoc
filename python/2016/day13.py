@@ -41,10 +41,9 @@ def show_distances(number, distances):
     def point_str(p):
         if p in distances:
             return str(distances[p]).center(width, " ")
-        elif is_open(p, number):
+        if is_open(p, number):
             return "#" * width
-        else:
-            return " " * width
+        return " " * width
 
     x_vals = [x for x, _ in distances.keys()]
     y_vals = [y for _, y in distances.keys()]

@@ -3,7 +3,6 @@ import datetime
 import itertools
 import operator
 import math
-import functools
 
 
 def get_pos_from_str(s):

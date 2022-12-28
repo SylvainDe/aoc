@@ -18,8 +18,7 @@ def support_tls(ip):
         elif a != b and a == d and b == c:
             if is_in_bracket:
                 return False
-            else:
-                abba_found = True
+            abba_found = True
     return abba_found
 
 

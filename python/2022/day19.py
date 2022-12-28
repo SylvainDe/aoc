@@ -9,7 +9,7 @@ SKIP_SLOW = True
 
 # Blueprint 1: Each ore robot costs 3 ore. Each clay robot costs 4 ore. Each obsidian robot costs 4 ore and 18 clay. Each geode robot costs 3 ore and 8 obsidian.
 blueprint_re = re.compile(
-    "^Blueprint (\d+): Each ore robot costs (\d+) ore. Each clay robot costs (\d+) ore. Each obsidian robot costs (\d+) ore and (\d+) clay. Each geode robot costs (\d+) ore and (\d+) obsidian.$"
+    r"^Blueprint (\d+): Each ore robot costs (\d+) ore. Each clay robot costs (\d+) ore. Each obsidian robot costs (\d+) ore and (\d+) clay. Each geode robot costs (\d+) ore and (\d+) obsidian.$"
 )
 
 Blueprint = collections.namedtuple(
@@ -51,7 +51,6 @@ def get_max_geodes(bp, time):
     )
     max_clay_cost = bp.obsidian_robot_clay
     max_obs_cost = bp.geode_robot_obsidian
-    prev_time = None
     while queue:
         state = queue.popleft()
         assert all(v >= 0 for v in state)
@@ -66,9 +65,6 @@ def get_max_geodes(bp, time):
             obsidian_robot,
             geode_robot,
         ) = state
-        # if time != prev_time:
-        #     print(bp.id, "time:", time, ":", len(queue), ",", max_geode)
-        # prev_time = time
         max_geode = max(geode, max_geode)
         if time == 0:
             continue

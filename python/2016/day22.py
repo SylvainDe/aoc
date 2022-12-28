@@ -29,7 +29,7 @@ def get_nodes_from_file(file_path="../../resources/year2016_day22_input.txt"):
 
 
 def run_tests():
-    nodes = ""
+    pass
 
 
 def get_solutions():

@@ -42,7 +42,7 @@ def part2(rucksacks):
 
 
 def run_tests():
-    rucksacks = ""
+    pass
 
 
 def get_solutions():

@@ -55,7 +55,7 @@ def get_number_of_bags_in_colored_bag(rules, color):
     while change:
         change = False
         for c1, lst in rules:
-            if not c1 in computed_bags and all(c2 in computed_bags for _, c2 in lst):
+            if c1 not in computed_bags and all(c2 in computed_bags for _, c2 in lst):
                 nb_bags = sum(nb * computed_bags[c2] for nb, c2 in lst)
                 if c1 == color:
                     return nb_bags

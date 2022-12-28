@@ -19,7 +19,7 @@ def get_wire_path(wire):
     x, y = 0, 0
     for instruction in wire.split(","):
         (dx, dy), value = directions[instruction[0]], int(instruction[1:])
-        for i in range(value):
+        for _ in range(value):
             x += dx
             y += dy
             yield x, y

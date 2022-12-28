@@ -2,7 +2,7 @@
 import datetime
 import re
 
-MOVE_RE = re.compile("move (\d+) from (\d+) to (\d+)")
+MOVE_RE = re.compile(r"move (\d+) from (\d+) to (\d+)")
 
 
 def get_input_from_lines(string):
@@ -11,8 +11,8 @@ def get_input_from_lines(string):
     empty_idx = lines.index("")
     stacks, instructions = lines[:empty_idx], lines[empty_idx + 1 :]
     # Parse stacks (transpose then parse)
-    parsed_stacks = dict()
-    for stack in [i for i in zip(*reversed(stacks))][1::4]:
+    parsed_stacks = {}
+    for stack in list(zip(*reversed(stacks)))[1::4]:
         # Use tuple to avoid future modifications
         nb, crates = int(stack[0]), tuple(c for c in stack[1:] if c != " ")
         parsed_stacks[nb] = crates

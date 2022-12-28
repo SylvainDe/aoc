@@ -6,12 +6,14 @@ def get_signal_from_file(file_path="../../resources/year2022_day6_input.txt"):
     with open(file_path) as f:
         for l in f:
             return l
+    return None
 
 
 def get_marker(signal, winsize):
     for i in range(len(signal)):
         if len(set(signal[i : i + winsize])) == winsize:
             return i + winsize
+    return None
 
 
 def run_tests():

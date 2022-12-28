@@ -59,7 +59,7 @@ def run_tests():
     assert get_next_timestamp_with_offsets([1789, 37, 47, 1889]) == 1202161486
     # My own tests
     assert get_next_timestamp_with_offsets([2, None, 4]) == 2
-    assert get_next_timestamp_with_offsets([2, 4]) == None
+    assert get_next_timestamp_with_offsets([2, 4]) is None
 
 
 def get_solutions():

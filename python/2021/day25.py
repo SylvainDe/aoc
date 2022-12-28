@@ -33,13 +33,15 @@ def get_info_from_sea_grid(sea_grid):
 
 
 def show_sea(grid_info):
-    cucumber = (
-        lambda p: ">"
-        if p in grid_info.east_facing
-        else "v"
-        if p in grid_info.south_facing
-        else "."
-    )
+    def cucumber(p):
+        return (
+            ">"
+            if p in grid_info.east_facing
+            else "v"
+            if p in grid_info.south_facing
+            else "."
+        )
+
     for i in range(grid_info.height):
         print("".join(cucumber((i, j)) for j in range(grid_info.width)))
     print()

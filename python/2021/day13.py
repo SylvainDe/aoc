@@ -11,7 +11,7 @@ def get_info_from_lines(lines, fold_instr="fold along "):
         if l == "":
             read_dot = False
         elif read_dot:
-            dots.add(tuple([int(v) for v in l.split(",")]))
+            dots.add(tuple(int(v) for v in l.split(",")))
         elif l.startswith(fold_instr):
             axis, line = l[len(fold_instr) :].split("=")
             folds.append((axis, int(line)))

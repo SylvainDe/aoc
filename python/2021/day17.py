@@ -19,7 +19,7 @@ def get_target_area_from_file(file_path="../../resources/year2021_day17_input.tx
 
 def position(vx, vy, step):
     x, y = 0, 0
-    for s in range(step):
+    for _ in range(step):
         x += vx
         y += vy
         if vx > 0:
@@ -32,7 +32,7 @@ def position(vx, vy, step):
 
 def x_position_slow(vx, step):
     x = 0
-    for s in range(step):
+    for _ in range(step):
         x += vx
         if vx > 0:
             vx -= 1
@@ -43,7 +43,7 @@ def x_position_slow(vx, step):
 
 def y_position_slow(vy, step):
     y = 0
-    for s in range(step):
+    for _ in range(step):
         y += vy
         vy -= 1
     return y

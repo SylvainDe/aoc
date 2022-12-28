@@ -49,7 +49,7 @@ def show_set(s):
 def play_rounds(elves, nb_round):
     attempts = collections.deque(attempts_original)
     for i in itertools.count(start=1) if nb_round is None else range(1, nb_round + 1):
-        proposals = dict()
+        proposals = {}
         elves2 = set()
         for pos in elves:
             x, y = pos
