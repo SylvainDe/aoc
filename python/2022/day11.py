@@ -11,30 +11,40 @@ operations = {
     "+": operator.add,
 }
 
+
 def get_operation_from_string(string):
     left, op, right = string.split(" ")
     return lambda old: operations[op](
-        old if left == "old" else int(left),
-        old if right == "old" else int(right)
+        old if left == "old" else int(left), old if right == "old" else int(right)
     )
 
-MonkeyInput = collections.namedtuple("MonkeyInput", ("id", "start_items", "operation", "div", "if_true", "if_false"))
+
+MonkeyInput = collections.namedtuple(
+    "MonkeyInput", ("id", "start_items", "operation", "div", "if_true", "if_false")
+)
 
 # "'Monkey 0:\n  Starting items: 79, 98\n  Operation: new = old * 19\n  Test: divisible by 23\n    If true: throw to monkey 2\n    If false: throw to monkey 3'"
-monkey_re = re.compile(r"^Monkey (\d+):\n  Starting items: (.*)\n"
-                       r"  Operation: new = (.*)\n"
-                       r"  Test: divisible by (\d+)\n"
-                       r"    If true: throw to monkey (\d+)\n"
-                       r"    If false: throw to monkey (\d+)$")
+monkey_re = re.compile(
+    r"^Monkey (\d+):\n  Starting items: (.*)\n"
+    r"  Operation: new = (.*)\n"
+    r"  Test: divisible by (\d+)\n"
+    r"    If true: throw to monkey (\d+)\n"
+    r"    If false: throw to monkey (\d+)$"
+)
 
 
 def get_monkey_from_string(string):
-    m_id, items, operation, div_test, if_true, if_false = monkey_re.match(string).groups()
-    m_id, div_test, if_true, if_false = (int(s) for s in (m_id, div_test, if_true, if_false))
+    m_id, items, operation, div_test, if_true, if_false = monkey_re.match(
+        string
+    ).groups()
+    m_id, div_test, if_true, if_false = (
+        int(s) for s in (m_id, div_test, if_true, if_false)
+    )
     items = tuple(int(c) for c in items.split(", "))
     operation = get_operation_from_string(operation)
     assert m_id not in (if_true, if_false)
     return MonkeyInput(m_id, items, operation, div_test, if_true, if_false)
+
 
 def get_monkeys_from_lines(string):
     return [get_monkey_from_string(l) for l in string.split("\n\n")]
@@ -60,9 +70,9 @@ def play_monkey_rounds(monkeys, is_part1):
         nb_round = 20
         worry_div = 3
     else:
-        nb_round=10000
+        nb_round = 10000
         worry_mod = lcmm(*[m.div for m in monkeys])
-    monkey_items = { m.id: list(m.start_items) for m in monkeys }
+    monkey_items = {m.id: list(m.start_items) for m in monkeys}
     counter = collections.Counter()
     for i in range(nb_round):
         for m in monkeys:
@@ -82,7 +92,8 @@ def play_monkey_rounds(monkeys, is_part1):
 
 
 def run_tests():
-    monkeys = get_monkeys_from_lines("""Monkey 0:
+    monkeys = get_monkeys_from_lines(
+        """Monkey 0:
   Starting items: 79, 98
   Operation: new = old * 19
   Test: divisible by 23
@@ -108,14 +119,17 @@ Monkey 3:
   Operation: new = old + 3
   Test: divisible by 17
     If true: throw to monkey 0
-    If false: throw to monkey 1""")
+    If false: throw to monkey 1"""
+    )
     assert play_monkey_rounds(monkeys, is_part1=True) == 10605
     assert play_monkey_rounds(monkeys, is_part1=False) == 2713310158
+
 
 def get_solutions():
     monkeys = get_monkey_from_file()
     print(play_monkey_rounds(monkeys, is_part1=True) == 64032)
     print(play_monkey_rounds(monkeys, is_part1=False) == 12729522272)
+
 
 if __name__ == "__main__":
     begin = datetime.datetime.now()

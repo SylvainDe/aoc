@@ -10,14 +10,14 @@ def get_grid_from_lines(string):
     grid = dict()
     for i, l in enumerate(string.splitlines()):
         for j, val in enumerate(l):
-            pos = (i, j);
+            pos = (i, j)
             if val == "S":
                 start = pos
                 val = "a"
             elif val == "E":
                 dest = pos
                 val = "z"
-            grid[pos] = ord(val) - ord('a')
+            grid[pos] = ord(val) - ord("a")
     assert start is not None
     assert dest is not None
     return grid, start, dest
@@ -38,8 +38,9 @@ def get_accessible_neighbours(grid, uphill):
         d = access.setdefault(pos, dict())
         for pos2 in get_neighbours(*pos):
             val2 = grid.get(pos2)
-            if val2 is not None and \
-               ((val2 <= val + 1) if uphill else (val2 + 1 >= val)):
+            if val2 is not None and (
+                (val2 <= val + 1) if uphill else (val2 + 1 >= val)
+            ):
                 d[pos2] = 1
     return access
 
@@ -52,7 +53,7 @@ def get_distances(grid, start, uphill):
         d, pos = queue.popleft()
         if pos not in distances or distances[pos] > d:
             distances[pos] = d
-            queue.extend((d+d2, pos2) for pos2, d2 in neigh[pos].items())
+            queue.extend((d + d2, pos2) for pos2, d2 in neigh[pos].items())
     return distances
 
 
@@ -61,16 +62,21 @@ def get_path(grid, start, dest):
 
 
 def get_path2(grid, dest):
-    return min(d for pos, d in get_distances(grid, dest, uphill=False).items()
-               if grid[pos] == 0)
+    return min(
+        d
+        for pos, d in get_distances(grid, dest, uphill=False).items()
+        if grid[pos] == 0
+    )
 
 
 def run_tests():
-    grid, start, dest = get_grid_from_lines("""Sabqponm
+    grid, start, dest = get_grid_from_lines(
+        """Sabqponm
 abcryxxl
 accszExk
 acctuvwj
-abdefghi""")
+abdefghi"""
+    )
     assert get_path(grid, start, dest) == 31
     assert get_path2(grid, dest) == 29
 

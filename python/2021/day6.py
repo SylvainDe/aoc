@@ -47,7 +47,34 @@ def run_tests():
     assert n_generations(fishes1, 4) == [6, 0, 6, 4, 5, 6, 7, 8, 8]
     assert n_generations(fishes1, 5) == [5, 6, 5, 3, 4, 5, 6, 7, 7, 8]
     assert n_generations(fishes1, 6) == [4, 5, 4, 2, 3, 4, 5, 6, 6, 7]
-    assert n_generations(fishes1, 18) == [6, 0, 6, 4, 5, 6, 0, 1, 1, 2, 6, 0, 1, 1, 1, 2, 2, 3, 3, 4, 6, 7, 8, 8, 8, 8]
+    assert n_generations(fishes1, 18) == [
+        6,
+        0,
+        6,
+        4,
+        5,
+        6,
+        0,
+        1,
+        1,
+        2,
+        6,
+        0,
+        1,
+        1,
+        1,
+        2,
+        2,
+        3,
+        3,
+        4,
+        6,
+        7,
+        8,
+        8,
+        8,
+        8,
+    ]
     for i in range(7):
         assert len(n_generations(fishes1, i)) == n_generations_from_count(fishes1, i)
     assert n_generations_from_count(fishes1, 256) == 26984457539

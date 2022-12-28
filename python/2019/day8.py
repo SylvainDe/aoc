@@ -43,21 +43,27 @@ def get_image(image, width, height):
 
 def run_tests():
     image = "0222112222120000"
-    assert get_image(image, 2, 2) == """01
+    assert (
+        get_image(image, 2, 2)
+        == """01
 10"""
+    )
 
 
 def get_solutions():
     image = get_image_from_file()
     width, height = 25, 6
     print(find_number1(image, width, height) == 2032)
-    print(get_image(image, width, height).replace("0", " ") == """\
+    print(
+        get_image(image, width, height).replace("0", " ")
+        == """\
  11  1111  11  1  1  11  
 1  1 1    1  1 1  1 1  1 
 1    111  1    1  1 1    
 1    1    1    1  1 1 11 
 1  1 1    1  1 1  1 1  1 
- 11  1     11   11   111 """)
+ 11  1     11   11   111 """
+    )
 
 
 if __name__ == "__main__":

@@ -6,7 +6,7 @@ VALUES = [".", "#"]
 
 
 def get_algo_from_str(s):
-    assert len(s) == 512 == 2 ** 9
+    assert len(s) == 512 == 2**9
     assert all(c in VALUES for c in s)
     return [c == "#" for c in s]
 

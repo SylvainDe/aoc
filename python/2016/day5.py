@@ -9,6 +9,7 @@ def get_door_id_from_file(file_path="../../resources/year2016_day5_input.txt"):
         for l in f:
             return l.strip()
 
+
 def yield_hashes(door_id, nb_zeros):
     zeros = "0" * nb_zeros
     for i in itertools.count():
@@ -19,7 +20,9 @@ def yield_hashes(door_id, nb_zeros):
 
 
 def compute_password(door_id, length=8, nb_zeros=5):
-    return "".join(h[0] for h in itertools.islice(yield_hashes(door_id, nb_zeros), length))
+    return "".join(
+        h[0] for h in itertools.islice(yield_hashes(door_id, nb_zeros), length)
+    )
 
 
 def compute_password2(door_id, length=8, nb_zeros=5):

@@ -2,9 +2,11 @@
 import datetime
 import collections
 
+
 def get_lines_from_file(file_path="../../resources/year2022_day7_input.txt"):
     with open(file_path) as f:
-       return [l.strip() for l in f]
+        return [l.strip() for l in f]
+
 
 def get_list_of_files(lines):
     files = dict()
@@ -32,17 +34,20 @@ def get_list_of_files(lines):
             files[tuple(cwd + [name])] = size
     return files
 
+
 def find_directories(files):
     directories = collections.Counter()
     for path, size in files.items():
-        for i in range(len(path)-1):
-            dir_path = path[:i+1]
+        for i in range(len(path) - 1):
+            dir_path = path[: i + 1]
             directories[dir_path] += size
     return directories
+
 
 def find_biggest_small_directories(lines):
     directories = find_directories(get_list_of_files(lines))
     return sum(size for size in directories.values() if size < 100000)
+
 
 def find_dir_to_remove(lines, total_space=70000000, need=30000000):
     files = get_list_of_files(lines)
@@ -52,6 +57,7 @@ def find_dir_to_remove(lines, total_space=70000000, need=30000000):
     assert space_to_free >= 0
     directories = find_directories(files)
     return min(size for size in directories.values() if size >= space_to_free)
+
 
 def run_tests():
     lines = """$ cd /
@@ -79,6 +85,7 @@ $ ls
 7214296 k""".splitlines()
     assert find_biggest_small_directories(lines) == 95437
     assert find_dir_to_remove(lines) == 24933642
+
 
 def get_solutions():
     lines = get_lines_from_file()

@@ -20,7 +20,9 @@ def get_bugs_from_lines(lines, make_point_func=make_point):
                 yield make_point_func(i, j)
 
 
-def get_bugs_from_file(file_path="../../resources/year2019_day24_input.txt", make_point_func=make_point):
+def get_bugs_from_file(
+    file_path="../../resources/year2019_day24_input.txt", make_point_func=make_point
+):
     with open(file_path) as f:
         return set(get_bugs_from_lines(f, make_point_func))
 

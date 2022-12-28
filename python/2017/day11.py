@@ -1,6 +1,7 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
 
+
 def get_steps_from_file(file_path="../../resources/year2017_day11_input.txt"):
     with open(file_path) as f:
         for l in f:
@@ -20,13 +21,14 @@ def get_steps_from_file(file_path="../../resources/year2017_day11_input.txt"):
 #      --+      +--             --+ (1,-1)+--               _\| x
 
 coords = {
-    'nw' : (-1, 0),
-    'n' :  (-1, 1),
-    'ne' : (0, 1),
-    'sw' : (0, -1),
-    's' :  (1, -1),
-    'se' : (1, 0),
+    "nw": (-1, 0),
+    "n": (-1, 1),
+    "ne": (0, 1),
+    "sw": (0, -1),
+    "s": (1, -1),
+    "se": (1, 0),
 }
+
 
 def get_path(steps):
     x, y = (0, 0)
@@ -37,12 +39,14 @@ def get_path(steps):
         y += dy
         yield (x, y)
 
+
 def get_final_position(steps):
     return list(get_path(steps))[-1]
 
-assert (0, 0) == get_final_position(c for c in ('n', 's'))
-assert (0, 0) == get_final_position(c for c in ('nw', 'se'))
-assert (0, 0) == get_final_position(c for c in ('ne', 'sw'))
+
+assert (0, 0) == get_final_position(c for c in ("n", "s"))
+assert (0, 0) == get_final_position(c for c in ("nw", "se"))
+assert (0, 0) == get_final_position(c for c in ("ne", "sw"))
 assert (0, 0) == get_final_position(c for c in coords)
 
 
@@ -50,8 +54,10 @@ def get_distance(coord):
     x, y = coord
     return max(abs(x), abs(y))
 
+
 def get_final_distance(steps):
     return get_distance(get_final_position(steps))
+
 
 def get_max_distance(steps):
     return max(get_distance(p) for p in get_path(steps))
@@ -68,6 +74,7 @@ def get_solutions():
     steps = get_steps_from_file()
     print(get_final_distance(steps) == 707)
     print(get_max_distance(steps) == 1490)
+
 
 if __name__ == "__main__":
     begin = datetime.datetime.now()

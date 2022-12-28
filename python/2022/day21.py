@@ -12,14 +12,27 @@ operations = {
 
 inverses = {
     # A + B = x is also A = x - B or B = x - A
-    operator.add: lambda left, right, expr: ((expr, operator.sub, right), (expr, operator.sub, left)),
+    operator.add: lambda left, right, expr: (
+        (expr, operator.sub, right),
+        (expr, operator.sub, left),
+    ),
     # A // B = x is also A = x * B or B = A // x
-    operator.floordiv: lambda left, right, expr: ((expr, operator.mul, right), (left, operator.floordiv, expr)),
+    operator.floordiv: lambda left, right, expr: (
+        (expr, operator.mul, right),
+        (left, operator.floordiv, expr),
+    ),
     # A - B = x is also A = x + B or B = A - x
-    operator.sub: lambda left, right, expr: ((expr, operator.add, right), (left, operator.sub, expr)),
+    operator.sub: lambda left, right, expr: (
+        (expr, operator.add, right),
+        (left, operator.sub, expr),
+    ),
     # A * B = x is also A = x // B or B = x // A
-    operator.mul: lambda left, right, expr: ((expr, operator.floordiv, right), (expr, operator.floordiv, left)),
+    operator.mul: lambda left, right, expr: (
+        (expr, operator.floordiv, right),
+        (expr, operator.floordiv, left),
+    ),
 }
+
 
 def get_monkey_from_line(string):
     sep = ": "
@@ -29,12 +42,15 @@ def get_monkey_from_line(string):
     expr = int(expr[0]) if len(expr) == 1 else (expr[0], operations[expr[1]], expr[2])
     return name, expr
 
+
 def get_monkeys_from_lines(string):
     return [get_monkey_from_line(l) for l in string.splitlines()]
+
 
 def get_monkeys_from_file(file_path="../../resources/year2022_day21_input.txt"):
     with open(file_path) as f:
         return get_monkeys_from_lines(f.read())
+
 
 def eval_expr(expr, values):
     if type(expr) == int:
@@ -49,6 +65,7 @@ def eval_expr(expr, values):
     if right is None:
         return None
     return func(left, right)
+
 
 def get_values(monkey_lst):
     monkey_dict = dict()
@@ -73,8 +90,10 @@ def get_values(monkey_lst):
                 break
     return values
 
+
 def get_root_value(monkeys):
     return get_values(monkeys)["root"]
+
 
 def get_hmn_value(monkeys):
     lst = []
@@ -89,7 +108,11 @@ def get_hmn_value(monkeys):
             # Express the relation in different ways
             if name == "root":
                 expr = 0
-                new_left, new_right = (right, operator.add, name), (left, operator.add, name)
+                new_left, new_right = (right, operator.add, name), (
+                    left,
+                    operator.add,
+                    name,
+                )
             else:
                 new_left, new_right = inverses[func](left, right, name)
             lst.append((left, new_left))
@@ -99,7 +122,8 @@ def get_hmn_value(monkeys):
 
 
 def run_tests():
-    monkeys = get_monkeys_from_lines("""root: pppw + sjmn
+    monkeys = get_monkeys_from_lines(
+        """root: pppw + sjmn
 dbpl: 5
 cczh: sllz + lgvd
 zczc: 2
@@ -113,14 +137,17 @@ sllz: 4
 pppw: cczh / lfqf
 lgvd: ljgn * ptdq
 drzm: hmdt - zczc
-hmdt: 32""")
+hmdt: 32"""
+    )
     assert get_root_value(monkeys) == 152
     assert get_hmn_value(monkeys) == 301
+
 
 def get_solutions():
     monkeys = get_monkeys_from_file()
     print(get_root_value(monkeys) == 353837700405464)
     print(get_hmn_value(monkeys) == 3678125408017)
+
 
 if __name__ == "__main__":
     begin = datetime.datetime.now()

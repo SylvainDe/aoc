@@ -3,6 +3,7 @@ import datetime
 import collections
 import itertools
 
+
 def get_boxes_from_file(file_path="../../resources/year2018_day2_input.txt"):
     with open(file_path) as f:
         return [l.strip() for l in f]
@@ -26,13 +27,7 @@ def find_common_chars(boxes):
 
 
 def run_tests():
-    boxes = ["abcdef",
-        "bababc",
-        "abbcde",
-        "abcccd",
-        "aabcdd",
-        "abcdee",
-        "ababab"]
+    boxes = ["abcdef", "bababc", "abbcde", "abcccd", "aabcdd", "abcdee", "ababab"]
     assert get_checksum(boxes) == 12
 
 

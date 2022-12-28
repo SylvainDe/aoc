@@ -4,9 +4,11 @@ import string
 import heapq
 import collections
 
+
 def get_maze_from_file(file_path="../../resources/year2019_day18_input.txt"):
     with open(file_path) as f:
         return [l.strip() for l in f]
+
 
 def is_entrance(c):
     return c == "@"
@@ -35,6 +37,7 @@ def find(maze, func):
         for j, c in enumerate(l):
             if func(c):
                 yield i, j
+
 
 def find_entrance(maze):
     entrances = list(find(maze, is_entrance))

@@ -3,20 +3,23 @@ import datetime
 import collections
 import itertools
 
+
 def get_elves_from_lines(string):
     elves = set()
     for x, l in enumerate(string.splitlines()):
         for y, c in enumerate(l):
-            assert c in ('.', '#')
-            if c == '#':
+            assert c in (".", "#")
+            if c == "#":
                 elves.add((x, y))
     return elves
+
 
 def get_elves_from_file(file_path="../../resources/year2022_day23_input.txt"):
     with open(file_path) as f:
         return get_elves_from_lines(f.read())
 
-r = (0, -1, 1) # "0" must be first
+
+r = (0, -1, 1)  # "0" must be first
 
 attempts_original = [
     # N
@@ -31,6 +34,7 @@ attempts_original = [
 
 neighbours = tuple(t for t in itertools.product(r, repeat=2) if t != (0, 0))
 
+
 def show_set(s):
     xs = [p[0] for p in s]
     ys = [p[1] for p in s]
@@ -38,22 +42,22 @@ def show_set(s):
     y_range = list(range(min(ys), max(ys) + 1))
     for x in x_range:
         print("".join(("#" if (x, y) in s else " ") for y in y_range) + "    " + str(x))
-    print("".join(str(y%10) for y in y_range))
+    print("".join(str(y % 10) for y in y_range))
     print()
 
 
 def play_rounds(elves, nb_round):
     attempts = collections.deque(attempts_original)
-    for i in itertools.count(start=1) if nb_round is None else range(1, nb_round+1):
+    for i in itertools.count(start=1) if nb_round is None else range(1, nb_round + 1):
         proposals = dict()
         elves2 = set()
         for pos in elves:
             x, y = pos
-            if not any((x+dx, y+dy) in elves for dx, dy in neighbours):
+            if not any((x + dx, y + dy) in elves for dx, dy in neighbours):
                 elves2.add(pos)
             else:
                 for a in attempts:
-                    candidates = [(x+dx, y+dy) for dx, dy in a]
+                    candidates = [(x + dx, y + dy) for dx, dy in a]
                     if not any(c in elves for c in candidates):
                         proposals.setdefault(candidates[0], []).append(pos)
                         break
@@ -79,15 +83,19 @@ def play_rounds(elves, nb_round):
     ys = [p[1] for p in elves]
     return (1 + max(xs) - min(xs)) * (1 + max(ys) - min(ys)) - len(elves)
 
+
 def run_tests():
-    elves = get_elves_from_lines(""".....
+    elves = get_elves_from_lines(
+        """.....
 ..##.
 ..#..
 .....
 ..##.
-.....""")
+....."""
+    )
     play_rounds(elves, 3)
-    elves = get_elves_from_lines("""..............
+    elves = get_elves_from_lines(
+        """..............
 ..............
 .......#......
 .....###.#....
@@ -98,11 +106,13 @@ def run_tests():
 ....#..#......
 ..............
 ..............
-..............""")
+.............."""
+    )
     assert play_rounds(elves, 10) == 110
     assert play_rounds(elves, None) == 20
 
-    elves = get_elves_from_lines(""".......#......
+    elves = get_elves_from_lines(
+        """.......#......
 ....#......#..
 ..#.....#.....
 ......#.......
@@ -113,8 +123,10 @@ def run_tests():
 ....#.#....#..
 .........#....
 ....#......#..
-.......#......""")
+.......#......"""
+    )
     assert play_rounds(elves, None) == 1
+
 
 def get_solutions():
     elves = get_elves_from_file()

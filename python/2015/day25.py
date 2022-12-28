@@ -3,26 +3,34 @@ import datetime
 import re
 
 # To continue, please consult the code grid in the manual.  Enter the code at row 123, column 45.
-code_re = re.compile(r"^To continue, please consult the code grid in the manual.  Enter the code at row (\d+), column (\d+).$")
+code_re = re.compile(
+    r"^To continue, please consult the code grid in the manual.  Enter the code at row (\d+), column (\d+).$"
+)
+
 
 def get_pos_from_line(string):
     return tuple(int(s) for s in code_re.match(string).groups())
+
 
 def get_pos_from_file(file_path="../../resources/year2015_day25_input.txt"):
     with open(file_path) as f:
         for l in f:
             return get_pos_from_line(l.strip())
 
+
 def get_index(pos):
     row, col = pos
     n = row + col - 2
-    return col + n*(n+1) // 2
+    return col + n * (n + 1) // 2
+
 
 def get_code_at_index(n, start=20151125, mult=252533, mod=33554393):
-    return (start * pow(mult, n-1, mod)) % mod
+    return (start * pow(mult, n - 1, mod)) % mod
+
 
 def get_code(pos):
     return get_code_at_index(get_index(pos))
+
 
 def run_tests():
     assert get_index((4, 2)) == 12
@@ -39,6 +47,7 @@ def run_tests():
     assert get_code((1, 2)) == res3
     assert get_code_at_index(20) == res20
     assert get_code((2, 5)) == res20
+
 
 def get_solutions():
     print(get_code(get_pos_from_file()) == 2650453)

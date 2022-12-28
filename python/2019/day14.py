@@ -28,7 +28,10 @@ def apply_reaction(products, reaction_by_output, integer_recipe):
     for prod, nb in products.items():
         if nb > 0:
             if prod in reaction_by_output:
-                chemicals_in, nb_out, = reaction_by_output[prod]
+                (
+                    chemicals_in,
+                    nb_out,
+                ) = reaction_by_output[prod]
                 if integer_recipe:
                     q = math.ceil(nb / nb_out)
                 else:

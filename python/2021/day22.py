@@ -433,10 +433,10 @@ def cube_split_tests(cube1, cube2, expected_results=None):
     else:
         # Overlapping different cubes are somehow affected
         len1, len2 = len(ret1), len(ret2)
-        assert 1 <= len1 <= 3 ** 3
-        assert 1 <= len2 <= 3 ** 3
-        assert 3 <= len1 + len2 <= 3 ** 3 + 1
-        assert 2 <= len(set(ret1 + ret2)) <= 3 ** 3
+        assert 1 <= len1 <= 3**3
+        assert 1 <= len2 <= 3**3
+        assert 3 <= len1 + len2 <= 3**3 + 1
+        assert 2 <= len(set(ret1 + ret2)) <= 3**3
     # Overall length is kept
     assert sum(cube_volume(i) for i in ret1) == cube_volume(cube1)
     assert sum(cube_volume(i) for i in ret2) == cube_volume(cube2)

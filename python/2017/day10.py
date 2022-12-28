@@ -3,6 +3,7 @@ import datetime
 import functools
 import operator
 
+
 def get_first_line(file_path="../../resources/year2017_day10_input.txt"):
     with open(file_path) as f:
         for l in f:
@@ -38,7 +39,7 @@ def process(nb_elt, string, is_part1=True):
             src1, src2 = lst[beg:], lst[:end]
             src = list(reversed(src1 + src2))
             assert len(src) == leng
-            dst1, dst2 = src[:nb_elt - beg], src[nb_elt-beg:]
+            dst1, dst2 = src[: nb_elt - beg], src[nb_elt - beg :]
             assert src == dst1 + dst2
             assert len(src1) == len(dst1)
             assert len(src2) == len(dst2)
@@ -49,17 +50,21 @@ def process(nb_elt, string, is_part1=True):
         return lst[0] * lst[1]
     else:
         args16 = [iter(lst)] * 16
-        hexs = [hex(functools.reduce(operator.xor, val16))[2:].zfill(2)
-                for val16 in zip(*args16)]
+        hexs = [
+            hex(functools.reduce(operator.xor, val16))[2:].zfill(2)
+            for val16 in zip(*args16)
+        ]
         return "".join(hexs)
 
 
 def run_tests():
-    is_part1=True
+    is_part1 = True
     assert get_nb_lst("3,4,1,5", is_part1) == [3, 4, 1, 5]
     assert process(5, "3,4,1,5", is_part1) == 12
-    is_part1=False
-    assert get_nb_lst("1,2,3", is_part1) == [49, 44, 50, 44, 51, 17, 31, 73, 47, 23] * 64
+    is_part1 = False
+    assert (
+        get_nb_lst("1,2,3", is_part1) == [49, 44, 50, 44, 51, 17, 31, 73, 47, 23] * 64
+    )
     assert process(256, "", is_part1) == "a2582a3a0e66e6e86e3812dcb672a272"
     assert process(256, "AoC 2017", is_part1) == "33efeb34ea91902bb2f59c9920caa6cd"
     assert process(256, "1,2,3", is_part1) == "3efbe78a8d82f29979031a4aa0b16a9d"

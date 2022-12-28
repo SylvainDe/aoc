@@ -8,7 +8,14 @@ def get_tiles_from_file(file_path="../../resources/year2016_day18_input.txt"):
             return l.strip()
 
 
-traps = set([("^", "^", "."), (".", "^", "^"), ("^", ".", "."), (".", ".", "^"),])
+traps = set(
+    [
+        ("^", "^", "."),
+        (".", "^", "^"),
+        ("^", ".", "."),
+        (".", ".", "^"),
+    ]
+)
 
 
 def get_next_line(tiles):

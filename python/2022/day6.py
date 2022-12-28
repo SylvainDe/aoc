@@ -7,10 +7,12 @@ def get_signal_from_file(file_path="../../resources/year2022_day6_input.txt"):
         for l in f:
             return l
 
+
 def get_marker(signal, winsize):
     for i in range(len(signal)):
-        if len(set(signal[i:i+winsize])) == winsize:
+        if len(set(signal[i : i + winsize])) == winsize:
             return i + winsize
+
 
 def run_tests():
     assert get_marker("mjqjpqmgbljsphdztnvjfqwrcgsmlb", winsize=4) == 7

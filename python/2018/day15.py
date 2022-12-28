@@ -5,8 +5,10 @@ import datetime
 def get_xxx_from_line(string):
     return string
 
+
 def get_xxxs_from_lines(string):
     return [get_xxx_from_line(l) for l in string.splitlines()]
+
 
 def get_xxxs_from_file(file_path="../../resources/year2018_day15_input.txt"):
     with open(file_path) as f:
@@ -14,9 +16,11 @@ def get_xxxs_from_file(file_path="../../resources/year2018_day15_input.txt"):
 
 
 def run_tests():
-    xxxs = get_xxxs_from_lines("""abc
+    xxxs = get_xxxs_from_lines(
+        """abc
 def
-ghi""")
+ghi"""
+    )
 
 
 def get_solutions():

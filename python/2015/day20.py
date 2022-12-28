@@ -62,7 +62,7 @@ def yield_divisors_using_primes_factorisation(n):
     but the complexity is hard to guarantee on all inputs and it is slower
     on small inputs."""
     elements = (
-        [p ** power for power in range(c + 1)]
+        [p**power for power in range(c + 1)]
         for p, c in collections.Counter(prime_factors(n)).items()
     )
     return (mult(it) for it in itertools.product(*elements))
@@ -99,11 +99,31 @@ def get_optimised_sum_of_divisors_bigger_than(n):
     candidate = None
     values = [(1, 1)]  # (i, sigma(i)) with sigma(i) < n
     # TODO: We are missing a condition to stop checking more primes
-    for p in [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67]:  # TODO
+    for p in [
+        2,
+        3,
+        5,
+        7,
+        11,
+        13,
+        17,
+        19,
+        23,
+        29,
+        31,
+        37,
+        41,
+        43,
+        47,
+        53,
+        59,
+        61,
+        67,
+    ]:  # TODO
         new_values = []
         for power in itertools.count(start=1):
             new_value_added = False
-            p_pow = p ** power
+            p_pow = p**power
             coef, remaining = divmod(p_pow * p - 1, p - 1)
             assert remaining == 0
             for (prod, sum_div) in values:

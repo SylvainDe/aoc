@@ -6,11 +6,12 @@ def get_rucksacks_from_file(file_path="../../resources/year2022_day3_input.txt")
     with open(file_path) as f:
         return [l.strip() for l in f]
 
+
 def get_prio(char):
     if char.islower():
-        return ord(char) - ord('a') + 1
+        return ord(char) - ord("a") + 1
     if char.isupper():
-        return ord(char) - ord('A') + 27
+        return ord(char) - ord("A") + 27
     assert False
 
 
@@ -31,7 +32,7 @@ def double_compartment_priority(rucksack):
 
 
 def part1(rucksacks):
-   return sum(double_compartment_priority(r) for r in rucksacks)
+    return sum(double_compartment_priority(r) for r in rucksacks)
 
 
 def part2(rucksacks):

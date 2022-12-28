@@ -6,6 +6,7 @@ def get_ip_from_file(file_path="../../resources/year2016_day7_input.txt"):
     with open(file_path) as f:
         return [l.strip() for l in f]
 
+
 def support_tls(ip):
     is_in_bracket = False
     abba_found = False
@@ -20,6 +21,7 @@ def support_tls(ip):
             else:
                 abba_found = True
     return abba_found
+
 
 def support_ssl(ip):
     is_in_bracket = False
@@ -36,6 +38,7 @@ def support_ssl(ip):
                 abas.add(a + b)
     return len(set.intersection(abas, babs)) > 0
 
+
 def run_tests():
     assert support_tls("abba[mnop]qrst")
     assert not support_tls("abcd[bddb]xyyx")
@@ -45,6 +48,7 @@ def run_tests():
     assert not support_ssl("xyx[xyx]xyx")
     assert support_ssl("aaa[kek]eke")
     assert support_ssl("zazbz[bzb]cdb")
+
 
 def get_solutions():
     ips = get_ip_from_file()

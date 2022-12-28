@@ -4,25 +4,28 @@ import re
 
 MOVE_RE = re.compile("move (\d+) from (\d+) to (\d+)")
 
+
 def get_input_from_lines(string):
     lines = string.splitlines()
     # Split stacks and instructions
     empty_idx = lines.index("")
-    stacks, instructions = lines[:empty_idx], lines[empty_idx+1:]
+    stacks, instructions = lines[:empty_idx], lines[empty_idx + 1 :]
     # Parse stacks (transpose then parse)
     parsed_stacks = dict()
     for stack in [i for i in zip(*reversed(stacks))][1::4]:
         # Use tuple to avoid future modifications
-        nb, crates = int(stack[0]), tuple(c for c in stack[1:] if c != ' ')
+        nb, crates = int(stack[0]), tuple(c for c in stack[1:] if c != " ")
         parsed_stacks[nb] = crates
-    parsed_instructions = [tuple(int(g) for g in MOVE_RE.fullmatch(ins).groups())
-                           for ins in instructions]
+    parsed_instructions = [
+        tuple(int(g) for g in MOVE_RE.fullmatch(ins).groups()) for ins in instructions
+    ]
     return parsed_stacks, parsed_instructions
 
 
 def get_input_from_file(file_path="../../resources/year2022_day5_input.txt"):
     with open(file_path) as f:
         return get_input_from_lines(f.read())
+
 
 def do_crane_operations(input_, is_fifo):
     original_stacks, instructions = input_
@@ -33,6 +36,7 @@ def do_crane_operations(input_, is_fifo):
         stack_dst.extend(popped if is_fifo else reversed(popped))
     return "".join(stacks[k][-1] for k in sorted(stacks.keys()))
 
+
 def part1(input_):
     return do_crane_operations(input_, is_fifo=True)
 
@@ -42,7 +46,8 @@ def part2(input_):
 
 
 def run_tests():
-    input_ = get_input_from_lines("""    [D]    
+    input_ = get_input_from_lines(
+        """    [D]    
 [N] [C]    
 [Z] [M] [P]
  1   2   3 
@@ -50,9 +55,11 @@ def run_tests():
 move 1 from 2 to 1
 move 3 from 1 to 3
 move 2 from 2 to 1
-move 1 from 1 to 2""")
+move 1 from 1 to 2"""
+    )
     assert part1(input_) == "CMZ"
     assert part2(input_) == "MCD"
+
 
 def get_solutions():
     input_ = get_input_from_file()

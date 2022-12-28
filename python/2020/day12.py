@@ -1,6 +1,7 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
 
+
 def get_instructions_from_file(file_path="../../resources/year2020_day12_input.txt"):
     with open(file_path) as f:
         return [l.strip() for l in f]

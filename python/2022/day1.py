@@ -28,7 +28,8 @@ def max_elf(elves, nb=1):
 
 
 def run_tests():
-    elves = get_elves_from_lines("""1000
+    elves = get_elves_from_lines(
+        """1000
 2000
 3000
 
@@ -41,7 +42,8 @@ def run_tests():
 8000
 9000
 
-10000""".splitlines())
+10000""".splitlines()
+    )
     assert max_elf(elves, 1) == 24000
     assert max_elf(elves, 3) == 45000
 

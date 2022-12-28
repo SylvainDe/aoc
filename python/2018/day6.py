@@ -3,11 +3,14 @@ import datetime
 import itertools
 import collections
 
+
 def get_location_from_line(string):
     return tuple(int(c) for c in string.split(", "))
 
+
 def get_locations_from_lines(string):
     return [get_location_from_line(l) for l in string.splitlines()]
+
 
 def get_locations_from_file(file_path="../../resources/year2018_day6_input.txt"):
     with open(file_path) as f:
@@ -18,6 +21,7 @@ def distance(pos1, pos2):
     x1, y1 = pos1
     x2, y2 = pos2
     return abs(x1 - x2) + abs(y1 - y2)
+
 
 def get_biggest_area(locations):
     areas = collections.Counter()
@@ -40,6 +44,7 @@ def get_biggest_area(locations):
                 infinite_areas.add(p_min)
     return max(area for point, area in areas.items() if point not in infinite_areas)
 
+
 def get_size_of_regions_total_distance_less_than(locations, limit):
     area = 0
     # Get bounding box - TODO this should probably be done in a smarter way
@@ -56,12 +61,14 @@ def get_size_of_regions_total_distance_less_than(locations, limit):
 
 
 def run_tests():
-    locations = get_locations_from_lines("""1, 1
+    locations = get_locations_from_lines(
+        """1, 1
 1, 6
 8, 3
 3, 4
 5, 5
-8, 9""")
+8, 9"""
+    )
     assert get_biggest_area(locations) == 17
     assert get_size_of_regions_total_distance_less_than(locations, 32) == 16
 

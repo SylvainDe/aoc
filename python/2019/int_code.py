@@ -34,6 +34,7 @@ def get_value(intcode, pos, mode, relative_base):
     else:
         assert False
 
+
 def set_value(intcode, pos, mode, relative_base, value):
     val = intcode[pos]
     if mode == 0:  # Position mode

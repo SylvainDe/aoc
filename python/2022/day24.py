@@ -3,11 +3,12 @@ import datetime
 import itertools
 
 blizzards_directions = {
-    '^': (-1, 0),
-    'v': (1, 0),
-    '>': (0, 1),
-    '<': (0, -1),
+    "^": (-1, 0),
+    "v": (1, 0),
+    ">": (0, 1),
+    "<": (0, -1),
 }
+
 
 def get_map_info_from_lines(string):
     walls = set()
@@ -15,17 +16,19 @@ def get_map_info_from_lines(string):
     for i, l in enumerate(string.splitlines()):
         for j, c in enumerate(l):
             pos = i, j
-            if c == '#':
+            if c == "#":
                 walls.add(pos)
             elif c in blizzards_directions:
                 blizzards.append((pos, blizzards_directions[c]))
             else:
-                assert c == '.'
+                assert c == "."
     return walls, blizzards
+
 
 def get_map_info_from_file(file_path="../../resources/year2022_day24_input.txt"):
     with open(file_path) as f:
         return get_map_info_from_lines(f.read())
+
 
 def show_grid(walls, blizzards, positions):
     grid = dict()
@@ -44,18 +47,19 @@ def show_grid(walls, blizzards, positions):
     x_range = list(range(min(xs), max(xs) + 1))
     y_range = list(range(min(ys), max(ys) + 1))
     for x in x_range:
-        print("".join(grid.get((x,y), " ") for y in y_range) + "    " + str(x))
-    print("".join(str(y%10) for y in y_range))
+        print("".join(grid.get((x, y), " ") for y in y_range) + "    " + str(x))
+    print("".join(str(y % 10) for y in y_range))
     print()
 
 
 def possible_moves(pos):
     x, y = pos
-    yield x+0, y+0
-    yield x+1, y+0
-    yield x-1, y+0
-    yield x+0, y+1
-    yield x+0, y-1
+    yield x + 0, y + 0
+    yield x + 1, y + 0
+    yield x - 1, y + 0
+    yield x + 0, y + 1
+    yield x + 0, y - 1
+
 
 def get_begin_and_end(walls):
     by_lines = dict()
@@ -65,18 +69,23 @@ def get_begin_and_end(walls):
     for f in (min, max):
         x = f(lines)
         row = set(by_lines[x])
-        yield x, next(iter(set(range(min(row), max(row)+1)) - row))
+        yield x, next(iter(set(range(min(row), max(row) + 1)) - row))
+
 
 def get_grid_dim(walls):
     nb_rows = max(i for i, _ in walls) + 1
     nb_col = max(j for _, j in walls) + 1
     return nb_rows, nb_col
 
+
 def get_blizzard_position(blizzard, dim, time):
     (x, y), (dx, dy) = blizzard
     nb_rows, nb_col = dim
-    return ((x + time * dx - 1) % (nb_rows-2) + 1,
-            (y + time * dy - 1) % (nb_col-2) + 1)
+    return (
+        (x + time * dx - 1) % (nb_rows - 2) + 1,
+        (y + time * dy - 1) % (nb_col - 2) + 1,
+    )
+
 
 def part1(map_info):
     walls, blizzards = map_info
@@ -99,6 +108,7 @@ def part1(map_info):
         positions = positions2
         if end in positions:
             return t
+
 
 def part2(map_info):
     walls, blizzards = map_info
@@ -126,20 +136,24 @@ def part2(map_info):
 
 
 def run_tests():
-    map_info = get_map_info_from_lines("""#.#####
+    map_info = get_map_info_from_lines(
+        """#.#####
 #.....#
 #>....#
 #.....#
 #...v.#
 #.....#
-#####.#""")
-    assert part1(map_info) == 9 # I suspect an off-by-one error...
-    map_info = get_map_info_from_lines("""#.######
+#####.#"""
+    )
+    assert part1(map_info) == 9  # I suspect an off-by-one error...
+    map_info = get_map_info_from_lines(
+        """#.######
 #>>.<^<#
 #.<..<<#
 #>v.><>#
 #<^v^^>#
-######.#""")
+######.#"""
+    )
     assert part1(map_info) == 18
     assert part2(map_info) == 54
 

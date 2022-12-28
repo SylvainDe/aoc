@@ -29,6 +29,7 @@ def execute(instructions):
         x += val
     return xs
 
+
 def part1(instructions):
     indexed_values = list(enumerate(execute(instructions)))[20::40]
     return sum(i * val for i, val in indexed_values)
@@ -44,12 +45,16 @@ def part2(instructions, width=40):
         crt.append("#" if pixel_in_sprite else ".")
     return "".join(crt)
 
+
 def run_tests():
-    instructions = get_instructions_from_lines("""noop
+    instructions = get_instructions_from_lines(
+        """noop
 addx 3
-addx -5""")
+addx -5"""
+    )
     assert execute(instructions) == [1, 1, 1, 1, 4, 4]
-    instructions = get_instructions_from_lines("""addx 15
+    instructions = get_instructions_from_lines(
+        """addx 15
 addx -11
 addx 6
 addx -3
@@ -194,26 +199,34 @@ addx -6
 addx -11
 noop
 noop
-noop""")
+noop"""
+    )
     assert part1(instructions) == 13140
-    assert part2(instructions) == """
+    assert (
+        part2(instructions)
+        == """
 ##..##..##..##..##..##..##..##..##..##..
 ###...###...###...###...###...###...###.
 ####....####....####....####....####....
 #####.....#####.....#####.....#####.....
 ######......######......######......####
 #######.......#######.......#######....."""
+    )
+
 
 def get_solutions():
     instructions = get_instruction_from_file()
     print(part1(instructions) == 17180)
-    print(part2(instructions) == """
+    print(
+        part2(instructions)
+        == """
 ###..####.#..#.###..###..#....#..#.###..
 #..#.#....#..#.#..#.#..#.#....#..#.#..#.
 #..#.###..####.#..#.#..#.#....#..#.###..
 ###..#....#..#.###..###..#....#..#.#..#.
 #.#..#....#..#.#....#.#..#....#..#.#..#.
-#..#.####.#..#.#....#..#.####..##..###..""")
+#..#.####.#..#.#....#..#.####..##..###.."""
+    )
 
 
 if __name__ == "__main__":

@@ -57,13 +57,15 @@ def part2(connection_list):
 
 
 def run_tests():
-    connection_list = get_connection_list_from_lines("""0 <-> 2
+    connection_list = get_connection_list_from_lines(
+        """0 <-> 2
 1 <-> 1
 2 <-> 0, 3, 4
 3 <-> 2, 4
 4 <-> 2, 3, 6
 5 <-> 6
-6 <-> 4, 5""")
+6 <-> 4, 5"""
+    )
     assert part1(connection_list) == 6
     assert part2(connection_list) == 2
 

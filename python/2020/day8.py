@@ -24,7 +24,7 @@ def get_state_after(program, pos, acc):
 
 
 def run_program_until_loop(program):
-    """ Return tuple (loop, acc) where loop is True if loop is found else False."""
+    """Return tuple (loop, acc) where loop is True if loop is found else False."""
     pos, acc = 0, 0
     visited = set([pos])
     while True:

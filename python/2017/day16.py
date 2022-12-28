@@ -45,7 +45,7 @@ def perform_one_dance(dance, nb_prog):
 
 def perform_many_dances(dance, nb_prog, nb_iter=1000000000):
     progs = string.ascii_lowercase[:nb_prog]
-    seen = { progs: 0 }
+    seen = {progs: 0}
     for i in range(1, nb_iter):
         progs = perform_dance(dance, list(progs))
         if progs in seen:
@@ -66,6 +66,7 @@ def run_tests():
     assert perform_one_dance(dance, nb_prog) == "deabc"
     dance = get_dance_from_line("s1,x3/4,pe/b")
     assert perform_one_dance(dance, nb_prog) == "baedc"
+
 
 def get_solutions():
     nb_prog = 16

@@ -53,7 +53,7 @@ completion_score = {
 
 def get_completion_score(s):
     _, stack = parse_string(s)
-    return sum(completion_score[c] * 5 ** i for i, c in enumerate(stack))
+    return sum(completion_score[c] * 5**i for i, c in enumerate(stack))
 
 
 def get_completion_final_score(lines):

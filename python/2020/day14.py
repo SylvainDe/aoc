@@ -32,7 +32,7 @@ def apply_mask2(value, mask):
     floating = []
     base_val = 0
     for i, (bval, bmask) in enumerate(reversed(list(zip(value, mask)))):
-        val = 2 ** i
+        val = 2**i
         if bmask == "X":
             floating.append(val)
         elif int(bmask) or int(bval):

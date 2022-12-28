@@ -2,15 +2,19 @@
 import datetime
 import itertools
 
+
 def get_segments_from_line(string):
     return [tuple(int(c) for c in c.split(",")) for c in string.split(" -> ")]
+
 
 def get_segments_from_lines(string):
     return [get_segments_from_line(l) for l in string.splitlines()]
 
+
 def get_segments_from_file(file_path="../../resources/year2022_day14_input.txt"):
     with open(file_path) as f:
         return get_segments_from_lines(f.read())
+
 
 def get_rocks(segments):
     rocks = set()
@@ -28,16 +32,18 @@ def get_rocks(segments):
                 assert False
     return rocks
 
+
 def get_candidate_positions(pos):
     x, y = pos
-    return ((x, y+1), (x-1, y+1), (x+1, y+1))
+    return ((x, y + 1), (x - 1, y + 1), (x + 1, y + 1))
+
 
 def drop_sand(segments, is_part1):
     rocks = get_rocks(segments)
     rock_bottom = max(y for (x, y) in rocks)
     if not is_part1:
         for x in range(-1000, 1000):
-            rocks.add((x, rock_bottom+2))
+            rocks.add((x, rock_bottom + 2))
     for i in itertools.count():
         pos = (500, 0)
         if pos in rocks:
@@ -54,11 +60,15 @@ def drop_sand(segments, is_part1):
                 rocks.add(pos)
                 break
 
+
 def run_tests():
-    segments = get_segments_from_lines("""498,4 -> 498,6 -> 496,6
-503,4 -> 502,4 -> 502,9 -> 494,9""")
+    segments = get_segments_from_lines(
+        """498,4 -> 498,6 -> 496,6
+503,4 -> 502,4 -> 502,9 -> 494,9"""
+    )
     assert drop_sand(segments, is_part1=True) == 24
     assert drop_sand(segments, is_part1=False) == 93
+
 
 def get_solutions():
     segments = get_segments_from_file()

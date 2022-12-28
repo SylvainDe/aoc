@@ -3,17 +3,20 @@ import datetime
 import itertools
 
 STREAM_DIR = {
-    '>': 1,
-    '<': -1,
+    ">": 1,
+    "<": -1,
 }
+
 
 def get_streams_from_line(string):
     return [c for c in string]
+
 
 def get_streams_from_file(file_path="../../resources/year2022_day17_input.txt"):
     with open(file_path) as f:
         for l in f:
             return get_streams_from_line(l.strip())
+
 
 WIDTH = 7
 
@@ -33,14 +36,16 @@ ROCKS_STR = [
 ##""",
 ]
 
+
 def convert_str_to_lst(string):
     lst = []
     for i, s in enumerate(reversed(string.splitlines())):
         for j, c in enumerate(s):
-            assert c in ('.', '#')
-            if c == '#':
+            assert c in (".", "#")
+            if c == "#":
                 lst.append((i, j))
     return lst
+
 
 ROCKS = [convert_str_to_lst(r) for r in ROCKS_STR]
 
@@ -63,15 +68,18 @@ def show(points):
     x_range = list(range(x_min, x_max + 1))
     y_range = list(range(y_min, y_max + 1))
     for x in reversed(x_range):
-        print("".join('#' if (x, y) in points else ' ' for y in y_range) + " " + str(x))
+        print("".join("#" if (x, y) in points else " " for y in y_range) + " " + str(x))
 
 
 def shift_rock(rock, x, y):
-    return [(i+x, j+y) for i, j in rock]
+    return [(i + x, j + y) for i, j in rock]
+
 
 def can_take_pos(fallen_rocks, rock, x, y):
-    return all(0 <= sr[1] < WIDTH and sr not in fallen_rocks
-               for sr in shift_rock(rock, x, y))
+    return all(
+        0 <= sr[1] < WIDTH and sr not in fallen_rocks for sr in shift_rock(rock, x, y)
+    )
+
 
 def simulate(streams, nb_rocks, skip_optim=False):
     # Cycle stream and rock
@@ -83,7 +91,11 @@ def simulate(streams, nb_rocks, skip_optim=False):
     heights = dict()
     for i, (rock_idx, r) in zip(range(nb_rocks), rock_iter):
         max_x = max(r[0] for r in fallen_rocks)
-        last_level = tuple((x, y) in fallen_rocks for y in range(WIDTH) for x in range(max_x - 6, max_x))
+        last_level = tuple(
+            (x, y) in fallen_rocks
+            for y in range(WIDTH)
+            for x in range(max_x - 6, max_x)
+        )
         indices = (rock_idx, stream_idx, last_level)
         heights[i] = max_x
         if not skip_optim and indices in indices_seen:
@@ -113,7 +125,7 @@ def simulate(streams, nb_rocks, skip_optim=False):
             if can_take_pos(fallen_rocks, r, x, y + dy):
                 y += dy
             # Fall
-            if can_take_pos(fallen_rocks, r, x-1, y):
+            if can_take_pos(fallen_rocks, r, x - 1, y):
                 x += -1
             else:
                 for sr in shift_rock(r, x, y):
@@ -121,6 +133,7 @@ def simulate(streams, nb_rocks, skip_optim=False):
                 break
     # show(fallen_rocks)
     return max(x for x, y in fallen_rocks)
+
 
 def run_tests():
     streams = get_streams_from_line(">>><<><>><<<>><>>><<<>>><<<><<<>><>><<>>")
@@ -139,6 +152,7 @@ def get_solutions():
     # for i in range(2178, 2230):
     #     assert simulate(streams, i) == simulate(streams, i, skip_optim=True)
     print(simulate(streams, 1000000000000) == 1555113636385)
+
 
 if __name__ == "__main__":
     begin = datetime.datetime.now()
