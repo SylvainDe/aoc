@@ -233,7 +233,7 @@ Solutions are written in Python and/or Rust.
 |Day 9: All in a Single Night|[Problem](https://adventofcode.com/2015/day/9) [Input](https://adventofcode.com/2015/day/9/input)|[puzzle.html](resources/year2015_day9_puzzle.html) [input.txt](resources/year2015_day9_input.txt)|**|[day9.py](python/2015/day9.py)|[-](rust/src/2015/day9.rs)|+24h|+24h|
 |Day 10: Elves Look, Elves Say|[Problem](https://adventofcode.com/2015/day/10) [Input](https://adventofcode.com/2015/day/10/input)|[puzzle.html](resources/year2015_day10_puzzle.html) [input.txt](resources/year2015_day10_input.txt)|**|[day10.py](python/2015/day10.py)|[-](rust/src/2015/day10.rs)|+24h|+24h|
 |Day 11: Corporate Policy|[Problem](https://adventofcode.com/2015/day/11) [Input](https://adventofcode.com/2015/day/11/input)|[puzzle.html](resources/year2015_day11_puzzle.html) [input.txt](resources/year2015_day11_input.txt)||[-](python/2015/day11.py)|[-](rust/src/2015/day11.rs)|-|-|
-|Day 12: JSAbacusFramework.io|[Problem](https://adventofcode.com/2015/day/12) [Input](https://adventofcode.com/2015/day/12/input)|[puzzle.html](resources/year2015_day12_puzzle.html) [input.txt](resources/year2015_day12_input.txt)||[-](python/2015/day12.py)|[-](rust/src/2015/day12.rs)|-|-|
+|Day 12: JSAbacusFramework.io|[Problem](https://adventofcode.com/2015/day/12) [Input](https://adventofcode.com/2015/day/12/input)|[puzzle.html](resources/year2015_day12_puzzle.html) [input.txt](resources/year2015_day12_input.txt)|**|[day12.py](python/2015/day12.py)|[-](rust/src/2015/day12.rs)|+24h|+24h|
 |Day 13: Knights of the Dinner Table|[Problem](https://adventofcode.com/2015/day/13) [Input](https://adventofcode.com/2015/day/13/input)|[puzzle.html](resources/year2015_day13_puzzle.html) [input.txt](resources/year2015_day13_input.txt)||[-](python/2015/day13.py)|[-](rust/src/2015/day13.rs)|-|-|
 |Day 14: Reindeer Olympics|[Problem](https://adventofcode.com/2015/day/14) [Input](https://adventofcode.com/2015/day/14/input)|[puzzle.html](resources/year2015_day14_puzzle.html) [input.txt](resources/year2015_day14_input.txt)|**|[day14.py](python/2015/day14.py)|[-](rust/src/2015/day14.rs)|+24h|+24h|
 |Day 15: Science for Hungry People|[Problem](https://adventofcode.com/2015/day/15) [Input](https://adventofcode.com/2015/day/15/input)|[puzzle.html](resources/year2015_day15_puzzle.html) [input.txt](resources/year2015_day15_input.txt)||[-](python/2015/day15.py)|[-](rust/src/2015/day15.rs)|-|-|
@@ -247,7 +247,7 @@ Solutions are written in Python and/or Rust.
 |Day 23: Opening the Turing Lock|[Problem](https://adventofcode.com/2015/day/23) [Input](https://adventofcode.com/2015/day/23/input)|[puzzle.html](resources/year2015_day23_puzzle.html) [input.txt](resources/year2015_day23_input.txt)||[-](python/2015/day23.py)|[-](rust/src/2015/day23.rs)|-|-|
 |Day 24: It Hangs in the Balance|[Problem](https://adventofcode.com/2015/day/24) [Input](https://adventofcode.com/2015/day/24/input)|[puzzle.html](resources/year2015_day24_puzzle.html) [input.txt](resources/year2015_day24_input.txt)||[-](python/2015/day24.py)|[-](rust/src/2015/day24.rs)|-|-|
 |Day 25: Let It Snow|[Problem](https://adventofcode.com/2015/day/25) [Input](https://adventofcode.com/2015/day/25/input)|[puzzle.html](resources/year2015_day25_puzzle.html) [input.txt](resources/year2015_day25_input.txt)|*|[day25.py](python/2015/day25.py)|[day25.rs](rust/src/2015/day25.rs)|+24h|-|
-|[2015](https://adventofcode.com/2015)|[Stats](https://adventofcode.com/2015/leaderboard/self)|[stats.txt](misc/leaderboard_self_2015.html)|28|-|-|-|-|
+|[2015](https://adventofcode.com/2015)|[Stats](https://adventofcode.com/2015/leaderboard/self)|[stats.txt](misc/leaderboard_self_2015.html)|30|-|-|-|-|
 
 ##  Summary
 |Day|[2015](https://adventofcode.com/2015)|[2016](https://adventofcode.com/2016)|[2017](https://adventofcode.com/2017)|[2018](https://adventofcode.com/2018)|[2019](https://adventofcode.com/2019)|[2020](https://adventofcode.com/2020)|[2021](https://adventofcode.com/2021)|[2022](https://adventofcode.com/2022)|Total|
@@ -263,7 +263,7 @@ Solutions are written in Python and/or Rust.
 |9|**|**|**||**|**|**|**|14: **************|
 |10|**|**|**|**|**|**|**|**|16: ****************|
 |11|||**|**||**|**|**|10: **********|
-|12||**|**||**|**|**|**|12: ************|
+|12|**|**|**||**|**|**|**|14: **************|
 |13||**|**|||**|**|**|10: **********|
 |14|**|**||**|**|**|**|**|14: **************|
 |15||**||||**|**|**| 8: ********|
@@ -277,4 +277,4 @@ Solutions are written in Python and/or Rust.
 |23||**||||**|*|**| 7: *******|
 |24||**|||**|**||**| 8: ********|
 |25|*|||*||**|*|**| 7: *******|
-|Total|28|42|28|23|28|50|46|50|295|
+|Total|30|42|28|23|28|50|46|50|297|
