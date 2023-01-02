@@ -76,7 +76,7 @@ fn main() {
     let before = Instant::now();
     let data = &get_first_line_from_file(INPUT_FILEPATH);
     let (ans, ans2) = get_answers(ANSWERS_FILEPATH);
-    let solved = false;
+    let solved = true;
     let res = part1(data);
     check_answer(&res.to_string(), ans, solved);
     let res2 = part2(data);

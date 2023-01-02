@@ -84,7 +84,7 @@ fn main() {
     let (ans, ans2) = get_answers(ANSWERS_FILEPATH);
     let solved = false;
     let res = part1(&data);
-    check_answer(&res.to_string(), ans, solved);
+    check_answer(&res.to_string(), ans, true /*solved*/);
     let res2 = part2(&data);
     check_answer(&res2.to_string(), ans2, solved);
     println!("Elapsed time: {:.2?}", before.elapsed());

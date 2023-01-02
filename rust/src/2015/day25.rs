@@ -50,7 +50,7 @@ fn main() {
     let before = Instant::now();
     let data = get_input_from_str(&get_first_line_from_file(INPUT_FILEPATH));
     let (ans, _) = get_answers(ANSWERS_FILEPATH);
-    let solved = false;
+    let solved = true;
     let res = part1(data);
     check_answer(&res.to_string(), ans, solved);
     println!("Elapsed time: {:.2?}", before.elapsed());
