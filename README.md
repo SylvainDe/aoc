@@ -212,12 +212,12 @@ Solutions are written in Python and/or Rust.
 |Day 18: Like a Rogue|[Problem](https://adventofcode.com/2016/day/18) [Input](https://adventofcode.com/2016/day/18/input)|[puzzle.html](resources/year2016_day18_puzzle.html) [input.txt](resources/year2016_day18_input.txt)|**|[day18.py](python/2016/day18.py)|[-](rust/src/2016/day18.rs)|+24h|+24h|
 |Day 19: An Elephant Named Joseph|[Problem](https://adventofcode.com/2016/day/19) [Input](https://adventofcode.com/2016/day/19/input)|[puzzle.html](resources/year2016_day19_puzzle.html) [input.txt](resources/year2016_day19_input.txt)|*|[-](python/2016/day19.py)|[day19.rs](rust/src/2016/day19.rs)|+24h|-|
 |Day 20: Firewall Rules|[Problem](https://adventofcode.com/2016/day/20) [Input](https://adventofcode.com/2016/day/20/input)|[puzzle.html](resources/year2016_day20_puzzle.html) [input.txt](resources/year2016_day20_input.txt)|**|[day20.py](python/2016/day20.py)|[-](rust/src/2016/day20.rs)|+24h|+24h|
-|Day 21: Scrambled Letters and Hash|[Problem](https://adventofcode.com/2016/day/21) [Input](https://adventofcode.com/2016/day/21/input)|[puzzle.html](resources/year2016_day21_puzzle.html) [input.txt](resources/year2016_day21_input.txt)||[-](python/2016/day21.py)|[-](rust/src/2016/day21.rs)|-|-|
+|Day 21: Scrambled Letters and Hash|[Problem](https://adventofcode.com/2016/day/21) [Input](https://adventofcode.com/2016/day/21/input)|[puzzle.html](resources/year2016_day21_puzzle.html) [input.txt](resources/year2016_day21_input.txt)|**|[-](python/2016/day21.py)|[day21.rs](rust/src/2016/day21.rs)|+24h|+24h|
 |Day 22: Grid Computing|[Problem](https://adventofcode.com/2016/day/22) [Input](https://adventofcode.com/2016/day/22/input)|[puzzle.html](resources/year2016_day22_puzzle.html) [input.txt](resources/year2016_day22_input.txt)|*|[day22.py](python/2016/day22.py)|[-](rust/src/2016/day22.rs)|+24h|-|
 |Day 23: Safe Cracking|[Problem](https://adventofcode.com/2016/day/23) [Input](https://adventofcode.com/2016/day/23/input)|[puzzle.html](resources/year2016_day23_puzzle.html) [input.txt](resources/year2016_day23_input.txt)|**|[-](python/2016/day23.py)|[day23.rs](rust/src/2016/day23.rs)|+24h|+24h|
 |Day 24: Air Duct Spelunking|[Problem](https://adventofcode.com/2016/day/24) [Input](https://adventofcode.com/2016/day/24/input)|[puzzle.html](resources/year2016_day24_puzzle.html) [input.txt](resources/year2016_day24_input.txt)|**|[-](python/2016/day24.py)|[day24.rs](rust/src/2016/day24.rs)|+24h|+24h|
 |Day 25: Clock Signal|[Problem](https://adventofcode.com/2016/day/25) [Input](https://adventofcode.com/2016/day/25/input)|[puzzle.html](resources/year2016_day25_puzzle.html) [input.txt](resources/year2016_day25_input.txt)||[-](python/2016/day25.py)|[-](rust/src/2016/day25.rs)|-|-|
-|[2016](https://adventofcode.com/2016)|[Stats](https://adventofcode.com/2016/leaderboard/self)|[stats.txt](misc/leaderboard_self_2016.html)|44|-|-|-|-|
+|[2016](https://adventofcode.com/2016)|[Stats](https://adventofcode.com/2016/leaderboard/self)|[stats.txt](misc/leaderboard_self_2016.html)|46|-|-|-|-|
 
 ## [2015](https://adventofcode.com/2015)
 |Day|URLs|Puzzle & Input|Stars|Python|Rust|Time part 1|Time part 2|
@@ -272,9 +272,9 @@ Solutions are written in Python and/or Rust.
 |18||**|||*|**|**|**| 9: *********|
 |19||*||||**|**|**| 7: *******|
 |20|*|**|||**|**|**|**|11: ***********|
-|21|**|||||**|**|**| 8: ********|
+|21|**|**||||**|**|**|10: **********|
 |22||*|||*|**|**|**| 8: ********|
 |23||**||||**|*|**| 7: *******|
 |24||**|||**|**||**| 8: ********|
 |25|*|||*||**|*|**| 7: *******|
-|Total|30|44|28|23|28|50|46|50|299|
+|Total|30|46|28|23|28|50|46|50|301|
