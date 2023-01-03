@@ -13,11 +13,11 @@ const ANSWERS_FILEPATH: &str = "../resources/year2016_day21_answer.txt";
 enum Instruction {
     SwapPosition(usize, usize),
     SwapLetter(char, char),
+    ReversePositions(usize, usize),
+    MovePosition(usize, usize),
     RotateRight(usize),
     RotateLeft(usize),
     RotateBasedOnLetter(char),
-    ReversePosition(usize, usize),
-    MovePosition(usize, usize),
 }
 
 type InputContent = Vec<Instruction>;
@@ -36,6 +36,10 @@ impl FromStr for Instruction {
                     } else if second == "letter" {
                         return Ok(Self::SwapLetter(get_first_char(2)?, get_first_char(5)?));
                     }
+                } else if first == "reverse" {
+                    return Ok(Self::ReversePositions(get_as_usize(2)?, get_as_usize(4)?));
+                } else if first == "move" {
+                    return Ok(Self::MovePosition(get_as_usize(2)?, get_as_usize(5)?));
                 } else if first == "rotate" {
                     if second == "left" {
                         return Ok(Self::RotateLeft(get_as_usize(2)?));
@@ -44,10 +48,6 @@ impl FromStr for Instruction {
                     } else if second == "based" {
                         return Ok(Self::RotateBasedOnLetter(get_first_char(6)?));
                     }
-                } else if first == "reverse" {
-                    return Ok(Self::ReversePosition(get_as_usize(2)?, get_as_usize(4)?));
-                } else if first == "move" {
-                    return Ok(Self::MovePosition(get_as_usize(2)?, get_as_usize(5)?));
                 }
             }
         }
@@ -59,88 +59,149 @@ fn get_input_from_str(string: &str) -> InputContent {
     collect_from_lines(string)
 }
 
-fn apply_instructions(string: &str, instructions: &InputContent) -> String {
-    let mut vec = string.chars().collect::<Vec<char>>();
-    for ins in instructions {
-        match ins {
-            Instruction::SwapPosition(pos1, pos2) => vec.swap(*pos1, *pos2),
-            Instruction::SwapLetter(c1, c2) => {
-                let pos1 = vec.iter().position(|&x| x == *c1).unwrap();
-                let pos2 = vec.iter().position(|&x| x == *c2).unwrap();
-                vec.swap(pos1, pos2);
-            }
-            Instruction::RotateRight(pos) => vec.rotate_right(*pos),
-            Instruction::RotateLeft(pos) => vec.rotate_left(*pos),
-            Instruction::RotateBasedOnLetter(c) => {
-                let pos = vec.iter().position(|&x| x == *c).unwrap();
-                let rotate = (1 + pos + usize::from(pos >= 4)) % (vec.len());
-                vec.rotate_right(rotate);
-            }
-            Instruction::ReversePosition(pos1, pos2) => {
-                assert!(pos1 < pos2);
-                let nb_it = (1 + pos2 - pos1) / 2;
-                for i in 0..nb_it {
-                    vec.swap(pos1 + i, pos2 - i);
-                }
-            }
-            Instruction::MovePosition(pos1, pos2) => {
-                let c = vec.remove(*pos1);
-                vec.insert(*pos2, c);
-            }
-        }
+fn get_pos(vec: &[char], c: char) -> Option<usize> {
+    vec.iter().position(|&x| x == c)
+}
+
+fn swap_positions_copy(vec: &[char], pos1: usize, pos2: usize) -> Vec<char> {
+    let mut vec2 = vec.to_owned();
+    vec2.swap(pos1, pos2);
+    vec2
+}
+
+fn swap_letters(vec: &mut [char], c1: char, c2: char) {
+    let pos1 = get_pos(vec, c1).unwrap();
+    let pos2 = get_pos(vec, c2).unwrap();
+    vec.swap(pos1, pos2);
+}
+
+fn swap_letters_copy(vec: &[char], c1: char, c2: char) -> Vec<char> {
+    let mut vec2 = vec.to_owned();
+    swap_letters(&mut vec2, c1, c2);
+    vec2
+}
+
+fn rotate_copy(vec: &[char], pos: usize, right: bool) -> Vec<char> {
+    let pos = pos % vec.len();
+    let mut vec2 = vec.to_owned();
+    if right {
+        vec2.rotate_right(pos);
+    } else {
+        vec2.rotate_left(pos);
     }
+    vec2
+}
+
+fn move_position(vec: &mut Vec<char>, pos1: usize, pos2: usize) {
+    let c = vec.remove(pos1);
+    vec.insert(pos2, c);
+}
+
+fn move_position_copy(vec: &[char], pos1: usize, pos2: usize) -> Vec<char> {
+    let mut vec2 = vec.to_owned();
+    move_position(&mut vec2, pos1, pos2);
+    vec2
+}
+
+fn reverse_positions(vec: &mut [char], pos1: usize, pos2: usize) {
+    assert!(pos1 < pos2);
+    let nb_it = (1 + pos2 - pos1) / 2;
+    for i in 0..nb_it {
+        vec.swap(pos1 + i, pos2 - i);
+    }
+}
+
+fn reverse_positions_copy(vec: &[char], pos1: usize, pos2: usize) -> Vec<char> {
+    let mut vec2 = vec.to_owned();
+    reverse_positions(&mut vec2, pos1, pos2);
+    vec2
+}
+
+fn vec2str(vec: &[char]) -> String {
     vec.iter().collect()
 }
 
-fn revert_instructions(string: &str, instructions: &InputContent) -> String {
-    let mut vec = string.chars().collect::<Vec<char>>();
-    for ins in instructions.iter().rev() {
-        match ins {
-            Instruction::SwapPosition(pos1, pos2) => vec.swap(*pos1, *pos2),
-            Instruction::SwapLetter(c1, c2) => {
-                let pos1 = vec.iter().position(|&x| x == *c1).unwrap();
-                let pos2 = vec.iter().position(|&x| x == *c2).unwrap();
-                vec.swap(pos1, pos2);
-            }
-            Instruction::RotateRight(pos) => vec.rotate_left(*pos),
-            Instruction::RotateLeft(pos) => vec.rotate_right(*pos),
-            Instruction::RotateBasedOnLetter(c) => {
-                let pos = vec.iter().position(|&x| x == *c).unwrap();
-                // Letter at index p gets moved to either:
-                //  - 2p + 1 % L if p < 4
-                //  - 2p + 2 % L otherwise
-                // which means one of these positions: (2p+1, 2p+2, 2p+1-L, 2p+2-L, 2p+2-2L)
-                let len = vec.len();
-                let mut done = false;
-                for nb_l in 0..=2 {
-                    let pos2 = pos + nb_l * len;
-                    if pos2 > 0 {
-                        let initial_pos = (pos2 - 1) / 2;
-                        let rotate = (1 + initial_pos + usize::from(initial_pos >= 4)) % len;
+fn apply_instruction(vec: &[char], instruction: &Instruction) -> Vec<char> {
+    match instruction {
+        Instruction::SwapPosition(pos1, pos2) => swap_positions_copy(vec, *pos1, *pos2),
+        Instruction::SwapLetter(c1, c2) => swap_letters_copy(vec, *c1, *c2),
+        Instruction::ReversePositions(pos1, pos2) => reverse_positions_copy(vec, *pos1, *pos2),
+        Instruction::MovePosition(pos1, pos2) => move_position_copy(vec, *pos1, *pos2),
+        Instruction::RotateRight(pos) => rotate_copy(vec, *pos, true),
+        Instruction::RotateLeft(pos) => rotate_copy(vec, *pos, false),
+        Instruction::RotateBasedOnLetter(c) => {
+            let pos = get_pos(vec, *c).unwrap();
+            let rotate = 1 + pos + usize::from(pos >= 4);
+            rotate_copy(vec, rotate, true)
+        }
+    }
+}
+
+fn revert_instruction(vec: &[char], instruction: &Instruction) -> Vec<Vec<char>> {
+    let mut ret = Vec::new();
+    match instruction {
+        Instruction::SwapPosition(pos1, pos2) => ret.push(swap_positions_copy(vec, *pos1, *pos2)),
+        Instruction::SwapLetter(c1, c2) => ret.push(swap_letters_copy(vec, *c1, *c2)),
+        Instruction::ReversePositions(p1, p2) => ret.push(reverse_positions_copy(vec, *p1, *p2)),
+        Instruction::MovePosition(pos1, pos2) => ret.push(move_position_copy(vec, *pos2, *pos1)),
+        Instruction::RotateRight(pos) => ret.push(rotate_copy(vec, *pos, false)),
+        Instruction::RotateLeft(pos) => ret.push(rotate_copy(vec, *pos, true)),
+        Instruction::RotateBasedOnLetter(c) => {
+            let pos = get_pos(vec, *c).unwrap();
+            // Letter at index p gets moved to either:
+            //  - 2p + 1 % L if p < 4
+            //  - 2p + 2 % L otherwise
+            // which means one of these positions: (2p+1, 2p+2, 2p+1-L, 2p+2-L, 2p+2-2L)
+            // In the other directions, if letter is at index q, we could come from:
+            //  - (q - 1) // 2
+            //  - (q - 2) // 2
+            //  - (q + L - 1) // 2
+            //  - (q + L - 2) // 2
+            //  - (q + 2L - 2) // 2
+            let len = vec.len();
+            for nb_l in 0..=2 {
+                let pos2 = pos + nb_l * len;
+                let shift = if pos2 % 2 == 0 { 2 } else { 1 };
+                if pos2 >= shift {
+                    assert!((pos2 - shift) % 2 == 0);
+                    let initial_pos = (pos2 - shift) / 2;
+                    if initial_pos < len {
+                        let rotate = 1 + initial_pos + usize::from(initial_pos >= 4);
                         if (initial_pos + rotate) % len == pos {
-                            assert!(!done);
-                            done = true;
-                            vec.rotate_left(rotate);
-                            break; // Is there a better way to handle ambiguity ?
+                            ret.push(rotate_copy(vec, rotate, false));
                         }
                     }
                 }
-                assert!(done);
-            }
-            Instruction::ReversePosition(pos1, pos2) => {
-                assert!(pos1 < pos2);
-                let nb_it = (1 + pos2 - pos1) / 2;
-                for i in 0..nb_it {
-                    vec.swap(pos1 + i, pos2 - i);
-                }
-            }
-            Instruction::MovePosition(pos1, pos2) => {
-                let c = vec.remove(*pos2);
-                vec.insert(*pos1, c);
             }
         }
     }
-    vec.iter().collect()
+    assert!(!ret.is_empty());
+    for v in &ret {
+        assert_eq!(vec, apply_instruction(v, instruction));
+    }
+    ret
+}
+
+fn apply_instructions(string: &str, instructions: &InputContent) -> String {
+    let mut vec = string.chars().collect::<Vec<char>>();
+    for ins in instructions {
+        vec = apply_instruction(&vec, ins);
+    }
+    vec2str(&vec)
+}
+
+fn revert_instructions(string: &str, instructions: &InputContent) -> Vec<String> {
+    let mut vec = vec![string.chars().collect::<Vec<char>>()];
+    for ins in instructions.iter().rev() {
+        let mut vec2 = Vec::new();
+        for v in vec {
+            for v2 in revert_instruction(&v, ins) {
+                vec2.push(v2);
+            }
+        }
+        vec = vec2;
+    }
+    vec.iter().map(|v| vec2str(v)).collect()
 }
 
 fn part1(arg: &InputContent) -> String {
@@ -148,7 +209,9 @@ fn part1(arg: &InputContent) -> String {
 }
 
 fn part2(arg: &InputContent) -> String {
-    revert_instructions("fbgdceah", arg)
+    let v = revert_instructions("fbgdceah", arg);
+    assert_eq!(v.len(), 1);
+    v[0].clone()
 }
 
 fn main() {
@@ -186,9 +249,7 @@ mod tests {
         for (begin, end, inst) in tests {
             let i = get_input_from_str(inst);
             assert_eq!(apply_instructions(begin, &i), end);
-            if !(begin == "ecabd" && inst == "rotate based on position of letter d") {
-                assert_eq!(revert_instructions(end, &i), begin);
-            }
+            assert!(revert_instructions(end, &i).contains(&begin.to_owned()));
         }
     }
 
@@ -204,6 +265,6 @@ rotate based on position of letter b
 rotate based on position of letter d";
         let inst = get_input_from_str(inst);
         assert_eq!(apply_instructions("abcde", &inst), "decab");
-        //        assert_eq!(revert_instructions("decab", &inst), "abcde");
+        assert!(revert_instructions("decab", &inst).contains(&"abcde".to_owned()));
     }
 }
