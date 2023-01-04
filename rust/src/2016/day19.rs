@@ -27,18 +27,16 @@ fn part1(size: Int) -> Int {
     *v.first().unwrap()
 }
 
-#[allow(dead_code)]
 fn part2(size: Int) -> Int {
     // Probably correct but to be optimised
     let mut v = (1..=size).collect::<Vec<Int>>();
     let mut i = 0;
-    // dbg!(&v);
     while v.len() > 1 {
-        let rm = (i + (v.len() / 2)) % v.len();
-        // dbg!(rm, v.len());
+        let l = v.len();
+        let rm = (i + (l / 2)) % l;
         v.remove(rm);
-        let incr = usize::from(rm >= i);
-        i = (i + incr) % v.len();
+        i += usize::from(rm >= i);
+        i %= v.len();
     }
     *v.first().unwrap()
 }
