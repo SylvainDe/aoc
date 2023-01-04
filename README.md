@@ -216,8 +216,8 @@ Solutions are written in Python and/or Rust.
 |Day 22: Grid Computing|[Problem](https://adventofcode.com/2016/day/22) [Input](https://adventofcode.com/2016/day/22/input)|[puzzle.html](resources/year2016_day22_puzzle.html) [input.txt](resources/year2016_day22_input.txt)|*|[day22.py](python/2016/day22.py)|[-](rust/src/2016/day22.rs)|+24h|-|
 |Day 23: Safe Cracking|[Problem](https://adventofcode.com/2016/day/23) [Input](https://adventofcode.com/2016/day/23/input)|[puzzle.html](resources/year2016_day23_puzzle.html) [input.txt](resources/year2016_day23_input.txt)|**|[-](python/2016/day23.py)|[day23.rs](rust/src/2016/day23.rs)|+24h|+24h|
 |Day 24: Air Duct Spelunking|[Problem](https://adventofcode.com/2016/day/24) [Input](https://adventofcode.com/2016/day/24/input)|[puzzle.html](resources/year2016_day24_puzzle.html) [input.txt](resources/year2016_day24_input.txt)|**|[-](python/2016/day24.py)|[day24.rs](rust/src/2016/day24.rs)|+24h|+24h|
-|Day 25: Clock Signal|[Problem](https://adventofcode.com/2016/day/25) [Input](https://adventofcode.com/2016/day/25/input)|[puzzle.html](resources/year2016_day25_puzzle.html) [input.txt](resources/year2016_day25_input.txt)||[-](python/2016/day25.py)|[-](rust/src/2016/day25.rs)|-|-|
-|[2016](https://adventofcode.com/2016)|[Stats](https://adventofcode.com/2016/leaderboard/self)|[stats.txt](misc/leaderboard_self_2016.html)|46|-|-|-|-|
+|Day 25: Clock Signal|[Problem](https://adventofcode.com/2016/day/25) [Input](https://adventofcode.com/2016/day/25/input)|[puzzle.html](resources/year2016_day25_puzzle.html) [input.txt](resources/year2016_day25_input.txt)|*|[-](python/2016/day25.py)|[day25.rs](rust/src/2016/day25.rs)|+24h|-|
+|[2016](https://adventofcode.com/2016)|[Stats](https://adventofcode.com/2016/leaderboard/self)|[stats.txt](misc/leaderboard_self_2016.html)|47|-|-|-|-|
 
 ## [2015](https://adventofcode.com/2015)
 |Day|URLs|Puzzle & Input|Stars|Python|Rust|Time part 1|Time part 2|
@@ -276,5 +276,5 @@ Solutions are written in Python and/or Rust.
 |22||*|||*|**|**|**| 8: ********|
 |23||**||||**|*|**| 7: *******|
 |24||**|||**|**||**| 8: ********|
-|25|*|||*||**|*|**| 7: *******|
-|Total|30|46|28|23|28|50|46|50|301|
+|25|*|*||*||**|*|**| 8: ********|
+|Total|30|47|28|23|28|50|46|50|302|

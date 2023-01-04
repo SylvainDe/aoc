@@ -205,18 +205,21 @@ mod tests_point {
 }
 
 pub mod assembunny2016 {
+    use crate::input::collect_from_lines;
     use std::collections::HashMap;
+    use std::collections::HashSet;
     use std::str::FromStr;
-    type Int = i32;
-    type InputContent = Vec<Instruction>;
+    pub type Int = i32;
+    pub type Instructions = Vec<Instruction>;
 
-    #[derive(Debug, Eq, Ord, PartialEq, PartialOrd, Clone)]
+    #[derive(Debug, Eq, Ord, PartialEq, PartialOrd, Hash, Clone)]
     pub enum Instruction {
         Copy(String, String),
         Increase(String),
         Decrease(String),
         Jump(String, String),
         Toggle(String),
+        Transmit(String),
     }
 
     impl FromStr for Instruction {
@@ -241,6 +244,11 @@ pub mod assembunny2016 {
                             return Ok(Self::Toggle(chunks[1].to_owned()));
                         }
                     }
+                    "out" => {
+                        if chunks.len() == 2 {
+                            return Ok(Self::Transmit(chunks[1].to_owned()));
+                        }
+                    }
                     "cpy" => {
                         if chunks.len() == 3 {
                             return Ok(Self::Copy(chunks[1].to_owned(), chunks[2].to_owned()));
@@ -258,12 +266,19 @@ pub mod assembunny2016 {
         }
     }
 
+    #[must_use]
+    pub fn get_input_from_str(string: &str) -> Instructions {
+        collect_from_lines(string)
+    }
+
     #[allow(clippy::missing_const_for_fn)]
     fn toggle_ins(ins: Instruction) -> Instruction {
         match ins {
             // For one-argument instructions, inc becomes dec, and all other one-argument instructions become inc
             Instruction::Increase(x) => Instruction::Decrease(x),
-            Instruction::Decrease(x) | Instruction::Toggle(x) => Instruction::Increase(x),
+            Instruction::Decrease(x) | Instruction::Toggle(x) | Instruction::Transmit(x) => {
+                Instruction::Increase(x)
+            }
             // For two-argument instructions, jnz becomes cpy, and all other two-instructions become jnz
             Instruction::Jump(x, y) => Instruction::Copy(x, y),
             Instruction::Copy(x, y) => Instruction::Jump(x, y),
@@ -280,7 +295,7 @@ pub mod assembunny2016 {
     /// Will panic if something goes wrong
     #[must_use]
     #[allow(clippy::cast_sign_loss)]
-    pub fn run_instructions(instructions: &InputContent, a_value: Int, c_value: Int) -> Int {
+    pub fn run_instructions(instructions: &Instructions, a_value: Int, c_value: Int) -> Int {
         let mut instructions = instructions.clone();
         let mut env = HashMap::from([
             ("a".to_owned(), a_value),
@@ -316,10 +331,81 @@ pub mod assembunny2016 {
                         continue;
                     }
                 }
+                Instruction::Transmit(_) => (),
             }
             cnt += 1;
         }
         env["a"]
+    }
+
+    /// # Panics
+    ///
+    /// Will panic if something goes wrong
+    #[must_use]
+    #[allow(clippy::cast_sign_loss)]
+    pub fn is_clock_signal(instructions: &Instructions, a_value: Int) -> bool {
+        let mut instructions = instructions.clone();
+        let mut env = HashMap::from([
+            ("a".to_owned(), a_value),
+            ("b".to_owned(), 0),
+            ("c".to_owned(), 0),
+            ("d".to_owned(), 0),
+        ]);
+        let mut expected = 0;
+        let mut seen = HashSet::new();
+        let mut cnt = 0;
+        while let Some(ins) = instructions.get(cnt as usize) {
+            match ins {
+                Instruction::Copy(x, y) => {
+                    let x = eval_string(x, &env);
+                    env.insert(y.clone(), x);
+                }
+                Instruction::Increase(x) => {
+                    env.entry(x.clone()).and_modify(|e| *e += 1);
+                }
+                Instruction::Decrease(x) => {
+                    env.entry(x.clone()).and_modify(|e| *e -= 1);
+                }
+                Instruction::Toggle(x) => {
+                    let x = eval_string(x, &env);
+                    let pos = (cnt + x) as usize;
+                    if let Some(ins2) = instructions.get(pos) {
+                        instructions[pos] = toggle_ins(ins2.clone());
+                    }
+                }
+                Instruction::Jump(x, y) => {
+                    let x = eval_string(x, &env);
+                    if x != 0 {
+                        let y = eval_string(y, &env);
+                        cnt += y;
+                        continue;
+                    }
+                }
+                Instruction::Transmit(x) => {
+                    let x = eval_string(x, &env);
+                    if x != expected {
+                        return false;
+                    }
+                    if expected == 0 {
+                        let state = (
+                            env["a"],
+                            env["b"],
+                            env["c"],
+                            env["d"],
+                            cnt,
+                            instructions.clone(),
+                        );
+                        if seen.contains(&state) {
+                            return true;
+                        }
+                        seen.insert(state);
+                    }
+                    expected = Int::from(expected == 0);
+                }
+            }
+            cnt += 1;
+        }
+        false
     }
 }
 
@@ -365,6 +451,10 @@ dec a";
         assert_eq!(
             Instruction::from_str("tgl a"),
             Ok(Instruction::Toggle("a".to_owned()))
+        );
+        assert_eq!(
+            Instruction::from_str("out x"),
+            Ok(Instruction::Transmit("x".to_owned()))
         );
         assert!(Instruction::from_str("").is_err());
         assert!(Instruction::from_str("abc").is_err());
