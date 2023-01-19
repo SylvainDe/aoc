@@ -90,9 +90,9 @@ mod tests {
 
     #[test]
     fn test_part1() {
-        assert_eq!(part1("5"), 124515891);
-        assert_eq!(part1("18"), 9251071085);
-        assert_eq!(part1("2018"), 5941429882);
+        assert_eq!(part1("5"), 124_515_891);
+        assert_eq!(part1("18"), 9_251_071_085);
+        assert_eq!(part1("2018"), 5_941_429_882);
     }
 
     #[test]

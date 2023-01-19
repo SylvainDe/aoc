@@ -10,6 +10,7 @@ day="${1:-$real_day}"
 year="${2:-$real_year}"
 
 # Configure what is triggered
+do_check="1"
 do_test="1"
 do_run="1"
 do_clippy="1"
@@ -57,10 +58,16 @@ clippy_checks="-D clippy::all
 -A clippy::print_stdout
 -A clippy::integer_division
 -A clippy::string_slice
+-A clippy::assertions_on_result_states
 -A clippy::std_instead_of_alloc
 -A clippy::std_instead_of_core"
 
 # Run cargo commands
+if [ "${do_check}" = "1" ]; then
+    cargo check --lib
+    cargo check --bin "${bin}"
+fi
+
 if [ "${autofix}" = "1" ]; then
     cargo fix ${fix_options} --lib
     cargo fix ${fix_options} --bin "${bin}"
