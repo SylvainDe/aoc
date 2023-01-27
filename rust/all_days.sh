@@ -16,6 +16,7 @@ fix_options="--allow-dirty --allow-staged"
 clippy_checks="-D clippy::all
 -D clippy::correctness
 -D clippy::suspicious
+-A clippy::blanket_clippy_restriction_lints
 -D clippy::style
 -D clippy::complexity
 -D clippy::perf
