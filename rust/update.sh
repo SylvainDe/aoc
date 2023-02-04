@@ -3,7 +3,7 @@ set -e
 
 date_=$(date "+%F_%Hh%Mm%Ss")
 before="update_${date_}_before.txt"
-after="update_${date_}_before.txt"
+after="update_${date_}_after.txt"
 (rustc -Vv; cargo clippy --version) > "${before}"
 rustup update
 cargo update
