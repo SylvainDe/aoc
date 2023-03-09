@@ -19,7 +19,6 @@ fn transpose(v: &InputContent) -> InputContent {
     assert!(!v.is_empty());
     let len = v[0].len();
     (0..len)
-        .into_iter()
         .map(|i| v.iter().map(|row| row[i]).collect())
         .collect()
 }
