@@ -49,6 +49,7 @@ clippy_checks="-D clippy::all
 -A clippy::integer_division
 -A clippy::string_slice
 -A clippy::assertions_on_result_states
+-A clippy::question_mark_used
 -A clippy::std_instead_of_alloc
 -A clippy::std_instead_of_core"
 
