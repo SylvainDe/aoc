@@ -16,7 +16,7 @@ fn get_input_from_str(string: &str) -> InputContent {
 }
 
 fn transpose(v: &InputContent) -> InputContent {
-    assert!(!v.is_empty());
+    assert!(!v.is_empty(), "Cannot transpose empty matrix");
     let len = v[0].len();
     (0..len)
         .map(|i| v.iter().map(|row| row[i]).collect())

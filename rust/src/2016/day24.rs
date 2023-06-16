@@ -75,7 +75,11 @@ fn compute_best_path(g: &Graph, return_to_origin: bool) -> Int {
     }
     // Check interesting distances
     for ((p1, p2), d) in &interesting_dist {
-        assert!(interesting_dist.get(&(p2, p1)) == Some(d));
+        assert_eq!(
+            interesting_dist.get(&(p2, p1)),
+            Some(d),
+            "Distance should be equal in both directions"
+        );
     }
     // Compute best path
     let mut distances = BinaryHeap::new();
@@ -93,10 +97,18 @@ fn compute_best_path(g: &Graph, return_to_origin: bool) -> Int {
         }
         if !added {
             if !return_to_origin {
-                assert!(points.len() == interesting_points.len());
+                assert_eq!(
+                    points.len(),
+                    interesting_points.len(),
+                    "All points should be interesting"
+                );
                 return d;
             } else if last == &start {
-                assert!(points.len() == interesting_points.len() + 1);
+                assert_eq!(
+                    points.len(),
+                    interesting_points.len() + 1,
+                    "All points but one should be interesting"
+                );
                 return d;
             }
             let mut points2 = points.clone();

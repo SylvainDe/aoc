@@ -41,6 +41,7 @@ clippy_checks="-D clippy::all
 -A clippy::modulo_arithmetic
 -A clippy::default_numeric_fallback
 -A clippy::implicit_return
+-A clippy::missing_assert_message
 -A clippy::missing_inline_in_public_items
 -A clippy::unwrap_used
 -A clippy::expect_used

@@ -67,7 +67,7 @@ pub mod input {
             |expected_res| {
                 if is_strict {
                     // println!("Answer: {} (expected: {})", result, expected_res);
-                    assert_eq!(result, expected_res);
+                    assert_eq!(result, expected_res, "Invalid answer computed");
                 } else if result == expected_res {
                     println!("Correct answer: {result}");
                 } else {
