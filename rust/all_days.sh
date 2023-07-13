@@ -25,7 +25,6 @@ clippy_checks="-D clippy::all
 -D clippy::nursery
 -D clippy::restriction
 -A clippy::indexing_slicing
--A clippy::integer_arithmetic
 -A clippy::arithmetic_side_effects
 -A clippy::modulo_arithmetic
 -A clippy::default_numeric_fallback
