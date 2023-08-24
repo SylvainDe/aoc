@@ -12,6 +12,9 @@ pub mod input {
         string.lines().next().map_or("", |l| l).to_owned()
     }
 
+    /// # Panics
+    ///
+    /// Will panic if file can't be read
     #[must_use]
     pub fn get_file_content(filepath: &str) -> String {
         fs::read_to_string(filepath).expect("Could not open file")

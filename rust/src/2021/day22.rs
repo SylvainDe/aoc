@@ -195,7 +195,7 @@ fn split_1d((beg1, end1): Range, (beg2, end2): Range) -> Vec<(Range, bool, bool)
     assert!(beg1 <= end1);
     assert!(beg2 <= end2);
     let mut ret = Vec::new();
-    let mut points = vec![beg1, end1, beg2, end2];
+    let mut points = [beg1, end1, beg2, end2];
     points.sort_unstable();
     for win in points.windows(2) {
         let (beg, end) = (win[0], win[1]);
@@ -215,7 +215,7 @@ fn intersection_1d((beg1, end1): Range, (beg2, end2): Range) -> Option<Range> {
     // belong to range 1 and/or range 2
     assert!(beg1 <= end1);
     assert!(beg2 <= end2);
-    let mut points = vec![beg1, end1, beg2, end2];
+    let mut points = [beg1, end1, beg2, end2];
     points.sort_unstable();
     for win in points.windows(2) {
         let (beg, end) = (win[0], win[1]);

@@ -20,7 +20,7 @@ type KeypadGraph = HashMap<(char /*Position*/, char /*Direction*/), char /*New p
 
 fn build_keypad_graph(keypad: &Keypad) -> KeypadGraph {
     let mut graph = KeypadGraph::new();
-    for s in keypad.iter() {
+    for s in keypad {
         for (a, b) in s.chars().zip(s.chars().skip(1)) {
             if a != ' ' && b != ' ' {
                 graph.insert((a, 'R'), b);
@@ -43,7 +43,7 @@ fn get_code(keypad: &Keypad, instructions: &InputContent) -> String {
     let g = build_keypad_graph(keypad);
     let mut pos = '5';
     let mut positions = Vec::new();
-    for instruction in instructions.iter() {
+    for instruction in instructions {
         for c in instruction.chars() {
             if let Some(new_position) = g.get(&(pos, c)) {
                 pos = *new_position;

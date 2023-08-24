@@ -62,7 +62,9 @@ clippy_checks="-D clippy::all
 -A clippy::assertions_on_result_states
 -A clippy::question_mark_used
 -A clippy::std_instead_of_alloc
--A clippy::std_instead_of_core"
+-A clippy::std_instead_of_core
+-A clippy::min_ident_chars
+-A clippy::single_call_fn"
 
 # Run cargo commands
 if [ "${do_check}" = "1" ]; then

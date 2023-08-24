@@ -62,8 +62,8 @@ trait Scorable {
 impl Scorable for Grid {
     fn compute_score(&self, numbers: &HashSet<Int>, last_number: Int) -> Int {
         let mut s = 0;
-        for line in self.iter() {
-            for val in line.iter() {
+        for line in self {
+            for val in line {
                 if !numbers.contains(val) {
                     s += val;
                 }
@@ -73,7 +73,7 @@ impl Scorable for Grid {
     }
     fn score(&self, numbers: &HashSet<Int>, last_number: Int) -> BingoState {
         // Look for horizontal lines
-        for line in self.iter() {
+        for line in self {
             if !line.iter().any(|n| !numbers.contains(n)) {
                 return BingoState::Finished(self.compute_score(numbers, last_number));
             }
