@@ -84,11 +84,11 @@ fn show_stars(positions: &Vec<(Int, Int)>) -> Option<String> {
 
     let mut points: HashMap<Int, HashSet<Int>> = HashMap::new();
     for (x, y) in positions {
-        points.entry(*y).or_insert_with(HashSet::new).insert(*x);
+        points.entry(*y).or_default().insert(*x);
     }
     Some(
         (y_min..=y_max)
-            .map(|y| get_line(points.entry(y).or_insert_with(HashSet::new), x_min, x_max))
+            .map(|y| get_line(points.entry(y).or_default(), x_min, x_max))
             .join("\n"),
     )
 }

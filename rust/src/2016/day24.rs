@@ -4,6 +4,7 @@ use common::input::collect_lines;
 use common::input::get_answers;
 use common::input::get_file_content;
 use std::cmp::Reverse;
+use std::collections::hash_map;
 use std::collections::BinaryHeap;
 use std::collections::HashMap;
 use std::collections::VecDeque;
@@ -60,7 +61,7 @@ fn compute_best_path(g: &Graph, return_to_origin: bool) -> Int {
         let mut dist = HashMap::new();
         let mut deq = VecDeque::from([(*p, 0)]);
         while let Some((p2, d)) = deq.pop_front() {
-            if let std::collections::hash_map::Entry::Vacant(e) = dist.entry(p2) {
+            if let hash_map::Entry::Vacant(e) = dist.entry(p2) {
                 e.insert(d);
                 for n in neighbours(&p2) {
                     if g.contains_key(&n) && !dist.contains_key(&n) {

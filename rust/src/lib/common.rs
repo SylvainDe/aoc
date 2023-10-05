@@ -37,7 +37,7 @@ pub mod input {
     pub fn collect_from_lines_with_func<Item, F, E>(string: &str, f: F) -> Vec<Item>
     where
         F: Fn(&str) -> Result<Item, E>,
-        E: std::fmt::Debug,
+        E: Debug,
     {
         string.lines().map(|l| f(l).unwrap()).collect()
     }
@@ -94,7 +94,7 @@ pub mod point_module {
     #[derive(Debug, PartialEq, Eq, Hash)]
     pub struct FromStrError;
 
-    impl<T: std::str::FromStr> Point<T> {
+    impl<T: FromStr> Point<T> {
         #[allow(clippy::result_unit_err, clippy::missing_errors_doc)]
         pub fn from_str_with_param(s: &str, separator: &str) -> Result<Self, FromStrError> {
             let (x, y) = s.split_once(separator).ok_or(FromStrError)?;
@@ -105,7 +105,7 @@ pub mod point_module {
         }
     }
 
-    impl<T: std::str::FromStr> FromStr for Point<T> {
+    impl<T: FromStr> FromStr for Point<T> {
         type Err = ();
         fn from_str(s: &str) -> Result<Self, Self::Err> {
             let (x, y) = s.split_once(", ").ok_or(())?;

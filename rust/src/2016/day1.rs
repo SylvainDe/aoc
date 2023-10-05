@@ -41,7 +41,7 @@ impl FromStr for Action {
         let first_char = char_it.next();
         match first_char {
             Some(c) => Ok(Self {
-                turn: c.to_string().parse().map_err(|_| {})?,
+                turn: c.to_string().parse().map_err(|()| {})?,
                 length: char_it.collect::<String>().parse().map_err(|_| {})?,
             }),
             None => Err(()),

@@ -78,8 +78,8 @@ impl FromStr for Event {
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         let (ts, action) = s.split_once("] ").ok_or(())?;
         Ok(Self {
-            timestamp: ts.parse().map_err(|_| {})?,
-            action: action.parse().map_err(|_| {})?,
+            timestamp: ts.parse().map_err(|()| {})?,
+            action: action.parse().map_err(|()| {})?,
         })
     }
 }
