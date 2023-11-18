@@ -198,6 +198,7 @@ fn split_1d((beg1, end1): Range, (beg2, end2): Range) -> Vec<(Range, bool, bool)
     let mut points = [beg1, end1, beg2, end2];
     points.sort_unstable();
     for win in points.windows(2) {
+        assert!(win.len() == 2);
         let (beg, end) = (win[0], win[1]);
         if beg < end {
             let in1 = value_in_range(beg, (beg1, end1));
@@ -218,6 +219,7 @@ fn intersection_1d((beg1, end1): Range, (beg2, end2): Range) -> Option<Range> {
     let mut points = [beg1, end1, beg2, end2];
     points.sort_unstable();
     for win in points.windows(2) {
+        assert!(win.len() == 2);
         let (beg, end) = (win[0], win[1]);
         if beg < end && value_in_range(beg, (beg1, end1)) && value_in_range(beg, (beg2, end2)) {
             return Some((beg, end));

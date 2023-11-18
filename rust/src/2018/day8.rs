@@ -19,6 +19,7 @@ fn get_input_from_str(string: &str) -> InputContent {
 
 fn compute_scores(nbs: &[Int], part1: bool) -> (Int, &[Int]) {
     //dbg!("start", nbs.len());
+    assert!(nbs.len() > 1);
     let nb_child = nbs[0];
     let nb_meta = nbs[1];
     let mut remaining = &nbs[2..];
