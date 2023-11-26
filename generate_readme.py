@@ -20,8 +20,10 @@ rust_file = "rust/src/{year}/day{day}.rs"
 stats_file = "misc/leaderboard_self_{year}.html"
 
 # Ranges
-year_range = range(2015, 2022+1)
-day_range = range(1, 25+1)
+first_year = 2015
+last_year = 2023
+first_day = 1
+last_day = 25
 
 
 def file_contains(filepath, string):
@@ -57,7 +59,8 @@ class YearData():
             stats = self.extract_stats()
         except FileNotFoundError:
             stats = dict()
-        days = [DayData(year, day, stats.get(day, dict())) for day in day_range]
+        days = [DayData(year, day, stats.get(day, dict()))
+                for day in range(first_day, last_day + 1)]
         self.days = [d for d in days if d.is_valid()]
         self.nb_stars = sum(d.nb_stars for d in days)
 
@@ -174,7 +177,7 @@ if __name__ == "__main__":
     ################
     # Collect data #
     ################
-    years = [YearData(year) for year in year_range]
+    years = [YearData(year) for year in range(first_year, last_year + 1)]
     years = [y for y in years if y.is_valid()]
 
     ################
