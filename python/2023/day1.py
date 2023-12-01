@@ -1,6 +1,6 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
-
+import string
 
 def get_string_from_line(string):
     return string
@@ -15,41 +15,39 @@ def get_strings_from_file(file_path="../../resources/year2023_day1_input.txt"):
         return get_strings_from_lines(f.read())
 
 
-def get_calibration_value(s):
-    digits = [c for c in s if c.isdigit()]
-    return 10 * int(digits[0]) + int(digits[-1])
+map_digits = { d: int(d) for d in string.digits }
+
+map_words = {
+    "one": 1,
+    "two": 2,
+    "three": 3,
+    "four": 4,
+    "five": 5,
+    "six": 6,
+    "seven": 7,
+    "eight": 8,
+    "nine": 9,
+}
+
+def find_values(s, mapping):
+    for i, c in enumerate(s):
+        s2 = s[i:]
+        for k, v in mapping.items():
+            if s2.startswith(k):
+                yield v
+
+def get_calibration_value(s, mapping):
+    digits_found = list(find_values(s, mapping))
+    return 10 * digits_found[0] + digits_found[-1]
 
 
 def get_calibration_sum(strings):
-    return sum(get_calibration_value(s) for s in strings)
-
-
-def get_calibration_value2(s):
-    digits_words = {
-        "one": 1,
-        "two": 2,
-        "three": 3,
-        "four": 4,
-        "five": 5,
-        "six": 6,
-        "seven": 7,
-        "eight": 8,
-        "nine": 9,
-    }
-    digits = []
-    for i, c in enumerate(s):
-        if c.isdigit():
-            digits.append(int(c))
-        else:
-            s2 = s[i:]
-            for w, val in digits_words.items():
-                if s2.startswith(w):
-                    digits.append(val)
-    return 10 * digits[0] + digits[-1]
+    return sum(get_calibration_value(s, map_digits) for s in strings)
 
 
 def get_calibration_sum2(strings):
-    return sum(get_calibration_value2(s) for s in strings)
+    mapping = {**map_digits, **map_words}
+    return sum(get_calibration_value(s, mapping) for s in strings)
 
 
 def run_tests():
