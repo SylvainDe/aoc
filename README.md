@@ -13,6 +13,7 @@ Solutions are written in Python and/or Rust.
 |Day|URLs|Puzzle & Input|Stars|Python|Rust|Time part 1|Time part 2|
 |---|---|---|---|---|---|---|---|
 |Day 1: Trebuchet?!|[Problem](https://adventofcode.com/2023/day/1) [Input](https://adventofcode.com/2023/day/1/input)|[puzzle.html](resources/year2023_day1_puzzle.html) [input.txt](resources/year2023_day1_input.txt)|**|[day1.py](python/2023/day1.py)|[-](rust/src/2023/day1.rs)|03:40:40|03:48:05|
+|Day 2: Cube Conundrum|[Problem](https://adventofcode.com/2023/day/2) [Input](https://adventofcode.com/2023/day/2/input)|[puzzle.html](resources/year2023_day2_puzzle.html) [input.txt](resources/year2023_day2_input.txt)||[-](python/2023/day2.py)|[-](rust/src/2023/day2.rs)|-|-|
 |[2023](https://adventofcode.com/2023)|[Stats](https://adventofcode.com/2023/leaderboard/self)|[stats.txt](misc/leaderboard_self_2023.html)|2|-|-|-|-|
 
 ## [2022](https://adventofcode.com/2022)
