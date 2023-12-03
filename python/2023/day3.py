@@ -1,5 +1,6 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
+import itertools
 
 def get_grid_from_file(file_path="../../resources/year2023_day3_input.txt"):
     with open(file_path) as f:
@@ -30,47 +31,55 @@ def run_tests():
     assert get_part_numbers(grid) == 123
 
 
-def get_adjacent_symbols(row, beg, end, grid):
-    symbols = []
-    for i in range(row-1, row + 1 + 1):
-        for j in range(beg-1, end + 1):
-            if i >= 0 and j >= 0:
-                try:
-                     c = grid[i][j]
-                except IndexError:
-                     continue
-                if not c.isdigit() and c != ".":
-                    # print(row, beg, end, grid[row][beg:end], c, i, j, "YYY")
-                    symbols.append((i, j, c))
-    # print(row, beg, end, grid[row][beg:end], "N")
-    return symbols
-
-def get_parts(grid):
-    parts = []
+def get_data_from_grid(grid):
+    symbols = dict()
+    numbers = []
     current_nb, nb_len = 0, 0
     for i, row in enumerate(grid):
         for j, c in enumerate(row):
-             if c.isdigit():
-                 current_nb = 10 * current_nb + int(c)
-                 nb_len += 1
-             elif current_nb:
-                 parts.append((current_nb, get_adjacent_symbols(i, j - nb_len, j, grid)))
-                 current_nb, nb_len = 0, 0
+            if c.isdigit():
+                current_nb = 10 * current_nb + int(c)
+                nb_len += 1
+            else:
+                if current_nb:
+                    numbers.append((i, j - nb_len, j, current_nb))
+                    current_nb, nb_len = 0, 0
+                if c != ".":
+                    symbols[(i, j)] = c
         if current_nb:
-            parts.append((current_nb, get_adjacent_symbols(i, j - nb_len, j, grid)))
+            j = len(row)
+            numbers.append((i, j - nb_len, j, current_nb))
             current_nb, nb_len = 0, 0
-    return parts
+    # for row, beg, end, n in numbers:
+    #     assert 0 <= beg < end
+    #     assert str(n) == grid[row][beg:end]
+    return symbols, numbers
+
+
+def get_adjacent_symbols(row, beg, end, symbols):
+    return [(pos, symbols[pos])
+            for pos in itertools.product(range(row - 1, row + 1 + 1), range(beg - 1 , end + 1))
+            if pos in symbols]
+
+
+def get_parts(grid):
+    symbols, numbers = get_data_from_grid(grid)
+    return [(n, get_adjacent_symbols(row, beg, end, symbols))
+            for row, beg, end, n in numbers]
+
 
 def get_part_numbers(grid):
     return sum(p for p, s in get_parts(grid) if s)
 
+
 def get_gears(grid):
     gears_candidate = dict()
     for p, symbols in get_parts(grid):
-        for (i, j, c) in symbols:
+        for (pos, c) in symbols:
             if c == "*":
-                gears_candidate.setdefault((i, j), []).append(p)
+                gears_candidate.setdefault(pos, []).append(p)
     return sum(l[0] * l[1] for pos, l in gears_candidate.items() if len(l) == 2)
+
 
 def get_solutions():
     grid = get_grid_from_file()
