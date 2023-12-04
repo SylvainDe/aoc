@@ -23,6 +23,15 @@ def get_card_score(card):
     n = len(set(numbers).intersection(winning))
     return 2 ** (n - 1) if n else 0
 
+def get_nb_cards(cards):
+    cards_to_process = {card_id: 1 for card_id, _, _ in cards}
+    for card_id, numbers, winning in cards:
+        nb = cards_to_process[card_id]
+        nb_win = len(set(numbers).intersection(winning))
+        for c2 in range(card_id + 1, card_id + nb_win + 1):
+            cards_to_process[c2] += nb
+    return sum(cards_to_process.values())
+
 def run_tests():
     cards = get_cards_from_lines(
         """Card 1: 41 48 83 86 17 | 83 86  6 31 17  9 48 53
@@ -33,10 +42,12 @@ Card 5: 87 83 26 28 32 | 88 30 70 12 93 22 82 36
 Card 6: 31 18 13 56 72 | 74 77 10 23 35 67 36 11"""
     )
     assert sum(get_card_score(c) for c in cards) == 13
+    assert get_nb_cards(cards) == 30
 
 def get_solutions():
     cards = get_cards_from_file()
     print(sum(get_card_score(c) for c in cards) == 23441)
+    print(get_nb_cards(cards) == 5923918)
 
 
 if __name__ == "__main__":
