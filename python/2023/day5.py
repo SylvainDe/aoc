@@ -24,9 +24,10 @@ def get_map_from_string(string):
 
 def get_almanach_from_string(string):
     parts = string.split("\n\n")
+    mappings = [get_map_from_string(m) for m in parts[1:]]
     return Almanach(
         seeds = get_seeds_from_first_line(parts[0]),
-        mappings = [get_map_from_string(m) for m in parts[1:]])
+        mappings = {m.src: m for m in mappings})
 
 def get_almanach_from_file(file_path="../../resources/year2023_day5_input.txt"):
     with open(file_path) as f:
@@ -48,9 +49,8 @@ def convert_small_range_with_mapping(small_range, mapping):
         assert beg_in_range == end_in_range
         if beg_in_range:
             shift = dst_start - src_start
-            return (beg + shift, end+shift)
+            return (beg + shift, end + shift)
     return small_range
-
 
 def pairwise(iterable):
     "s -> (s0, s1), (s2, s3), (s4, s5), ..."
@@ -78,27 +78,25 @@ def convert_ranges_with_mapping(ranges, mapping):
     # Convert ranges
     return set(convert_small_range_with_mapping(r, mapping) for r in ranges)
 
-def find_mapping_for_res(res_name, almanach):
-    for m in almanach.mappings:
-        if m.src == res_name:
-            return m
-    return None
-
 def get_locations_for_seeds(almanach):
     res, res_name = set(almanach.seeds), "seed"
-    while res_name != "location":
-        m = find_mapping_for_res(res_name, almanach)
+    mappings = almanach.mappings
+    while res_name in mappings:
+        m = mappings[res_name]
         res = set(convert_resource_with_mapping(r, m) for r in res)
         res_name = m.dst
+    assert res_name == "location"
     return res
 
-def get_locations_for_seeds2(almanach):
+def get_locations_for_seed_ranges(almanach):
     res_name = "seed"
     res = [(start, start + length) for start, length in pairwise(almanach.seeds)]
-    while res_name != "location":
-        m = find_mapping_for_res(res_name, almanach)
+    mappings = almanach.mappings
+    while res_name in mappings:
+        m = mappings[res_name]
         res = convert_ranges_with_mapping(res, m)
         res_name = m.dst
+    assert res_name == "location"
     return res
 
 def run_tests():
@@ -138,13 +136,13 @@ humidity-to-location map:
 56 93 4"""
     )
     assert min(get_locations_for_seeds(almanach)) == 35
-    assert min(get_locations_for_seeds2(almanach))[0] == 46
+    assert min(get_locations_for_seed_ranges(almanach))[0] == 46
 
 
 def get_solutions():
     almanach = get_almanach_from_file()
     print(min(get_locations_for_seeds(almanach)) == 251346198)
-    print(min(get_locations_for_seeds2(almanach))[0] == 72263011)
+    print(min(get_locations_for_seed_ranges(almanach))[0] == 72263011)
 
 
 if __name__ == "__main__":
