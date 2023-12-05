@@ -54,6 +54,24 @@ def get_locations_for_seeds(almanach):
         res_name = m.dst
     return res
 
+def pairwise(iterable):
+    "s -> (s0, s1), (s2, s3), (s4, s5), ..."
+    a = iter(iterable)
+    return zip(a, a)
+
+def get_locations_for_seeds2(almanach):
+    res_name = "seed"
+    res = set()
+    for start, length in pairwise(almanach.seeds):
+        for i in range(length):
+            res.add(start + i)
+    while res_name != "location":
+        m = find_mapping_for_res(res_name, almanach)
+        # print(res_name, len(res), m)
+        res = set(convert_resource_with_mapping(r, m) for r in res)
+        res_name = m.dst
+    return res
+
 def run_tests():
     almanach = get_almanach_from_string(
         """seeds: 79 14 55 13
@@ -91,11 +109,13 @@ humidity-to-location map:
 56 93 4"""
     )
     assert min(get_locations_for_seeds(almanach)) == 35
+    assert min(get_locations_for_seeds2(almanach)) == 46
 
 
 def get_solutions():
     almanach = get_almanach_from_file()
     print(min(get_locations_for_seeds(almanach)) == 251346198)
+    # print(min(get_locations_for_seeds2(almanach))) - TOO SLOW!
 
 
 if __name__ == "__main__":
