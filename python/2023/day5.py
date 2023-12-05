@@ -1,0 +1,84 @@
+# vi: set shiftwidth=4 tabstop=4 expandtab:
+import datetime
+import collections
+
+# These should be dataclasses ?
+Almanach = collections.namedtuple("Almanach", ("seeds", "mappings"))
+Mapping = collections.namedtuple("Mapping", ("src", "dst", "ranges"))
+Range = collections.namedtuple("Range", ("dst_start", "src_start", "length"))
+
+def get_seeds_from_first_line(string):
+    before, mid, seeds = string.partition("seeds: ")
+    assert before == ""
+    assert mid == "seeds: "
+    return [int(s) for s in seeds.split()]
+
+def get_map_from_string(string):
+    # print("get_map_from_string(", string, ")")
+    lst = string.split("\n")
+    name = lst[0].split(" ")[0]
+    src, mid, dst = name.partition("-to-")
+    assert mid == "-to-"
+    return Mapping(
+        src, dst,
+        ranges = [Range._make(int(s) for s in r.split(" ")) for r in lst[1:] if r])
+
+def get_almanach_from_string(string):
+    parts = string.split("\n\n")
+    return Almanach(
+        seeds = get_seeds_from_first_line(parts[0]),
+        mappings = [get_map_from_string(m) for m in parts[1:]])
+
+def get_almanach_from_file(file_path="../../resources/year2023_day5_input.txt"):
+    with open(file_path) as f:
+        return get_almanach_from_string(f.read())
+
+
+def run_tests():
+    almanach = get_almanach_from_string(
+        """seeds: 79 14 55 13
+
+seed-to-soil map:
+50 98 2
+52 50 48
+
+soil-to-fertilizer map:
+0 15 37
+37 52 2
+39 0 15
+
+fertilizer-to-water map:
+49 53 8
+0 11 42
+42 0 7
+57 7 4
+
+water-to-light map:
+88 18 7
+18 25 70
+
+light-to-temperature map:
+45 77 23
+81 45 19
+68 64 13
+
+temperature-to-humidity map:
+0 69 1
+1 0 69
+
+humidity-to-location map:
+60 56 37
+56 93 4"""
+    )
+
+
+def get_solutions():
+    almanach = get_almanach_from_file()
+
+
+if __name__ == "__main__":
+    begin = datetime.datetime.now()
+    run_tests()
+    get_solutions()
+    end = datetime.datetime.now()
+    print(end - begin)
