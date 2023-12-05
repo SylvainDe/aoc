@@ -33,6 +33,26 @@ def get_almanach_from_file(file_path="../../resources/year2023_day5_input.txt"):
     with open(file_path) as f:
         return get_almanach_from_string(f.read())
 
+def convert_resource_with_mapping(value, mapping):
+    for r in mapping.ranges:
+        if r.src_start <= value < r.src_start + r.length:
+            return value - r.src_start + r.dst_start
+    return value
+
+def find_mapping_for_res(res_name, almanach):
+    for m in almanach.mappings:
+        if m.src == res_name:
+            return m
+    return None
+
+def get_locations_for_seeds(almanach):
+    res, res_name = set(almanach.seeds), "seed"
+    while res_name != "location":
+        m = find_mapping_for_res(res_name, almanach)
+        # print(res_name, res, m)
+        res = set(convert_resource_with_mapping(r, m) for r in res)
+        res_name = m.dst
+    return res
 
 def run_tests():
     almanach = get_almanach_from_string(
@@ -70,10 +90,12 @@ humidity-to-location map:
 60 56 37
 56 93 4"""
     )
+    assert min(get_locations_for_seeds(almanach)) == 35
 
 
 def get_solutions():
     almanach = get_almanach_from_file()
+    print(min(get_locations_for_seeds(almanach)) == 251346198)
 
 
 if __name__ == "__main__":
