@@ -14,7 +14,6 @@ def get_seeds_from_first_line(string):
     return [int(s) for s in seeds.split()]
 
 def get_map_from_string(string):
-    # print("get_map_from_string(", string, ")")
     lst = string.split("\n")
     name = lst[0].split(" ")[0]
     src, mid, dst = name.partition("-to-")
@@ -34,10 +33,50 @@ def get_almanach_from_file(file_path="../../resources/year2023_day5_input.txt"):
         return get_almanach_from_string(f.read())
 
 def convert_resource_with_mapping(value, mapping):
-    for r in mapping.ranges:
-        if r.src_start <= value < r.src_start + r.length:
-            return value - r.src_start + r.dst_start
+    for dst_start, src_start, length in mapping.ranges:
+        src_end = src_start + length
+        if src_start <= value < src_end:
+            return value - src_start + dst_start
     return value
+
+def convert_small_range_with_mapping(small_range, mapping):
+    beg, end = small_range
+    for dst_start, src_start, length in mapping.ranges:
+        src_end = src_start + length
+        beg_in_range = src_start <= beg < src_end
+        end_in_range = src_start <= end < src_end
+        assert beg_in_range == end_in_range
+        if beg_in_range:
+            shift = dst_start - src_start
+            return (beg + shift, end+shift)
+    return small_range
+
+
+def pairwise(iterable):
+    "s -> (s0, s1), (s2, s3), (s4, s5), ..."
+    a = iter(iterable)
+    return zip(a, a)
+
+def convert_ranges_with_mapping(ranges, mapping):
+    # Find limits
+    limits = set()
+    for _, src_start, length in mapping.ranges:
+        src_end = src_start + length
+        limits.add(src_start)
+        limits.add(src_end)
+    limits = sorted(limits)
+    # Split ranges on limits
+    for l in limits:
+        new_ranges = set()
+        for beg, end in ranges:
+            if beg < l <= end:
+                new_ranges.add((beg, l-1))
+                new_ranges.add((l, end))
+            else:
+                new_ranges.add((beg, end))
+        ranges = new_ranges
+    # Convert ranges
+    return set(convert_small_range_with_mapping(r, mapping) for r in ranges)
 
 def find_mapping_for_res(res_name, almanach):
     for m in almanach.mappings:
@@ -49,26 +88,16 @@ def get_locations_for_seeds(almanach):
     res, res_name = set(almanach.seeds), "seed"
     while res_name != "location":
         m = find_mapping_for_res(res_name, almanach)
-        # print(res_name, res, m)
         res = set(convert_resource_with_mapping(r, m) for r in res)
         res_name = m.dst
     return res
 
-def pairwise(iterable):
-    "s -> (s0, s1), (s2, s3), (s4, s5), ..."
-    a = iter(iterable)
-    return zip(a, a)
-
 def get_locations_for_seeds2(almanach):
     res_name = "seed"
-    res = set()
-    for start, length in pairwise(almanach.seeds):
-        for i in range(length):
-            res.add(start + i)
+    res = [(start, start + length) for start, length in pairwise(almanach.seeds)]
     while res_name != "location":
         m = find_mapping_for_res(res_name, almanach)
-        # print(res_name, len(res), m)
-        res = set(convert_resource_with_mapping(r, m) for r in res)
+        res = convert_ranges_with_mapping(res, m)
         res_name = m.dst
     return res
 
@@ -109,13 +138,13 @@ humidity-to-location map:
 56 93 4"""
     )
     assert min(get_locations_for_seeds(almanach)) == 35
-    assert min(get_locations_for_seeds2(almanach)) == 46
+    assert min(get_locations_for_seeds2(almanach))[0] == 46
 
 
 def get_solutions():
     almanach = get_almanach_from_file()
     print(min(get_locations_for_seeds(almanach)) == 251346198)
-    # print(min(get_locations_for_seeds2(almanach))) - TOO SLOW!
+    print(min(get_locations_for_seeds2(almanach))[0] == 72263011)
 
 
 if __name__ == "__main__":
