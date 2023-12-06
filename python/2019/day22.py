@@ -106,11 +106,10 @@ def xgcd(a, b):
 @functools.lru_cache()
 def modinv(a, m):
     """Computes the Modular multiplicative inverse."""
-    g, x, y = xgcd(a, m)
+    g, x, _ = xgcd(a, m)
     if g != 1:
         raise Exception("modular inverse does not exist")
-    else:
-        return x % m
+    return x % m
 
 
 # Orders
@@ -146,15 +145,12 @@ def get_order_and_remaining(order):
 # Orders on the whole deck
 def apply_order(order, deck):
     op, rem = get_order_and_remaining(order)
-    if rem:
-        return op.deck(deck, int(rem))
-    else:
-        return op.deck(deck)
+    return op.deck(deck, int(rem)) if rem else op.deck(deck)
 
 
 def apply_orders(nb, orders, repetition=1):
     deck = new_deck(nb)
-    for i in range(repetition):
+    for _ in range(repetition):
         for order in orders:
             deck = apply_order(order, deck)
     return deck
@@ -163,10 +159,9 @@ def apply_orders(nb, orders, repetition=1):
 # Orders on single cards
 def apply_single_order(order, nb_cards, position):
     op, rem = get_order_and_remaining(order)
-    if rem:
-        return op.single(nb_cards, int(rem), position)
-    else:
-        return op.single(nb_cards, position)
+    return op.single(nb_cards, int(rem), position) \
+           if rem else \
+           op.single(nb_cards, position)
 
 
 def apply_single_orders(orders, nb_cards, position):
@@ -178,10 +173,9 @@ def apply_single_orders(orders, nb_cards, position):
 # Reverse orders on single cards
 def apply_reverse_order(order, nb_cards, position):
     op, rem = get_order_and_remaining(order)
-    if rem:
-        return op.reverse(nb_cards, int(rem), position)
-    else:
-        return op.reverse(nb_cards, position)
+    return op.reverse(nb_cards, int(rem), position) \
+           if rem else \
+           op.reverse(nb_cards, position)
 
 
 def apply_reverse_orders(orders, nb_cards, position):

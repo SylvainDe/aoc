@@ -30,7 +30,7 @@ map_words = {
 }
 
 def find_values(s, mapping):
-    for i, c in enumerate(s):
+    for i in range(len(s)):
         s2 = s[i:]
         for k, v in mapping.items():
             if s2.startswith(k):

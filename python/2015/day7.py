@@ -37,10 +37,10 @@ def get_wires_from_file(file_path="../../resources/year2015_day7_input.txt"):
 
 
 def eval_wire(wire, wires):
-    return eval(wire, dict(), wires)
+    return eval_wire_(wire, dict(), wires)
 
 
-def eval(wire, env, wires):
+def eval_wire_(wire, env, wires):
     val = env.get(wire, None)
     if val is not None:
         return val
@@ -49,13 +49,13 @@ def eval(wire, env, wires):
         ret = int(wire)
     elif len(expr) == 3:
         func, left, right = expr
-        ret = func(eval(left, env, wires), eval(right, env, wires))
+        ret = func(eval_wire_(left, env, wires), eval_wire_(right, env, wires))
     elif len(expr) == 2:
         func, value = expr
-        ret = func(eval(value, env, wires))
+        ret = func(eval_wire_(value, env, wires))
     else:
         value = expr[0]
-        ret = eval(value, env, wires)
+        ret = eval_wire_(value, env, wires)
     env[wire] = ret
     return ret
 

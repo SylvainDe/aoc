@@ -47,7 +47,7 @@ def part2(connection_list):
     connection_dict = get_connection_matrix(connection_list)
     grouped = set()
     nb_group = 0
-    for iden in connection_dict.keys():
+    for iden in connection_dict:
         if iden not in grouped:
             nb_group += 1
             for iden2 in get_group(connection_dict, iden):

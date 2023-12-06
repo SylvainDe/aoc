@@ -19,7 +19,7 @@ def get_cards_from_file(file_path="../../resources/year2023_day4_input.txt"):
         return get_cards_from_lines(f.read())
 
 def get_card_score(card):
-    card_id, numbers, winning = card
+    _, numbers, winning = card
     n = len(set(numbers).intersection(winning))
     return 2 ** (n - 1) if n else 0
 
