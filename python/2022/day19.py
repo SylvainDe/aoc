@@ -1,9 +1,13 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
+import os
 import re
 import collections
 import operator
 import functools
+
+
+resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
 
 SKIP_SLOW = True
 
@@ -34,7 +38,7 @@ def get_blueprints_from_lines(string):
     return [get_blueprint_from_line(l) for l in string.splitlines()]
 
 
-def get_blueprints_from_file(file_path="../../resources/year2022_day19_input.txt"):
+def get_blueprints_from_file(file_path=resource_dir + "year2022_day19_input.txt"):
     with open(file_path) as f:
         return get_blueprints_from_lines(f.read())
 

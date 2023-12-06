@@ -1,7 +1,10 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
+import os
 import itertools
 
+
+resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
 
 def get_grid_from_lines(lines):
     for x, l in enumerate(lines):
@@ -9,7 +12,7 @@ def get_grid_from_lines(lines):
             yield (x, y), int(v)
 
 
-def get_grid_from_file(file_path="../../resources/year2021_day11_input.txt"):
+def get_grid_from_file(file_path=resource_dir + "year2021_day11_input.txt"):
     with open(file_path) as f:
         return dict(get_grid_from_lines(f))
 

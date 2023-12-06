@@ -1,7 +1,10 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
+import os
 import re
 
+
+resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
 
 LINE_RE = re.compile(r"(?P<mini>\d+)-(?P<maxi>\d+) (?P<letter>.): (?P<pwd>.*)")
 
@@ -15,7 +18,7 @@ def get_info_from_line(line):
     return (mini, maxi, letter, pwd)
 
 
-def get_lines_from_file(file_path="../../resources/year2020_day2_input.txt"):
+def get_lines_from_file(file_path=resource_dir + "year2020_day2_input.txt"):
     with open(file_path) as f:
         return [l.strip() for l in f]
 

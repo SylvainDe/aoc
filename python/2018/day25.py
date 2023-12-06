@@ -1,8 +1,11 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
+import os
 import itertools
 import collections
 
+
+resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
 
 def get_point_from_line(string):
     return tuple(int(s) for s in string.split(","))
@@ -12,7 +15,7 @@ def get_points_from_lines(string):
     return [get_point_from_line(l) for l in string.splitlines()]
 
 
-def get_points_from_file(file_path="../../resources/year2018_day25_input.txt"):
+def get_points_from_file(file_path=resource_dir + "year2018_day25_input.txt"):
     with open(file_path) as f:
         return get_points_from_lines(f.read())
 

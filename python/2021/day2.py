@@ -1,8 +1,12 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
+import os
 
 
-def get_commands_from_file(file_path="../../resources/year2021_day2_input.txt"):
+resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
+
+
+def get_commands_from_file(file_path=resource_dir + "year2021_day2_input.txt"):
     with open(file_path) as f:
         return [l.strip().split() for l in f]
 

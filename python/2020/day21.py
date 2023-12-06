@@ -1,5 +1,9 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
+import os
+
+
+resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
 
 
 def get_ingredients_from_line(line):
@@ -7,7 +11,7 @@ def get_ingredients_from_line(line):
     return tuple(beg.split(" ")), end[:-1].split(", ")
 
 
-def get_ingredients_from_file(file_path="../../resources/year2020_day21_input.txt"):
+def get_ingredients_from_file(file_path=resource_dir + "year2020_day21_input.txt"):
     with open(file_path) as f:
         return [get_ingredients_from_line(l.strip()) for l in f]
 

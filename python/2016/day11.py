@@ -1,9 +1,13 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
+import os
 import collections
 import itertools
 import functools
 import heapq
+
+
+resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
 
 SKIP_SLOW = True
 
@@ -34,7 +38,7 @@ def get_floors_from_lines(string):
     return tuple(get_floor_from_line(l) for l in string.splitlines())
 
 
-def get_floors_from_file(file_path="../../resources/year2016_day11_input.txt"):
+def get_floors_from_file(file_path=resource_dir + "year2016_day11_input.txt"):
     with open(file_path) as f:
         return get_floors_from_lines(f.read())
 

@@ -1,11 +1,15 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
+import os
 import itertools
+
+
+resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
 
 RUN_LONG_TESTS = False
 
 
-def get_public_keys_from_file(file_path="../../resources/year2020_day25_input.txt"):
+def get_public_keys_from_file(file_path=resource_dir + "year2020_day25_input.txt"):
     with open(file_path) as f:
         return [int(l) for l in f]
 

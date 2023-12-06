@@ -1,7 +1,10 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
+import os
 import itertools
 
+
+resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
 
 def get_segments_from_line(string):
     return [tuple(int(c) for c in c.split(",")) for c in string.split(" -> ")]
@@ -11,7 +14,7 @@ def get_segments_from_lines(string):
     return [get_segments_from_line(l) for l in string.splitlines()]
 
 
-def get_segments_from_file(file_path="../../resources/year2022_day14_input.txt"):
+def get_segments_from_file(file_path=resource_dir + "year2022_day14_input.txt"):
     with open(file_path) as f:
         return get_segments_from_lines(f.read())
 

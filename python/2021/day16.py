@@ -1,11 +1,14 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
+import os
 import collections
 import functools
 import operator
 
 
-def get_str_from_file(file_path="../../resources/year2021_day16_input.txt"):
+resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
+
+def get_str_from_file(file_path=resource_dir + "year2021_day16_input.txt"):
     with open(file_path) as f:
         for l in f:
             return l.strip()

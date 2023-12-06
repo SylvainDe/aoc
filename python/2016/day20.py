@@ -1,5 +1,9 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
+import os
+
+
+resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
 
 
 def get_range_from_str(s, sep="-"):
@@ -8,7 +12,7 @@ def get_range_from_str(s, sep="-"):
     return int(left), int(right)
 
 
-def get_ip_range_from_file(file_path="../../resources/year2016_day20_input.txt"):
+def get_ip_range_from_file(file_path=resource_dir + "year2016_day20_input.txt"):
     with open(file_path) as f:
         return [get_range_from_str(l.strip()) for l in f]
 

@@ -1,8 +1,12 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
+import os
 import re
 import collections
 import itertools
+
+
+resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
 
 # "Disc #1 has 13 positions; at time=0, it is at position 10."
 disc_re = r"^Disc \#(?P<number>\d+) has (?P<nb_pos>\d+) positions; at time=0, it is at position (?P<init_pos>\d+).$"
@@ -16,7 +20,7 @@ def get_disc_from_str(s):
     return Disc(int(d["number"]), int(d["nb_pos"]), int(d["init_pos"]))
 
 
-def get_discs_from_file(file_path="../../resources/year2016_day15_input.txt"):
+def get_discs_from_file(file_path=resource_dir + "year2016_day15_input.txt"):
     with open(file_path) as f:
         return [get_disc_from_str(l.strip()) for l in f]
 

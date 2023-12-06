@@ -1,7 +1,10 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
+import os
 import collections
 
+
+resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
 
 def get_point(string):
     x, y = string.split(",")
@@ -13,7 +16,7 @@ def get_vent(string):
     return get_point(left), get_point(right)
 
 
-def get_vents_from_file(file_path="../../resources/year2021_day5_input.txt"):
+def get_vents_from_file(file_path=resource_dir + "year2021_day5_input.txt"):
     with open(file_path) as f:
         return [get_vent(l) for l in f]
 

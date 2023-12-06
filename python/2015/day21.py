@@ -1,7 +1,11 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
+import os
 import collections
 import heapq
+
+
+resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
 
 Player = collections.namedtuple("Player", ["hit_points", "damage", "armor"])
 Equipment = collections.namedtuple("Equipment", ["cost", "damage", "armor", "type"])
@@ -12,7 +16,7 @@ def get_player_from_lines(string):
     return Player(*[int(l.split(" ")[-1]) for l in string.splitlines()])
 
 
-def get_player_from_file(file_path="../../resources/year2015_day21_input.txt"):
+def get_player_from_file(file_path=resource_dir + "year2015_day21_input.txt"):
     with open(file_path) as f:
         return get_player_from_lines(f.read())
 

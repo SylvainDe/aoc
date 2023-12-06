@@ -1,5 +1,9 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
+import os
+
+
+resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
 
 DIRECTIONS = {
     "R": (1, 0),
@@ -20,7 +24,7 @@ def get_directions_from_lines(string):
     return [get_directions_from_line(l) for l in string.splitlines()]
 
 
-def get_directions_from_file(file_path="../../resources/year2022_day9_input.txt"):
+def get_directions_from_file(file_path=resource_dir + "year2022_day9_input.txt"):
     with open(file_path) as f:
         return get_directions_from_lines(f.read())
 

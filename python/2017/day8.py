@@ -1,8 +1,11 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
+import os
 import collections
 import operator
 
+
+resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
 
 operators = {
     "==": operator.eq,
@@ -29,7 +32,7 @@ def get_instructions_from_string(s):
     return [get_instruction_from_line(l) for l in s.splitlines()]
 
 
-def get_instructions_from_file(file_path="../../resources/year2017_day8_input.txt"):
+def get_instructions_from_file(file_path=resource_dir + "year2017_day8_input.txt"):
     with open(file_path) as f:
         return get_instructions_from_string(f.read())
 

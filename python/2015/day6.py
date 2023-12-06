@@ -1,7 +1,11 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
+import os
 import itertools
 import collections
+
+
+resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
 
 verbs = ["turn on", "toggle", "turn off"]
 
@@ -25,7 +29,7 @@ def get_instruction_from_string(s):
     assert False
 
 
-def get_instructions_from_file(file_path="../../resources/year2015_day6_input.txt"):
+def get_instructions_from_file(file_path=resource_dir + "year2015_day6_input.txt"):
     with open(file_path) as f:
         return [get_instruction_from_string(l.strip()) for l in f]
 

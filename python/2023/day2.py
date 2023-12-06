@@ -1,7 +1,11 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
+import os
 import re
 import collections
+
+
+resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
 
 GAME_RE = re.compile(r"Game (\d+): (.*)")
 
@@ -24,7 +28,7 @@ def get_games_from_lines(string):
     return [get_game_from_line(l) for l in string.splitlines()]
 
 
-def get_games_from_file(file_path="../../resources/year2023_day2_input.txt"):
+def get_games_from_file(file_path=resource_dir + "year2023_day2_input.txt"):
     with open(file_path) as f:
         return get_games_from_lines(f.read())
 

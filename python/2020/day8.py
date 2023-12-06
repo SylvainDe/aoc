@@ -1,8 +1,12 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
+import os
 
 
-def get_program_from_file(file_path="../../resources/year2020_day8_input.txt"):
+resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
+
+
+def get_program_from_file(file_path=resource_dir + "year2020_day8_input.txt"):
     with open(file_path) as f:
         return [l.strip() for l in f]
 

@@ -1,6 +1,10 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
+import os
 import itertools
+
+
+resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
 
 blizzards_directions = {
     "^": (-1, 0),
@@ -25,7 +29,7 @@ def get_map_info_from_lines(string):
     return walls, blizzards
 
 
-def get_map_info_from_file(file_path="../../resources/year2022_day24_input.txt"):
+def get_map_info_from_file(file_path=resource_dir + "year2022_day24_input.txt"):
     with open(file_path) as f:
         return get_map_info_from_lines(f.read())
 

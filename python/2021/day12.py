@@ -1,5 +1,9 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
+import os
+
+
+resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
 
 
 def get_map_item_from_line(l, sep="-"):
@@ -12,7 +16,7 @@ def get_map_from_lines(lines):
     return [get_map_item_from_line(l.strip()) for l in lines]
 
 
-def get_map_from_file(file_path="../../resources/year2021_day12_input.txt"):
+def get_map_from_file(file_path=resource_dir + "year2021_day12_input.txt"):
     with open(file_path) as f:
         return get_map_from_lines(f)
 

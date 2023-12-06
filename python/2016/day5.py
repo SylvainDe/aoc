@@ -1,10 +1,14 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
+import os
 import hashlib
 import itertools
 
 
-def get_door_id_from_file(file_path="../../resources/year2016_day5_input.txt"):
+resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
+
+
+def get_door_id_from_file(file_path=resource_dir + "year2016_day5_input.txt"):
     with open(file_path) as f:
         for l in f:
             return l.strip()

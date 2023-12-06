@@ -1,6 +1,10 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
+import os
 import collections
+
+
+resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
 
 size = 5
 
@@ -21,7 +25,7 @@ def get_bugs_from_lines(lines, make_point_func=make_point):
 
 
 def get_bugs_from_file(
-    file_path="../../resources/year2019_day24_input.txt", make_point_func=make_point
+    file_path=resource_dir + "year2019_day24_input.txt", make_point_func=make_point
 ):
     with open(file_path) as f:
         return set(get_bugs_from_lines(f, make_point_func))

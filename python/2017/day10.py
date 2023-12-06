@@ -1,10 +1,13 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
+import os
 import functools
 import operator
 
 
-def get_first_line(file_path="../../resources/year2017_day10_input.txt"):
+resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
+
+def get_first_line(file_path=resource_dir + "year2017_day10_input.txt"):
     with open(file_path) as f:
         for l in f:
             return l.strip()

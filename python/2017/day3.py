@@ -1,10 +1,13 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
+import os
 import math
 import itertools
 
 
-def get_int_from_file(file_path="../../resources/year2017_day3_input.txt"):
+resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
+
+def get_int_from_file(file_path=resource_dir + "year2017_day3_input.txt"):
     with open(file_path) as f:
         for l in f:
             return int(l)

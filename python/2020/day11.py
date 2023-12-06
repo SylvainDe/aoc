@@ -1,7 +1,11 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
+import os
 import itertools
 import collections
+
+
+resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
 
 RUN_LONG_TESTS = False
 
@@ -20,7 +24,7 @@ def seat_layout_to_string(seats):
     return "\n".join("".join(seats[(i, j)] for j in range(n + 1)) for i in range(m + 1))
 
 
-def get_seat_layout_from_file(file_path="../../resources/year2020_day11_input.txt"):
+def get_seat_layout_from_file(file_path=resource_dir + "year2020_day11_input.txt"):
     with open(file_path) as f:
         return string_to_seat_layout(f.read())
 

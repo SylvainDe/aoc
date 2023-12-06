@@ -1,8 +1,11 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
+import os
 import itertools
 import collections
 
+
+resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
 
 def get_2d_points_from_string(string):
     return {
@@ -13,7 +16,7 @@ def get_2d_points_from_string(string):
     }
 
 
-def get_2d_points_from_file(file_path="../../resources/year2020_day17_input.txt"):
+def get_2d_points_from_file(file_path=resource_dir + "year2020_day17_input.txt"):
     with open(file_path) as f:
         return get_2d_points_from_string(f.read())
 

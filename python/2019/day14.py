@@ -1,9 +1,12 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
+import os
 import collections
 import fractions
 import math
 
+
+resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
 
 def get_quantity_and_chemical(s):
     nb, chem = s.split(" ")
@@ -19,7 +22,7 @@ def get_reaction_from_line(l):
     )
 
 
-def get_reactions_from_file(file_path="../../resources/year2019_day14_input.txt"):
+def get_reactions_from_file(file_path=resource_dir + "year2019_day14_input.txt"):
     with open(file_path) as f:
         return [get_reaction_from_line(l) for l in f]
 

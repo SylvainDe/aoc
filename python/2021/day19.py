@@ -1,8 +1,12 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
+import os
 import re
 import itertools
 import collections
+
+
+resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
 
 scanner_re = r"^--- scanner (\d+) ---$"
 
@@ -28,7 +32,7 @@ def get_info_from_lines(lines):
     return info
 
 
-def get_info_from_file(file_path="../../resources/year2021_day19_input.txt"):
+def get_info_from_file(file_path=resource_dir + "year2021_day19_input.txt"):
     with open(file_path) as f:
         return get_info_from_lines([l.strip() for l in f])
 

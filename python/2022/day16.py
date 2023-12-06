@@ -1,8 +1,12 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
+import os
 import re
 import heapq
 import collections
+
+
+resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
 
 Valve = collections.namedtuple("Valve", ["id", "flow", "tunnels"])
 
@@ -23,7 +27,7 @@ def get_valves_from_lines(string):
     return [get_valves_from_line(l) for l in string.splitlines()]
 
 
-def get_valves_from_file(file_path="../../resources/year2022_day16_input.txt"):
+def get_valves_from_file(file_path=resource_dir + "year2022_day16_input.txt"):
     with open(file_path) as f:
         return get_valves_from_lines(f.read())
 

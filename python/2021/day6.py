@@ -1,9 +1,12 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
+import os
 import collections
 
 
-def get_fishes_from_file(file_path="../../resources/year2021_day6_input.txt"):
+resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
+
+def get_fishes_from_file(file_path=resource_dir + "year2021_day6_input.txt"):
     with open(file_path) as f:
         for l in f:
             return [int(v) for v in l.strip().split(",")]

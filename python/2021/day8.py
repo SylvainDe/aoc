@@ -1,7 +1,10 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
+import os
 import collections
 
+
+resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
 
 def get_signals_from_str(l, sep=" | "):
     left, mid, right = l.strip().partition(sep)
@@ -9,7 +12,7 @@ def get_signals_from_str(l, sep=" | "):
     return (left.split(), right.split())
 
 
-def get_signals_from_file(file_path="../../resources/year2021_day8_input.txt"):
+def get_signals_from_file(file_path=resource_dir + "year2021_day8_input.txt"):
     with open(file_path) as f:
         return [get_signals_from_str(l) for l in f]
 

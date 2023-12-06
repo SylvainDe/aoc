@@ -1,12 +1,16 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
+import os
+
+
+resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
 
 
 def get_triangle_from_line(line):
     return tuple(int(v) for v in line.split())
 
 
-def get_triangles_from_file(file_path="../../resources/year2016_day3_input.txt"):
+def get_triangles_from_file(file_path=resource_dir + "year2016_day3_input.txt"):
     with open(file_path) as f:
         return [get_triangle_from_line(l.strip()) for l in f]
 

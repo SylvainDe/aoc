@@ -1,6 +1,10 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
+import os
 import itertools
+
+
+resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
 
 STREAM_DIR = {
     ">": 1,
@@ -12,7 +16,7 @@ def get_streams_from_line(string):
     return list(string)
 
 
-def get_streams_from_file(file_path="../../resources/year2022_day17_input.txt"):
+def get_streams_from_file(file_path=resource_dir + "year2022_day17_input.txt"):
     with open(file_path) as f:
         for l in f:
             return get_streams_from_line(l.strip())

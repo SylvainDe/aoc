@@ -1,6 +1,10 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
+import os
 import re
+
+
+resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
 
 MOVE_RE = re.compile(r"move (\d+) from (\d+) to (\d+)")
 
@@ -22,7 +26,7 @@ def get_input_from_lines(string):
     return parsed_stacks, parsed_instructions
 
 
-def get_input_from_file(file_path="../../resources/year2022_day5_input.txt"):
+def get_input_from_file(file_path=resource_dir + "year2022_day5_input.txt"):
     with open(file_path) as f:
         return get_input_from_lines(f.read())
 

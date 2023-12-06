@@ -1,6 +1,10 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
+import os
 import re
+
+
+resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
 
 rules_re = re.compile(r"(?P<min>\d+)-(?P<max>\d+)")
 
@@ -23,7 +27,7 @@ def get_info_from_string(string):
     )
 
 
-def get_info_from_file(file_path="../../resources/year2020_day16_input.txt"):
+def get_info_from_file(file_path=resource_dir + "year2020_day16_input.txt"):
     with open(file_path) as f:
         return get_info_from_string(f.read())
 

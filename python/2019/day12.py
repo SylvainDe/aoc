@@ -1,9 +1,12 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
+import os
 import itertools
 import operator
 import math
 
+
+resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
 
 def get_pos_from_str(s):
     for c in "<>xyz= ":
@@ -11,7 +14,7 @@ def get_pos_from_str(s):
     return [int(v) for v in s.split(",")]
 
 
-def get_pos_from_file(file_path="../../resources/year2019_day12_input.txt"):
+def get_pos_from_file(file_path=resource_dir + "year2019_day12_input.txt"):
     with open(file_path) as f:
         return [get_pos_from_str(l.strip()) for l in f]
 

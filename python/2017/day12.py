@@ -1,5 +1,9 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
+import os
+
+
+resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
 
 
 def get_connection_list_from_line(string):
@@ -13,7 +17,7 @@ def get_connection_list_from_lines(string):
     return [get_connection_list_from_line(l) for l in string.splitlines()]
 
 
-def get_connection_list_from_file(file_path="../../resources/year2017_day12_input.txt"):
+def get_connection_list_from_file(file_path=resource_dir + "year2017_day12_input.txt"):
     with open(file_path) as f:
         return get_connection_list_from_lines(f.read())
 

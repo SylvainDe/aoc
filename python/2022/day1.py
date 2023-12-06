@@ -1,5 +1,9 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
+import os
+
+
+resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
 
 
 def get_elves_from_lines(lines):
@@ -16,7 +20,7 @@ def get_elves_from_lines(lines):
     return elves
 
 
-def get_elves_from_file(file_path="../../resources/year2022_day1_input.txt"):
+def get_elves_from_file(file_path=resource_dir + "year2022_day1_input.txt"):
     with open(file_path) as f:
         return get_elves_from_lines([l.strip() for l in f])
 

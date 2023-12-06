@@ -1,6 +1,10 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
+import os
 import collections
+
+
+resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
 
 # These should be dataclasses ?
 Almanach = collections.namedtuple("Almanach", ("seeds", "mappings"))
@@ -29,7 +33,7 @@ def get_almanach_from_string(string):
         seeds = get_seeds_from_first_line(parts[0]),
         mappings = {m.src: m for m in mappings})
 
-def get_almanach_from_file(file_path="../../resources/year2023_day5_input.txt"):
+def get_almanach_from_file(file_path=resource_dir + "year2023_day5_input.txt"):
     with open(file_path) as f:
         return get_almanach_from_string(f.read())
 
