@@ -124,12 +124,10 @@ def get_moves(points, moving_parts):
                 # Free
                 final_destination = dest
                 break
-            elif val2 == val:
-                # Busy with correct value - look at next spot
-                continue
-            else:
+            if val2 != val:
                 # Busy with incorrect value - stop
                 break
+            # Otherwise: busy with correct value - look at next spot
 
         if pos in hallway:
             # Once an amphipod stops moving in the hallway, it will stay in that spot until it can move into a room

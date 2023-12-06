@@ -35,7 +35,7 @@ directions = [pos for pos in itertools.product((-1, 0, +1), repeat=2) if pos != 
 def get_new_seat_value_1(seat, nb_neigh):
     if seat == "L":
         return "#" if nb_neigh == 0 else seat
-    elif seat == "#":
+    if seat == "#":
         return "L" if nb_neigh >= 4 else seat
     return seat
 
@@ -56,7 +56,7 @@ def get_new_seats1(seats):
 def get_new_seat_value_rule2(seat, nb_visible):
     if seat == "L":
         return "#" if nb_visible == 0 else seat
-    elif seat == "#":
+    if seat == "#":
         return "L" if nb_visible >= 5 else seat
     return seat
 

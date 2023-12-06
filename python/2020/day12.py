@@ -42,7 +42,7 @@ def state_after_instruction(state, instruction):
         rot = (-1 if action == "L" else 1) * n // 90
         direc = rotations[(rotations.index(direc) + rot) % 4]
     else:
-        1 / 0
+        assert False
     return x, y, direc
 
 
@@ -63,10 +63,10 @@ def state_after_instruction2(state, instruction):
         xs, ys = xs + n * xw, ys + n * yw
     elif action in ("L", "R"):
         rot = ((-1 if action == "L" else 1) * n // 90) % 4
-        for i in range(rot):
+        for _ in range(rot):
             xw, yw = yw, -xw
     else:
-        1 / 0
+        assert False
     return xs, ys, xw, yw
 
 
@@ -85,17 +85,17 @@ def run_tests():
         "R90",
         "F11",
     ]
-    x, y, direct = state_after_instructions(example1)
+    x, y, _ = state_after_instructions(example1)
     assert abs(x) + abs(y) == 25
-    x, y, xw, yw = state_after_instructions2(example1)
+    x, y, _, _ = state_after_instructions2(example1)
     assert abs(x) + abs(y) == 286
 
 
 def get_solutions():
     instructions = get_instructions_from_file()
-    x, y, direct = state_after_instructions(instructions)
+    x, y, _ = state_after_instructions(instructions)
     print(abs(x) + abs(y) == 381)
-    x, y, xw, yw = state_after_instructions2(instructions)
+    x, y, _, _ = state_after_instructions2(instructions)
     print(abs(x) + abs(y) == 28591)
 
 

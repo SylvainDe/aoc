@@ -18,24 +18,21 @@ content_re = re.compile(r"(?P<number>\d+) (?P<color>" + color_desc + ") bags?")
 
 def get_rule_from_line(line):
     m = rule_re.fullmatch(line)
-    if m:
-        lst = []
-        container, content = m.groups()
-        if content != "no other bags":
-            for content_item in content.split(", "):
-                m2 = content_re.fullmatch(content_item)
-                if m2:
-                    nb, color = m2.groups()
-                    lst.append((int(nb), color))
-                else:
-                    print(content_item, "did not match")
-        return container, lst
-    else:
-        print(m, "did not match")
+    assert m
+    lst = []
+    container, content = m.groups()
+    if content != "no other bags":
+        for content_item in content.split(", "):
+            m2 = content_re.fullmatch(content_item)
+            if m2:
+                nb, color = m2.groups()
+                lst.append((int(nb), color))
+            else:
+                print(content_item, "did not match")
+    return container, lst
 
 
 def get_nb_colors_to_contain(rules, color):
-    transitive_content = dict()
     can_be_in = dict()
     for c1, lst in rules:
         for _, c2 in lst:

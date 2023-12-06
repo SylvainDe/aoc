@@ -4,6 +4,7 @@ import os
 
 
 resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
+year_dir = os.path.dirname(os.path.abspath(__file__))
 
 
 def get_bingo_from_file(file_path=resource_dir + "year2021_day4_input.txt"):
@@ -44,7 +45,7 @@ def play_bingo(bingo):
 
 
 def run_tests():
-    bingo = get_bingo_from_file("day4_example_input.txt")
+    bingo = get_bingo_from_file(year_dir + "/day4_example_input.txt")
     bingo_scores = list(play_bingo(bingo))
     assert bingo_scores[0] == 4512
     assert bingo_scores[-1] == 1924

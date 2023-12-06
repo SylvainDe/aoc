@@ -37,7 +37,7 @@ def perform_move_with_linked_dict(cup_dict, curr):
     min_cup, max_cup = 1, len(cup_dict)
     nb_removed = 3
     removed = []
-    for i in range(nb_removed):
+    for _ in range(nb_removed):
         removed.append(remove_from_linked_dict(cup_dict, curr))
     dest = curr - 1
     while dest not in cup_dict:
@@ -52,7 +52,7 @@ def perform_move_with_linked_dict(cup_dict, curr):
 
 def perform_moves(cups, nb):
     curr, cup_dict = init_linked_dict(cups)
-    for i in range(nb):
+    for _ in range(nb):
         cup_dict, curr = perform_move_with_linked_dict(cup_dict, curr)
     return cup_dict
 

@@ -34,7 +34,7 @@ def find_contiguous_set_with_sum(numbers, n):
             curr_sum += numbers[j]
             if curr_sum == n:
                 return numbers[i : j + 1]
-            elif curr_sum > n:
+            if curr_sum > n:
                 break
     return None
 

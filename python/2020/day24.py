@@ -70,8 +70,8 @@ def n_days(tiles, n):
 
 
 def run_tests():
-    get_tile_from_direction_string("esew") == (1, 1)
-    get_tile_from_direction_string("nwwswee") == (0, 0)
+    assert get_tile_from_direction_string("esew") == (1, 1)
+    assert get_tile_from_direction_string("nwwswee") == (0, 0)
     example1 = [
         "sesenwnenenewseeswwswswwnenewsewsw",
         "neeenesenwnwwswnenewnwwsewnenwseswesw",

@@ -228,8 +228,7 @@ def follow_instructions2(instructions):
     # We can try to handle disjoint cuboids containing only cubes on, the final
     # number of points is the sum of the volume of the cubes
     cubes = []
-    for i, instruction in enumerate(instructions):
-        # print(i + 1, len(instructions))
+    for instruction in instructions:
         cubes = follow_instruction2(instruction, cubes)
     return sum(cube_volume(c) for c in cubes)
 

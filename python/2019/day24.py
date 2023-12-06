@@ -100,7 +100,7 @@ def first_repeated_layout(bugs, neigh_func=neighbours):
 
 
 def get_bugs_after_n_generations(bugs, n, neigh_func=neighbours):
-    for i in range(n):
+    for _ in range(n):
         bugs = next_gen(bugs, neigh_func)
     return bugs
 

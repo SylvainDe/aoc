@@ -2,8 +2,6 @@
 import datetime
 import os
 import string
-import collections
-import itertools
 import heapq
 
 
@@ -11,7 +9,7 @@ resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
 
 def get_grid_from_file(file_path=resource_dir + "year2019_day20_input.txt"):
     with open(file_path) as f:
-        return [l for l in f]
+        return list(f)
 
 
 def points_iter(grid):
@@ -52,7 +50,7 @@ def get_dist(p1, p2):
 def get_labels(letters, passages):
     # Find labels
     labels = dict()
-    for pos, val in letters.items():
+    for pos in letters:
         neigh = list(neighbours(pos))
         passage = [n for n in neigh if n in passages]
         letter = [n for n in neigh if n in letters]
@@ -64,12 +62,12 @@ def get_labels(letters, passages):
             labels.setdefault(label, []).append(pos2)
     # Interpret labels
     entrance = labels.pop("AA")
-    exit = labels.pop("ZZ")
+    exit_ = labels.pop("ZZ")
     assert len(entrance) == 1
-    assert len(exit) == 1
+    assert len(exit_) == 1
     entrance = entrance[0]
-    exit = exit[0]
-    return entrance, exit, labels
+    exit_ = exit_[0]
+    return entrance, exit_, labels
 
 
 def print_graph(graph):
@@ -101,7 +99,7 @@ def build_graph(passages):
 
 
 def add_warps(graph, warps):
-    for label, positions in warps.items():
+    for positions in warps.values():
         assert len(positions) == 2
         pos1, pos2 = positions
         graph[pos1][pos2] = 1
@@ -130,12 +128,12 @@ def simplify_graph(graph):
     return graph
 
 
-def shortest_path(graph, entrance, exit):
+def shortest_path(graph, entrance, exit_):
     distances = dict()
     heap = [(0, entrance)]
     while heap:
         d, pos = heapq.heappop(heap)
-        if pos == exit:
+        if pos == exit_:
             return d
         if pos in distances:
             assert d >= distances[pos]
@@ -151,10 +149,10 @@ def solve_maze(grid):
     # Extract relevant info from maze
     passages, letters = get_info(grid)
     # Extract positions for interesting places
-    entrance, exit, warps = get_labels(letters, passages)
+    entrance, exit_, warps = get_labels(letters, passages)
     graph = build_graph(passages)
     add_warps(graph, warps)
-    return shortest_path(graph, entrance, exit)
+    return shortest_path(graph, entrance, exit_)
 
 
 def solve_maze2(grid):
@@ -162,7 +160,7 @@ def solve_maze2(grid):
     passages, letters = get_info(grid)
     center = get_center(grid)
     # Extract positions for interesting places
-    entrance, exit, warps = get_labels(letters, passages)
+    entrance, exit_, warps = get_labels(letters, passages)
     graph = build_graph(passages)
     graph = simplify_graph(graph)
     # Bring to next dimensions
@@ -174,7 +172,7 @@ def solve_maze2(grid):
             graph2[(x, y, z)] = {(x2, y2, z): d for (x2, y2), d in succs.items()}
     for z in range(nb_levels):
         # Add multi-dimensions wraps
-        for label, positions in warps.items():
+        for positions in warps.values():
             assert len(positions) == 2
             inner, outter = sorted(positions, key=lambda p: get_dist(p, center))
             (x_in, y_in), (x_out, y_out) = inner, outter
@@ -184,7 +182,7 @@ def solve_maze2(grid):
             graph2.setdefault((x_out, y_out, z + 1), dict())[(x_in, y_in, z)] = 1
     # Solve
     in1, in2 = entrance
-    out1, out2 = exit
+    out1, out2 = exit_
     return shortest_path(graph2, (in1, in2, 0), (out1, out2, 0))
 
 

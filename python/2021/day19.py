@@ -7,6 +7,7 @@ import collections
 
 
 resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
+year_dir = os.path.dirname(os.path.abspath(__file__))
 
 scanner_re = r"^--- scanner (\d+) ---$"
 
@@ -66,7 +67,7 @@ def get_overlaps(gaps, nb_common):
     nb_overlaps = nb_common * (nb_common - 1) // 2
     # Count similar gaps for each pair of scanners
     overlaps = collections.Counter()
-    for gap, points in gaps.items():
+    for points in gaps.values():
         for p1, p2 in itertools.combinations(points, 2):
             i, _, _ = p1
             j, _, _ = p2
@@ -145,7 +146,7 @@ def get_max_distance(points):
 
 def run_tests():
     nb_common = 12
-    info = get_info_from_file("day19_example_input.txt")
+    info = get_info_from_file(year_dir + "/day19_example_input.txt")
     gaps = get_gaps(info)
     overlaps = get_overlaps(gaps, nb_common)
     assert 1 in overlaps[0]

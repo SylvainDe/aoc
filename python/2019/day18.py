@@ -144,7 +144,7 @@ def run_tests():
 
 
 def get_solutions():
-    maze = get_maze_from_file()
+    _ = get_maze_from_file()
     # Too slow: print(get_all_keys(maze))
 
 

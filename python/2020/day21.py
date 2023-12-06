@@ -7,7 +7,7 @@ resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
 
 
 def get_ingredients_from_line(line):
-    beg, sep, end = line.partition(" (contains ")
+    beg, _, end = line.partition(" (contains ")
     return tuple(beg.split(" ")), end[:-1].split(", ")
 
 

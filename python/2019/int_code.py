@@ -18,7 +18,7 @@ def parse_op_code(op):
     p100, de = divmod(op, 100)
     p1000, c = divmod(p100, 10)
     p10000, b = divmod(p1000, 10)
-    p100000, a = divmod(p10000, 10)
+    _, a = divmod(p10000, 10)
     assert op == a * 10000 + b * 1000 + c * 100 + de
     return de, c, b, a
 
@@ -27,12 +27,11 @@ def get_value(intcode, pos, mode, relative_base):
     val = intcode[pos]
     if mode == 0:  # Position mode
         return intcode[val]
-    elif mode == 1:  # Immediate mode
+    if mode == 1:  # Immediate mode
         return val
-    elif mode == 2:  # Relative mode
+    if mode == 2:  # Relative mode
         return intcode[val + relative_base]
-    else:
-        assert False
+    assert False
 
 
 def set_value(intcode, pos, mode, relative_base, value):

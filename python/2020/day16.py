@@ -61,7 +61,7 @@ def guess_positions(impossible_positions, positions):
             if len(possible) == 0:
                 print("Impossible")
                 return None
-            elif len(possible) == 1:
+            if len(possible) == 1:
                 unique_pos = possible.pop()
                 found[name] = unique_pos
                 del impossible_positions[name]

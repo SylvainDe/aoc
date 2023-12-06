@@ -2,7 +2,6 @@
 import datetime
 import os
 import collections
-import itertools
 
 
 resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"

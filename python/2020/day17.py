@@ -47,7 +47,7 @@ def get_neighbours_4(p):
 
 
 def get_n_th_state(state, get_neighbours_func, n):
-    for i in range(n):
+    for _ in range(n):
         neigh_count = collections.Counter(
             p2 for p in state for p2 in get_neighbours_func(p)
         )

@@ -8,7 +8,7 @@ resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
 
 def get_seat_ids_from_file(file_path=resource_dir + "year2020_day5_input.txt"):
     with open(file_path) as f:
-        return set([get_seat_id_from_boarding_pass(l.strip()) for l in f])
+        return set(get_seat_id_from_boarding_pass(l.strip()) for l in f)
 
 
 def get_seat_id_from_boarding_pass(bp):

@@ -8,7 +8,7 @@ resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
 
 def get_info_from_file(file_path=resource_dir + "year2020_day13_input.txt"):
     with open(file_path) as f:
-        return get_time_and_buses(*[l for l in f])
+        return get_time_and_buses(*list(f))
 
 
 def get_time_and_buses(line1, line2):

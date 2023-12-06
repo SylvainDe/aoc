@@ -44,12 +44,12 @@ def rotate(matrix):
 def get_rotations_and_symetries(tile):
     t = tile
     yield t
-    for i in range(3):
+    for _ in range(3):
         t = rotate(t)
         yield t
     t = t[::-1]
     yield t
-    for i in range(3):
+    for _ in range(3):
         t = rotate(t)
         yield t
 
@@ -76,7 +76,7 @@ def guess_corners(tiles):
         for side in tile:
             for s in (side, side[::-1]):
                 sides.setdefault(s, []).append(n)
-    unique_sides = set([s for s, lst in sides.items() if len(lst) == 1])
+    unique_sides = set(s for s, lst in sides.items() if len(lst) == 1)
     corners = [
         n
         for n, tile in tiles_borders.items()
@@ -94,7 +94,7 @@ def guess_image(tiles):
             for s in (side, side[::-1]):
                 sides.setdefault(s, []).append(n)
 
-    unique_sides = set([s for s, lst in sides.items() if len(lst) == 1])
+    unique_sides = set(s for s, lst in sides.items() if len(lst) == 1)
 
     # Determine corners and sides
     corners, borders, middles = [], [], []
