@@ -5,7 +5,7 @@ import re
 import collections
 
 
-resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
+top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
 # Example: "Comet can fly 14 km/s for 10 seconds, but then must rest for 127 seconds."
 input_re = r"(?P<name>[A-Za-z]+) can fly (?P<speed>\d+) km\/s for (?P<time>\d+) seconds, but then must rest for (?P<rest>\d+) seconds\."
@@ -19,7 +19,7 @@ def get_reindeer_from_line(s):
     return Reindeer(d["name"], int(d["speed"]), int(d["time"]), int(d["rest"]))
 
 
-def get_reindeers_from_file(file_path=resource_dir + "year2015_day14_input.txt"):
+def get_reindeers_from_file(file_path=top_dir + "resources/year2015_day14_input.txt"):
     with open(file_path) as f:
         return [get_reindeer_from_line(l.strip()) for l in f]
 

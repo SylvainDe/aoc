@@ -3,7 +3,7 @@ import datetime
 import os
 
 
-resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
+top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
 
 def get_ingredients_from_line(line):
@@ -11,7 +11,7 @@ def get_ingredients_from_line(line):
     return tuple(beg.split(" ")), end[:-1].split(", ")
 
 
-def get_ingredients_from_file(file_path=resource_dir + "year2020_day21_input.txt"):
+def get_ingredients_from_file(file_path=top_dir + "resources/year2020_day21_input.txt"):
     with open(file_path) as f:
         return [get_ingredients_from_line(l.strip()) for l in f]
 

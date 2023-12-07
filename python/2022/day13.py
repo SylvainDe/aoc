@@ -5,7 +5,7 @@ import functools
 import ast
 
 
-resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
+top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
 def get_packets_from_line(string):
     return tuple(ast.literal_eval(s) for s in string.split("\n"))
@@ -15,7 +15,7 @@ def get_packets_from_lines(string):
     return [get_packets_from_line(l.strip()) for l in string.split("\n\n")]
 
 
-def get_packets_from_file(file_path=resource_dir + "year2022_day13_input.txt"):
+def get_packets_from_file(file_path=top_dir + "resources/year2022_day13_input.txt"):
     with open(file_path) as f:
         return get_packets_from_lines(f.read())
 

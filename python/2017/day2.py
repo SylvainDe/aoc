@@ -4,13 +4,13 @@ import os
 import itertools
 
 
-resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
+top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
 def get_numbers_from_line(s):
     return [int(v) for v in s.split()]
 
 
-def get_spreadsheet_from_file(file_path=resource_dir + "year2017_day2_input.txt"):
+def get_spreadsheet_from_file(file_path=top_dir + "resources/year2017_day2_input.txt"):
     with open(file_path) as f:
         return [get_numbers_from_line(l.strip()) for l in f]
 

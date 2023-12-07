@@ -3,7 +3,7 @@ import datetime
 import os
 
 
-resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
+top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
 DIRECTIONS = {
     "R": (1, 0),
@@ -24,7 +24,7 @@ def get_directions_from_lines(string):
     return [get_directions_from_line(l) for l in string.splitlines()]
 
 
-def get_directions_from_file(file_path=resource_dir + "year2022_day9_input.txt"):
+def get_directions_from_file(file_path=top_dir + "resources/year2022_day9_input.txt"):
     with open(file_path) as f:
         return get_directions_from_lines(f.read())
 

@@ -5,7 +5,7 @@ import itertools
 import collections
 
 
-resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
+top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
 def get_cube_from_line(string):
     return tuple(int(s) for s in string.split(","))
@@ -15,7 +15,7 @@ def get_cubes_from_lines(string):
     return set(get_cube_from_line(l) for l in string.splitlines())
 
 
-def get_cubes_from_file(file_path=resource_dir + "year2022_day18_input.txt"):
+def get_cubes_from_file(file_path=top_dir + "resources/year2022_day18_input.txt"):
     with open(file_path) as f:
         return get_cubes_from_lines(f.read())
 

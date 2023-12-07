@@ -4,7 +4,7 @@ import os
 import collections
 
 
-resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
+top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
 def is_valid(n):
     s = str(n)

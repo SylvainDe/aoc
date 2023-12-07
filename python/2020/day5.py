@@ -3,10 +3,10 @@ import datetime
 import os
 
 
-resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
+top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
 
-def get_seat_ids_from_file(file_path=resource_dir + "year2020_day5_input.txt"):
+def get_seat_ids_from_file(file_path=top_dir + "resources/year2020_day5_input.txt"):
     with open(file_path) as f:
         return set(get_seat_id_from_boarding_pass(l.strip()) for l in f)
 

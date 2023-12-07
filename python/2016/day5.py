@@ -5,10 +5,10 @@ import hashlib
 import itertools
 
 
-resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
+top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
 
-def get_door_id_from_file(file_path=resource_dir + "year2016_day5_input.txt"):
+def get_door_id_from_file(file_path=top_dir + "resources/year2016_day5_input.txt"):
     with open(file_path) as f:
         for l in f:
             return l.strip()

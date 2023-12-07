@@ -5,10 +5,10 @@ import re
 import collections
 
 
-resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
+top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
 
-def get_instructions_from_file(file_path=resource_dir + "year2016_day10_input.txt"):
+def get_instructions_from_file(file_path=top_dir + "resources/year2016_day10_input.txt"):
     with open(file_path) as f:
         return [l.strip() for l in f]
 

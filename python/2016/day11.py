@@ -7,7 +7,7 @@ import functools
 import heapq
 
 
-resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
+top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
 SKIP_SLOW = True
 
@@ -38,7 +38,7 @@ def get_floors_from_lines(string):
     return tuple(get_floor_from_line(l) for l in string.splitlines())
 
 
-def get_floors_from_file(file_path=resource_dir + "year2016_day11_input.txt"):
+def get_floors_from_file(file_path=top_dir + "resources/year2016_day11_input.txt"):
     with open(file_path) as f:
         return get_floors_from_lines(f.read())
 

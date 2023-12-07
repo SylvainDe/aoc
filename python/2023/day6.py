@@ -6,7 +6,7 @@ import math
 import os
 
 
-resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
+top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
 def mult(iterable, start=1):
     """Returns the product of an iterable - like the sum builtin."""
@@ -21,7 +21,7 @@ def get_races_from_lines(string):
     return list(zip(d["Time"], d["Distance"]))
 
 
-def get_races_from_file(file_path=resource_dir + "year2023_day6_input.txt"):
+def get_races_from_file(file_path=top_dir + "resources/year2023_day6_input.txt"):
     with open(file_path) as f:
         return get_races_from_lines(f.read())
 

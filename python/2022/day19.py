@@ -7,7 +7,7 @@ import operator
 import functools
 
 
-resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
+top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
 SKIP_SLOW = True
 
@@ -38,7 +38,7 @@ def get_blueprints_from_lines(string):
     return [get_blueprint_from_line(l) for l in string.splitlines()]
 
 
-def get_blueprints_from_file(file_path=resource_dir + "year2022_day19_input.txt"):
+def get_blueprints_from_file(file_path=top_dir + "resources/year2022_day19_input.txt"):
     with open(file_path) as f:
         return get_blueprints_from_lines(f.read())
 

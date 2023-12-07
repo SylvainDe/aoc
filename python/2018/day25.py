@@ -5,7 +5,7 @@ import itertools
 import collections
 
 
-resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
+top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
 def get_point_from_line(string):
     return tuple(int(s) for s in string.split(","))
@@ -15,7 +15,7 @@ def get_points_from_lines(string):
     return [get_point_from_line(l) for l in string.splitlines()]
 
 
-def get_points_from_file(file_path=resource_dir + "year2018_day25_input.txt"):
+def get_points_from_file(file_path=top_dir + "resources/year2018_day25_input.txt"):
     with open(file_path) as f:
         return get_points_from_lines(f.read())
 

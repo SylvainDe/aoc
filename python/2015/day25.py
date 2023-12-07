@@ -4,7 +4,7 @@ import os
 import re
 
 
-resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
+top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
 # To continue, please consult the code grid in the manual.  Enter the code at row 123, column 45.
 code_re = re.compile(
@@ -16,7 +16,7 @@ def get_pos_from_line(string):
     return tuple(int(s) for s in code_re.match(string).groups())
 
 
-def get_pos_from_file(file_path=resource_dir + "year2015_day25_input.txt"):
+def get_pos_from_file(file_path=top_dir + "resources/year2015_day25_input.txt"):
     with open(file_path) as f:
         for l in f:
             return get_pos_from_line(l.strip())

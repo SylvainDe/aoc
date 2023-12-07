@@ -8,7 +8,7 @@ import functools
 import math
 
 
-resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
+top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
 operations = {
     "*": operator.mul,
@@ -54,7 +54,7 @@ def get_monkeys_from_lines(string):
     return [get_monkey_from_string(l) for l in string.split("\n\n")]
 
 
-def get_monkey_from_file(file_path=resource_dir + "year2022_day11_input.txt"):
+def get_monkey_from_file(file_path=top_dir + "resources/year2022_day11_input.txt"):
     with open(file_path) as f:
         return get_monkeys_from_lines(f.read())
 

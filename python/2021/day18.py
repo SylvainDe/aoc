@@ -4,7 +4,7 @@ import os
 import itertools
 
 
-resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
+top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
 def get_pair_from_str(s):
     digits = []
@@ -27,7 +27,7 @@ def get_pair_from_str(s):
     return pair
 
 
-def get_pairs_from_file(file_path=resource_dir + "year2021_day18_input.txt"):
+def get_pairs_from_file(file_path=top_dir + "resources/year2021_day18_input.txt"):
     with open(file_path) as f:
         return [get_pair_from_str(l.strip()) for l in f]
 

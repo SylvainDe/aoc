@@ -6,7 +6,7 @@ import re
 import itertools
 
 
-resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
+top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
 
 # Filesystem              Size  Used  Avail  Use%
@@ -26,7 +26,7 @@ def get_node_from_str(s):
     )
 
 
-def get_nodes_from_file(file_path=resource_dir + "year2016_day22_input.txt"):
+def get_nodes_from_file(file_path=top_dir + "resources/year2016_day22_input.txt"):
     with open(file_path) as f:
         lines = [l.strip() for l in f]
         return [get_node_from_str(s) for s in lines[2:]]

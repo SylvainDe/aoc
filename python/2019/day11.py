@@ -3,14 +3,14 @@ import datetime
 import os
 
 
-resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
+top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
 
 def get_xxx_from_line(string):
     return string
 
 
-def get_xxx_from_file(file_path=resource_dir + "year2019_day11_input.txt"):
+def get_xxx_from_file(file_path=top_dir + "resources/year2019_day11_input.txt"):
     with open(file_path) as f:
         for l in f:
             return get_xxx_from_line(l.strip())

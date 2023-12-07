@@ -6,7 +6,7 @@ import collections
 import string
 
 
-resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
+top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
 Room = collections.namedtuple("Room", ("name", "sector", "checksum"))
 
@@ -20,7 +20,7 @@ def get_room_from_string(s):
     return Room(d["name"], int(d["sector"]), d["checksum"])
 
 
-def get_rooms_from_file(file_path=resource_dir + "year2016_day4_input.txt"):
+def get_rooms_from_file(file_path=top_dir + "resources/year2016_day4_input.txt"):
     with open(file_path) as f:
         return [get_room_from_string(l.strip()) for l in f]
 

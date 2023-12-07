@@ -4,7 +4,7 @@ import os
 import int_code
 
 
-resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
+top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
 def run_tests():
     int_code.run_tests_day5()

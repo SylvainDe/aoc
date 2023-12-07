@@ -4,7 +4,7 @@ import os
 import re
 
 
-resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
+top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
 info_re = r"^(?P<loc1>[A-Za-z]+) to (?P<loc2>[A-Za-z]+) = (?P<dist>\d+)$"
 
@@ -15,7 +15,7 @@ def get_info_from_str(s):
     return d["loc1"], d["loc2"], int(d["dist"])
 
 
-def get_info_from_file(file_path=resource_dir + "year2015_day9_input.txt"):
+def get_info_from_file(file_path=top_dir + "resources/year2015_day9_input.txt"):
     with open(file_path) as f:
         return [get_info_from_str(l.strip()) for l in f]
 

@@ -4,7 +4,7 @@ import os
 import itertools
 
 
-resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
+top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
 blizzards_directions = {
     "^": (-1, 0),
@@ -29,7 +29,7 @@ def get_map_info_from_lines(string):
     return walls, blizzards
 
 
-def get_map_info_from_file(file_path=resource_dir + "year2022_day24_input.txt"):
+def get_map_info_from_file(file_path=top_dir + "resources/year2022_day24_input.txt"):
     with open(file_path) as f:
         return get_map_info_from_lines(f.read())
 

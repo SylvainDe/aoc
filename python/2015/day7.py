@@ -4,7 +4,7 @@ import os
 import operator
 
 
-resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
+top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
 max_val = 65535
 
@@ -35,7 +35,7 @@ def get_wire_from_string(s, sep=" -> "):
     return wire, get_parse_expr(expr)
 
 
-def get_wires_from_file(file_path=resource_dir + "year2015_day7_input.txt"):
+def get_wires_from_file(file_path=top_dir + "resources/year2015_day7_input.txt"):
     with open(file_path) as f:
         return dict(get_wire_from_string(l.strip()) for l in f)
 

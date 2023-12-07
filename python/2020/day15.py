@@ -4,9 +4,9 @@ import os
 import itertools
 
 
-resource_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../resources/"
+top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
-def get_numbers_from_file(file_path=resource_dir + "year2020_day15_input.txt"):
+def get_numbers_from_file(file_path=top_dir + "resources/year2020_day15_input.txt"):
     with open(file_path) as f:
         for l in f:
             return [int(s) for s in l.split(",")]
