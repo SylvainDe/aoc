@@ -23,10 +23,16 @@ def get_bidded_hands_from_file(file_path=resource_dir + "year2023_day7_input.txt
 
 HIGH_CARD, ONE_PAIR, TWO_PAIR, THREE_OF_A_KIND, FULL_HOUSE, FOUR_OF_A_KIND, FIVE_OF_A_KIND = range(7)
 
-def get_rank(hand):
+def get_rank(hand, use_joker):
     c = collections.Counter(hand)
+    if use_joker:
+        nb_joker = c['J']
+        c['J'] = 0
+    else:
+        nb_joker = 0
     l = c.most_common()
     (_, mc) = l[0]
+    mc += nb_joker
     if mc == 5:
         return FIVE_OF_A_KIND
     if mc == 4:
@@ -39,19 +45,17 @@ def get_rank(hand):
         return TWO_PAIR if mc2 == 2 else ONE_PAIR
     return HIGH_CARD
 
-card_values = dict(zip(reversed('AKQJT98765432'), itertools.count(2)))
+card_values_no_joker = dict(zip(reversed('AKQJT98765432'), itertools.count(2)))
+card_values_with_joker = dict(zip(reversed('AKQT98765432J'), itertools.count(2)))
 
-def get_sorting_key(bidded_hand):
+def get_sorting_key(bidded_hand, use_joker):
     hand, bid = bidded_hand
-    return get_rank(hand), [card_values[c] for c in hand]
+    return get_rank(hand, use_joker), [(card_values_with_joker if use_joker else card_values_no_joker)[c] for c in hand]
 
-def find_winning(bidded_hands):
-    ranks = [get_rank(h) for h, _ in bidded_hands]
-    sorted_hands = sorted(bidded_hands, key=lambda bh: get_sorting_key(bh))
-    w = 0
-    for i, (_, bid) in enumerate(sorted_hands, start=1):
-        w += i*bid
-    return w
+def find_winning(bidded_hands, use_joker):
+    ranks = [get_rank(h, use_joker) for h, _ in bidded_hands]
+    sorted_hands = sorted(bidded_hands, key=lambda bh: get_sorting_key(bh, use_joker))
+    return sum(i * bid for i, (_, bid) in enumerate(sorted_hands, start=1))
 
 def run_tests():
     bidded_hands = get_bidded_hands_from_lines(
@@ -61,11 +65,13 @@ KK677 28
 KTJJT 220
 QQQJA 483"""
     )
-    assert find_winning(bidded_hands) == 6440
+    assert find_winning(bidded_hands, False) == 6440
+    assert find_winning(bidded_hands, True) == 5905
 
 def get_solutions():
     bidded_hands = get_bidded_hands_from_file()
-    print(find_winning(bidded_hands) == 254024898)
+    print(find_winning(bidded_hands, False) == 254024898)
+    print(find_winning(bidded_hands, True) == 254115617)
 
 
 if __name__ == "__main__":
