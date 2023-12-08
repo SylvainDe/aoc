@@ -19,8 +19,8 @@ Solutions are written in Python and/or Rust.
 |Day 5: If You Give A Seed A Fertilizer|[Problem](https://adventofcode.com/2023/day/5) [Input](https://adventofcode.com/2023/day/5/input)|[puzzle.html](resources/year2023_day5_puzzle.html) [input.txt](resources/year2023_day5_input.txt)|**|[day5.py](python/2023/day5.py)|[-](rust/src/2023/day5.rs)|03:12:33|12:29:50|
 |Day 6: Wait For It|[Problem](https://adventofcode.com/2023/day/6) [Input](https://adventofcode.com/2023/day/6/input)|[puzzle.html](resources/year2023_day6_puzzle.html) [input.txt](resources/year2023_day6_input.txt)|**|[day6.py](python/2023/day6.py)|[-](rust/src/2023/day6.rs)|03:14:24|05:19:55|
 |Day 7: Camel Cards|[Problem](https://adventofcode.com/2023/day/7) [Input](https://adventofcode.com/2023/day/7/input)|[puzzle.html](resources/year2023_day7_puzzle.html) [input.txt](resources/year2023_day7_input.txt)|**|[day7.py](python/2023/day7.py)|[-](rust/src/2023/day7.rs)|01:11:23|01:20:10|
-|Day 8: Haunted Wasteland|[Problem](https://adventofcode.com/2023/day/8) [Input](https://adventofcode.com/2023/day/8/input)|[puzzle.html](resources/year2023_day8_puzzle.html) [input.txt](resources/year2023_day8_input.txt)|*|[day8.py](python/2023/day8.py)|[-](rust/src/2023/day8.rs)|05:38:48|-|
-|[2023](https://adventofcode.com/2023)|[Stats](https://adventofcode.com/2023/leaderboard/self)|[stats.txt](misc/leaderboard_self_2023.html)|15|-|-|-|-|
+|Day 8: Haunted Wasteland|[Problem](https://adventofcode.com/2023/day/8) [Input](https://adventofcode.com/2023/day/8/input)|[puzzle.html](resources/year2023_day8_puzzle.html) [input.txt](resources/year2023_day8_input.txt)|**|[day8.py](python/2023/day8.py)|[-](rust/src/2023/day8.rs)|05:38:48|05:55:13|
+|[2023](https://adventofcode.com/2023)|[Stats](https://adventofcode.com/2023/leaderboard/self)|[stats.txt](misc/leaderboard_self_2023.html)|16|-|-|-|-|
 
 ## [2022](https://adventofcode.com/2022)
 |Day|URLs|Puzzle & Input|Stars|Python|Rust|Time part 1|Time part 2|
@@ -272,7 +272,7 @@ Solutions are written in Python and/or Rust.
 |5|**|**|**|**|**|**|**|**|**|18: ******************|
 |6|**|**|**|**|**|**|**|**|**|18: ******************|
 |7|**|**|**|**||**|**|**|**|16: ****************|
-|8|**|**|**|**|**|**|**|**|*|17: *****************|
+|8|**|**|**|**|**|**|**|**|**|18: ******************|
 |9|**|**|**||**|**|**|**||14: **************|
 |10|**|**|**|**|**|**|**|**||16: ****************|
 |11||**|**|**||**|**|**||12: ************|
@@ -290,4 +290,4 @@ Solutions are written in Python and/or Rust.
 |23||**||||**|*|**|| 7: *******|
 |24||**|||**|**||**|| 8: ********|
 |25|*|*||*||**|*|**|| 8: ********|
-|Total|30|48|28|23|28|50|46|50|15|318|
+|Total|30|48|28|23|28|50|46|50|16|319|

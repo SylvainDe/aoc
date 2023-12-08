@@ -3,6 +3,7 @@ import datetime
 import os
 import itertools
 import re
+import math
 
 top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
@@ -26,14 +27,37 @@ def get_data_from_file(file_path=top_dir + "resources/year2023_day8_input.txt"):
         return get_data_from_lines(f.read())
 
 
-def get_steps_to_reach(instr, nodes, begin="AAA", end="ZZZ"):
+def get_steps_to_reach(instr, nodes, begin="AAA", end={"ZZZ"}):
     pos = begin
     for i in itertools.cycle(instr):
-        if pos == end:
+        if pos in end:
             return
         yield pos
         left, right = nodes[pos]
         pos = left if i == 'L' else right
+
+def get_nb_steps_to_reach(instr, nodes, begin="AAA", end={"ZZZ"}):
+    return len(list(get_steps_to_reach(instr, nodes, begin, end)))
+
+
+def get_steps_to_reach_ghost_naive(instr, nodes, begin="A", end="Z"):
+    pos = {n for n in nodes if n.endswith(begin)}
+    for i in itertools.cycle(instr):
+        if all(p.endswith(end) for p in pos):
+            return
+        yield pos
+        idx = 0 if i == 'L' else 1
+        pos = {nodes[p][idx] for p in pos}
+
+def get_nb_steps_to_reach_ghost(instr, nodes, begin="A", end="Z"):
+    ends = {n for n in nodes if n.endswith("Z")}
+    nb_steps = {
+        get_nb_steps_to_reach(instr, nodes, n, ends)
+        for n in nodes
+        if n.endswith(begin)
+    }
+    return math.lcm(*nb_steps)
+
 
 def run_tests():
     instr, nodes = get_data_from_lines(
@@ -47,7 +71,7 @@ EEE = (EEE, EEE)
 GGG = (GGG, GGG)
 ZZZ = (ZZZ, ZZZ)"""
     )
-    assert len(list(get_steps_to_reach(instr, nodes))) == 2
+    assert get_nb_steps_to_reach(instr, nodes) == 2
     instr, nodes = get_data_from_lines(
         """LLR
 
@@ -55,12 +79,27 @@ AAA = (BBB, BBB)
 BBB = (AAA, ZZZ)
 ZZZ = (ZZZ, ZZZ)"""
     )
-    assert len(list(get_steps_to_reach(instr, nodes))) == 6
+    assert get_nb_steps_to_reach(instr, nodes) == 6
+    instr, nodes = get_data_from_lines(
+        """LR
+
+11A = (11B, XXX)
+11B = (XXX, 11Z)
+11Z = (11B, XXX)
+22A = (22B, XXX)
+22B = (22C, 22C)
+22C = (22Z, 22Z)
+22Z = (22B, 22B)
+XXX = (XXX, XXX)"""
+    )
+    assert len(list(get_steps_to_reach_ghost_naive(instr, nodes))) == 6
+    assert get_nb_steps_to_reach_ghost(instr, nodes) == 6
 
 
 def get_solutions():
     instr, nodes = get_data_from_file()
-    print(len(list(get_steps_to_reach(instr, nodes))) == 19637)
+    print(get_nb_steps_to_reach(instr, nodes) == 19637)
+    print(get_nb_steps_to_reach_ghost(instr, nodes) == 8811050362409)
 
 
 if __name__ == "__main__":
