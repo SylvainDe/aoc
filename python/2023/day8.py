@@ -3,6 +3,7 @@ import datetime
 import os
 import itertools
 import re
+import functools
 import math
 
 top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
@@ -49,6 +50,15 @@ def get_steps_to_reach_ghost_naive(instr, nodes, begin="A", end="Z"):
         idx = 0 if i == 'L' else 1
         pos = {nodes[p][idx] for p in pos}
 
+def lcm(a, b):
+    """Computes lcm for 2 numbers."""
+    return a * b // math.gcd(a, b)
+
+
+def lcmm(*args):
+    """Computes lcm for numbers."""
+    return functools.reduce(lcm, args)
+
 def get_nb_steps_to_reach_ghost(instr, nodes, begin="A", end="Z"):
     ends = {n for n in nodes if n.endswith("Z")}
     nb_steps = {
@@ -56,7 +66,7 @@ def get_nb_steps_to_reach_ghost(instr, nodes, begin="A", end="Z"):
         for n in nodes
         if n.endswith(begin)
     }
-    return math.lcm(*nb_steps)
+    return lcmm(*nb_steps)
 
 
 def run_tests():
