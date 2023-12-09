@@ -18,20 +18,15 @@ def get_sequences_from_file(file_path=top_dir + "resources/year2023_day9_input.t
     with open(file_path) as f:
         return get_sequences_from_lines(f.read())
 
-def pairwise(iterable):
-    "s -> (s0, s1), (s2, s3), (s4, s5), ..."
-    a = iter(iterable)
-    return zip(a, a)
-
-def get_interpolated_value(sequence):
-    # print(sequence, "?")
-    if any(sequence):
-        return sequence[-1] + get_interpolated_value([b - a for a, b in zip(sequence, sequence[1:])])
-    return 0
+def get_interpolated_value(sequence, forward):
+    if not any(sequence):
+        return 0
+    interpolated = get_interpolated_value([b - a for a, b in zip(sequence, sequence[1:])], forward)
+    return (sequence[-1] + interpolated) if forward else (sequence[0] - interpolated )
 
 
-def get_interpolated_sum(sequences):
-    return sum(get_interpolated_value(seq) for seq in sequences)
+def get_interpolated_sum(sequences, forward):
+    return sum(get_interpolated_value(seq, forward) for seq in sequences)
 
 def run_tests():
     sequences = get_sequences_from_lines(
@@ -39,12 +34,14 @@ def run_tests():
 1 3 6 10 15 21
 10 13 16 21 30 45"""
     )
-    assert get_interpolated_sum(sequences) == 114
+    assert get_interpolated_sum(sequences, True) == 114
+    assert get_interpolated_sum(sequences, False) == 2
 
 
 def get_solutions():
     sequences = get_sequences_from_file()
-    print(get_interpolated_sum(sequences) == 1980437560)
+    print(get_interpolated_sum(sequences, True) == 1980437560)
+    print(get_interpolated_sum(sequences, False) == 977)
 
 
 if __name__ == "__main__":
