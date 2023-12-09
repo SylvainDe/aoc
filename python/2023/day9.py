@@ -7,7 +7,7 @@ top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
 
 def get_sequence_from_line(string):
-    return [int(s) for s in string.split()] 
+    return [int(s) for s in string.split()]
 
 
 def get_sequences_from_lines(string):
@@ -18,15 +18,15 @@ def get_sequences_from_file(file_path=top_dir + "resources/year2023_day9_input.t
     with open(file_path) as f:
         return get_sequences_from_lines(f.read())
 
-def get_interpolated_value(sequence, forward):
+def get_interpolated_value(sequence):
     if not any(sequence):
         return 0
-    interpolated = get_interpolated_value([b - a for a, b in zip(sequence, sequence[1:])], forward)
-    return (sequence[-1] + interpolated) if forward else (sequence[0] - interpolated )
+    return sequence[-1] + get_interpolated_value([b - a for a, b in zip(sequence, sequence[1:])])
 
 
 def get_interpolated_sum(sequences, forward):
-    return sum(get_interpolated_value(seq, forward) for seq in sequences)
+    return sum(get_interpolated_value(seq if forward else list(reversed(seq)))
+               for seq in sequences)
 
 def run_tests():
     sequences = get_sequences_from_lines(
