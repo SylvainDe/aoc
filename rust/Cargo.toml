@@ -865,6 +865,10 @@ path = "src/2023/day7.rs"
 name = "2023_day8"
 path = "src/2023/day8.rs"
 
+[[bin]]
+name = "2023_day9"
+path = "src/2023/day9.rs"
+
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
