@@ -29,6 +29,7 @@ connectors = {
     ".": [],      # ground; there is no pipe in this tile."
 }
 
+
 def get_data(grid):
     start = None
     connections = dict()
@@ -48,6 +49,7 @@ def get_data(grid):
             assert 1 <= len(lst) <= 4
     return start, connections
 
+
 def get_distances(start, connections):
     dist = {start: 0}
     prev = {}
@@ -65,6 +67,7 @@ def get_distances(start, connections):
         positions = new_positions
     return dist, prev
 
+
 def get_path(connections, beg, end):
     distances, previous = get_distances(beg, connections)
     pos = end
@@ -74,20 +77,42 @@ def get_path(connections, beg, end):
         path.append(pos)
     return path
 
-def get_loop(connections, start):
+
+def get_loop(grid):
+    start, connections = get_data(grid)
     beg, end = connections[start]
     return [start] + get_path(connections, beg, end)
 
+
 def get_distance_to_furthest(grid):
-    start, connections = get_data(grid)
-    loop = get_loop(connections, start)
-    return len(loop) // 2
+    return len(get_loop(grid)) // 2
 
 
 def get_enclosed_tiles(grid):
-    start, connections = get_data(grid)
-    loop = get_loop(connections, start)
-    # I guess we could count how many times we cross the path: odd or even ?
+    loop = get_loop(grid)
+
+    # Consider vertical boundaries: going to the north or to the south
+    # One needs to check the role(s) for the S boundary
+    start_i, start_j = loop[0]
+    northbounds, southbounds = set("|LJ"), set("|7F")
+    neighbours = set([loop[1], loop[-1]])
+    for (di, dj), boundaries in zip((N, S), (northbounds, southbounds)):
+        if (start_i + di, start_j + dj) in neighbours:
+            boundaries.add("S")
+
+    loop = set(loop)
+    enclosed = set()
+    for i, row in enumerate(grid):
+        inside = False
+        for j, cell in enumerate(row):
+            pos = (i, j)
+            if pos in loop:
+                if cell in southbounds:
+                    inside = not inside
+            elif inside:
+                enclosed.add(pos)
+        assert not inside
+    return len(enclosed)
 
 def run_tests():
     grid = get_grid_from_lines(
@@ -98,7 +123,6 @@ def run_tests():
 ....."""
     )
     assert get_distance_to_furthest(grid) == 4
-    print(get_enclosed_tiles(grid))
     grid = get_grid_from_lines(
         """..F7.
 .FJ|.
@@ -107,14 +131,50 @@ SJ.L7
 LJ..."""
     )
     assert get_distance_to_furthest(grid) == 8
-    print(get_enclosed_tiles(grid))
+    grid = get_grid_from_lines(
+        """...........
+.S-------7.
+.|F-----7|.
+.||.....||.
+.||.....||.
+.|L-7.F-J|.
+.|..|.|..|.
+.L--J.L--J.
+...........
+""")
+    assert get_enclosed_tiles(grid) == 4
+    grid = get_grid_from_lines(
+        """.F----7F7F7F7F-7....
+.|F--7||||||||FJ....
+.||.FJ||||||||L7....
+FJL7L7LJLJ||LJ.L-7..
+L--J.L7...LJS7F-7L7.
+....F-J..F7FJ|L7L7L7
+....L7.F7||L7|.L7L7|
+.....|FJLJ|FJ|F7|.LJ
+....FJL-7.||.||||...
+....L---J.LJ.LJLJ...""")
+    assert get_enclosed_tiles(grid) == 8
+    grid = get_grid_from_lines(
+        """FF7FSF7F7F7F7F7F---7
+L|LJ||||||||||||F--J
+FL-7LJLJ||||||LJL-77
+F--JF--7||LJLJ7F7FJ-
+L---JF-JLJ.||-FJLJJ7
+|F|F-JF---7F7-L7L|7|
+|FFJF7L7F-JF7|JL---7
+7-L-JL7||F7|L7F-7F7|
+L.L7LFJ|||||FJL7||LJ
+L7JLJL-JLJLJL--JLJ.L""")
+    assert get_enclosed_tiles(grid) == 10
+
 
 
 
 def get_solutions():
     grid = get_grid_from_file()
     print(get_distance_to_furthest(grid) == 6979)
-    print(get_enclosed_tiles(grid))
+    print(get_enclosed_tiles(grid) == 443)
 
 if __name__ == "__main__":
     begin = datetime.datetime.now()
