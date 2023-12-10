@@ -40,10 +40,8 @@ def get_data(grid):
             else:
                 for di, dj in connectors[cell]:
                     pos2 = (i+di, j+dj)
-                    # connections.setdefault(pos, set()).add(pos2)
                     connections.setdefault(pos2, set()).add(pos)
     for p, lst in connections.items():
-        # print(p, len(lst))
         if p == start:
             assert len(lst) == 2
         else:
@@ -52,6 +50,7 @@ def get_data(grid):
 
 def get_distances(start, connections):
     dist = {start: 0}
+    prev = {}
     positions = {start}
     while positions:
         new_positions = set()
@@ -60,17 +59,35 @@ def get_distances(start, connections):
             for p2 in connections.get(p, []):
                 if p2 not in dist:
                     dist[p2] = d + 1
+                    prev[p2] = p
                     new_positions.add(p2)
         # print(set(dist[p] for p in positions), set(dist[p] for p in new_positions))
         positions = new_positions
-    return dist
+    return dist, prev
 
+def get_path(connections, beg, end):
+    distances, previous = get_distances(beg, connections)
+    pos = end
+    path = [end]
+    while pos in previous:
+        pos = previous[pos]
+        path.append(pos)
+    return path
+
+def get_loop(connections, start):
+    beg, end = connections[start]
+    return [start] + get_path(connections, beg, end)
 
 def get_distance_to_furthest(grid):
     start, connections = get_data(grid)
-    beg, end = connections[start]
-    dist = get_distances(beg, connections)
-    return 1 + dist[end] // 2
+    loop = get_loop(connections, start)
+    return len(loop) // 2
+
+
+def get_enclosed_tiles(grid):
+    start, connections = get_data(grid)
+    loop = get_loop(connections, start)
+    # I guess we could count how many times we cross the path: odd or even ?
 
 def run_tests():
     grid = get_grid_from_lines(
@@ -81,6 +98,7 @@ def run_tests():
 ....."""
     )
     assert get_distance_to_furthest(grid) == 4
+    print(get_enclosed_tiles(grid))
     grid = get_grid_from_lines(
         """..F7.
 .FJ|.
@@ -89,13 +107,14 @@ SJ.L7
 LJ..."""
     )
     assert get_distance_to_furthest(grid) == 8
+    print(get_enclosed_tiles(grid))
 
 
 
 def get_solutions():
     grid = get_grid_from_file()
     print(get_distance_to_furthest(grid) == 6979)
-
+    print(get_enclosed_tiles(grid))
 
 if __name__ == "__main__":
     begin = datetime.datetime.now()
