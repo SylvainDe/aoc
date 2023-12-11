@@ -28,18 +28,17 @@ def get_data_from_file(file_path=top_dir + "resources/year2023_day8_input.txt"):
         return get_data_from_lines(f.read())
 
 
-def get_steps_to_reach(instr, nodes, begin="AAA", end={"ZZZ"}):
+def get_steps_to_reach(instr, nodes, begin, ends):
     pos = begin
     for i in itertools.cycle(instr):
-        if pos in end:
+        if pos in ends:
             return
         yield pos
         left, right = nodes[pos]
         pos = left if i == 'L' else right
 
-def get_nb_steps_to_reach(instr, nodes, begin="AAA", end={"ZZZ"}):
-    return len(list(get_steps_to_reach(instr, nodes, begin, end)))
-
+def get_nb_steps_part1(instr, nodes):
+    return len(list(get_steps_to_reach(instr, nodes, "AAA", {"ZZZ"})))
 
 def get_steps_to_reach_ghost_naive(instr, nodes, begin="A", end="Z"):
     pos = {n for n in nodes if n.endswith(begin)}
@@ -60,9 +59,9 @@ def lcmm(*args):
     return functools.reduce(lcm, args)
 
 def get_nb_steps_to_reach_ghost(instr, nodes, begin="A", end="Z"):
-    ends = {n for n in nodes if n.endswith("Z")}
+    ends = {n for n in nodes if n.endswith(end)}
     nb_steps = {
-        get_nb_steps_to_reach(instr, nodes, n, ends)
+        len(list(get_steps_to_reach(instr, nodes, n, ends)))
         for n in nodes
         if n.endswith(begin)
     }
@@ -81,7 +80,7 @@ EEE = (EEE, EEE)
 GGG = (GGG, GGG)
 ZZZ = (ZZZ, ZZZ)"""
     )
-    assert get_nb_steps_to_reach(instr, nodes) == 2
+    assert get_nb_steps_part1(instr, nodes) == 2
     instr, nodes = get_data_from_lines(
         """LLR
 
@@ -89,7 +88,7 @@ AAA = (BBB, BBB)
 BBB = (AAA, ZZZ)
 ZZZ = (ZZZ, ZZZ)"""
     )
-    assert get_nb_steps_to_reach(instr, nodes) == 6
+    assert get_nb_steps_part1(instr, nodes) == 6
     instr, nodes = get_data_from_lines(
         """LR
 
@@ -108,7 +107,7 @@ XXX = (XXX, XXX)"""
 
 def get_solutions():
     instr, nodes = get_data_from_file()
-    print(get_nb_steps_to_reach(instr, nodes) == 19637)
+    print(get_nb_steps_part1(instr, nodes) == 19637)
     print(get_nb_steps_to_reach_ghost(instr, nodes) == 8811050362409)
 
 
