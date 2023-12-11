@@ -14,18 +14,8 @@ def get_grid_from_file(file_path=top_dir + "resources/year2023_day11_input.txt")
     with open(file_path) as f:
         return get_grid_from_lines(f.read())
 
-
 def get_galaxies(grid):
     return set((i, j) for i, row in enumerate(grid) for j, cell in enumerate(row) if cell == '#')
-
-
-def show_galaxies(galaxies):
-    xs = set(x for x, _ in galaxies)
-    ys = set(y for _, y in galaxies)
-    for x in range(max(xs) + 1):
-         for y in range(max(ys) + 1):
-             print("#" if (x, y) in galaxies else ".", end="")
-         print()
 
 def get_shift_values(values, expansion_value):
     shift = 0
@@ -34,16 +24,18 @@ def get_shift_values(values, expansion_value):
         if v not in values:
             shift += expansion_value - 1
 
+def manhattan_dist(p1, p2):
+    return sum(abs(c2 - c1) for c1, c2 in zip(p1, p2))
+
 def expand_galaxies(galaxies, expansion_value):
-    xs = set(x for x, _ in galaxies)
-    ys = set(y for _, y in galaxies)
-    shift_x = list(get_shift_values(xs, expansion_value))
-    shift_y = list(get_shift_values(ys, expansion_value))
+    shift_x = list(get_shift_values(set(x for x, _ in galaxies), expansion_value))
+    shift_y = list(get_shift_values(set(y for _, y in galaxies), expansion_value))
     return set((i + shift_x[i], j + shift_y[j]) for i, j in galaxies)
 
 def get_expanded_length_sum(grid, expansion_value):
     galaxies = expand_galaxies(get_galaxies(grid), expansion_value)
-    return sum(abs(x1 - x2) + abs(y1 - y2) for (x1, y1), (x2, y2) in itertools.combinations(galaxies, 2))
+    pairs = itertools.combinations(galaxies, 2)
+    return sum(manhattan_dist(*pair) for pair in pairs)
 
 def run_tests():
     grid = get_grid_from_lines(
