@@ -27,22 +27,22 @@ def show_galaxies(galaxies):
              print("#" if (x, y) in galaxies else ".", end="")
          print()
 
-def get_shift_values(values):
+def get_shift_values(values, expansion_value):
     shift = 0
     for v in range(max(values) + 1):
         yield shift
         if v not in values:
-            shift += 1
+            shift += expansion_value - 1
 
-def expand_galaxies(galaxies):
+def expand_galaxies(galaxies, expansion_value):
     xs = set(x for x, _ in galaxies)
     ys = set(y for _, y in galaxies)
-    shift_x = list(get_shift_values(xs))
-    shift_y = list(get_shift_values(ys))
+    shift_x = list(get_shift_values(xs, expansion_value))
+    shift_y = list(get_shift_values(ys, expansion_value))
     return set((i + shift_x[i], j + shift_y[j]) for i, j in galaxies)
 
-def get_expanded_length_sum(grid):
-    galaxies = expand_galaxies(get_galaxies(grid))
+def get_expanded_length_sum(grid, expansion_value):
+    galaxies = expand_galaxies(get_galaxies(grid), expansion_value)
     return sum(abs(x1 - x2) + abs(y1 - y2) for (x1, y1), (x2, y2) in itertools.combinations(galaxies, 2))
 
 def run_tests():
@@ -58,12 +58,15 @@ def run_tests():
 .......#..
 #...#....."""
     )
-    assert get_expanded_length_sum(grid) == 374
+    assert get_expanded_length_sum(grid, 2) == 374
+    assert get_expanded_length_sum(grid, 10) == 1030
+    assert get_expanded_length_sum(grid, 100) == 8410
 
 
 def get_solutions():
     grid = get_grid_from_file()
-    print(get_expanded_length_sum(grid) == 9799681)
+    print(get_expanded_length_sum(grid, 2) == 9799681)
+    print(get_expanded_length_sum(grid, 1000000) == 513171773355)
 
 
 if __name__ == "__main__":
