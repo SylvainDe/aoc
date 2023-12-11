@@ -7,7 +7,7 @@ top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
 
 def get_grid_from_lines(string):
-    return [l for l in string.splitlines()]
+    return list(string.splitlines())
 
 
 def get_grid_from_file(file_path=top_dir + "resources/year2023_day10_input.txt"):
@@ -70,6 +70,8 @@ def get_distances(start, connections):
 
 def get_path(connections, beg, end):
     distances, previous = get_distances(beg, connections)
+    assert end in distances
+    assert end in previous
     pos = end
     path = [end]
     while pos in previous:
