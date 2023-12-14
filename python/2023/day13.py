@@ -15,16 +15,18 @@ def get_grids_from_file(file_path=top_dir + "resources/year2023_day13_input.txt"
         return get_grids_from_lines(f.read())
 
 def is_horizontal_reflection(grid, line, with_smudge):
-    expected_nb_diff = 2 if with_smudge else 0
+    expected_nb_diff = 1 if with_smudge else 0
     nb_diff = 0
-    for i, row in enumerate(grid):  # TODO: Better range check
-        i2 = 2 * line - i - 1
-        if 0 <= i2 < len(grid):
-            row2 = grid[i2]
-            assert len(row) == len(row2)
-            nb_diff += sum(v != v2 for v, v2 in zip(row, row2))
-            if nb_diff > expected_nb_diff:
-                return False
+    nb_lines = len(grid)
+    for i in range(nb_lines):  # TODO: Better range check
+        i1, i2 = line - 1 - i, line + i
+        if not (0 <= i1 < i2 < nb_lines):
+            break
+        row1, row2 = grid[i1], grid[i2]
+        assert len(row1) == len(row2)
+        nb_diff += sum(v != v2 for v, v2 in zip(row1, row2))
+        if nb_diff > expected_nb_diff:
+            return False
     return nb_diff == expected_nb_diff
 
 def get_horizontal_reflections(grid, with_smudge):
