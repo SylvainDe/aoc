@@ -18,6 +18,12 @@ ROUND = "O"
 EMPTY = "."
 CUBE = "#"
 
+N = (-1, 0)
+S = (+1, 0)
+W = (0, -1)
+E = (0, +1)
+
+
 def extracts_rounds(grid):
     rounds = set()
     for i, row in enumerate(grid):
@@ -26,8 +32,6 @@ def extracts_rounds(grid):
                 rounds.add((i, j))
                 row[j] = EMPTY
     return rounds
-
-N = (-1, 0)
 
 def find_destination(grid, pos, direction):
     dx, dy = direction
@@ -44,17 +48,36 @@ def find_destination(grid, pos, direction):
                     continue
         return x, y
 
-def tilt_north(grid):
+def tilt_direction(grid, direction):
+    dx, dy = direction
     grid = [list(s) for s in grid]
-    for pos in sorted(extracts_rounds(grid), key=lambda p: p[0]):
-        x, y = find_destination(grid, pos, N)
+    for pos in sorted(extracts_rounds(grid), key=lambda p: dx * p[0] + dy * p[1], reverse=True):
+        x, y = find_destination(grid, pos, direction)
         grid[x][y] = ROUND
     return grid
 
-def get_load_after_tilt(grid):
-    grid = tilt_north(grid)
+def get_load_for_grid(grid):
     return sum(i * sum(c == ROUND for c in row)
                for i, row in enumerate(reversed(grid), start=1))
+
+def get_load_after_tilt(grid):
+    return get_load_for_grid(tilt_direction(grid, N))
+
+def get_load_after_cycles(grid, nb_cycle):
+    seen = dict()
+    for i in range(nb_cycle):
+        for direc in (N, W, S, E):
+            grid = tilt_direction(grid, direc)
+        hashable = tuple(tuple(row) for row in grid)
+        if hashable in seen:
+            last_seen = seen[hashable]
+            period = i - last_seen
+            if (nb_cycle - i - 1) % period == 0:
+                break
+        seen[hashable] = i
+    # print("\n".join("".join(row) for row in grid))
+    return get_load_for_grid(grid)
+
 
 def run_tests():
     grid = get_grid_from_lines(
@@ -69,12 +92,52 @@ O.#..O.#.#
 #....###..
 #OO..#...."""
     )
-    print(get_load_after_tilt(grid) == 136)
-
+    assert get_load_after_tilt(grid) == 136
+    grid_after_1_cycle = get_grid_from_lines(
+        """.....#....
+....#...O#
+...OO##...
+.OO#......
+.....OOO#.
+.O#...O#.#
+....O#....
+......OOOO
+#...O###..
+#..OO#...."""
+    )
+    grid_after_2_cycle = get_grid_from_lines(
+        """.....#....
+....#...O#
+.....##...
+..O#......
+.....OOO#.
+.O#...O#.#
+....O#...O
+.......OOO
+#..OO###..
+#.OOO#...O"""
+    )
+    grid_after_3_cycle = get_grid_from_lines(
+        """.....#....
+....#...O#
+.....##...
+..O#......
+.....OOO#.
+.O#...O#.#
+....O#...O
+.......OOO
+#...O###.O
+#.OOO#...O"""
+    )
+    assert get_load_after_cycles(grid, 1) == get_load_for_grid(grid_after_1_cycle)
+    assert get_load_after_cycles(grid, 2) == get_load_for_grid(grid_after_2_cycle)
+    assert get_load_after_cycles(grid, 3) == get_load_for_grid(grid_after_3_cycle)
+    assert get_load_after_cycles(grid, 1000000000) == 64
 
 def get_solutions():
     grid = get_grid_from_file()
     print(get_load_after_tilt(grid) == 103614)
+    print(get_load_after_cycles(grid, 1000000000) == 83790)
 
 
 if __name__ == "__main__":
