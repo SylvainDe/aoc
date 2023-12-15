@@ -25,32 +25,16 @@ def get_hash_sum(lst):
     return sum(get_hash(l) for l in lst)
 
 
-def remove_lens(boxes, label):
-    box = boxes[get_hash(label)]
-    idxs = [i for i, (l, _) in enumerate(box) if l == label]
-    if idxs:
-        idx = idxs[0]
-        box.pop(idx)
-
-
-def add_or_replace_lens(boxes, label, nb):
-    box = boxes[get_hash(label)]
-    idxs = [i for i, (l, _) in enumerate(box) if l == label]
-    if idxs:
-        idx = idxs[0]
-        box[idx] = (label, nb)
-    else:
-        box.append((label, nb))
-
-
 def get_focusing_power_sum(lst):
     boxes = [list() for _ in range(255)]
     for lens in lst:
-        if lens.endswith("-"):
-            remove_lens(boxes, lens[:-1])
-        else:
-            label, nb = lens.split("=")
-            add_or_replace_lens(boxes, label, int(nb))
+        label, nb = (lens[:-1], None) if lens.endswith("-") else lens.split("=")
+        box = boxes[get_hash(label)]
+        idx = next((i for i, (l, _) in enumerate(box) if l == label), None)
+        if idx is not None:
+            box.pop(idx)
+        if nb is not None:
+            box.insert(len(box) if idx is None else idx, (label, int(nb)))
     return sum(
         i * j * nb
         for i, box_lst in enumerate(boxes, start=1)
