@@ -1,7 +1,6 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
 import os
-import itertools
 
 
 top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
@@ -23,62 +22,51 @@ def get_grid_from_file(file_path=top_dir + "resources/year2023_day16_input.txt")
     with open(file_path) as f:
         return get_grid_from_lines(f.read())
 
-origin = (0, 0)
 N = (-1, 0)
 S = (+1, 0)
 W = (0, -1)
 E = (0, +1)
 
-mirror_slash = {
-    N: [E],
-    E: [N],
-    S: [W],
-    W: [S],
+next_directions = {
+    ".": {
+        N: [N],
+        E: [E],
+        S: [S],
+        W: [W],
+    },
+    "/": {
+        N: [E],
+        E: [N],
+        S: [W],
+        W: [S],
+    },
+    "\\": {
+        N: [W],
+        W: [N],
+        S: [E],
+        E: [S],
+    },
+    "-": {
+        N: [W, E],
+        S: [W, E],
+        E: [E],
+        W: [W],
+    },
+    "|": {
+        N: [N],
+        S: [S],
+        E: [N, S],
+        W: [N, S],
+    },
 }
 
-mirror_backslash = {
-    N: [W],
-    W: [N],
-    S: [E],
-    E: [S],
-}
-
-splitter_horizontal = {
-    N: [W, E],
-    S: [W, E],
-    E: [E],
-    W: [W],
-}
-
-splitter_vertical = {
-    N: [N],
-    S: [S],
-    E: [N, S],
-    W: [N, S],
-}
-
-
-def get_next_directions(content, direction):
-    if content == ".":
-        return [direction]
-    if content == "/":
-        return mirror_slash[direction]
-    if content == "\\":
-        return mirror_backslash[direction]
-    if content == "-":
-        return splitter_horizontal[direction]
-    if content == "|":
-        return splitter_vertical[direction]
-    assert False
 
 def get_beam_paths(grid, starting_beam):
     beam_paths = set()
     beam_ends = set([starting_beam])
     while True:
         new_beam_ends = set()
-        # print("beam_ends", beam_ends)
         for val in beam_ends:
-            # print(val)
             pos, direction = val
             content = grid.get(pos)
             if content is None:
@@ -87,8 +75,7 @@ def get_beam_paths(grid, starting_beam):
                 continue
             beam_paths.add(val)
             i, j = pos
-            # print(content)
-            for dir2 in get_next_directions(content, direction):
+            for dir2 in next_directions[content][direction]:
                 di, dj = dir2
                 new_beam_ends.add(((i + di, j + dj), dir2))
         if not new_beam_ends:
@@ -136,21 +123,26 @@ def show_paths(paths):
         print()
     print()
 
-def get_nb_energized_tiles(grid):
-    # show_grid(grid)
-    paths = get_beam_paths(grid, (origin, E))
-    # show_paths(paths)
-    return len(set(pos for pos, _ in paths))
+def get_nb_energized_tiles(grid, start=((0, 0), E)):
+    return len(set(pos for pos, _ in get_beam_paths(grid, start)))
 
 def get_max_nb_energized_tiles(grid):
-    directions = (N, S, W, E)
     xs = [p[0] for p in grid]
     ys = [p[1] for p in grid]
-    x_bounds = set([min(xs), max(xs)])
-    y_bounds = set([min(ys), max(ys)])
-    boundaries = [(x, y) for (x, y) in grid if x in x_bounds or y in y_bounds]
-    starting_config = itertools.product(boundaries, directions)
-    return max(len(set(pos for pos, _ in get_beam_paths(grid, conf))) for conf in starting_config)
+    min_x, max_x = set([min(xs), max(xs)])
+    min_y, max_y = set([min(ys), max(ys)])
+    starts = []
+    for pos in grid:
+        x, y = pos
+        if x == min_x:
+            starts.append((pos, S))
+        if x == max_x:
+            starts.append((pos, N))
+        if y == min_y:
+            starts.append((pos, E))
+        if y == max_y:
+            starts.append((pos, W))
+    return max(get_nb_energized_tiles(grid, s) for s in starts)
 
 def run_tests():
     grid = get_grid_from_lines(
