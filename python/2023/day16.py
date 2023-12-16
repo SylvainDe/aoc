@@ -1,6 +1,7 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
 import os
+import itertools
 
 
 top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
@@ -141,6 +142,16 @@ def get_nb_energized_tiles(grid):
     # show_paths(paths)
     return len(set(pos for pos, _ in paths))
 
+def get_max_nb_energized_tiles(grid):
+    directions = (N, S, W, E)
+    xs = [p[0] for p in grid]
+    ys = [p[1] for p in grid]
+    x_bounds = set([min(xs), max(xs)])
+    y_bounds = set([min(ys), max(ys)])
+    boundaries = [(x, y) for (x, y) in grid if x in x_bounds or y in y_bounds]
+    starting_config = itertools.product(boundaries, directions)
+    return max(len(set(pos for pos, _ in get_beam_paths(grid, conf))) for conf in starting_config)
+
 def run_tests():
     grid = get_grid_from_lines(
         """.|...\....
@@ -155,11 +166,13 @@ def run_tests():
 ..//.|...."""
     )
     assert get_nb_energized_tiles(grid) == 46
+    assert get_max_nb_energized_tiles(grid) == 51
 
 
 def get_solutions():
     grid = get_grid_from_file()
     print(get_nb_energized_tiles(grid) == 7477)
+    print(get_max_nb_energized_tiles(grid) == 7853)
 
 
 if __name__ == "__main__":
