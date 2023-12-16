@@ -27,7 +27,8 @@ Solutions are written in Python and/or Rust.
 |Day 13: Point of Incidence|[Problem](https://adventofcode.com/2023/day/13) [Input](https://adventofcode.com/2023/day/13/input)|[puzzle.html](resources/year2023_day13_puzzle.html) [input.txt](resources/year2023_day13_input.txt)|**|[day13.py](python/2023/day13.py)|[-](rust/src/2023/day13.rs)|10:51:42|11:14:40|
 |Day 14: Parabolic Reflector Dish|[Problem](https://adventofcode.com/2023/day/14) [Input](https://adventofcode.com/2023/day/14/input)|[puzzle.html](resources/year2023_day14_puzzle.html) [input.txt](resources/year2023_day14_input.txt)|**|[day14.py](python/2023/day14.py)|[-](rust/src/2023/day14.rs)|12:06:12|12:18:42|
 |Day 15: Lens Library|[Problem](https://adventofcode.com/2023/day/15) [Input](https://adventofcode.com/2023/day/15/input)|[puzzle.html](resources/year2023_day15_puzzle.html) [input.txt](resources/year2023_day15_input.txt)|**|[day15.py](python/2023/day15.py)|[-](rust/src/2023/day15.rs)|02:09:38|02:27:32|
-|[2023](https://adventofcode.com/2023)|[Stats](https://adventofcode.com/2023/leaderboard/self)|[stats.txt](misc/leaderboard_self_2023.html)|30|-|-|-|-|
+|Day 16: The Floor Will Be Lava|[Problem](https://adventofcode.com/2023/day/16) [Input](https://adventofcode.com/2023/day/16/input)|[puzzle.html](resources/year2023_day16_puzzle.html) [input.txt](resources/year2023_day16_input.txt)|*|[-](python/2023/day16.py)|[-](rust/src/2023/day16.rs)|04:44:41|-|
+|[2023](https://adventofcode.com/2023)|[Stats](https://adventofcode.com/2023/leaderboard/self)|[stats.txt](misc/leaderboard_self_2023.html)|31|-|-|-|-|
 
 ## [2022](https://adventofcode.com/2022)
 |Day|URLs|Puzzle & Input|Stars|Python|Rust|Time part 1|Time part 2|
@@ -287,7 +288,7 @@ Solutions are written in Python and/or Rust.
 |13||**|**|||**|**|**|**|12: ************|
 |14|**|**||**|**|**|**|**|**|16: ****************|
 |15||**||||**|**|**|**|10: **********|
-|16||**|**|||**|**|**||10: **********|
+|16||**|**|||**|**|**|*|11: ***********|
 |17|**|**||||**|**|**||10: **********|
 |18||**|||*|**|**|**|| 9: *********|
 |19||**||||**|**|**|| 8: ********|
@@ -297,4 +298,4 @@ Solutions are written in Python and/or Rust.
 |23||**||||**|*|**|| 7: *******|
 |24||**|||**|**||**|| 8: ********|
 |25|*|*||*||**|*|**|| 8: ********|
-|Total|30|48|28|23|28|50|46|50|30|333|
+|Total|30|48|28|23|28|50|46|50|31|334|
