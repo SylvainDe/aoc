@@ -31,7 +31,7 @@ def get_workflows_and_parts_from_lines(string):
     workflows, parts = string.split("\n\n")
     workflows = dict(get_workflow_from_line(l) for l in workflows.splitlines())
     parts = [get_part_from_line(l) for l in parts.splitlines()]
-    return workflows, parts 
+    return workflows, parts
 
 def get_workflows_and_parts_from_file(file_path=top_dir + "resources/year2023_day19_input.txt"):
     with open(file_path) as f:
@@ -56,11 +56,19 @@ def get_status(part, workflows, start='in'):
             if dest in workflows:
                 return get_status(part, workflows, dest)
             else:
-                assert dest in ('AR') 
+                assert dest in ('AR')
                 return dest
-    
+
 def get_accepted_parts_sum(parts, workflows):
     return sum(sum(p.values()) for p in parts if get_status(p, workflows) == 'A')
+
+def get_nb_accepted_combinations(workflows):
+    # TODO:
+    # Note: an idea could have been to find the accepted range for each
+    # value and multiply the range lengths together but the values are not
+    # independant so this will not work (this is the reason why 167409079868000
+    # can not be written as the product of 3 smallish numbers)
+    pass
 
 def run_tests():
     workflows, parts = get_workflows_and_parts_from_lines(
@@ -83,10 +91,12 @@ hdj{m>838:A,pv}
 {x=2127,m=1623,a=2188,s=1013}"""
     )
     assert get_accepted_parts_sum(parts, workflows) == 19114
+    print(get_nb_accepted_combinations(workflows), 167409079868000)
 
 def get_solutions():
     workflows, parts = get_workflows_and_parts_from_file()
-    print(get_accepted_parts_sum(parts, workflows))
+    print(get_accepted_parts_sum(parts, workflows) == 406849)
+    print(get_nb_accepted_combinations(workflows))
 
 if __name__ == "__main__":
     begin = datetime.datetime.now()
