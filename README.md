@@ -31,8 +31,9 @@ Solutions are written in Python and/or Rust.
 |Day 17: Clumsy Crucible|[Problem](https://adventofcode.com/2023/day/17) [Input](https://adventofcode.com/2023/day/17/input)|[puzzle.html](resources/year2023_day17_puzzle.html) [input.txt](resources/year2023_day17_input.txt)|**|[day17.py](python/2023/day17.py)|[-](rust/src/2023/day17.rs)|08:14:30|08:26:09|
 |Day 18: Lavaduct Lagoon|[Problem](https://adventofcode.com/2023/day/18) [Input](https://adventofcode.com/2023/day/18/input)|[puzzle.html](resources/year2023_day18_puzzle.html) [input.txt](resources/year2023_day18_input.txt)|*|[day18.py](python/2023/day18.py)|[-](rust/src/2023/day18.rs)|04:01:23|-|
 |Day 19: Aplenty|[Problem](https://adventofcode.com/2023/day/19) [Input](https://adventofcode.com/2023/day/19/input)|[puzzle.html](resources/year2023_day19_puzzle.html) [input.txt](resources/year2023_day19_input.txt)|*|[day19.py](python/2023/day19.py)|[-](rust/src/2023/day19.rs)|02:51:12|-|
-|Day 20: Pulse Propagation|[Problem](https://adventofcode.com/2023/day/20) [Input](https://adventofcode.com/2023/day/20/input)|[puzzle.html](resources/year2023_day20_puzzle.html) [input.txt](resources/year2023_day20_input.txt)||[-](python/2023/day20.py)|[-](rust/src/2023/day20.rs)|-|-|
-|[2023](https://adventofcode.com/2023)|[Stats](https://adventofcode.com/2023/leaderboard/self)|[stats.txt](misc/leaderboard_self_2023.html)|36|-|-|-|-|
+|Day 20: Pulse Propagation|[Problem](https://adventofcode.com/2023/day/20) [Input](https://adventofcode.com/2023/day/20/input)|[puzzle.html](resources/year2023_day20_puzzle.html) [input.txt](resources/year2023_day20_input.txt)||[day20.py](python/2023/day20.py)|[-](rust/src/2023/day20.rs)|-|-|
+|Day 21: Step Counter|[Problem](https://adventofcode.com/2023/day/21) [Input](https://adventofcode.com/2023/day/21/input)|[puzzle.html](resources/year2023_day21_puzzle.html) [input.txt](resources/year2023_day21_input.txt)|*|[day21.py](python/2023/day21.py)|[-](rust/src/2023/day21.rs)|01:37:48|-|
+|[2023](https://adventofcode.com/2023)|[Stats](https://adventofcode.com/2023/leaderboard/self)|[stats.txt](misc/leaderboard_self_2023.html)|37|-|-|-|-|
 
 ## [2022](https://adventofcode.com/2022)
 |Day|URLs|Puzzle & Input|Stars|Python|Rust|Time part 1|Time part 2|
@@ -297,9 +298,9 @@ Solutions are written in Python and/or Rust.
 |18||**|||*|**|**|**|*|10: **********|
 |19||**||||**|**|**|*| 9: *********|
 |20|*|**|||**|**|**|**||11: ***********|
-|21|**|**||||**|**|**||10: **********|
+|21|**|**||||**|**|**|*|11: ***********|
 |22||*|||*|**|**|**|| 8: ********|
 |23||**||||**|*|**|| 7: *******|
 |24||**|||**|**||**|| 8: ********|
 |25|*|*||*||**|*|**|| 8: ********|
-|Total|30|48|28|23|28|50|46|50|36|339|
+|Total|30|48|28|23|28|50|46|50|37|340|
