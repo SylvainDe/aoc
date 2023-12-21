@@ -16,8 +16,7 @@ def get_module_from_line(string):
     dests = dests.split(", ")
     if name[0] in ('%&'):
         return (name[1:], name[0], dests)
-    else:
-        return (name, None, dests)
+    return (name, None, dests)
 
 
 def get_modules_from_lines(string):
@@ -32,7 +31,7 @@ def get_modules_from_file(file_path=top_dir + "resources/year2023_day20_input.tx
 
 
 def get_initial_state(modules):
-    flipflops, conjunctions, inputs = dict(), dict(), dict()
+    flipflops, conjunctions, inputs = {}, {}, {}
     for name, (_, dests) in modules.items():
         for d in dests:
             inputs.setdefault(d, []).append(name)
@@ -44,42 +43,40 @@ def get_initial_state(modules):
     return flipflops, conjunctions
 
 
+def get_generated_pulses(src, module_name, level, modules, flipflops, conjunctions):
+    prefix, dests = modules.get(module_name, (None, []))
+    if prefix == "%":
+        if level == HIGH:
+            return
+        previous_state = flipflops[module_name]
+        assert previous_state in (ON, OFF)
+        flipflops[module_name] = OFF if previous_state == ON else ON
+        level_to_send = LOW if previous_state == ON else HIGH
+    elif prefix == "&":
+        conj = conjunctions[module_name]
+        conj[src] = level
+        level_to_send = LOW if all(l == HIGH for l in conj.values()) else HIGH
+    else:
+        assert prefix is None
+        level_to_send = level
+    assert level_to_send is not None
+    for dst in dests:
+        new_event = (module_name, dst, level_to_send)
+        yield new_event
+
+
 def process_pulse(modules, input_event, nb=1):
-    nb_low, nb_high = 0, 0
+    count = collections.Counter()
     flipflops, conjunctions = get_initial_state(modules)
+    d = collections.deque()
     for _ in range(nb):
-        d = collections.deque([input_event])
+        d.append(input_event)
         while d:
-            event = d.popleft()
-            src, module_name, level = event
-            assert level in (LOW, HIGH)
-            if level == LOW:
-                nb_low += 1
-            else:
-                nb_high += 1
-            # print(src, "-" + ("low" if level == LOW else "high") + "->", module_name)
-            prefix, dests = modules.get(module_name, (None, []))
-            level_to_send = None
-            if prefix == "%":
-                if level == LOW:
-                    previous_state = flipflops[module_name]
-                    assert previous_state in (ON, OFF)
-                    level_to_send = HIGH if previous_state == OFF else LOW
-                    flipflops[module_name] = OFF if previous_state == ON else ON
-            elif prefix == "&":
-                conj = conjunctions[module_name]
-                conj[src] = level
-                level_to_send = LOW if all(l == HIGH for l in conj.values()) else HIGH
-            else:
-                assert prefix is None
-                level_to_send = level
-            if level_to_send is not None:
-                for dst in dests:
-                    new_event = (module_name, dst, level_to_send)
-                    d.append((new_event))
-    ret = nb_low * nb_high
-    # print(nb, nb_low, nb_high, ret)
-    return ret
+            src, module_name, level = d.popleft()
+            count[level] += 1
+            d.extend(get_generated_pulses(
+                    src, module_name, level, modules, flipflops, conjunctions))
+    return count[LOW] * count[HIGH]
 
 def run_tests():
     modules = get_modules_from_lines(
