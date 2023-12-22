@@ -33,6 +33,7 @@ Solutions are written in Python and/or Rust.
 |Day 19: Aplenty|[Problem](https://adventofcode.com/2023/day/19) [Input](https://adventofcode.com/2023/day/19/input)|[puzzle.html](resources/year2023_day19_puzzle.html) [input.txt](resources/year2023_day19_input.txt)|*|[day19.py](python/2023/day19.py)|[-](rust/src/2023/day19.rs)|02:51:12|-|
 |Day 20: Pulse Propagation|[Problem](https://adventofcode.com/2023/day/20) [Input](https://adventofcode.com/2023/day/20/input)|[puzzle.html](resources/year2023_day20_puzzle.html) [input.txt](resources/year2023_day20_input.txt)|*|[day20.py](python/2023/day20.py)|[-](rust/src/2023/day20.rs)|+24h|-|
 |Day 21: Step Counter|[Problem](https://adventofcode.com/2023/day/21) [Input](https://adventofcode.com/2023/day/21/input)|[puzzle.html](resources/year2023_day21_puzzle.html) [input.txt](resources/year2023_day21_input.txt)|*|[day21.py](python/2023/day21.py)|[-](rust/src/2023/day21.rs)|01:37:48|-|
+|Day 22: Sand Slabs|[Problem](https://adventofcode.com/2023/day/22) [Input](https://adventofcode.com/2023/day/22/input)|[puzzle.html](resources/year2023_day22_puzzle.html) [input.txt](resources/year2023_day22_input.txt)||[-](python/2023/day22.py)|[-](rust/src/2023/day22.rs)|-|-|
 |[2023](https://adventofcode.com/2023)|[Stats](https://adventofcode.com/2023/leaderboard/self)|[stats.txt](misc/leaderboard_self_2023.html)|38|-|-|-|-|
 
 ## [2022](https://adventofcode.com/2022)
