@@ -150,11 +150,41 @@ Hailstones' paths crossed in the past for both hailstones.
 <p>However, you'll need to search a much larger test area if you want to see if any hailstones might collide. Look for intersections that happen with an X and Y position each at least <code>200000000000000</code> and at most <code>400000000000000</code>. Disregard the Z axis entirely.</p>
 <p>Considering only the X and Y axes, check all pairs of hailstones' future paths for intersections. <em>How many of these intersections occur within the test area?</em></p>
 </article>
-<p>To begin, <a href="24/input" target="_blank">get your puzzle input</a>.</p>
-<form method="post" action="24/answer"><input type="hidden" name="level" value="1"/><p>Answer: <input type="text" name="answer" autocomplete="off"/> <input type="submit" value="[Submit]"/></p></form>
+<p>Your puzzle answer was <code>16665</code>.</p><p class="day-success">The first half of this puzzle is complete! It provides one gold star: *</p>
+<article class="day-desc"><h2 id="part2">--- Part Two ---</h2><p>Upon further analysis, it doesn't seem like <em>any</em> hailstones will naturally collide. It's up to you to fix that!</p>
+<p>You find a rock on the ground nearby. While it seems extremely unlikely, if you throw it just right, you should be able to <em>hit every hailstone in a single throw</em>!</p>
+<p>You can use the probably-magical winds to reach <em>any integer position</em> you like and to propel the rock at <em>any integer velocity</em>. Now <em>including the Z axis</em> in your calculations, if you throw the rock at time <code>0</code>, where do you need to be so that the rock <em>perfectly collides with every hailstone</em>? Due to <span title="What, you've never studied probably-magical physics?">probably-magical inertia</span>, the rock won't slow down or change direction when it collides with a hailstone.</p>
+<p>In the example above, you can achieve this by moving to position <code>24, 13, 10</code> and throwing the rock at velocity <code>-3, 1, 2</code>. If you do this, you will hit every hailstone as follows:</p>
+<pre><code>Hailstone: 19, 13, 30 @ -2, 1, -2
+Collision time: 5
+Collision position: 9, 18, 20
+
+Hailstone: 18, 19, 22 @ -1, -1, -2
+Collision time: 3
+Collision position: 15, 16, 16
+
+Hailstone: 20, 25, 34 @ -2, -2, -4
+Collision time: 4
+Collision position: 12, 17, 18
+
+Hailstone: 12, 31, 28 @ -1, -2, -1
+Collision time: 6
+Collision position: 6, 19, 22
+
+Hailstone: 20, 19, 15 @ 1, -5, -3
+Collision time: 1
+Collision position: 21, 14, 12
+</code></pre>
+<p>Above, each hailstone is identified by its initial position and its velocity. Then, the time and position of that hailstone's collision with your rock are given.</p>
+<p>After 1 nanosecond, the rock has <em>exactly the same position</em> as one of the hailstones, obliterating it into ice dust! Another hailstone is smashed to bits two nanoseconds after that. After a total of 6 nanoseconds, all of the hailstones have been destroyed.</p>
+<p>So, at time <code>0</code>, the rock needs to be at X position <code>24</code>, Y position <code>13</code>, and Z position <code>10</code>. Adding these three coordinates together produces <code><em>47</em></code>. (Don't add any coordinates from the rock's velocity.)</p>
+<p>Determine the exact position and velocity the rock needs to have at time <code>0</code> so that it perfectly collides with every hailstone. <em>What do you get if you add up the X, Y, and Z coordinates of that initial position?</em></p>
+</article>
+<form method="post" action="24/answer"><input type="hidden" name="level" value="2"/><p>Answer: <input type="text" name="answer" autocomplete="off"/> <input type="submit" value="[Submit]"/></p></form>
+<p>Although it hasn't changed, you can still <a href="24/input" target="_blank">get your puzzle input</a>.</p>
 <p>You can also <span class="share">[Share<span class="share-content">on
-  <a href="https://twitter.com/intent/tweet?text=%22Never+Tell+Me+The+Odds%22+%2D+Day+24+%2D+Advent+of+Code+2023&amp;url=https%3A%2F%2Fadventofcode%2Ecom%2F2023%2Fday%2F24&amp;related=ericwastl&amp;hashtags=AdventOfCode" target="_blank">Twitter</a>
-  <a href="javascript:void(0);" onclick="var ms; try{ms=localStorage.getItem('mastodon.server')}finally{} if(typeof ms!=='string')ms=''; ms=prompt('Mastodon Server?',ms); if(typeof ms==='string' && ms.length){this.href='https://'+ms+'/share?text=%22Never+Tell+Me+The+Odds%22+%2D+Day+24+%2D+Advent+of+Code+2023+%23AdventOfCode+https%3A%2F%2Fadventofcode%2Ecom%2F2023%2Fday%2F24';try{localStorage.setItem('mastodon.server',ms);}finally{}}else{return false;}" target="_blank">Mastodon</a
+  <a href="https://twitter.com/intent/tweet?text=I%27ve+completed+Part+One+of+%22Never+Tell+Me+The+Odds%22+%2D+Day+24+%2D+Advent+of+Code+2023&amp;url=https%3A%2F%2Fadventofcode%2Ecom%2F2023%2Fday%2F24&amp;related=ericwastl&amp;hashtags=AdventOfCode" target="_blank">Twitter</a>
+  <a href="javascript:void(0);" onclick="var ms; try{ms=localStorage.getItem('mastodon.server')}finally{} if(typeof ms!=='string')ms=''; ms=prompt('Mastodon Server?',ms); if(typeof ms==='string' && ms.length){this.href='https://'+ms+'/share?text=I%27ve+completed+Part+One+of+%22Never+Tell+Me+The+Odds%22+%2D+Day+24+%2D+Advent+of+Code+2023+%23AdventOfCode+https%3A%2F%2Fadventofcode%2Ecom%2F2023%2Fday%2F24';try{localStorage.setItem('mastodon.server',ms);}finally{}}else{return false;}" target="_blank">Mastodon</a
 ></span>]</span> this puzzle.</p>
 </main>
 
