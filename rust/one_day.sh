@@ -35,6 +35,7 @@ clippy_checks="-D clippy::all
 -D clippy::cargo
 -D clippy::nursery
 -D clippy::restriction
+-A clippy::missing_asserts_for_indexing
 -A clippy::indexing_slicing
 -A clippy::arithmetic_side_effects
 -A clippy::modulo_arithmetic

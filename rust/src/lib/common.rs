@@ -57,7 +57,7 @@ pub mod input {
     pub fn get_answers(filepath: &str) -> (Option<String>, Option<String>) {
         fs::read_to_string(filepath).map_or((None, None), |s| {
             let v: Vec<String> = s.lines().map(ToOwned::to_owned).collect();
-            (v.get(0).cloned(), v.get(1).cloned())
+            (v.first().cloned(), v.get(1).cloned())
         })
     }
 
