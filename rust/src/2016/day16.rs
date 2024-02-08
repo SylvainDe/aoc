@@ -34,7 +34,14 @@ fn checksum(data: &str) -> String {
     while v.len() % 2 == 0 {
         v = v
             .chunks(2)
-            .map(|s| if s[0] == s[1] { '1' } else { '0' })
+            .map(|s| {
+                assert!(s.len() == 2);
+                if s[0] == s[1] {
+                    '1'
+                } else {
+                    '0'
+                }
+            })
             .collect();
     }
     v.iter().collect::<String>()

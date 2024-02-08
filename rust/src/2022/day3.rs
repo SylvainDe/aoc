@@ -26,7 +26,7 @@ fn get_char_prio(c: char) -> Int {
     }
 }
 
-fn double_compartment_priority(s: &String) -> Int {
+fn double_compartment_priority(s: &str) -> Int {
     let len = s.len();
     assert_eq!(len % 2, 0);
     let half = len / 2;
@@ -40,7 +40,10 @@ fn double_compartment_priority(s: &String) -> Int {
 }
 
 fn part1(rucksacks: &InputContent) -> Int {
-    rucksacks.iter().map(double_compartment_priority).sum()
+    rucksacks
+        .iter()
+        .map(|s| double_compartment_priority(s))
+        .sum()
 }
 
 fn badge_prio(s1: &str, s2: &str, s3: &str) -> Int {
@@ -59,7 +62,10 @@ fn badge_prio(s1: &str, s2: &str, s3: &str) -> Int {
 fn part2(rucksacks: &InputContent) -> Int {
     rucksacks
         .chunks(3)
-        .map(|s| badge_prio(&s[0], &s[1], &s[2]))
+        .map(|s| {
+            assert!(s.len() == 3);
+            badge_prio(&s[0], &s[1], &s[2])
+        })
         .sum()
 }
 
