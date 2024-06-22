@@ -289,8 +289,7 @@ pub mod assembunny2016 {
     }
 
     fn eval_string(s: &str, env: &HashMap<String, Int>) -> Int {
-        s.parse::<Int>()
-            .map_or_else(|_| *env.get(s).unwrap(), |n| n)
+        s.parse::<Int>().unwrap_or_else(|_| *env.get(s).unwrap())
     }
 
     /// # Panics

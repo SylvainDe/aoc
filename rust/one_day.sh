@@ -39,6 +39,7 @@ clippy_checks="-D clippy::all
 -A clippy::iter_over_hash_type
 -A clippy::arithmetic_side_effects
 -A clippy::modulo_arithmetic
+-A clippy::integer_division_remainder_used
 -A clippy::default_numeric_fallback
 -A clippy::implicit_return
 -A clippy::missing_assert_message
