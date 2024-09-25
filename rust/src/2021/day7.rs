@@ -47,10 +47,11 @@ fn part1(positions: &InputContent) -> Int {
     )
 }
 
-#[allow(
+#[expect(
     clippy::cast_possible_wrap,
     clippy::cast_possible_truncation,
-    clippy::cast_precision_loss
+    clippy::cast_precision_loss,
+    reason = "cast between Int (i32) and usize"
 )]
 fn part2(positions: &InputContent) -> Int {
     // 1. Computing the minimal cost with a square cost: C = d²

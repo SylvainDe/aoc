@@ -15,7 +15,7 @@ type Point = point_module::Point<isize>;
 type Grid = HashMap<Point, Int>;
 type InputContent = (Grid, Point, Point);
 
-#[allow(clippy::cast_possible_wrap)]
+#[expect(clippy::cast_possible_wrap, reason = "cast between isize and usize")]
 fn get_input_from_str(string: &str) -> InputContent {
     let mut start = None;
     let mut end = None;

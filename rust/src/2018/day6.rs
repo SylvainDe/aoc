@@ -17,13 +17,13 @@ fn get_input_from_str(string: &str) -> InputContent {
     collect_from_lines_with_func(string, |s| Point::from_str_with_param(s, ", "))
 }
 
-#[allow(clippy::trivially_copy_pass_by_ref, clippy::missing_const_for_fn)]
+#[expect(clippy::missing_const_for_fn, reason = "Not implemented yet")]
 fn part1(_arg: &InputContent) -> Int {
     // TODO: First step - filter interior points and exterior points
     0
 }
 
-#[allow(clippy::trivially_copy_pass_by_ref, clippy::missing_const_for_fn)]
+#[expect(clippy::missing_const_for_fn, reason = "Not implemented yet")]
 fn part2(_arg: &InputContent) -> Int {
     0
 }

@@ -15,7 +15,7 @@ fn get_input_from_str(string: &str) -> InputContent {
     collect_from_lines(string)
 }
 
-#[allow(clippy::cast_sign_loss)]
+#[expect(clippy::cast_sign_loss, reason = "cast between Int (i32) and usize")]
 fn count_steps(instructions: &InputContent, new_rule: bool) -> Int {
     let mut instructions = instructions.clone();
     let mut pos = 0;

@@ -66,7 +66,7 @@ fn eval_string(s: &str, env: &HashMap<String, Int>) -> Int {
     s.parse::<Int>().unwrap_or_else(|_| *env.get(s).unwrap())
 }
 
-#[allow(dead_code)]
+#[expect(dead_code, reason = "Only for testing")]
 fn run_instructions_on_nb(instructions: &InputContent, input: u64) -> (Int, Int, Int, Int) {
     if input == 0 {
         return run_instructions(instructions, &[0]);
@@ -109,13 +109,13 @@ fn get_input_from_str(string: &str) -> InputContent {
     collect_from_lines(string)
 }
 
-#[allow(clippy::missing_const_for_fn)]
+#[expect(clippy::missing_const_for_fn, reason = "Not implemented yet")]
 fn part1(_instructions: &InputContent) -> Int {
     // This may actually be an exercice of reverse engineering
     0
 }
 
-#[allow(clippy::missing_const_for_fn)]
+#[expect(clippy::missing_const_for_fn, reason = "Not implemented yet")]
 fn part2(_arg: &InputContent) -> Int {
     0
 }

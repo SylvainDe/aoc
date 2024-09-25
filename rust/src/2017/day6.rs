@@ -15,7 +15,6 @@ fn get_input_from_str(string: &str) -> InputContent {
     string.split('\t').map(|s| s.parse().unwrap()).collect()
 }
 
-#[allow(clippy::cast_sign_loss)]
 fn get_cycle_information(blocks: &InputContent) -> (usize, usize) {
     let l = blocks.len();
     let sum: Int = blocks.iter().sum();

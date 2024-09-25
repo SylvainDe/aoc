@@ -37,7 +37,7 @@ fn get_input_from_str(string: &str) -> InputContent {
     collect_from_lines(string)
 }
 
-#[allow(clippy::similar_names)]
+#[expect(clippy::similar_names, reason = "Mathematical computations")]
 fn count_intersection(vents: &Vec<Vent>, diagonal: bool) -> usize {
     let mut point_counter = HashMap::new();
     for Vent {

@@ -55,7 +55,6 @@ fn part1(arg: &InputContent) -> String {
     to_snafu(arg.iter().map(|s| from_snafu(s)).sum())
 }
 
-#[allow(clippy::missing_const_for_fn)]
 fn main() {
     let before = Instant::now();
     let data = get_input_from_str(&get_file_content(INPUT_FILEPATH));

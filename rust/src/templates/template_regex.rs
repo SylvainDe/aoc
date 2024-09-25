@@ -51,12 +51,12 @@ fn get_input_from_str(string: &str) -> InputContent {
     collect_from_lines(string)
 }
 
-#[allow(clippy::missing_const_for_fn)]
+#[expect(clippy::missing_const_for_fn, reason = "Not implemented yet")]
 fn part1(_arg: &InputContent) -> Int {
     0
 }
 
-#[allow(clippy::missing_const_for_fn)]
+#[expect(clippy::missing_const_for_fn, reason = "Not implemented yet")]
 fn part2(_arg: &InputContent) -> Int {
     0
 }

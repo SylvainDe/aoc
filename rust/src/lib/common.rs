@@ -95,7 +95,9 @@ pub mod point_module {
     pub struct FromStrError;
 
     impl<T: FromStr> Point<T> {
-        #[allow(clippy::result_unit_err, clippy::missing_errors_doc)]
+        /// # Errors
+        ///
+        /// Will return `FromStrError` if string is not properly formatted
         pub fn from_str_with_param(s: &str, separator: &str) -> Result<Self, FromStrError> {
             let (x, y) = s.split_once(separator).ok_or(FromStrError)?;
             Ok(Self {
@@ -120,10 +122,10 @@ pub mod point_module {
     impl<T: Add<Output = T>> Add for Point<T> {
         type Output = Self;
 
-        fn add(self, other: Self) -> Self {
+        fn add(self, rhs: Self) -> Self {
             Self {
-                x: self.x + other.x,
-                y: self.y + other.y,
+                x: self.x + rhs.x,
+                y: self.y + rhs.y,
             }
         }
     }
@@ -131,10 +133,10 @@ pub mod point_module {
     impl<T: Sub<Output = T>> Sub for Point<T> {
         type Output = Self;
 
-        fn sub(self, other: Self) -> Self {
+        fn sub(self, rhs: Self) -> Self {
             Self {
-                x: self.x - other.x,
-                y: self.y - other.y,
+                x: self.x - rhs.x,
+                y: self.y - rhs.y,
             }
         }
     }
@@ -274,7 +276,6 @@ pub mod assembunny2016 {
         collect_from_lines(string)
     }
 
-    #[allow(clippy::missing_const_for_fn)]
     fn toggle_ins(ins: Instruction) -> Instruction {
         match ins {
             // For one-argument instructions, inc becomes dec, and all other one-argument instructions become inc
@@ -296,7 +297,7 @@ pub mod assembunny2016 {
     ///
     /// Will panic if something goes wrong
     #[must_use]
-    #[allow(clippy::cast_sign_loss)]
+    #[expect(clippy::cast_sign_loss, reason = "cast between Int (i32) and usize")]
     pub fn run_instructions(instructions: &Instructions, a_value: Int, c_value: Int) -> Int {
         let mut instructions = instructions.clone();
         let mut env = HashMap::from([
@@ -344,7 +345,7 @@ pub mod assembunny2016 {
     ///
     /// Will panic if something goes wrong
     #[must_use]
-    #[allow(clippy::cast_sign_loss)]
+    #[expect(clippy::cast_sign_loss, reason = "cast between Int (i32) and usize")]
     pub fn is_clock_signal(instructions: &Instructions, a_value: Int) -> bool {
         let mut instructions = instructions.clone();
         let mut env = HashMap::from([

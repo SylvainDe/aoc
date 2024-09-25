@@ -12,7 +12,7 @@ const ANSWERS_FILEPATH: &str = "../resources/year2018_day9_answer.txt";
 type Int = u32;
 type InputContent = Int;
 
-#[allow(clippy::missing_const_for_fn)]
+#[expect(clippy::missing_const_for_fn, reason = "Not implemented yet")]
 fn get_input_from_str(_string: &str) -> InputContent {
     lazy_static! {
         static ref RE: Regex =
@@ -22,12 +22,20 @@ fn get_input_from_str(_string: &str) -> InputContent {
     0
 }
 
-#[allow(clippy::trivially_copy_pass_by_ref, clippy::missing_const_for_fn)]
+#[expect(
+    clippy::trivially_copy_pass_by_ref,
+    clippy::missing_const_for_fn,
+    reason = "Not implemented yet"
+)]
 fn part1(_arg: &InputContent) -> Int {
     0
 }
 
-#[allow(clippy::trivially_copy_pass_by_ref, clippy::missing_const_for_fn)]
+#[expect(
+    clippy::trivially_copy_pass_by_ref,
+    clippy::missing_const_for_fn,
+    reason = "Not implemented yet"
+)]
 fn part2(_arg: &InputContent) -> Int {
     0
 }

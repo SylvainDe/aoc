@@ -69,7 +69,7 @@ fn part1(entries: &InputContent) -> usize {
         .sum()
 }
 
-#[allow(clippy::trivially_copy_pass_by_ref, clippy::missing_const_for_fn)]
+#[expect(clippy::missing_const_for_fn, reason = "Not implemented yet")]
 fn solve(_entry: &Entry) -> Int {
     0
 }

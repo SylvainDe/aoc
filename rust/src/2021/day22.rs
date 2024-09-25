@@ -96,7 +96,7 @@ fn perform_instructions_naive(instructions: &InputContent) -> usize {
     cubes.len()
 }
 
-#[allow(dead_code)]
+#[expect(dead_code, reason = "Not the final version")]
 fn perform_instructions_optimised(instructions: &InputContent) -> Int {
     // An optimisation is not to keep track of individual cubes but instead
     // track of cuboids as large as possible.
@@ -188,7 +188,6 @@ const fn cuboid_vol((r1, r2, r3): Cuboid) -> Int {
     range_len(r1) * range_len(r2) * range_len(r3)
 }
 
-#[allow(dead_code)]
 fn split_1d((beg1, end1): Range, (beg2, end2): Range) -> Vec<(Range, bool, bool)> {
     // Return list of disjoint sets with booleans to know whether the chunk
     // belong to range 1 and/or range 2
@@ -228,8 +227,7 @@ fn intersection_1d((beg1, end1): Range, (beg2, end2): Range) -> Option<Range> {
     None
 }
 
-#[allow(dead_code)]
-#[allow(clippy::similar_names)]
+#[expect(clippy::similar_names, reason = "Mathematical computations")]
 fn split_3d((rx1, ry1, rz1): Cuboid, (rx2, ry2, rz2): Cuboid) -> Vec<(Cuboid, bool, bool)> {
     let x_split = split_1d(rx1, rx2);
     let y_split = split_1d(ry1, ry2);
@@ -249,7 +247,7 @@ fn split_3d((rx1, ry1, rz1): Cuboid, (rx2, ry2, rz2): Cuboid) -> Vec<(Cuboid, bo
     ret
 }
 
-#[allow(clippy::similar_names)]
+#[expect(clippy::similar_names, reason = "Mathematical computations")]
 fn intersection_3d((rx1, ry1, rz1): Cuboid, (rx2, ry2, rz2): Cuboid) -> Option<Cuboid> {
     if let Some(rx) = intersection_1d(rx1, rx2) {
         if let Some(ry) = intersection_1d(ry1, ry2) {
