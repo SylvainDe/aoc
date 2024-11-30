@@ -36,7 +36,7 @@ Solutions are written in Python and/or Rust.
 |Day 22: Sand Slabs|[Problem](https://adventofcode.com/2023/day/22) [Input](https://adventofcode.com/2023/day/22/input)|[puzzle.html](resources/year2023_day22_puzzle.html) [input.txt](resources/year2023_day22_input.txt)||[day22.py](python/2023/day22.py)|[-](rust/src/2023/day22.rs)|-|-|
 |Day 23: A Long Walk|[Problem](https://adventofcode.com/2023/day/23) [Input](https://adventofcode.com/2023/day/23/input)|[puzzle.html](resources/year2023_day23_puzzle.html) [input.txt](resources/year2023_day23_input.txt)||[-](python/2023/day23.py)|[-](rust/src/2023/day23.rs)|-|-|
 |Day 24: Never Tell Me The Odds|[Problem](https://adventofcode.com/2023/day/24) [Input](https://adventofcode.com/2023/day/24/input)|[puzzle.html](resources/year2023_day24_puzzle.html) [input.txt](resources/year2023_day24_input.txt)|*|[day24.py](python/2023/day24.py)|[-](rust/src/2023/day24.rs)|15:04:38|-|
-|Day 25: Snowverload|[Problem](https://adventofcode.com/2023/day/25) [Input](https://adventofcode.com/2023/day/25/input)|[puzzle.html](resources/year2023_day25_puzzle.html) [input.txt](resources/year2023_day25_input.txt)||[-](python/2023/day25.py)|[-](rust/src/2023/day25.rs)|-|-|
+|Day 25: Snowverload|[Problem](https://adventofcode.com/2023/day/25) [Input](https://adventofcode.com/2023/day/25/input)|[puzzle.html](resources/year2023_day25_puzzle.html) [input.txt](resources/year2023_day25_input.txt)||[day25.py](python/2023/day25.py)|[-](rust/src/2023/day25.rs)|-|-|
 |[2023](https://adventofcode.com/2023)|[Stats](https://adventofcode.com/2023/leaderboard/self)|[stats.txt](misc/leaderboard_self_2023.html)|39|-|-|-|-|
 
 ## [2022](https://adventofcode.com/2022)

@@ -3,7 +3,7 @@ set -e
 
 # Previous years
 first_year=2015
-last_full_year=2022
+last_full_year=2023
 first_day=1
 last_day=25
 for y in $(seq ${first_year} ${last_full_year}); do
