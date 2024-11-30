@@ -2,7 +2,7 @@
 use common::input::check_answer;
 use common::input::get_answers;
 use common::input::get_first_line_from_file;
-use itertools::Itertools;
+use itertools::Itertools as _;
 use std::time::Instant;
 
 const INPUT_FILEPATH: &str = "../resources/year2016_day14_input.txt";

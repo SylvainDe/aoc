@@ -3,7 +3,7 @@ use common::input::check_answer;
 use common::input::collect_from_lines;
 use common::input::get_answers;
 use common::input::get_file_content;
-use itertools::Itertools;
+use itertools::Itertools as _;
 use std::time::Instant;
 
 const INPUT_FILEPATH: &str = "../resources/year2021_day1_input.txt";

@@ -5,7 +5,7 @@ use common::input::get_answers;
 use common::input::get_file_content;
 use common::point_module;
 use core::str::FromStr;
-use itertools::Itertools;
+use itertools::Itertools as _;
 use lazy_static::lazy_static;
 use regex::Regex;
 use std::collections::HashMap;
