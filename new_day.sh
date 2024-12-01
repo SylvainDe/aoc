@@ -33,6 +33,7 @@ overwrite_python="0"
 
 generate_readme="1"
 git_add="1"
+git_commit="1"
 
 # URLs
 puzzle_url="https://adventofcode.com/${year}/day/${day}"
@@ -110,7 +111,7 @@ if [ "${get_input}" = "1" ]; then
 	get_url_and_save "${input_url}" "${input_file}" "${overwrite_input}" "0"
 fi
 if [ "${extract_answers}" = "1" ]; then
-    sed -n "s/<p>Your puzzle answer was <code>\([^<]*\)<\/code>\..*/\1/gp" "${puzzle_file}" | tee "${answer_file}"
+	sed -n "s/<p>Your puzzle answer was <code>\([^<]*\)<\/code>\..*/\1/gp" "${puzzle_file}" | tee "${answer_file}"
 fi
 
 create_code_from_template() {
@@ -153,6 +154,7 @@ if [ "${create_python}" = "1" ]; then
 		*)   python_template="python/template_multi_line.py";;
 	esac
 	create_code_from_template "${python_template}" "${python_script_file}" "${overwrite_python}"
+	echo "Run Python solution with 'python3 ${python_script_file}'"
 	open_file_in_editor "${python_script_file}"
 fi
 
@@ -170,9 +172,10 @@ if [ "${create_rust}" = "1" ]; then
 	grep -q "${rust_bin}" "${cargo_file}" || sed -i "s#.*See more keys#${cargo_content}&#g" "${cargo_file}"
 
 	create_code_from_template "${rust_template}" "${rust_src_file}" "${overwrite_rust}"
+	echo "Run Rust solution with './rust/one_day.sh ${day} ${year}' or '(cd rust && cargo run --bin "${rust_bin}")'"
 
 	# Instruction to run cargo
-	# echo """(cd rust && cargo run --bin "${rust_bin}")"""
+	# echo """"""
 
 	open_file_in_editor "${rust_src_file}"
 fi
@@ -187,5 +190,10 @@ if [ "${git_add}" = "1" ]; then
 	git status
 	git add "${puzzle_file}" "${input_file}" "${answer_file}" "${stats_file}" "${python_script_file}" "${rust_src_file}" "${cargo_file}" "${readme_file}"
 	git status
-	echo "Commit with: 'git commit -m \"Year ${year} - Day ${day} - Getting started\"'"
+	commit_title="Year ${year} - Day ${day} - Getting started"
+	if [ "${git_commit}" = "1" ]; then
+	   git commit -m "${commit_title}"
+	else
+	   echo "Commit with: 'git commit -m \"${commit_title}\"'"
+	fi
 fi

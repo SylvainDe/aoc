@@ -68,6 +68,9 @@ clippy_checks="-D clippy::all
 -A clippy::min_ident_chars
 -A clippy::single_call_fn"
 
+# Move to correct directory
+cd "$(dirname "$0")"
+
 # Run cargo commands
 if [ "${do_check}" = "1" ]; then
     cargo check --lib
