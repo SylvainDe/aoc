@@ -1,5 +1,5 @@
 # Output for Rust update script
-rust/update_*.txt
+rust/updates/update_*.txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
