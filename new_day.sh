@@ -10,10 +10,8 @@ day="${1:-$real_day}"
 year="${2:-$real_year}"
 
 # Configuration
-browser="firefox"  # Can be left empty
-editor="vim"  # Can be left empty
-browser=""
-editor=""
+browser="${aoc_browswer:-}"  # For example: '' or 'firefox'
+editor="${aoc_editor:-}"     # For example: '' or 'vim'
 
 get_input="1"
 overwrite_input="0"
@@ -74,12 +72,15 @@ rust_src_file="rust/${rust_src_file_rel}"
 cargo_file="rust/Cargo.toml"
 readme_file="README.md"
 
+files_to_open_in_editor=()
+
 # Get input file
 get_url_and_save() {
 	url="${1}"
 	dest="${2}"
 	overwrite="${3}"
 	cleanup="${4}"
+	files_to_open_in_editor+=("${dest}")
 	# echo "About to save ${url} in ${dest}"
 	mkdir -p $(dirname "${dest}")
 	if [ "${overwrite}" == "0" -a -f "${dest}" ]; then
@@ -119,6 +120,7 @@ create_code_from_template() {
 	dest="${2}"
 	overwrite="${3}"
 
+	files_to_open_in_editor+=("${dest}")
 	if [ "${overwrite}" == "0" -a -f "${dest}" ]; then
 		echo "Script file ${dest} already exists - ignored."
 		return
@@ -135,15 +137,6 @@ create_code_from_template() {
 	sed -i "s#${answer_example}#${answer_file}#g" "${dest}"
 }
 
-open_file_in_editor() {
-	filename="${1}"
-	if [ -z "${editor}" ]; then
-		echo "No editor set to open ${filename} - ignored."
-	else
-		"${editor}" "${filename}"
-	fi
-}
-
 # Count lines in input files to use the most relevant template
 nb_lines="$(cat "${input_file}" | wc -l)"
 
@@ -155,7 +148,6 @@ if [ "${create_python}" = "1" ]; then
 	esac
 	create_code_from_template "${python_template}" "${python_script_file}" "${overwrite_python}"
 	echo "Run Python solution with 'python3 ${python_script_file}'"
-	open_file_in_editor "${python_script_file}"
 fi
 
 # Create Rust file
@@ -173,11 +165,6 @@ if [ "${create_rust}" = "1" ]; then
 
 	create_code_from_template "${rust_template}" "${rust_src_file}" "${overwrite_rust}"
 	echo "Run Rust solution with './rust/one_day.sh ${day} ${year}' or '(cd rust && cargo run --bin "${rust_bin}")'"
-
-	# Instruction to run cargo
-	# echo """"""
-
-	open_file_in_editor "${rust_src_file}"
 fi
 
 # Generate README
@@ -196,4 +183,11 @@ if [ "${git_add}" = "1" ]; then
 	else
 	   echo "Commit with: 'git commit -m \"${commit_title}\"'"
 	fi
+fi
+
+# Open files in editor
+if [ -z "${editor}" ]; then
+	echo "No editor set to open ${files_to_open_in_editor[@]} - ignored."
+else
+	"${editor}" "${files_to_open_in_editor[@]}"
 fi
