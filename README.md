@@ -14,8 +14,8 @@ Solutions are written in Python and/or Rust.
 |---|---|---|---|---|---|---|---|
 |Day 1: Historian Hysteria|[Problem](https://adventofcode.com/2024/day/1) [Input](https://adventofcode.com/2024/day/1/input)|[puzzle.html](resources/year2024_day1_puzzle.html) [input.txt](resources/year2024_day1_input.txt)|**|[day1.py](python/2024/day1.py)|[-](rust/src/2024/day1.rs)|00:17:51|00:21:33|
 |Day 2: Red-Nosed Reports|[Problem](https://adventofcode.com/2024/day/2) [Input](https://adventofcode.com/2024/day/2/input)|[puzzle.html](resources/year2024_day2_puzzle.html) [input.txt](resources/year2024_day2_input.txt)|**|[day2.py](python/2024/day2.py)|[-](rust/src/2024/day2.rs)|03:23:21|03:29:20|
-|Day 3: Mull It Over|[Problem](https://adventofcode.com/2024/day/3) [Input](https://adventofcode.com/2024/day/3/input)|[puzzle.html](resources/year2024_day3_puzzle.html) [input.txt](resources/year2024_day3_input.txt)||[-](python/2024/day3.py)|[-](rust/src/2024/day3.rs)|-|-|
-|[2024](https://adventofcode.com/2024)|[Stats](https://adventofcode.com/2024/leaderboard/self)|[stats.txt](misc/leaderboard_self_2024.html)|4|-|-|-|-|
+|Day 3: Mull It Over|[Problem](https://adventofcode.com/2024/day/3) [Input](https://adventofcode.com/2024/day/3/input)|[puzzle.html](resources/year2024_day3_puzzle.html) [input.txt](resources/year2024_day3_input.txt)|**|[day3.py](python/2024/day3.py)|[-](rust/src/2024/day3.rs)|00:09:42|00:16:54|
+|[2024](https://adventofcode.com/2024)|[Stats](https://adventofcode.com/2024/leaderboard/self)|[stats.txt](misc/leaderboard_self_2024.html)|6|-|-|-|-|
 
 ## [2023](https://adventofcode.com/2023)
 |Day|URLs|Puzzle & Input|Stars|Python|Rust|Time part 1|Time part 2|
@@ -292,7 +292,7 @@ Solutions are written in Python and/or Rust.
 |---|---|---|---|---|---|---|---|---|---|---|---|
 |1|**|**|**|**|**|**|**|**|**|**|20: ********************|
 |2|**|**|**|**|**|**|**|**|**|**|20: ********************|
-|3|**|**|**|**|**|**|**|**|**||18: ******************|
+|3|**|**|**|**|**|**|**|**|**|**|20: ********************|
 |4|**|**|**|**|**|**|**|**|**||18: ******************|
 |5|**|**|**|**|**|**|**|**|**||18: ******************|
 |6|**|**|**|**|**|**|**|**|**||18: ******************|
@@ -315,4 +315,4 @@ Solutions are written in Python and/or Rust.
 |23||**||||**|*|**||| 7: *******|
 |24||**|||**|**||**|*|| 9: *********|
 |25|*|*||*||**|*|**||| 8: ********|
-|Total|30|48|28|23|28|50|46|50|39|4|346|
+|Total|30|48|28|23|28|50|46|50|39|6|348|
