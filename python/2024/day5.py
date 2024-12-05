@@ -48,13 +48,26 @@ def is_in_order(update, rules):
         if seen.intersection(expected_after):
             return False
         seen.add(p)
-    # TODO
     return True
 
+
+def order(update, rules):
+    full_order = get_full_ordering(rules, update)
+    seen = []
+    for i in range(len(update)):
+        cand = set()
+        for p, after in full_order.items():
+            if p not in seen and all(a in seen for a in after):
+                cand.add(p)
+        assert len(cand) == 1
+        seen.append(cand.pop())
+    return list(reversed(seen))
 
 def get_part1(rules, updates):
     return sum(up[len(up)//2] for up in updates if is_in_order(up, rules))
 
+def get_part2(rules, updates):
+    return sum(order(up, rules)[len(up)//2] for up in updates if not is_in_order(up, rules))
 
 def run_tests():
     rules, updates = get_input_data_from_lines(
@@ -87,12 +100,14 @@ def run_tests():
 61,13,29
 97,13,75,29,47"""
     )
-    print(get_part1(rules, updates) == 143)
+    assert get_part1(rules, updates) == 143
+    assert get_part2(rules, updates) == 123
 
 
 def get_solutions():
     rules, updates = get_input_data_from_file()
-    print(get_part1(rules, updates))
+    print(get_part1(rules, updates) == 6034)
+    print(get_part2(rules, updates) == 6305)
 
 
 if __name__ == "__main__":
