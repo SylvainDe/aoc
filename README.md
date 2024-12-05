@@ -16,7 +16,7 @@ Solutions are written in Python and/or Rust.
 |Day 2: Red-Nosed Reports|[Problem](https://adventofcode.com/2024/day/2) [Input](https://adventofcode.com/2024/day/2/input)|[puzzle.html](resources/year2024_day2_puzzle.html) [input.txt](resources/year2024_day2_input.txt)|**|[day2.py](python/2024/day2.py)|[-](rust/src/2024/day2.rs)|03:23:21|03:29:20|
 |Day 3: Mull It Over|[Problem](https://adventofcode.com/2024/day/3) [Input](https://adventofcode.com/2024/day/3/input)|[puzzle.html](resources/year2024_day3_puzzle.html) [input.txt](resources/year2024_day3_input.txt)|**|[day3.py](python/2024/day3.py)|[-](rust/src/2024/day3.rs)|00:09:42|00:16:54|
 |Day 4: Ceres Search|[Problem](https://adventofcode.com/2024/day/4) [Input](https://adventofcode.com/2024/day/4/input)|[puzzle.html](resources/year2024_day4_puzzle.html) [input.txt](resources/year2024_day4_input.txt)|**|[day4.py](python/2024/day4.py)|[-](rust/src/2024/day4.rs)|03:24:11|04:02:51|
-|Day 5: Print Queue|[Problem](https://adventofcode.com/2024/day/5) [Input](https://adventofcode.com/2024/day/5/input)|[puzzle.html](resources/year2024_day5_puzzle.html) [input.txt](resources/year2024_day5_input.txt)||[-](python/2024/day5.py)|[-](rust/src/2024/day5.rs)|-|-|
+|Day 5: Print Queue|[Problem](https://adventofcode.com/2024/day/5) [Input](https://adventofcode.com/2024/day/5/input)|[puzzle.html](resources/year2024_day5_puzzle.html) [input.txt](resources/year2024_day5_input.txt)||[day5.py](python/2024/day5.py)|[-](rust/src/2024/day5.rs)|-|-|
 |[2024](https://adventofcode.com/2024)|[Stats](https://adventofcode.com/2024/leaderboard/self)|[stats.txt](misc/leaderboard_self_2024.html)|8|-|-|-|-|
 
 ## [2023](https://adventofcode.com/2023)
