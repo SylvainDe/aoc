@@ -23,8 +23,31 @@ def get_input_data_from_file(file_path=top_dir + "resources/year2024_day5_input.
         return get_input_data_from_lines(f.read())
 
 
+def get_full_ordering(rules, update):
+    update = set(update)
+    order = collections.defaultdict(set)
+    for a, b in rules:
+        if a in update and b in update:
+            s = order[a]
+            objects_to_add = set([b])
+            while objects_to_add:
+                b = objects_to_add.pop()
+                if b not in s:
+                    s.add(b)
+                    objects_to_add.update(order[b])
+    for p, dep in order.items():
+        assert p not in dep
+    return order
+
+
 def is_in_order(update, rules):
-    seens = set()
+    seen = set()
+    full_order = get_full_ordering(rules, update)
+    for p in update:
+        expected_after = full_order[p]
+        if seen.intersection(expected_after):
+            return False
+        seen.add(p)
     # TODO
     return True
 
