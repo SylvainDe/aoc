@@ -6,6 +6,7 @@ import collections
 
 top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
+
 def get_grid_from_lines(string):
     start = None
     dest = None

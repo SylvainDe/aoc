@@ -21,13 +21,22 @@ def get_bidded_hands_from_file(file_path=top_dir + "resources/year2023_day7_inpu
         return get_bidded_hands_from_lines(f.read())
 
 
-HIGH_CARD, ONE_PAIR, TWO_PAIR, THREE_OF_A_KIND, FULL_HOUSE, FOUR_OF_A_KIND, FIVE_OF_A_KIND = range(7)
+(
+    HIGH_CARD,
+    ONE_PAIR,
+    TWO_PAIR,
+    THREE_OF_A_KIND,
+    FULL_HOUSE,
+    FOUR_OF_A_KIND,
+    FIVE_OF_A_KIND,
+) = range(7)
+
 
 def get_rank(hand, use_joker):
     c = collections.Counter(hand)
     if use_joker:
-        nb_joker = c['J']
-        c['J'] = 0
+        nb_joker = c["J"]
+        c["J"] = 0
     else:
         nb_joker = 0
     l = [nb for _, nb in c.most_common()]
@@ -42,17 +51,22 @@ def get_rank(hand, use_joker):
         return TWO_PAIR if l[1] == 2 else ONE_PAIR
     return HIGH_CARD
 
-card_values_no_joker = dict(zip(reversed('AKQJT98765432'), itertools.count(2)))
-card_values_with_joker = dict(zip(reversed('AKQT98765432J'), itertools.count(2)))
+
+card_values_no_joker = dict(zip(reversed("AKQJT98765432"), itertools.count(2)))
+card_values_with_joker = dict(zip(reversed("AKQT98765432J"), itertools.count(2)))
+
 
 def get_sorting_key(hand, use_joker):
     card_values = card_values_with_joker if use_joker else card_values_no_joker
     return get_rank(hand, use_joker), [card_values[c] for c in hand]
 
+
 def find_winning(bidded_hands, use_joker):
-    sorted_hands = sorted(bidded_hands, key=lambda bh: get_sorting_key(bh[0], use_joker))
-    return sum(i * bid
-               for i, (_, bid) in enumerate(sorted_hands, start=1))
+    sorted_hands = sorted(
+        bidded_hands, key=lambda bh: get_sorting_key(bh[0], use_joker)
+    )
+    return sum(i * bid for i, (_, bid) in enumerate(sorted_hands, start=1))
+
 
 def run_tests():
     bidded_hands = get_bidded_hands_from_lines(
@@ -64,6 +78,7 @@ QQQJA 483"""
     )
     assert find_winning(bidded_hands, False) == 6440
     assert find_winning(bidded_hands, True) == 5905
+
 
 def get_solutions():
     bidded_hands = get_bidded_hands_from_file()

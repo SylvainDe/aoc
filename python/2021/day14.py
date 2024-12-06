@@ -6,6 +6,7 @@ import collections
 
 top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
+
 def get_pair_insertion_rules(line, sep=" -> "):
     left, mid, right = line.partition(sep)
     assert mid == sep

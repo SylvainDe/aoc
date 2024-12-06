@@ -6,31 +6,31 @@ import itertools
 
 top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
+
 def get_grid_from_file(file_path=top_dir + "resources/year2023_day3_input.txt"):
     with open(file_path) as f:
         return [l.strip() for l in f]
 
 
-
 def run_tests():
     grid = [
-"467..114..",
-"...*......",
-"..35..633.",
-"......#...",
-"617*......",
-".....+.58.",
-"..592.....",
-"......755.",
-"...$.*....",
-".664.598..",
+        "467..114..",
+        "...*......",
+        "..35..633.",
+        "......#...",
+        "617*......",
+        ".....+.58.",
+        "..592.....",
+        "......755.",
+        "...$.*....",
+        ".664.598..",
     ]
     assert get_part_numbers(grid) == 4361
     assert get_gears(grid) == 467835
     grid = [
-"467..114..",
-"..........",
-"......*123",
+        "467..114..",
+        "..........",
+        "......*123",
     ]
     assert get_part_numbers(grid) == 123
 
@@ -61,15 +61,21 @@ def get_data_from_grid(grid):
 
 
 def get_adjacent_symbols(row, beg, end, symbols):
-    return [(pos, symbols[pos])
-            for pos in itertools.product(range(row - 1, row + 1 + 1), range(beg - 1 , end + 1))
-            if pos in symbols]
+    return [
+        (pos, symbols[pos])
+        for pos in itertools.product(
+            range(row - 1, row + 1 + 1), range(beg - 1, end + 1)
+        )
+        if pos in symbols
+    ]
 
 
 def get_parts(grid):
     symbols, numbers = get_data_from_grid(grid)
-    return [(n, get_adjacent_symbols(row, beg, end, symbols))
-            for row, beg, end, n in numbers]
+    return [
+        (n, get_adjacent_symbols(row, beg, end, symbols))
+        for row, beg, end, n in numbers
+    ]
 
 
 def get_part_numbers(grid):
@@ -89,6 +95,7 @@ def get_solutions():
     grid = get_grid_from_file()
     print(get_part_numbers(grid) == 526404)
     print(get_gears(grid) == 84399773)
+
 
 if __name__ == "__main__":
     begin = datetime.datetime.now()

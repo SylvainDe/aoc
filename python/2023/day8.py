@@ -35,10 +35,12 @@ def get_steps_to_reach(instr, nodes, begin, ends):
             return
         yield pos
         left, right = nodes[pos]
-        pos = left if i == 'L' else right
+        pos = left if i == "L" else right
+
 
 def get_nb_steps_part1(instr, nodes):
     return len(list(get_steps_to_reach(instr, nodes, "AAA", {"ZZZ"})))
+
 
 def get_steps_to_reach_ghost_naive(instr, nodes, begin="A", end="Z"):
     pos = {n for n in nodes if n.endswith(begin)}
@@ -46,8 +48,9 @@ def get_steps_to_reach_ghost_naive(instr, nodes, begin="A", end="Z"):
         if all(p.endswith(end) for p in pos):
             return
         yield pos
-        idx = 0 if i == 'L' else 1
+        idx = 0 if i == "L" else 1
         pos = {nodes[p][idx] for p in pos}
+
 
 def lcm(a, b):
     """Computes lcm for 2 numbers."""
@@ -57,6 +60,7 @@ def lcm(a, b):
 def lcmm(*args):
     """Computes lcm for numbers."""
     return functools.reduce(lcm, args)
+
 
 def get_nb_steps_to_reach_ghost(instr, nodes, begin="A", end="Z"):
     ends = {n for n in nodes if n.endswith(end)}

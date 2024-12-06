@@ -26,8 +26,9 @@ def separate_in_2_groups(components):
     links = set()
     for n1, lst in components:
         for n2 in lst:
-             links.add((n1, n2))
+            links.add((n1, n2))
     print(links)
+
 
 def run_tests():
     components = get_components_from_lines(
@@ -47,9 +48,11 @@ frs: qnr lhk lsr"""
     )
     print(separate_in_2_groups(components))
 
+
 def get_solutions():
     components = get_components_from_file()
     # print(components)
+
 
 if __name__ == "__main__":
     begin = datetime.datetime.now()

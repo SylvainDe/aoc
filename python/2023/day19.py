@@ -13,19 +13,22 @@ def get_rule_from_string(string):
     else:
         condition, dest = l
         name, op, nb = condition[0], condition[1], int(condition[2:])
-        assert name in ('xmas')
-        assert op in ('<>')
+        assert name in ("xmas")
+        assert op in ("<>")
         condition = (name, op, nb)
     return condition, dest
+
 
 def get_workflow_from_line(string):
     name, rules = string.split("{")
     rules = [get_rule_from_string(s) for s in rules[:-1].split(",")]
     return name, rules
 
+
 def get_part_from_line(string):
     ratings = (s.split("=") for s in string[1:-1].split(","))
     return {k: int(v) for k, v in ratings}
+
 
 def get_workflows_and_parts_from_lines(string):
     workflows, parts = string.split("\n\n")
@@ -33,9 +36,13 @@ def get_workflows_and_parts_from_lines(string):
     parts = [get_part_from_line(l) for l in parts.splitlines()]
     return workflows, parts
 
-def get_workflows_and_parts_from_file(file_path=top_dir + "resources/year2023_day19_input.txt"):
+
+def get_workflows_and_parts_from_file(
+    file_path=top_dir + "resources/year2023_day19_input.txt",
+):
     with open(file_path) as f:
         return get_workflows_and_parts_from_lines(f.read())
+
 
 def evaluate_rule_for_part(rule, part):
     cond, dest = rule
@@ -43,24 +50,27 @@ def evaluate_rule_for_part(rule, part):
         return dest
     name, op, nb = cond
     val = part[name]
-    if op == '>':
+    if op == ">":
         big, small = val, nb
     else:
         big, small = nb, val
     return dest if big > small else None
 
-def get_status(part, workflows, start='in'):
+
+def get_status(part, workflows, start="in"):
     for rule in workflows[start]:
         dest = evaluate_rule_for_part(rule, part)
         if dest is not None:
             if dest in workflows:
                 return get_status(part, workflows, dest)
             else:
-                assert dest in ('AR')
+                assert dest in ("AR")
                 return dest
 
+
 def get_accepted_parts_sum(parts, workflows):
-    return sum(sum(p.values()) for p in parts if get_status(p, workflows) == 'A')
+    return sum(sum(p.values()) for p in parts if get_status(p, workflows) == "A")
+
 
 def get_nb_accepted_combinations(workflows):
     # TODO:
@@ -69,6 +79,7 @@ def get_nb_accepted_combinations(workflows):
     # independant so this will not work (this is the reason why 167409079868000
     # can not be written as the product of 3 smallish numbers)
     pass
+
 
 def run_tests():
     workflows, parts = get_workflows_and_parts_from_lines(
@@ -93,10 +104,12 @@ hdj{m>838:A,pv}
     assert get_accepted_parts_sum(parts, workflows) == 19114
     print(get_nb_accepted_combinations(workflows), 167409079868000)
 
+
 def get_solutions():
     workflows, parts = get_workflows_and_parts_from_file()
     print(get_accepted_parts_sum(parts, workflows) == 406849)
     print(get_nb_accepted_combinations(workflows))
+
 
 if __name__ == "__main__":
     begin = datetime.datetime.now()

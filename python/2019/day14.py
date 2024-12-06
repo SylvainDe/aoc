@@ -8,6 +8,7 @@ import math
 
 top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
+
 def get_quantity_and_chemical(s):
     nb, chem = s.split(" ")
     return (int(nb), chem)

@@ -6,6 +6,7 @@ import json
 
 top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
+
 def get_json_from_line(string):
     return json.loads(string)
 

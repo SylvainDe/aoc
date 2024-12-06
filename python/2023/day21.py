@@ -23,7 +23,9 @@ def get_garden_from_file(file_path=top_dir + "resources/year2023_day21_input.txt
     with open(file_path) as f:
         return get_garden_from_lines(f.read())
 
+
 neighbours = [(-1, 0), (+1, 0), (0, -1), (0, +1)]
+
 
 def get_nb_plots(garden_plot, nb_steps):
     grid, start = garden_plot
@@ -34,12 +36,13 @@ def get_nb_plots(garden_plot, nb_steps):
         new_positions = set()
         for i, j in positions:
             for di, dj in neighbours:
-                pos2 = (i+di, j+dj)
+                pos2 = (i + di, j + dj)
                 if pos2 in grid:
                     new_positions.add(pos2)
         positions = new_positions
     # print(len(positions))
     return len(positions)
+
 
 def run_tests():
     garden = get_garden_from_lines(
@@ -59,6 +62,7 @@ def run_tests():
     assert get_nb_plots(garden, 2) == 4
     assert get_nb_plots(garden, 3) == 6
     assert get_nb_plots(garden, 6) == 16
+
 
 def get_solutions():
     garden = get_garden_from_file()

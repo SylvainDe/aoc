@@ -11,11 +11,13 @@ Almanach = collections.namedtuple("Almanach", ("seeds", "mappings"))
 Mapping = collections.namedtuple("Mapping", ("src", "dst", "ranges"))
 Range = collections.namedtuple("Range", ("dst_start", "src_start", "length"))
 
+
 def get_seeds_from_first_line(string):
     before, mid, seeds = string.partition("seeds: ")
     assert before == ""
     assert mid == "seeds: "
     return [int(s) for s in seeds.split()]
+
 
 def get_map_from_string(string):
     lst = string.split("\n")
@@ -23,19 +25,24 @@ def get_map_from_string(string):
     src, mid, dst = name.partition("-to-")
     assert mid == "-to-"
     return Mapping(
-        src, dst,
-        ranges = [Range._make(int(s) for s in r.split(" ")) for r in lst[1:] if r])
+        src,
+        dst,
+        ranges=[Range._make(int(s) for s in r.split(" ")) for r in lst[1:] if r],
+    )
+
 
 def get_almanach_from_string(string):
     parts = string.split("\n\n")
     mappings = [get_map_from_string(m) for m in parts[1:]]
     return Almanach(
-        seeds = get_seeds_from_first_line(parts[0]),
-        mappings = {m.src: m for m in mappings})
+        seeds=get_seeds_from_first_line(parts[0]), mappings={m.src: m for m in mappings}
+    )
+
 
 def get_almanach_from_file(file_path=top_dir + "resources/year2023_day5_input.txt"):
     with open(file_path) as f:
         return get_almanach_from_string(f.read())
+
 
 def convert_resource_with_mapping(value, mapping):
     for dst_start, src_start, length in mapping.ranges:
@@ -43,6 +50,7 @@ def convert_resource_with_mapping(value, mapping):
         if src_start <= value < src_end:
             return value - src_start + dst_start
     return value
+
 
 def convert_small_range_with_mapping(small_range, mapping):
     beg, end = small_range
@@ -56,10 +64,12 @@ def convert_small_range_with_mapping(small_range, mapping):
             return (beg + shift, end + shift)
     return small_range
 
+
 def pairwise(iterable):
     "s -> (s0, s1), (s2, s3), (s4, s5), ..."
     a = iter(iterable)
     return zip(a, a)
+
 
 def convert_ranges_with_mapping(ranges, mapping):
     # Find limits
@@ -74,13 +84,14 @@ def convert_ranges_with_mapping(ranges, mapping):
         new_ranges = set()
         for beg, end in ranges:
             if beg < l <= end:
-                new_ranges.add((beg, l-1))
+                new_ranges.add((beg, l - 1))
                 new_ranges.add((l, end))
             else:
                 new_ranges.add((beg, end))
         ranges = new_ranges
     # Convert ranges
     return set(convert_small_range_with_mapping(r, mapping) for r in ranges)
+
 
 def get_locations_for_seeds(almanach):
     res, res_name = set(almanach.seeds), "seed"
@@ -92,6 +103,7 @@ def get_locations_for_seeds(almanach):
     assert res_name == "location"
     return res
 
+
 def get_locations_for_seed_ranges(almanach):
     res_name = "seed"
     res = [(start, start + length) for start, length in pairwise(almanach.seeds)]
@@ -102,6 +114,7 @@ def get_locations_for_seed_ranges(almanach):
         res_name = m.dst
     assert res_name == "location"
     return res
+
 
 def run_tests():
     almanach = get_almanach_from_string(

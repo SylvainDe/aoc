@@ -24,12 +24,12 @@ def transpose(numbers):
 
 
 def get_total_distance(numbers):
-    list1, list2 = transpose(numbers) 
+    list1, list2 = transpose(numbers)
     return sum(abs(i1 - i2) for i1, i2 in zip(sorted(list1), sorted(list2)))
 
 
 def get_similarities(numbers):
-    list1, list2 = transpose(numbers) 
+    list1, list2 = transpose(numbers)
     count2 = Counter(list2)
     return sum(n * count2[n] for n in list1)
 

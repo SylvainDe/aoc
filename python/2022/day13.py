@@ -7,6 +7,7 @@ import ast
 
 top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
+
 def get_packets_from_line(string):
     return tuple(ast.literal_eval(s) for s in string.split("\n"))
 

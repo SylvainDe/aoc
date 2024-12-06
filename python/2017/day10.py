@@ -7,6 +7,7 @@ import operator
 
 top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
+
 def get_first_line(file_path=top_dir + "resources/year2017_day10_input.txt"):
     with open(file_path) as f:
         for l in f:

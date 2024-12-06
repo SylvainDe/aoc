@@ -8,6 +8,7 @@ import math
 
 top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
+
 def get_pos_from_str(s):
     for c in "<>xyz= ":
         s = s.replace(c, "")

@@ -28,13 +28,16 @@ def pairwise(iterable):
         yield a, b
         a = b
 
+
 def is_safe(report):
-    return any(sorted(report, reverse=b) == report for b in [True, False]) and all(1 <= abs(a - b) <= 3 for a, b in pairwise(report))
+    return any(sorted(report, reverse=b) == report for b in [True, False]) and all(
+        1 <= abs(a - b) <= 3 for a, b in pairwise(report)
+    )
 
 
 def is_safe2(report):
     # Not the most efficient solution
-    return any(is_safe(report[:i] + report[i+1:]) for i in range(len(report)))
+    return any(is_safe(report[:i] + report[i + 1 :]) for i in range(len(report)))
 
 
 def get_nb_safe_reports(reports):

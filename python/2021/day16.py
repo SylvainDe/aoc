@@ -8,6 +8,7 @@ import operator
 
 top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
+
 def get_str_from_file(file_path=top_dir + "resources/year2021_day16_input.txt"):
     with open(file_path) as f:
         for l in f:

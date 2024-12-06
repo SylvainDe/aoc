@@ -7,6 +7,7 @@ import collections
 
 top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
+
 def get_point_from_line(string):
     return tuple(int(s) for s in string.split(","))
 

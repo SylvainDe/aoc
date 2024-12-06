@@ -14,6 +14,7 @@ def get_grid_from_file(file_path=top_dir + "resources/year2023_day14_input.txt")
     with open(file_path) as f:
         return get_grid_from_lines(f.read())
 
+
 ROUND = "O"
 EMPTY = "."
 CUBE = "#"
@@ -33,6 +34,7 @@ def extracts_rounds(grid):
                 row[j] = EMPTY
     return rounds
 
+
 def find_destination(grid, pos, direction):
     dx, dy = direction
     x, y = pos
@@ -48,20 +50,28 @@ def find_destination(grid, pos, direction):
                     continue
         return x, y
 
+
 def tilt_direction(grid, direction):
     dx, dy = direction
     grid = [list(s) for s in grid]
-    for pos in sorted(extracts_rounds(grid), key=lambda p: dx * p[0] + dy * p[1], reverse=True):
+    for pos in sorted(
+        extracts_rounds(grid), key=lambda p: dx * p[0] + dy * p[1], reverse=True
+    ):
         x, y = find_destination(grid, pos, direction)
         grid[x][y] = ROUND
     return grid
 
+
 def get_load_for_grid(grid):
-    return sum(i * sum(c == ROUND for c in row)
-               for i, row in enumerate(reversed(grid), start=1))
+    return sum(
+        i * sum(c == ROUND for c in row)
+        for i, row in enumerate(reversed(grid), start=1)
+    )
+
 
 def get_load_after_tilt(grid):
     return get_load_for_grid(tilt_direction(grid, N))
+
 
 def get_load_after_cycles(grid, nb_cycle):
     seen = dict()
@@ -133,6 +143,7 @@ O.#..O.#.#
     assert get_load_after_cycles(grid, 2) == get_load_for_grid(grid_after_2_cycle)
     assert get_load_after_cycles(grid, 3) == get_load_for_grid(grid_after_3_cycle)
     assert get_load_after_cycles(grid, 1000000000) == 64
+
 
 def get_solutions():
     grid = get_grid_from_file()

@@ -18,15 +18,21 @@ def get_sequences_from_file(file_path=top_dir + "resources/year2023_day9_input.t
     with open(file_path) as f:
         return get_sequences_from_lines(f.read())
 
+
 def get_interpolated_value(sequence):
     if not any(sequence):
         return 0
-    return sequence[-1] + get_interpolated_value([b - a for a, b in zip(sequence, sequence[1:])])
+    return sequence[-1] + get_interpolated_value(
+        [b - a for a, b in zip(sequence, sequence[1:])]
+    )
 
 
 def get_interpolated_sum(sequences, forward):
-    return sum(get_interpolated_value(seq if forward else list(reversed(seq)))
-               for seq in sequences)
+    return sum(
+        get_interpolated_value(seq if forward else list(reversed(seq)))
+        for seq in sequences
+    )
+
 
 def run_tests():
     sequences = get_sequences_from_lines(

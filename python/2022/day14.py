@@ -6,6 +6,7 @@ import itertools
 
 top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
+
 def get_segments_from_line(string):
     return [tuple(int(c) for c in c.split(",")) for c in string.split(" -> ")]
 

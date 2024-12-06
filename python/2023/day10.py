@@ -14,6 +14,7 @@ def get_grid_from_file(file_path=top_dir + "resources/year2023_day10_input.txt")
     with open(file_path) as f:
         return get_grid_from_lines(f.read())
 
+
 N = (-1, 0)
 S = (+1, 0)
 W = (0, -1)
@@ -26,7 +27,7 @@ connectors = {
     "J": [N, W],  # a 90-degree bend connecting north and west.
     "7": [S, W],  # a 90-degree bend connecting south and west.
     "F": [S, E],  # a 90-degree bend connecting south and east.
-    ".": [],      # ground; there is no pipe in this tile."
+    ".": [],  # ground; there is no pipe in this tile."
 }
 
 
@@ -40,7 +41,7 @@ def get_data(grid):
                 start = pos
             else:
                 for di, dj in connectors[cell]:
-                    pos2 = (i+di, j+dj)
+                    pos2 = (i + di, j + dj)
                     connections.setdefault(pos2, set()).add(pos)
     for p, lst in connections.items():
         if p == start:
@@ -116,6 +117,7 @@ def get_enclosed_tiles(grid):
         assert not inside
     return len(enclosed)
 
+
 def run_tests():
     grid = get_grid_from_lines(
         """.....
@@ -143,7 +145,8 @@ LJ..."""
 .|..|.|..|.
 .L--J.L--J.
 ...........
-""")
+"""
+    )
     assert get_enclosed_tiles(grid) == 4
     grid = get_grid_from_lines(
         """.F----7F7F7F7F-7....
@@ -155,7 +158,8 @@ L--J.L7...LJS7F-7L7.
 ....L7.F7||L7|.L7L7|
 .....|FJLJ|FJ|F7|.LJ
 ....FJL-7.||.||||...
-....L---J.LJ.LJLJ...""")
+....L---J.LJ.LJLJ..."""
+    )
     assert get_enclosed_tiles(grid) == 8
     grid = get_grid_from_lines(
         """FF7FSF7F7F7F7F7F---7
@@ -167,16 +171,16 @@ L---JF-JLJ.||-FJLJJ7
 |FFJF7L7F-JF7|JL---7
 7-L-JL7||F7|L7F-7F7|
 L.L7LFJ|||||FJL7||LJ
-L7JLJL-JLJLJL--JLJ.L""")
+L7JLJL-JLJLJL--JLJ.L"""
+    )
     assert get_enclosed_tiles(grid) == 10
-
-
 
 
 def get_solutions():
     grid = get_grid_from_file()
     print(get_distance_to_furthest(grid) == 6979)
     print(get_enclosed_tiles(grid) == 443)
+
 
 if __name__ == "__main__":
     begin = datetime.datetime.now()

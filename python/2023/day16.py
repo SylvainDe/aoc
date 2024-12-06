@@ -22,6 +22,7 @@ def get_grid_from_file(file_path=top_dir + "resources/year2023_day16_input.txt")
     with open(file_path) as f:
         return get_grid_from_lines(f.read())
 
+
 N = (-1, 0)
 S = (+1, 0)
 W = (0, -1)
@@ -82,15 +83,17 @@ def get_beam_paths(grid, starting_beam):
             return beam_paths
         beam_ends = new_beam_ends
 
+
 def show_grid(grid):
     xs = [p[0] for p in grid]
     ys = [p[1] for p in grid]
-    for i in range(min(xs), max(xs)+1):
-        for j in range(min(ys), max(ys)+1):
+    for i in range(min(xs), max(xs) + 1):
+        for j in range(min(ys), max(ys) + 1):
             pos = (i, j)
             print(grid.get(pos, "#"), end="")
         print()
     print()
+
 
 def show_paths(paths):
     positions_values = dict()
@@ -98,8 +101,8 @@ def show_paths(paths):
         positions_values.setdefault(pos, []).append(direct)
     xs = [p[0] for p in positions_values]
     ys = [p[1] for p in positions_values]
-    for i in range(min(xs), max(xs)+1):
-        for j in range(min(ys), max(ys)+1):
+    for i in range(min(xs), max(xs) + 1):
+        for j in range(min(ys), max(ys) + 1):
             pos = (i, j)
             directions = positions_values.get(pos, [])
             nb_directions = len(directions)
@@ -116,15 +119,17 @@ def show_paths(paths):
                 elif d == E:
                     value = "E"
                 else:
-                    1/0
+                    1 / 0
             else:
                 value = str(nb_directions)
             print(value, end="")
         print()
     print()
 
+
 def get_nb_energized_tiles(grid, start=((0, 0), E)):
     return len(set(pos for pos, _ in get_beam_paths(grid, start)))
+
 
 def get_max_nb_energized_tiles(grid):
     xs = [p[0] for p in grid]
@@ -143,6 +148,7 @@ def get_max_nb_energized_tiles(grid):
         if y == max_y:
             starts.append((pos, W))
     return max(get_nb_energized_tiles(grid, s) for s in starts)
+
 
 def run_tests():
     grid = get_grid_from_lines(

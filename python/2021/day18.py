@@ -6,6 +6,7 @@ import itertools
 
 top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
+
 def get_pair_from_str(s):
     digits = []
     pair = []

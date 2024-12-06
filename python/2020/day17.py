@@ -7,6 +7,7 @@ import collections
 
 top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
+
 def get_2d_points_from_string(string):
     return {
         (i, j)

@@ -6,6 +6,7 @@ import itertools
 
 top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
+
 def get_grid_from_lines(lines):
     for x, l in enumerate(lines):
         for y, v in enumerate(l.strip()):

@@ -6,6 +6,7 @@ import string
 
 top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
+
 def get_dance_from_line(string):
     return string.strip().split(",")
 

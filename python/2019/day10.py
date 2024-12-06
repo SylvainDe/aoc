@@ -6,6 +6,7 @@ import math
 
 top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
+
 def get_grid_from_file(file_path=top_dir + "resources/year2019_day10_input.txt"):
     with open(file_path) as f:
         return [l.strip() for l in f]

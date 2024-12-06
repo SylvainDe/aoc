@@ -7,6 +7,7 @@ import collections
 
 top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
+
 def get_location_from_line(string):
     return tuple(int(c) for c in string.split(", "))
 

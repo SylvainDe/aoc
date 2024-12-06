@@ -7,6 +7,7 @@ import collections
 
 top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
+
 def get_position_from_line(s):
     return int(s.split(": ")[-1])
 

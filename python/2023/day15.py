@@ -15,11 +15,13 @@ def get_lst_from_file(file_path=top_dir + "resources/year2023_day15_input.txt"):
         for l in f:
             return get_lst_from_line(l.strip())
 
+
 def get_hash(string):
     val = 0
     for c in string:
         val = (17 * (val + ord(c))) % 256
     return val
+
 
 def get_hash_sum(lst):
     return sum(get_hash(l) for l in lst)
@@ -38,7 +40,8 @@ def get_focusing_power_sum(lst):
     return sum(
         i * j * nb
         for i, box_lst in enumerate(boxes, start=1)
-        for j, (_, nb) in enumerate(box_lst, start=1))
+        for j, (_, nb) in enumerate(box_lst, start=1)
+    )
 
 
 def run_tests():

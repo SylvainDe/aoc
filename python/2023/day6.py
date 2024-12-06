@@ -8,9 +8,11 @@ import os
 
 top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
+
 def mult(iterable, start=1):
     """Returns the product of an iterable - like the sum builtin."""
     return functools.reduce(operator.mul, iterable, start)
+
 
 def get_races_from_lines(string):
     d = dict()
@@ -38,16 +40,19 @@ def get_nb_winning_ways(race):
     sq = math.sqrt(delta)
     x1 = (time - sq) / 2
     x2 = (time + sq) / 2
-    perfect_sq = (int(sq)**2 == delta)
+    perfect_sq = int(sq) ** 2 == delta
     return math.floor(x2) - math.ceil(x1) + (-1 if perfect_sq else 1)
+
 
 def get_nb_winning_ways_product(races):
     return mult(get_nb_winning_ways(r) for r in races)
+
 
 def get_new_race(races):
     time = int("".join(str(t) for t, _ in races))
     dist = int("".join(str(d) for _, d in races))
     return (time, dist)
+
 
 def run_tests():
     races = get_races_from_lines(
@@ -56,6 +61,7 @@ Distance:  9  40  200"""
     )
     assert get_nb_winning_ways_product(races) == 288
     assert get_nb_winning_ways(get_new_race(races)) == 71503
+
 
 def get_solutions():
     races = get_races_from_file()

@@ -6,6 +6,7 @@ import collections
 
 top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
+
 def get_fishes_from_file(file_path=top_dir + "resources/year2021_day6_input.txt"):
     with open(file_path) as f:
         for l in f:

@@ -6,6 +6,7 @@ import collections
 
 top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
+
 def get_line_from_str(s):
     return [int(d) for d in s.strip()]
 

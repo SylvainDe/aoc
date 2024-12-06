@@ -19,11 +19,12 @@ def get_grid_from_file(file_path=top_dir + "resources/year2024_day4_input.txt"):
 directions = [pos for pos in itertools.product((-1, 0, +1), repeat=2) if pos != (0, 0)]
 directions_diag = [pos for pos in itertools.product((-1, +1), repeat=2)]
 
+
 def is_word(word, pos, direction, grid_dict, start=0):
     x, y = pos
     dx, dy = direction
     return all(
-        grid_dict.get((x+(i-start)*dx, y+(i-start)*dy)) == c
+        grid_dict.get((x + (i - start) * dx, y + (i - start) * dy)) == c
         for i, c in enumerate(word)
     )
 
@@ -45,8 +46,14 @@ def get_number2(word, grid):
     crossing_pos = 1
     for pos, c in grid_dict.items():
         if c == word[crossing_pos]:
-            if sum(is_word(word, pos, d, grid_dict, crossing_pos) for d in directions_diag) == 2:
-                nb+=1
+            if (
+                sum(
+                    is_word(word, pos, d, grid_dict, crossing_pos)
+                    for d in directions_diag
+                )
+                == 2
+            ):
+                nb += 1
     return nb
 
 
@@ -71,6 +78,7 @@ def get_solutions():
     grid = get_grid_from_file()
     print(get_number("XMAS", grid) == 2551)
     print(get_number2("MAS", grid) == 1985)
+
 
 if __name__ == "__main__":
     begin = datetime.datetime.now()

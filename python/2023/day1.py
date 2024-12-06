@@ -6,6 +6,7 @@ import string
 
 top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
+
 def get_string_from_line(string):
     return string
 
@@ -19,7 +20,7 @@ def get_strings_from_file(file_path=top_dir + "resources/year2023_day1_input.txt
         return get_strings_from_lines(f.read())
 
 
-map_digits = { d: int(d) for d in string.digits }
+map_digits = {d: int(d) for d in string.digits}
 
 map_words = {
     "one": 1,
@@ -33,12 +34,14 @@ map_words = {
     "nine": 9,
 }
 
+
 def find_values(s, mapping):
     for i in range(len(s)):
         s2 = s[i:]
         for k, v in mapping.items():
             if s2.startswith(k):
                 yield v
+
 
 def get_calibration_value(s, mapping):
     digits_found = list(find_values(s, mapping))

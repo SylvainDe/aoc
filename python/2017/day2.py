@@ -6,6 +6,7 @@ import itertools
 
 top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
+
 def get_numbers_from_line(s):
     return [int(v) for v in s.split()]
 

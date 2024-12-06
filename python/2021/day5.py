@@ -6,6 +6,7 @@ import collections
 
 top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
+
 def get_point(string):
     x, y = string.split(",")
     return int(x), int(y)

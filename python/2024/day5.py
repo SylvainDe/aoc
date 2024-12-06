@@ -63,11 +63,16 @@ def order(update, rules):
         seen.append(cand.pop())
     return list(reversed(seen))
 
+
 def get_part1(rules, updates):
-    return sum(up[len(up)//2] for up in updates if is_in_order(up, rules))
+    return sum(up[len(up) // 2] for up in updates if is_in_order(up, rules))
+
 
 def get_part2(rules, updates):
-    return sum(order(up, rules)[len(up)//2] for up in updates if not is_in_order(up, rules))
+    return sum(
+        order(up, rules)[len(up) // 2] for up in updates if not is_in_order(up, rules)
+    )
+
 
 def run_tests():
     rules, updates = get_input_data_from_lines(

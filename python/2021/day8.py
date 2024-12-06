@@ -6,6 +6,7 @@ import collections
 
 top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
+
 def get_signals_from_str(l, sep=" | "):
     left, mid, right = l.strip().partition(sep)
     assert mid == sep

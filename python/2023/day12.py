@@ -12,6 +12,7 @@ FULL = "#"
 KNOWN_VALUES = {EMPTY, FULL}
 VALID_VALUES = {EMPTY, FULL, UNKNOWN}
 
+
 def get_record_from_line(string):
     chars, groups = string.split()
     return chars, [int(s) for s in groups.split(",")]
@@ -49,7 +50,9 @@ def get_nb_arrangements_wrapper(chars, groups):
     # print(chars, groups, ret)
     return ret
 
+
 import functools
+
 
 @functools.lru_cache()
 def get_nb_ways_split_number_in_buckets(n, nb_buckets):
@@ -60,7 +63,10 @@ def get_nb_ways_split_number_in_buckets(n, nb_buckets):
         return 1
     if nb_buckets == 0:
         return 0
-    return sum(get_nb_ways_split_number_in_buckets(n-i, nb_buckets-1) for i in range(n+1))
+    return sum(
+        get_nb_ways_split_number_in_buckets(n - i, nb_buckets - 1) for i in range(n + 1)
+    )
+
 
 def get_nb_arrangements(chars, groups):
     if not groups:
@@ -78,8 +84,11 @@ def get_nb_arrangements(chars, groups):
     first_g, other_g = groups[0], groups[1:]
     if first_c == FULL:
         expected_beg = "".join([FULL] * first_g + ([EMPTY] if other_g else []))
-        return get_nb_arrangements(chars[len(expected_beg):], other_g) \
-            if suffix_matches(expected_beg, chars) else 0
+        return (
+            get_nb_arrangements(chars[len(expected_beg) :], other_g)
+            if suffix_matches(expected_beg, chars)
+            else 0
+        )
     if first_c == EMPTY:
         return get_nb_arrangements(other_c, groups)
 
@@ -114,15 +123,18 @@ def get_nb_arrangements(chars, groups):
         mid_idx_idx = len(nonfull_indices) // 2
         assert 0 <= mid_idx_idx < len(nonfull_indices)
         mid_idx = nonfull_indices[mid_idx_idx]
-        left, right = chars[:mid_idx], chars[mid_idx+1:]
+        left, right = chars[:mid_idx], chars[mid_idx + 1 :]
         assert len(left) + 1 + len(right) == len(chars)
         mid_char = chars[mid_idx]
         if mid_char == UNKNOWN:
-            ret = get_nb_arrangements("".join(c if i != mid_idx else FULL for i, c in enumerate(chars)), groups)
+            ret = get_nb_arrangements(
+                "".join(c if i != mid_idx else FULL for i, c in enumerate(chars)),
+                groups,
+            )
         else:
             assert mid_char == EMPTY
             ret = 0
-        for i in range(len(groups)+1):
+        for i in range(len(groups) + 1):
             group_left, group_right = groups[:i], groups[i:]
             ret_left = get_nb_arrangements(left, group_left)
             if ret_left:
@@ -130,18 +142,17 @@ def get_nb_arrangements(chars, groups):
                 ret += ret_left * ret_right
         return ret
 
-
     # Divide and conquer on empty indices
     empty_indices = [i for i, c in enumerate(chars) if c == EMPTY]
     if empty_indices and 1:
         mid_idx_idx = len(empty_indices) // 2
         assert 0 <= mid_idx_idx < len(empty_indices)
         mid_idx = empty_indices[mid_idx_idx]
-        left, right = chars[:mid_idx], chars[mid_idx+1:]
+        left, right = chars[:mid_idx], chars[mid_idx + 1 :]
         assert chars[mid_idx] == EMPTY
         assert len(left) + 1 + len(right) == len(chars)
         ret = 0
-        for i in range(len(groups)+1):
+        for i in range(len(groups) + 1):
             group_left, group_right = groups[:i], groups[i:]
             ret_left = get_nb_arrangements(left, group_left)
             if ret_left:
@@ -155,11 +166,13 @@ def get_nb_arrangements(chars, groups):
         mid_idx_idx = len(free_indices) // 2
         assert 0 <= mid_idx_idx < len(free_indices)
         mid_idx = free_indices[mid_idx_idx]
-        left, right = chars[:mid_idx], chars[mid_idx+1:]
+        left, right = chars[:mid_idx], chars[mid_idx + 1 :]
         assert chars[mid_idx] == UNKNOWN
         assert len(left) + 1 + len(right) == len(chars)
-        ret = get_nb_arrangements("".join(c if i != mid_idx else FULL for i, c in enumerate(chars)), groups)
-        for i in range(len(groups)+1):
+        ret = get_nb_arrangements(
+            "".join(c if i != mid_idx else FULL for i, c in enumerate(chars)), groups
+        )
+        for i in range(len(groups) + 1):
             group_left, group_right = groups[:i], groups[i:]
             ret_left = get_nb_arrangements(left, group_left)
             if ret_left:
@@ -167,19 +180,24 @@ def get_nb_arrangements(chars, groups):
                 ret += ret_left * ret_right
         return ret
 
-    ret = get_nb_arrangements(FULL + other_c, groups) + get_nb_arrangements(EMPTY + other_c, groups)
+    ret = get_nb_arrangements(FULL + other_c, groups) + get_nb_arrangements(
+        EMPTY + other_c, groups
+    )
     return ret
 
 
 def get_sum_nb_arrangement(records):
     return sum(get_nb_arrangements_wrapper(chars, groups) for chars, groups in records)
 
+
 def unfold_record(record, nb):
     chars, groups = record
-    return ("?".join([chars] *nb), groups * nb)
+    return ("?".join([chars] * nb), groups * nb)
+
 
 def unfold_records(records, nb=5):
     return [unfold_record(r, nb) for r in records]
+
 
 def run_tests():
     assert generate_smallest_combination([]) == ""
@@ -204,10 +222,12 @@ def run_tests():
     assert get_sum_nb_arrangement(records) == 21
     assert get_sum_nb_arrangement(unfold_records(records)) == 525152
 
+
 def get_solutions():
     records = get_records_from_file()
     print(get_sum_nb_arrangement(records) == 6827)
     print(get_sum_nb_arrangement(unfold_records(records)) == 1537505634471)
+
 
 if __name__ == "__main__":
     begin = datetime.datetime.now()

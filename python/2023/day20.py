@@ -7,27 +7,27 @@ top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
 OFF, ON = False, True
 LOW, HIGH = 0, 1
-BUTTON_PRESS = ('button', 'broadcaster', LOW)
+BUTTON_PRESS = ("button", "broadcaster", LOW)
+
 
 def get_module_from_line(string):
     sep = " -> "
     name, mid, dests = string.partition(sep)
     assert mid == sep
     dests = dests.split(", ")
-    if name[0] in ('%&'):
+    if name[0] in ("%&"):
         return (name[1:], name[0], dests)
     return (name, None, dests)
 
 
 def get_modules_from_lines(string):
     lst = [get_module_from_line(l) for l in string.splitlines()]
-    return { name: (prefix, dests) for name, prefix, dests in lst }
+    return {name: (prefix, dests) for name, prefix, dests in lst}
 
 
 def get_modules_from_file(file_path=top_dir + "resources/year2023_day20_input.txt"):
     with open(file_path) as f:
         return get_modules_from_lines(f.read())
-
 
 
 def get_initial_state(modules):
@@ -39,7 +39,7 @@ def get_initial_state(modules):
         if prefix == "%":
             flipflops[name] = OFF
         elif prefix == "&":
-            conjunctions[name] = { m: LOW for m in inputs[name] }
+            conjunctions[name] = {m: LOW for m in inputs[name]}
     return flipflops, conjunctions
 
 
@@ -74,9 +74,13 @@ def process_pulse(modules, input_event, nb=1):
         while d:
             src, module_name, level = d.popleft()
             count[level] += 1
-            d.extend(get_generated_pulses(
-                    src, module_name, level, modules, flipflops, conjunctions))
+            d.extend(
+                get_generated_pulses(
+                    src, module_name, level, modules, flipflops, conjunctions
+                )
+            )
     return count[LOW] * count[HIGH]
+
 
 def run_tests():
     modules = get_modules_from_lines(
@@ -87,7 +91,9 @@ def run_tests():
 &inv -> a"""
     )
     for nb_rep in (1, 2, 1000):
-        assert process_pulse(modules, BUTTON_PRESS, nb_rep) == (nb_rep * 8) * (nb_rep * 4)
+        assert process_pulse(modules, BUTTON_PRESS, nb_rep) == (nb_rep * 8) * (
+            nb_rep * 4
+        )
     modules = get_modules_from_lines(
         """broadcaster -> a
 %a -> inv, con
@@ -99,7 +105,6 @@ def run_tests():
     assert process_pulse(modules, BUTTON_PRESS, 2) == 8 * 6
     assert process_pulse(modules, BUTTON_PRESS, 3) == 13 * 9
     assert process_pulse(modules, BUTTON_PRESS, 1000) == 4250 * 2750
-
 
 
 def get_solutions():

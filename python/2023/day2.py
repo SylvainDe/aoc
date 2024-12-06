@@ -38,7 +38,7 @@ def is_valid(subsets, bag):
 
 
 def part1(games):
-    bag = {'red': 12, 'green': 13, 'blue': 14}
+    bag = {"red": 12, "green": 13, "blue": 14}
     return sum(game_id for game_id, subsets in games if is_valid(subsets, bag))
 
 
@@ -47,7 +47,7 @@ def smallest_set(subsets):
     for subset in subsets:
         for nb, color in subset:
             smallest_set[color] = max(smallest_set[color], nb)
-    return smallest_set['blue'] * smallest_set['green'] * smallest_set['red']
+    return smallest_set["blue"] * smallest_set["green"] * smallest_set["red"]
 
 
 def part2(games):

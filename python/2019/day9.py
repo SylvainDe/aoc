@@ -6,6 +6,7 @@ import int_code
 
 top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
+
 def run_tests():
     int_code.run_tests_day9()
 

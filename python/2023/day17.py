@@ -19,11 +19,13 @@ def get_grid_from_file(file_path=top_dir + "resources/year2023_day17_input.txt")
     with open(file_path) as f:
         return get_grid_from_lines(f.read())
 
+
 directions = [(-1, 0), (+1, 0), (0, -1), (0, +1)]
 
 
 def manhattan_dist(p1, p2):
     return sum(abs(c2 - c1) for c1, c2 in zip(p1, p2))
+
 
 def show_path(path):
     grid = dict()
@@ -31,8 +33,8 @@ def show_path(path):
         grid.setdefault(pos, []).append(i)
     xs = [p[0] for p in grid]
     ys = [p[1] for p in grid]
-    for x in range(min(xs), max(xs)+1):
-        for y in range(min(ys), max(ys)+1):
+    for x in range(min(xs), max(xs) + 1):
+        for y in range(min(ys), max(ys) + 1):
             pos = x, y
             print(grid[pos][0] % 10 if pos in grid else " ", end="")
         print()
@@ -41,6 +43,7 @@ def show_path(path):
 
 move_range_normal = (1, 3)
 move_range_ultra = (4, 10)
+
 
 def get_minimal_heat(grid, move_range=move_range_ultra):
     starting_pos, end_pos = (0, 0), (max(x for x, _ in grid), (max(y for _, y in grid)))
@@ -77,10 +80,16 @@ def get_minimal_heat(grid, move_range=move_range_ultra):
                 nb_consec_move2 = curr_move
             if nb_consec_move2 > nb_max_consec_move:
                 continue
-            new_path = [(i+di*c, j+dj*c) for c in range(1, curr_move+1)]
+            new_path = [(i + di * c, j + dj * c) for c in range(1, curr_move + 1)]
             if all(p in grid for p in new_path):
                 heat_val = sum(grid[p] for p in new_path)
-                state2 = (heat+heat_val, nb_consec_move2, direct, new_path[-1], path + new_path)
+                state2 = (
+                    heat + heat_val,
+                    nb_consec_move2,
+                    direct,
+                    new_path[-1],
+                    path + new_path,
+                )
                 heapq.heappush(heap, state2)
     assert False
 
@@ -117,6 +126,7 @@ def get_solutions():
     grid = get_grid_from_file()
     print(get_minimal_heat(grid, move_range_normal) == 1260)
     print(get_minimal_heat(grid, move_range_ultra) == 1416)
+
 
 if __name__ == "__main__":
     begin = datetime.datetime.now()

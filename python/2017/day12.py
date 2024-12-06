@@ -17,7 +17,9 @@ def get_connection_list_from_lines(string):
     return [get_connection_list_from_line(l) for l in string.splitlines()]
 
 
-def get_connection_list_from_file(file_path=top_dir + "resources/year2017_day12_input.txt"):
+def get_connection_list_from_file(
+    file_path=top_dir + "resources/year2017_day12_input.txt",
+):
     with open(file_path) as f:
         return get_connection_list_from_lines(f.read())
 

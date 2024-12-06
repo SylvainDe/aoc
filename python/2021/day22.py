@@ -31,7 +31,9 @@ def get_instructions_from_strings(lines):
     return [get_instruction_from_string(l.strip()) for l in lines]
 
 
-def get_instructions_from_file(file_path=top_dir + "resources/year2021_day22_input.txt"):
+def get_instructions_from_file(
+    file_path=top_dir + "resources/year2021_day22_input.txt",
+):
     with open(file_path) as f:
         return get_instructions_from_strings(f)
 

@@ -6,6 +6,7 @@ import re
 
 top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
+
 def get_passport(string):
     data = dict()
     for chunk in string.split():

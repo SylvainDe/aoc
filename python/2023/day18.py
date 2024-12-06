@@ -15,17 +15,20 @@ def get_instructions_from_lines(string):
     return [get_instruction_from_line(l) for l in string.splitlines()]
 
 
-def get_instructions_from_file(file_path=top_dir + "resources/year2023_day18_input.txt"):
+def get_instructions_from_file(
+    file_path=top_dir + "resources/year2023_day18_input.txt",
+):
     with open(file_path) as f:
         return get_instructions_from_lines(f.read())
 
 
 directions = {
-    'D': (+1, 0),
-    'U': (-1, 0),
-    'R': (0, +1),
-    'L': (0, -1),
+    "D": (+1, 0),
+    "U": (-1, 0),
+    "R": (0, +1),
+    "L": (0, -1),
 }
+
 
 def get_trench(instructions):
     i, j = 0, 0
@@ -36,6 +39,7 @@ def get_trench(instructions):
             i += di
             j += dj
             yield i, j
+
 
 def get_reachable(start, grid):
     print(min(grid), max(grid))
@@ -55,16 +59,20 @@ def get_reachable(start, grid):
         to_handle = new_to_handle
     return visited
 
+
 def get_interior_volume(path):
     xs = set(p[0] for p in path)
     ys = set(p[1] for p in path)
-    x_range = list(range(min(xs)-1, max(xs)+1+1))
-    y_range = list(range(min(ys)-1, max(ys)+1+1))
-    empty_spaces = [pos for pos in itertools.product(x_range, y_range) if pos not in path]
+    x_range = list(range(min(xs) - 1, max(xs) + 1 + 1))
+    y_range = list(range(min(ys) - 1, max(ys) + 1 + 1))
+    empty_spaces = [
+        pos for pos in itertools.product(x_range, y_range) if pos not in path
+    ]
     # what are we living for
     abandoned_places = get_reachable((min(x_range), min(y_range)), empty_spaces)
     # I guess we know the score
     return len(x_range) * len(y_range) - len(abandoned_places)
+
 
 def get_trench_volume(instructions):
     return get_interior_volume(set(get_trench(instructions)))
@@ -88,6 +96,7 @@ L 2 (#015232)
 U 2 (#7a21e3)"""
     )
     assert get_trench_volume(instructions) == 62
+
 
 def get_solutions():
     instructions = get_instructions_from_file()

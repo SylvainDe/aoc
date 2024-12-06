@@ -8,6 +8,7 @@ import collections
 
 top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
+
 def get_orders_from_file(file_path=top_dir + "resources/year2019_day22_input.txt"):
     with open(file_path) as f:
         return [l.strip() for l in f]
@@ -162,9 +163,11 @@ def apply_orders(nb, orders, repetition=1):
 # Orders on single cards
 def apply_single_order(order, nb_cards, position):
     op, rem = get_order_and_remaining(order)
-    return op.single(nb_cards, int(rem), position) \
-           if rem else \
-           op.single(nb_cards, position)
+    return (
+        op.single(nb_cards, int(rem), position)
+        if rem
+        else op.single(nb_cards, position)
+    )
 
 
 def apply_single_orders(orders, nb_cards, position):
@@ -176,9 +179,11 @@ def apply_single_orders(orders, nb_cards, position):
 # Reverse orders on single cards
 def apply_reverse_order(order, nb_cards, position):
     op, rem = get_order_and_remaining(order)
-    return op.reverse(nb_cards, int(rem), position) \
-           if rem else \
-           op.reverse(nb_cards, position)
+    return (
+        op.reverse(nb_cards, int(rem), position)
+        if rem
+        else op.reverse(nb_cards, position)
+    )
 
 
 def apply_reverse_orders(orders, nb_cards, position):
