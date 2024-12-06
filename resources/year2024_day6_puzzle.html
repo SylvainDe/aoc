@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+<meta charset="utf-8"/>
+<title>Day 6 - Advent of Code 2024</title>
+<link rel="stylesheet" type="text/css" href="/static/style.css?31"/>
+<link rel="stylesheet alternate" type="text/css" href="/static/highcontrast.css?1" title="High Contrast"/>
+<link rel="shortcut icon" href="/favicon.png"/>
+<script>window.addEventListener('click', function(e,s,r){if(e.target.nodeName==='CODE'&&e.detail===3){s=window.getSelection();s.removeAllRanges();r=document.createRange();r.selectNodeContents(e.target);s.addRange(r);}});</script>
+</head><!--
+
+
+
+
+Oh, hello!  Funny seeing you here.
+
+I appreciate your enthusiasm, but you aren't going to find much down here.
+There certainly aren't clues to any of the puzzles.  The best surprises don't
+even appear in the source until you unlock them for real.
+
+Please be careful with automated requests; I'm not a massive company, and I can
+only take so much traffic.  Please be considerate so that everyone gets to play.
+
+If you're curious about how Advent of Code works, it's running on some custom
+Perl code. Other than a few integrations (auth, analytics, social media), I
+built the whole thing myself, including the design, animations, prose, and all
+of the puzzles.
+
+The puzzles are most of the work; preparing a new calendar and a new set of
+puzzles each year takes all of my free time for 4-5 months. A lot of effort
+went into building this thing - I hope you're enjoying playing it as much as I
+enjoyed making it for you!
+
+If you'd like to hang out, I'm @was.tl on Bluesky, @ericwastl@hachyderm.io on
+Mastodon, and @ericwastl on Twitter.
+
+- Eric Wastl
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-->
+<body>
+
+<div id="sidebar">
+</div><!--/sidebar-->
+
+<main>
+<article class="day-desc"><h2>--- Day 6: Guard Gallivant ---</h2><p>The Historians use their fancy <a href="4">device</a> again, this time to whisk you all away to the North Pole prototype suit manufacturing lab... in the year <a href="/2018/day/5">1518</a>! It turns out that having direct access to history is very convenient for a group of historians.</p>
+<p>You still have to be careful of time paradoxes, and so it will be important to avoid anyone from 1518 while The Historians search for the Chief. Unfortunately, a single <em>guard</em> is patrolling this part of the lab.</p>
+<p>Maybe you can work out where the guard will go ahead of time so that The Historians can search safely?</p>
+<p>You start by making a map (your puzzle input) of the situation. For example:</p>
+<pre><code>....#.....
+.........#
+..........
+..#.......
+.......#..
+..........
+.#..^.....
+........#.
+#.........
+......#...
+</code></pre>
+<p>The map shows the current position of the guard with <code>^</code> (to indicate the guard is currently facing <em>up</em> from the perspective of the map). Any <em>obstructions</em> - crates, desks, alchemical reactors, etc. - are shown as <code>#</code>.</p>
+<p>Lab guards in 1518 follow a very strict patrol protocol which involves repeatedly following these steps:</p>
+<ul>
+<li>If there is something directly in front of you, turn right 90 degrees.</li>
+<li>Otherwise, take a step forward.</li>
+</ul>
+<p>Following the above protocol, the guard moves up several times until she reaches an obstacle (in this case, a pile of failed suit prototypes):</p>
+<pre><code>....#.....
+....^....#
+..........
+..#.......
+.......#..
+..........
+.#........
+........#.
+#.........
+......#...
+</code></pre>
+<p>Because there is now an obstacle in front of the guard, she turns right before continuing straight in her new facing direction:</p>
+<pre><code>....#.....
+........&gt;#
+..........
+..#.......
+.......#..
+..........
+.#........
+........#.
+#.........
+......#...
+</code></pre>
+<p>Reaching another obstacle (a spool of several <em>very</em> long polymers), she turns right again and continues downward:</p>
+<pre><code>....#.....
+.........#
+..........
+..#.......
+.......#..
+..........
+.#......v.
+........#.
+#.........
+......#...
+</code></pre>
+<p>This process continues for a while, but the guard eventually leaves the mapped area (after walking past a tank of universal solvent):</p>
+<pre><code>....#.....
+.........#
+..........
+..#.......
+.......#..
+..........
+.#........
+........#.
+#.........
+......#v..
+</code></pre>
+<p>By predicting the guard's route, you can determine which specific positions in the lab will be in the patrol path. <em>Including the guard's starting position</em>, the positions visited by the guard before leaving the area are marked with an <code>X</code>:</p>
+<pre><code>....#.....
+....XXXXX#
+....X...X.
+..#.X...X.
+..XXXXX#X.
+..X.X.X.X.
+.#XXXXXXX.
+.XXXXXXX#.
+#XXXXXXX..
+......#X..
+</code></pre>
+<p>In this example, the guard will visit <code><em>41</em></code> distinct positions on your map.</p>
+<p>Predict the path of the guard. <em>How many distinct positions will the guard visit before leaving the mapped area?</em></p>
+</article>
+<p>To begin, <a href="6/input" target="_blank">get your puzzle input</a>.</p>
+<form method="post" action="6/answer"><input type="hidden" name="level" value="1"/><p>Answer: <input type="text" name="answer" autocomplete="off"/> <input type="submit" value="[Submit]"/></p></form>
+<p>You can also <span class="share">[Share<span class="share-content">on
+  <a href="https://bsky.app/intent/compose?text=%22Guard+Gallivant%22+%2D+Day+6+%2D+Advent+of+Code+2024+%23AdventOfCode+https%3A%2F%2Fadventofcode%2Ecom%2F2024%2Fday%2F6" target="_blank">Bluesky</a>
+  <a href="https://twitter.com/intent/tweet?text=%22Guard+Gallivant%22+%2D+Day+6+%2D+Advent+of+Code+2024&amp;url=https%3A%2F%2Fadventofcode%2Ecom%2F2024%2Fday%2F6&amp;related=ericwastl&amp;hashtags=AdventOfCode" target="_blank">Twitter</a>
+  <a href="javascript:void(0);" onclick="var ms; try{ms=localStorage.getItem('mastodon.server')}finally{} if(typeof ms!=='string')ms=''; ms=prompt('Mastodon Server?',ms); if(typeof ms==='string' && ms.length){this.href='https://'+ms+'/share?text=%22Guard+Gallivant%22+%2D+Day+6+%2D+Advent+of+Code+2024+%23AdventOfCode+https%3A%2F%2Fadventofcode%2Ecom%2F2024%2Fday%2F6';try{localStorage.setItem('mastodon.server',ms);}finally{}}else{return false;}" target="_blank">Mastodon</a
+></span>]</span> this puzzle.</p>
+</main>
+
+<!-- ga -->
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-69522494-1', 'auto');
+ga('set', 'anonymizeIp', true);
+ga('send', 'pageview');
+</script>
+<!-- /ga -->
+</body>
+</html>
