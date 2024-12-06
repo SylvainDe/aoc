@@ -59,6 +59,7 @@ def get_path(grid, guard):
     pos, direc = guard
     yield pos, direc
     while True:
+        assert grid[pos] == FREE
         next_pos = get_next(pos, direc)
         next_cell = grid.get(next_pos)
         if next_cell is None:
@@ -84,13 +85,34 @@ def part1(grid, guard):
     return len(set(p for p, _ in get_path(grid, guard)))
 
 
+
+def is_looped_with_new_wall(grid, guard, pos):
+    assert grid[pos] == FREE
+    grid[pos] = WALL
+    ret = is_looped(grid, guard)
+    grid[pos] = FREE
+    return ret
+
+
+def part2_very_slow(grid, guard):
+    return sum(is_looped_with_new_wall(grid, guard, pos)
+               for pos in grid
+               if pos != guard[0] and grid[pos] == FREE)
+
+
+def part2_slow(grid, guard):
+    return sum(is_looped_with_new_wall(grid, guard, pos)
+               for pos in set(p for p, _ in get_path(grid, guard) if p != guard[0]))
+
+
 def part2(grid, guard):
     nb = 0
-    for pos in set(p for p, _ in get_path(grid, guard)):
-        assert grid[pos] == FREE
-        grid[pos] = WALL
-        nb += is_looped(grid, guard)
-        grid[pos] = FREE
+    seen = set(guard[0])
+    path = list(get_path(grid, guard))
+    for prev, (pos, _) in zip(path, path[1:]):
+        if pos not in seen:
+            nb += is_looped_with_new_wall(grid, prev, pos)
+            seen.add(pos)
     return nb
 
 
@@ -122,13 +144,15 @@ def run_tests():
 ......#..."""
     )
     assert is_looped(grid2, guard2)
+    assert part2_very_slow(grid, guard) == 6
+    assert part2_slow(grid, guard) == 6
     assert part2(grid, guard) == 6
 
 
 def get_solutions():
     grid, guard = get_grid_content_from_file()
     print(part1(grid, guard) == 5086)
-    # To be optimised: print(part2(grid, guard) == 1770)
+    print(part2(grid, guard) == 1770)
 
 
 if __name__ == "__main__":
