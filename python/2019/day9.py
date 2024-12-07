@@ -13,8 +13,8 @@ def run_tests():
 
 def get_solutions():
     intcode = int_code.get_intcode_from_file("../../resources/year2019_day9_input.txt")
-    print(int_code.run(intcode, input_=1)[1][0] == 2457252183)
-    print(int_code.run(intcode, input_=2)[1][0] == 70634)
+    print(int_code.run(intcode, input_=[1]).output[0] == 2457252183)
+    print(int_code.run(intcode, input_=[2]).output[0] == 70634)
 
 
 if __name__ == "__main__":

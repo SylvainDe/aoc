@@ -12,11 +12,7 @@ def run_tests():
 
 
 def part1(intcode):
-    intcode = list(intcode)
-    intcode[1] = 12
-    intcode[2] = 2
-    intcode, _ = int_code.run(intcode)
-    return intcode[0]
+    return int_code.run_verb_noun(intcode, 12, 2)
 
 
 def part2(intcode):

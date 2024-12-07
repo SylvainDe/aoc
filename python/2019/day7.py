@@ -1,27 +1,19 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
 import os
+import int_code
 
 
 top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
 
-def get_xxx_from_line(string):
-    return string
-
-
-def get_xxx_from_file(file_path=top_dir + "resources/year2019_day7_input.txt"):
-    with open(file_path) as f:
-        for l in f:
-            return get_xxx_from_line(l.strip())
-
-
 def run_tests():
-    xxx = get_xxx_from_line("abc")
+    int_code.run_tests_day7()
 
 
 def get_solutions():
-    xxx = get_xxx_from_file()
+    intcode = int_code.get_intcode_from_file("../../resources/year2019_day7_input.txt")
+    print(int_code.get_circuit_max_output(intcode) == 199988)
 
 
 if __name__ == "__main__":
