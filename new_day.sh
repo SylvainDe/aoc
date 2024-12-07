@@ -10,7 +10,7 @@ day="${1:-$real_day}"
 year="${2:-$real_year}"
 
 # Configuration
-browser="${aoc_browswer:-}"  # For example: '' or 'firefox'
+browser="${aoc_browser:-}"   # For example: '' or 'firefox'
 editor="${aoc_editor:-}"     # For example: '' or 'vim'
 
 get_input="1"
@@ -80,7 +80,7 @@ get_url_and_save() {
 	dest="${2}"
 	overwrite="${3}"
 	cleanup="${4}"
-	files_to_open_in_editor+=("${dest}")
+	# files_to_open_in_editor+=("${dest}")
 	# echo "About to save ${url} in ${dest}"
 	mkdir -p $(dirname "${dest}")
 	if [ "${overwrite}" == "0" -a -f "${dest}" ]; then
