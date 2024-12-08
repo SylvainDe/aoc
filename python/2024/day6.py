@@ -85,7 +85,6 @@ def part1(grid, guard):
     return len(set(p for p, _ in get_path(grid, guard)))
 
 
-
 def is_looped_with_new_wall(grid, guard, pos):
     assert grid[pos] == FREE
     grid[pos] = WALL
@@ -95,14 +94,18 @@ def is_looped_with_new_wall(grid, guard, pos):
 
 
 def part2_very_slow(grid, guard):
-    return sum(is_looped_with_new_wall(grid, guard, pos)
-               for pos in grid
-               if pos != guard[0] and grid[pos] == FREE)
+    return sum(
+        is_looped_with_new_wall(grid, guard, pos)
+        for pos in grid
+        if pos != guard[0] and grid[pos] == FREE
+    )
 
 
 def part2_slow(grid, guard):
-    return sum(is_looped_with_new_wall(grid, guard, pos)
-               for pos in set(p for p, _ in get_path(grid, guard) if p != guard[0]))
+    return sum(
+        is_looped_with_new_wall(grid, guard, pos)
+        for pos in set(p for p, _ in get_path(grid, guard) if p != guard[0])
+    )
 
 
 def part2(grid, guard):

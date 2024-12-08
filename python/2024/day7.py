@@ -34,7 +34,7 @@ def can_be_reached(val, nbs, part2):
         val_str = str(val)
         end_str = str(end)
         if val_str.endswith(end_str):
-            return can_be_reached(int(val_str[:-len(end_str)]), begin, part2)
+            return can_be_reached(int(val_str[: -len(end_str)]), begin, part2)
     return False
 
 
