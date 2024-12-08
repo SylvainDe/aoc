@@ -11,6 +11,8 @@ puzzle_url = "[Problem](https://adventofcode.com/{year}/day/{day})"
 input_url = "[Input](https://adventofcode.com/{year}/day/{day}/input)"
 event_url = "[{year}](https://adventofcode.com/{year})"
 stats_url = "[Stats](https://adventofcode.com/{year}/leaderboard/self)"
+github_year_url = "[{year}](#{year})"
+github_summary = "[Summary](#summary)"
 
 # Local files
 puzzle_file = "resources/year{year}_day{day}_puzzle.html"
@@ -55,6 +57,7 @@ class YearData():
         self.stats_url = self.format_str(stats_url)
         self.stats_file = self.format_str(stats_file)
         self.event_url = self.format_str(event_url)
+        self.github_url = self.format_str(github_year_url)
         try:
             stats = self.extract_stats()
         except FileNotFoundError:
@@ -64,8 +67,8 @@ class YearData():
         self.days = [d for d in days if d.is_valid()]
         self.nb_stars = sum(d.nb_stars for d in days)
 
-    def __str__(self):
-        return self.event_url
+    # def __str__(self):
+    #     return self.event_url
 
     def is_valid(self):
         # Any condition can be imagined here (for instance nb of stars)
@@ -113,6 +116,7 @@ class DayData():
         self.puzzle_file = self.format_str(puzzle_file)
         self.input_file = self.format_str(input_file)
         self.title = self.get_title()
+        self.pretty_title = self.get_pretty_title()
         self.python_file = self.format_str(python_file)
         self.rust_file = self.format_str(rust_file)
         self.nb_stars = 0
@@ -126,7 +130,7 @@ class DayData():
         assert (self.part2_time is None) == (self.part2_rank is None) == (self.part2_score is None)
         self.nb_stars = (self.part1_time is not None) + (self.part2_time is not None)
 
-    def __str__(self):
+    def get_pretty_title(self):
         return self.title if self.title is not None else self.format_str("{year}/12/{day}")
 
     def is_valid(self):
@@ -186,15 +190,22 @@ if __name__ == "__main__":
     with open(destfile, "w") as f:
         f.write(readme_header)
 
+        # Table of contents
+        f.write("## Table of contents\n")
+        for y in reversed(years):
+            f.write(" - {}\n".format(y.github_url))
+        f.write(" - {}\n".format(github_summary))
+        f.write("\n")
+
         # Details for each day
         columns = ["Day", "URLs", "Puzzle & Input", "Stars", "Python", "Rust", "Time part 1", "Time part 2"]
         for y in reversed(years):
-            f.write("## {}\n".format(y))
+            f.write("## {}\n".format(y.event_url))
             f.write(format_table_colums(columns))
             f.write(format_table_colums(("---" for _ in columns)))
             for d in y.days:
                 f.write(format_table_colums([
-                    d,
+                    d.pretty_title,
                     "{} {}".format(d.puzzle_url, d.input_url),
                     "{} {}".format(format_file(d.puzzle_file), format_file(d.input_file)),
                     "*" * d.nb_stars,
@@ -204,7 +215,7 @@ if __name__ == "__main__":
                     "-" if d.part2_time is None else d.part2_time,
                 ]))
             f.write(format_table_colums([
-                y,
+                y.event_url,
                 y.stats_url,
                 format_file(y.stats_file),
                 y.nb_stars,
@@ -223,7 +234,7 @@ if __name__ == "__main__":
                 s = d.nb_stars
                 stars_by_day_num.setdefault(d.day, dict())[y.year] = s
 
-        columns = ["Day"] + [y for y in years] + ["Total"]
+        columns = ["Day"] + [y.event_url + " " + y.github_url for y in years] + ["Total"]
         f.write(format_table_colums(columns))
         f.write(format_table_colums(("---" for _ in columns)))
         for day_num, year_dict in sorted(stars_by_day_num.items()):

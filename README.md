@@ -9,6 +9,19 @@ Solutions used to be stored in different repositories for each year limiting the
 
 Solutions are written in Python and/or Rust.
 
+## Table of contents
+ - [2024](#2024)
+ - [2023](#2023)
+ - [2022](#2022)
+ - [2021](#2021)
+ - [2020](#2020)
+ - [2019](#2019)
+ - [2018](#2018)
+ - [2017](#2017)
+ - [2016](#2016)
+ - [2015](#2015)
+ - [Summary](#summary)
+
 ## [2024](https://adventofcode.com/2024)
 |Day|URLs|Puzzle & Input|Stars|Python|Rust|Time part 1|Time part 2|
 |---|---|---|---|---|---|---|---|
@@ -293,7 +306,7 @@ Solutions are written in Python and/or Rust.
 |[2015](https://adventofcode.com/2015)|[Stats](https://adventofcode.com/2015/leaderboard/self)|[stats.txt](misc/leaderboard_self_2015.html)|30|-|-|-|-|
 
 ##  Summary
-|Day|[2015](https://adventofcode.com/2015)|[2016](https://adventofcode.com/2016)|[2017](https://adventofcode.com/2017)|[2018](https://adventofcode.com/2018)|[2019](https://adventofcode.com/2019)|[2020](https://adventofcode.com/2020)|[2021](https://adventofcode.com/2021)|[2022](https://adventofcode.com/2022)|[2023](https://adventofcode.com/2023)|[2024](https://adventofcode.com/2024)|Total|
+|Day|[2015](https://adventofcode.com/2015) [2015](#2015)|[2016](https://adventofcode.com/2016) [2016](#2016)|[2017](https://adventofcode.com/2017) [2017](#2017)|[2018](https://adventofcode.com/2018) [2018](#2018)|[2019](https://adventofcode.com/2019) [2019](#2019)|[2020](https://adventofcode.com/2020) [2020](#2020)|[2021](https://adventofcode.com/2021) [2021](#2021)|[2022](https://adventofcode.com/2022) [2022](#2022)|[2023](https://adventofcode.com/2023) [2023](#2023)|[2024](https://adventofcode.com/2024) [2024](#2024)|Total|
 |---|---|---|---|---|---|---|---|---|---|---|---|
 |1|**|**|**|**|**|**|**|**|**|**|20: ********************|
 |2|**|**|**|**|**|**|**|**|**|**|20: ********************|
