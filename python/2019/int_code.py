@@ -56,6 +56,113 @@ def get_values_from_pos(intcode, pos, modes, relative_base):
 RunOutput = collections.namedtuple("RunOutput", ["intcode", "output", "position"])
 
 
+class IntCode:
+    def __init__(self, intcode):
+        self.intcode = collections.defaultdict(int, enumerate(intcode))
+        self.output = []
+        self.input_lst = []
+        self.input_iter = iter(self.input_lst)
+        self.pos = 0
+        self.relative_base = 0
+
+    def add_input(self, input_lst):
+        self.input_lst.extend(input_lst)
+
+    @classmethod
+    def from_string(cls, string):
+        return cls(get_intcode_from_string(string))
+
+    def get_intcode_as_lst(self):
+        return [self.intcode[v] for v in range(max(self.intcode) + 1)]
+
+    def get_final_state(self):
+        # TODO: Remove this - temporary to ease transition from method to class
+        final_intcode = self.get_intcode_as_lst()
+        return RunOutput(final_intcode, self.output, self.pos)
+
+    def run(self):
+        while True:
+            op, mode1, mode2, mode3 = parse_op_code(self.intcode[self.pos])
+            # Day 2: opcode 1, 2 and 99
+            if op == 99:
+                return self.get_final_state()
+            elif op == 1:  # Addition
+                a, b = get_values_from_pos(
+                    self.intcode, self.pos, [mode1, mode2], self.relative_base
+                )
+                set_value(self.intcode, self.pos + 3, mode3, self.relative_base, a + b)
+                self.pos += 4
+            elif op == 2:  # Multiplication
+                a, b = get_values_from_pos(
+                    self.intcode, self.pos, [mode1, mode2], self.relative_base
+                )
+                set_value(self.intcode, self.pos + 3, mode3, self.relative_base, a * b)
+                self.pos += 4
+            # Day 5 part 1: opcode 3 and 4
+            elif op == 3:  # Save-input
+                next_input = next(self.input_iter)
+                assert isinstance(next_input, int)
+                set_value(
+                    self.intcode, self.pos + 1, mode1, self.relative_base, next_input
+                )
+                self.pos += 2
+            elif op == 4:  # Output
+                a = get_value(self.intcode, self.pos + 1, mode1, self.relative_base)
+                self.output.append(a)
+                self.pos += 2
+            # Day 5 part 2: opcode 5, 6, 7 and 8
+            elif op == 5:  # Jump-if-true
+                a, b = get_values_from_pos(
+                    self.intcode, self.pos, [mode1, mode2], self.relative_base
+                )
+                self.pos = b if a else self.pos + 3
+            elif op == 6:  # Jump-if-false
+                a, b = get_values_from_pos(
+                    self.intcode, self.pos, [mode1, mode2], self.relative_base
+                )
+                self.pos = b if not a else self.pos + 3
+            elif op == 7:  # Less-then
+                a, b = get_values_from_pos(
+                    self.intcode, self.pos, [mode1, mode2], self.relative_base
+                )
+                set_value(
+                    self.intcode,
+                    self.pos + 3,
+                    mode3,
+                    self.relative_base,
+                    1 if a < b else 0,
+                )
+                self.pos += 4
+            elif op == 8:  # Equals
+                a, b = get_values_from_pos(
+                    self.intcode, self.pos, [mode1, mode2], self.relative_base
+                )
+                set_value(
+                    self.intcode,
+                    self.pos + 3,
+                    mode3,
+                    self.relative_base,
+                    1 if a == b else 0,
+                )
+                self.pos += 4
+            # Day 9: opcode 9
+            elif op == 9:  # Relative base
+                a = get_value(self.intcode, self.pos + 1, mode1, self.relative_base)
+                self.relative_base += a
+                self.pos += 2
+            else:
+                assert False
+
+    @classmethod
+    def run_verb_noun(cls, intcode, noun, verb):
+        """Specific to day 2 ?."""
+        intcode = list(intcode)
+        intcode[1] = noun
+        intcode[2] = verb
+        ic = cls(intcode)
+        return ic.run().intcode[0]
+
+
 def run(intcode, input_=[]):
     intcode = collections.defaultdict(int, enumerate(intcode))
     output = []
@@ -125,6 +232,7 @@ def run_diagnostic(intcode, input_):
 
 
 def run_circuit(intcode, nbs):
+    """Specific to day 7 ?."""
     prev_output = 0
     for nb in nbs:
         prev_output = run(intcode, [nb, prev_output]).output[0]
@@ -132,34 +240,50 @@ def run_circuit(intcode, nbs):
 
 
 def run_circuit_with_feedback(intcode, nbs):
+    """Specific to day 7 ?."""
     return 0
 
 
 def get_circuit_max_output(intcode):
+    """Specific to day 7 ?."""
     return max(run_circuit(intcode, p) for p in itertools.permutations(range(4 + 1)))
 
 
 def run_tests_day2():
     intcode = get_intcode_from_string("1,9,10,3,2,3,11,0,99,30,40,50")
-    assert run(intcode) == ([3500, 9, 10, 70, 2, 3, 11, 0, 99, 30, 40, 50], [], 8)
-    assert run_verb_noun(intcode, 9, 10) == 3500
+
+    ic = IntCode(intcode)
+    assert ic.run() == ([3500, 9, 10, 70, 2, 3, 11, 0, 99, 30, 40, 50], [], 8)
+    assert IntCode.run_verb_noun(intcode, 9, 10) == 3500
+
     intcode = get_intcode_from_string("1,0,0,0,99")
-    assert run(intcode) == ([2, 0, 0, 0, 99], [], 4)
-    assert run_verb_noun(intcode, 0, 0) == 2
+    ic = IntCode(intcode)
+    assert ic.run() == ([2, 0, 0, 0, 99], [], 4)
+    assert IntCode.run_verb_noun(intcode, 0, 0) == 2
+
     intcode = get_intcode_from_string("2,3,0,3,99")
-    assert run(intcode) == ([2, 3, 0, 6, 99], [], 4)
+    ic = IntCode(intcode)
+    assert ic.run() == ([2, 3, 0, 6, 99], [], 4)
+
     intcode = get_intcode_from_string("2,4,4,5,99,0")
-    assert run(intcode) == ([2, 4, 4, 5, 99, 9801], [], 4)
+    ic = IntCode(intcode)
+    assert ic.run() == ([2, 4, 4, 5, 99, 9801], [], 4)
+
     intcode = get_intcode_from_string("1,1,1,4,99,5,6,0,99")
-    assert run(intcode) == ([30, 1, 1, 4, 2, 5, 6, 0, 99], [], 8)
+    ic = IntCode(intcode)
+    assert ic.run() == ([30, 1, 1, 4, 2, 5, 6, 0, 99], [], 8)
 
 
 def run_tests_day5():
     intcode = get_intcode_from_string("3,0,4,0,99")
     for v in range(10):
-        assert run(intcode, [v])[1] == [v]
+        ic = IntCode(intcode)
+        ic.add_input([v])
+        assert ic.run().output == [v]
+
     intcode = get_intcode_from_string("1002,4,3,4,33")
     assert run(intcode) == ([1002, 4, 3, 4, 99], [], 4)
+
     intcode = get_intcode_from_string("1101,100,-1,4,0")
     assert run(intcode) == ([1101, 100, -1, 4, 99], [], 4)
     intcode = get_intcode_from_string("3,9,8,9,10,9,4,9,99,-1,8")
