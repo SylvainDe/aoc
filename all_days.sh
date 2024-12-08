@@ -1,6 +1,9 @@
 #set -x
 set -e
 
+aoc_browser=""
+aoc_editor=""
+
 # Previous years
 first_year=2015
 last_full_year=2023
