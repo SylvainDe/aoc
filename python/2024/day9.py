@@ -36,33 +36,28 @@ def part1(diskmap):
 
 
 def part2(diskmap):
-    free = []  # (pos, len)
-    files = []  # (-pos, len, val)
+    free = []
+    files = []
     pos = 0
     for f, l in generate_files(diskmap):
         if f is None:
-            heapq.heappush(free, (pos, l))
+            free.append((pos, l))
         else:
-            heapq.heappush(files, (-pos, l, f))
+            files.append((pos, l, f))
         pos += l
     ret_sum = 0
-    while files:
-        f_pos, f_l, f_val = heapq.heappop(files)
-        f_pos *= -1
-        too_small = []
-        while free:
-            free_pos, free_l = heapq.heappop(free)
-            if free_l >= f_l and f_pos > free_pos:
-                # Big enough
-                f_pos = free_pos
-                if free_l > f_l:
-                    heapq.heappush(free, (f_pos + f_l, free_l - f_l))
-                break
-            too_small.append((free_pos, free_l))
+    for (f_pos, f_l, f_val) in reversed(files):
+        for i, (free_pos, free_l) in enumerate(free):
             if f_pos < free_pos:
                 break
-        for b in too_small:
-            heapq.heappush(free, b)
+            if free_l >= f_l:
+                # Big enough
+                f_pos = free_pos
+                free.pop(i)
+                if free_l > f_l:
+                    free.append((f_pos + f_l, free_l - f_l))
+                    free.sort()
+                break
         ret_sum += f_val * sum(f_pos + i for i in range(f_l))
     return ret_sum
 
