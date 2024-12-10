@@ -145,12 +145,62 @@ Mastodon, and @ericwastl on Twitter.
 <p>This larger example has 9 trailheads. Considering the trailheads in reading order, they have scores of <code>5</code>, <code>6</code>, <code>5</code>, <code>3</code>, <code>1</code>, <code>3</code>, <code>5</code>, <code>3</code>, and <code>5</code>. Adding these scores together, the sum of the scores of all trailheads is <code><em>36</em></code>.</p>
 <p>The reindeer gleefully carries over a protractor and adds it to the pile. <em>What is the sum of the scores of all trailheads on your topographic map?</em></p>
 </article>
-<p>To begin, <a href="10/input" target="_blank">get your puzzle input</a>.</p>
-<form method="post" action="10/answer"><input type="hidden" name="level" value="1"/><p>Answer: <input type="text" name="answer" autocomplete="off"/> <input type="submit" value="[Submit]"/></p></form>
+<p>Your puzzle answer was <code>566</code>.</p><article class="day-desc"><h2 id="part2">--- Part Two ---</h2><p>The reindeer spends a few minutes reviewing your hiking trail map before realizing something, disappearing for a few minutes, and finally returning with yet another slightly-charred piece of paper.</p>
+<p>The paper describes a second way to measure a trailhead called its <em>rating</em>. A trailhead's rating is the <em>number of distinct hiking trails</em> which begin at that trailhead. For example:</p>
+<pre><code>.....0.
+..4321.
+..5..2.
+..6543.
+..7..4.
+..8765.
+..9....
+</code></pre>
+<p>The above map has a single trailhead; its rating is <code>3</code> because there are exactly three distinct hiking trails which begin at that position:</p>
+<pre><code>.....0.   .....0.   .....0.
+..4321.   .....1.   .....1.
+..5....   .....2.   .....2.
+..6....   ..6543.   .....3.
+..7....   ..7....   .....4.
+..8....   ..8....   ..8765.
+..9....   ..9....   ..9....
+</code></pre>
+<p>Here is a map containing a single trailhead with rating <code>13</code>:</p>
+<pre><code>..90..9
+...1.98
+...2..7
+6543456
+765.987
+876....
+987....
+</code></pre>
+<p>This map contains a single trailhead with rating <code>227</code> (because there are <code>121</code> distinct hiking trails that lead to the <code>9</code> on the right edge and <code>106</code> that lead to the <code>9</code> on the bottom edge):</p>
+<pre><code>012345
+123456
+234567
+345678
+4.6789
+56789.
+</code></pre>
+<p>Here's the larger example from before:</p>
+<pre><code>89010123
+78121874
+87430965
+96549874
+45678903
+32019012
+01329801
+10456732
+</code></pre>
+<p>Considering its trailheads in reading order, they have ratings of <code>20</code>, <code>24</code>, <code>10</code>, <code>4</code>, <code>1</code>, <code>4</code>, <code>5</code>, <code>8</code>, and <code>5</code>. The sum of all trailhead ratings in this larger example topographic map is <code><em>81</em></code>.</p>
+<p>You're not sure how, but the reindeer seems to have crafted some tiny flags out of toothpicks and bits of paper and is using them to mark trailheads on your topographic map. <em>What is the sum of the ratings of all trailheads?</em></p>
+</article>
+<p>Your puzzle answer was <code>1324</code>.</p><p class="day-success">Both parts of this puzzle are complete! They provide two gold stars: **</p>
+<p>At this point, you should <a href="/2024">return to your Advent calendar</a> and try another puzzle.</p>
+<p>If you still want to see it, you can <a href="10/input" target="_blank">get your puzzle input</a>.</p>
 <p>You can also <span class="share">[Share<span class="share-content">on
-  <a href="https://bsky.app/intent/compose?text=%22Hoof+It%22+%2D+Day+10+%2D+Advent+of+Code+2024+%23AdventOfCode+https%3A%2F%2Fadventofcode%2Ecom%2F2024%2Fday%2F10" target="_blank">Bluesky</a>
-  <a href="https://twitter.com/intent/tweet?text=%22Hoof+It%22+%2D+Day+10+%2D+Advent+of+Code+2024&amp;url=https%3A%2F%2Fadventofcode%2Ecom%2F2024%2Fday%2F10&amp;related=ericwastl&amp;hashtags=AdventOfCode" target="_blank">Twitter</a>
-  <a href="javascript:void(0);" onclick="var ms; try{ms=localStorage.getItem('mastodon.server')}finally{} if(typeof ms!=='string')ms=''; ms=prompt('Mastodon Server?',ms); if(typeof ms==='string' && ms.length){this.href='https://'+ms+'/share?text=%22Hoof+It%22+%2D+Day+10+%2D+Advent+of+Code+2024+%23AdventOfCode+https%3A%2F%2Fadventofcode%2Ecom%2F2024%2Fday%2F10';try{localStorage.setItem('mastodon.server',ms);}finally{}}else{return false;}" target="_blank">Mastodon</a
+  <a href="https://bsky.app/intent/compose?text=I%27ve+completed+%22Hoof+It%22+%2D+Day+10+%2D+Advent+of+Code+2024+%23AdventOfCode+https%3A%2F%2Fadventofcode%2Ecom%2F2024%2Fday%2F10" target="_blank">Bluesky</a>
+  <a href="https://twitter.com/intent/tweet?text=I%27ve+completed+%22Hoof+It%22+%2D+Day+10+%2D+Advent+of+Code+2024&amp;url=https%3A%2F%2Fadventofcode%2Ecom%2F2024%2Fday%2F10&amp;related=ericwastl&amp;hashtags=AdventOfCode" target="_blank">Twitter</a>
+  <a href="javascript:void(0);" onclick="var ms; try{ms=localStorage.getItem('mastodon.server')}finally{} if(typeof ms!=='string')ms=''; ms=prompt('Mastodon Server?',ms); if(typeof ms==='string' && ms.length){this.href='https://'+ms+'/share?text=I%27ve+completed+%22Hoof+It%22+%2D+Day+10+%2D+Advent+of+Code+2024+%23AdventOfCode+https%3A%2F%2Fadventofcode%2Ecom%2F2024%2Fday%2F10';try{localStorage.setItem('mastodon.server',ms);}finally{}}else{return false;}" target="_blank">Mastodon</a
 ></span>]</span> this puzzle.</p>
 </main>
 
