@@ -6,23 +6,19 @@ import re
 top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
 
-def get_string_from_lines(string):
-    return " ".join(string.splitlines())
-
-
 def get_string_from_file(file_path=top_dir + "resources/year2024_day3_input.txt"):
     with open(file_path) as f:
-        return get_string_from_lines(f.read())
+        return f.read()
 
 
 def get_mults(s, always_enabled):
     do = True
     for instr, a, b in re.findall("(mul\((\d+),(\d+)\)|don't\(\)|do\(\))", s):
         if instr == "don't()":
-            do = False
+            do = always_enabled
         elif instr == "do()":
             do = True
-        elif always_enabled or do:
+        elif do:
             yield int(a) * int(b)
 
 
@@ -31,11 +27,11 @@ def get_enabled_mult_sum(s, always_enabled):
 
 
 def run_tests():
-    string = get_string_from_lines(
+    string = (
         """xmul(2,4)%&mul[3,7]!@^do_not_mul(5,5)+mul(32,64]then(mul(11,8)mul(8,5))"""
     )
     assert get_enabled_mult_sum(string, True) == 161
-    string = get_string_from_lines(
+    string = (
         """xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))"""
     )
     assert get_enabled_mult_sum(string, False) == 48
