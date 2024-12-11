@@ -35,6 +35,7 @@ Solutions are written in Python and/or Rust.
 |Day 8: Resonant Collinearity|[Problem](https://adventofcode.com/2024/day/8) [Input](https://adventofcode.com/2024/day/8/input)|[puzzle.html](resources/year2024_day8_puzzle.html) [input.txt](resources/year2024_day8_input.txt)|**|[day8.py](python/2024/day8.py)|[-](rust/src/2024/day8.rs)|01:50:11|01:56:23|
 |Day 9: Disk Fragmenter|[Problem](https://adventofcode.com/2024/day/9) [Input](https://adventofcode.com/2024/day/9/input)|[puzzle.html](resources/year2024_day9_puzzle.html) [input.txt](resources/year2024_day9_input.txt)|**|[day9.py](python/2024/day9.py)|[-](rust/src/2024/day9.rs)|03:00:41|03:34:30|
 |Day 10: Hoof It|[Problem](https://adventofcode.com/2024/day/10) [Input](https://adventofcode.com/2024/day/10/input)|[puzzle.html](resources/year2024_day10_puzzle.html) [input.txt](resources/year2024_day10_input.txt)|**|[day10.py](python/2024/day10.py)|[-](rust/src/2024/day10.rs)|02:55:13|02:55:32|
+|Day 11: Plutonian Pebbles|[Problem](https://adventofcode.com/2024/day/11) [Input](https://adventofcode.com/2024/day/11/input)|[puzzle.html](resources/year2024_day11_puzzle.html) [input.txt](resources/year2024_day11_input.txt)||[-](python/2024/day11.py)|[-](rust/src/2024/day11.rs)|-|-|
 |[2024](https://adventofcode.com/2024)|[Stats](https://adventofcode.com/2024/leaderboard/self)|[stats.txt](misc/leaderboard_self_2024.html)|20|-|-|-|-|
 
 ## [2023](https://adventofcode.com/2023)
