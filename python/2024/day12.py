@@ -1,7 +1,8 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
 import os
-
+import itertools
+import operator
 
 top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
@@ -51,30 +52,23 @@ def get_perimeter(region):
 
 
 def get_nb_seq(lst):
-    nb = 1 if lst else 0
-    for a, b in zip(lst, lst[1:]):
-        if a + 1 != b:
-            nb += 1
-    return nb
+    return 1 + sum(a + 1 != b for a, b in zip(lst, lst[1:])) if lst else 0
+
+
+def get_nb_sides_in_direction(region, dx, dy):
+    sides = set((x, y) for x, y in region if (x + dx, y + dy) not in region)
+    f1, f2 = (operator.itemgetter(i) for i in ((1, 0) if dx == 0 else (0, 1)))
+    return sum(
+        get_nb_seq(sorted(f2(s) for s in grp))
+        for _, grp in itertools.groupby(sorted(sides, key=f1), key=f1)
+    )
 
 
 def get_nb_sides(region):
-    # To be optimised/simplified
-    total_nb_sides = 0
-    for dx, dy in [(0, 1), (0, -1), (1, 0), (-1, 0)]:
-        sides = set((x, y) for x, y in region if (x + dx, y + dy) not in region)
-        if dx == 0:
-            distinct_ys = set(y for x, y in sides)
-            nb_sides = sum(
-                get_nb_seq(sorted(x for x, y in sides if y == y2)) for y2 in distinct_ys
-            )
-        else:
-            distinct_xs = set(x for x, y in sides)
-            nb_sides = sum(
-                get_nb_seq(sorted(y for x, y in sides if x == x2)) for x2 in distinct_xs
-            )
-        total_nb_sides += nb_sides
-    return total_nb_sides
+    return sum(
+        get_nb_sides_in_direction(region, dx, dy)
+        for dx, dy in [(0, 1), (0, -1), (1, 0), (-1, 0)]
+    )
 
 
 def get_region_fencing_price(region, part2):
