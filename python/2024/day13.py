@@ -41,58 +41,32 @@ def xgcd(a, b, s1=1, s2=0, t1=0, t2=1):
     return (abs(b), s2, t2) if (r == 0) else xgcd(b, r, s2, s3, t2, t3)
 
 
-def get_min_spend_for_machine(m, part1, max_press=100, error=10000000000000):
+def det(a, b, c, d):
+    return a * d - b * c
+
+
+def get_min_spend_for_machine(m, part1):
     (ax, ay), (bx, by), (px, py) = m
     # ax * A + bx * B = px   (eq 1)
     # ay * A + by * B = py   (eq 2)
     # min(3*A+B)
-    # TODO: https://en.wikipedia.org/wiki/B%C3%A9zout%27s_identity
-    mini = 0
+    # https://en.wikipedia.org/wiki/Cramer%27s_rule
+    if not part1:
+        error = 10000000000000
+        px += error
+        py += error
+    detm = det(ax, bx, ay, by)
+    deta = det(px, bx, py, by)
+    detb = det(ax, px, ay, py)
+    a, b = deta / detm, detb / detm
+    a, b = int(a), int(b)
+    if a < 0 or b < 0 or ax * a + bx * b != px:
+        return 0
     if part1:
-        for a in range(max_press):
-            for b in range(max_press):
-                if ax * a + bx * b == px and ay * a + by * b == py:
-                    c = 3 * a + b
-                    if mini == 0 or mini > c:
-                        mini = c
-    else:
-        # TODO
-        # px += error
-        # py += error
-        gcdx, cax, cbx = xgcd(ax, bx)
-        gcdy, cay, cby = xgcd(ay, by)
-        qx, rx = divmod(px, gcdx)
-        qy, ry = divmod(py, gcdy)
-        assert ax * cax + bx * cbx == gcdx
-        assert ay * cay + by * cby == gcdy
-        if rx == 0 and ry == 0:
-            cax *= qx
-            cbx *= qx
-            cay *= qy
-            cby *= qy
-            assert ax * cax + bx * cbx == px
-            assert ay * cay + by * cby == py
-            incax, incbx = -bx // gcdx, ax // gcdx
-            incay, incby = -by // gcdy, ay // gcdy
-            # Solutions for (1) are: (cax - k*incax, cbx+k*incbx)
-            # Solutions for (2) are: (cay - k*incay, cby+k*incby)
-            for k in [-100, -10, -1, 0, 1, 10, 100]:
-                assert ax * (cax + k * incax) + bx * (cbx + k * incbx) == px
-                assert ay * (cay + k * incay) + by * (cby + k * incby) == py
-            # But we also want:
-            #  A = cax + kx*incax = cay + ky*incay
-            #  B = cbx + kx*incbx = cby + ky*incby
-            # Did we replace a system of equation by another one just as hard?
-            if px == 8400:
-                A, B = 80, 40
-                kx, ky = 1520, 160
-                assert ax * A + bx * B == px
-                assert ay * A + by * B == py
-                assert A == cax + kx * incax
-                assert B == cbx + kx * incbx
-                assert A == cay + ky * incay
-                assert B == cby + ky * incby
-    return mini
+        max_press = 100
+        if a > max_press or b > max_press:
+            return 0
+    return 3 * a + b
 
 
 def get_min_spend(machines, part1=True):
@@ -120,12 +94,12 @@ Prize: X=18641, Y=10279"""
         )
     )
     assert get_min_spend(machines) == 480
-    print(get_min_spend(machines, False))
 
 
 def get_solutions():
     machines = list(get_machines_from_file())
     print(get_min_spend(machines) == 29438)
+    print(get_min_spend(machines, False) == 104958599303720)
 
 
 if __name__ == "__main__":
