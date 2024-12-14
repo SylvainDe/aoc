@@ -46,14 +46,15 @@ def safety_factor(time, robots, grid):
 
 def has_pattern(t, robots, grid):
     wid, hei = grid
-    s = set(get_pos_robot(t, r, grid) for r in robots)
-    lines = [
-        "".join("#" if (x, y) in s else " " for x in range(wid)) for y in range(hei)
-    ]
-    found = any("#######" in l for l in lines)
+    c = collections.Counter(get_pos_robot(t, r, grid) for r in robots)
+    pict = "\n".join(
+        "".join("#" if (x, y) in c else " " for x in range(wid)) for y in range(hei)
+    )
+    found = "######" in pict
+    # only_ones = all(v == 1 for k, v in c.items())
     if found:
         print(t)
-        print("\n".join(lines))
+        print(pict)
     return found
 
 
