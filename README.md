@@ -38,6 +38,7 @@ Solutions are written in Python and/or Rust.
 |Day 11: Plutonian Pebbles|[Problem](https://adventofcode.com/2024/day/11) [Input](https://adventofcode.com/2024/day/11/input)|[puzzle.html](resources/year2024_day11_puzzle.html) [input.txt](resources/year2024_day11_input.txt)|**|[day11.py](python/2024/day11.py)|[-](rust/src/2024/day11.rs)|00:41:47|02:35:14|
 |Day 12: Garden Groups|[Problem](https://adventofcode.com/2024/day/12) [Input](https://adventofcode.com/2024/day/12/input)|[puzzle.html](resources/year2024_day12_puzzle.html) [input.txt](resources/year2024_day12_input.txt)|**|[day12.py](python/2024/day12.py)|[-](rust/src/2024/day12.rs)|04:51:13|05:13:59|
 |Day 13: Claw Contraption|[Problem](https://adventofcode.com/2024/day/13) [Input](https://adventofcode.com/2024/day/13/input)|[puzzle.html](resources/year2024_day13_puzzle.html) [input.txt](resources/year2024_day13_input.txt)|**|[day13.py](python/2024/day13.py)|[-](rust/src/2024/day13.rs)|00:37:48|08:06:30|
+|Day 14: Restroom Redoubt|[Problem](https://adventofcode.com/2024/day/14) [Input](https://adventofcode.com/2024/day/14/input)|[puzzle.html](resources/year2024_day14_puzzle.html) [input.txt](resources/year2024_day14_input.txt)||[-](python/2024/day14.py)|[-](rust/src/2024/day14.rs)|-|-|
 |[2024](https://adventofcode.com/2024)|[Stats](https://adventofcode.com/2024/leaderboard/self)|[stats.txt](misc/leaderboard_self_2024.html)|26|-|-|-|-|
 
 ## [2023](https://adventofcode.com/2023)
