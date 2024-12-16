@@ -6,29 +6,54 @@ import os
 top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
 
-def get_xxx_from_line(string):
-    return string
+def get_map_content_from_lines(string):
+    walls = set()
+    start, end = None, None
+    for i, l in enumerate(string.splitlines()):
+        for j, v in enumerate(l):
+            pos = i, j
+            if v == '#':
+                walls.add(pos)
+            elif v == 'S':
+                start = pos
+            elif v == 'E':
+                end = pos
+            else:
+                assert v == '.'
+    return start, end, walls
 
-
-def get_xxxs_from_lines(string):
-    return [get_xxx_from_line(l) for l in string.splitlines()]
-
-
-def get_xxxs_from_file(file_path=top_dir + "resources/year2024_day16_input.txt"):
+def get_map_content_from_file(file_path=top_dir + "resources/year2024_day16_input.txt"):
     with open(file_path) as f:
-        return get_xxxs_from_lines(f.read())
+        return get_map_content_from_lines(f.read())
 
+
+def get_path(map_content):
+    start, end, walls = map_content
+    dist = dict()
 
 def run_tests():
-    xxxs = get_xxxs_from_lines(
-        """abc
-def
-ghi"""
+    map_content = get_map_content_from_lines(
+        """###############
+#.......#....E#
+#.#.###.#.###.#
+#.....#.#...#.#
+#.###.#####.#.#
+#.#.#.......#.#
+#.#.#####.###.#
+#...........#.#
+###.#.#####.#.#
+#...#.....#.#.#
+#.#.#.###.#.#.#
+#.....#...#.#.#
+#.###.#.#.#.#.#
+#S..#.....#...#
+###############"""
     )
+    print(get_path(map_content))
 
 
 def get_solutions():
-    xxxs = get_xxxs_from_file()
+    map_content = get_map_content_from_file()
 
 
 if __name__ == "__main__":
