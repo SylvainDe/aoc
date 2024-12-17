@@ -2,6 +2,7 @@
 import datetime
 import os
 import itertools
+import math
 
 top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
@@ -75,15 +76,33 @@ def run_computer(computer):
         else:
             assert False
     return output
-    return ",".join(str(o) for o in output)
+
+
+def format_lst(lst):
+    return ",".join(str(v) for v in lst)
 
 
 def find_a_for_copy(computer):
     registers, program = computer
     for a in itertools.count():
         registers["A"] = a
-        if run_computer((registers, program)) == program:
+        output = run_computer((registers, program))
+        if output == program:
             return a
+
+
+def find_a_for_copy2(computer):
+    registers, program = computer
+    candidates = list(range(8))
+    while candidates:
+        cand = candidates.pop(0)
+        registers["A"] = cand
+        output = run_computer((registers, program))
+        if output == program:
+            return cand
+        if program[-len(output) :] == output:
+            for i in range(8):
+                candidates.append(8 * cand + i)
 
 
 def run_tests():
@@ -95,7 +114,7 @@ Register C: 0
 Program: 0,1,5,4,3,0
 """
     )
-    assert ",".join(str(o) for o in run_computer(computer)) == "4,6,3,5,6,3,5,2,1,0"
+    assert format_lst(run_computer(computer)) == "4,6,3,5,6,3,5,2,1,0"
     computer = get_computer_from_lines(
         """Register A: 2024
 Register B: 0
@@ -108,8 +127,8 @@ Program: 0,3,5,4,3,0"""
 
 def get_solutions():
     computer = get_computer_from_file()
-    print(",".join(str(o) for o in run_computer(computer)) == "7,5,4,3,4,5,3,4,6")
-    print(find_a_for_copy(computer))
+    print(format_lst(run_computer(computer)) == "7,5,4,3,4,5,3,4,6")
+    print(find_a_for_copy2(computer) == 164278899142333)
 
 
 if __name__ == "__main__":
