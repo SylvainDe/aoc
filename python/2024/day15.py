@@ -14,23 +14,22 @@ directions = {
 
 WALL = "#"
 BOX = "O"
+LBOX = "["
+RBOX = "]"
+BOXES = (BOX, LBOX, RBOX)
+ROBOT = "@"
 
 
 def get_grid_content(strings):
     grid = dict()
-    robot = None
     for i, l in enumerate(strings):
         for j, v in enumerate(l):
             pos = (i, j)
             if v == ".":
                 continue
-            elif v == "@":
-                assert robot is None
-                robot = pos
-                continue
-            assert v in (WALL, BOX)
+            assert v in (WALL, BOX, ROBOT)
             grid[pos] = v
-    return grid, robot
+    return grid
 
 
 def get_instructions(string):
@@ -41,8 +40,7 @@ def get_inputs_from_lines(string):
     sep = "\n\n"
     beg, mid, end = string.partition(sep)
     assert mid == sep
-    grid, robot = get_grid_content(beg.splitlines())
-    return grid, robot, get_instructions(end.strip())
+    return get_grid_content(beg.splitlines()), get_instructions(end.strip())
 
 
 def get_inputs_from_file(file_path=top_dir + "resources/year2024_day15_input.txt"):
@@ -55,31 +53,82 @@ def gps(pos):
     return 100 * x + y
 
 
-def follow_instructions(grid, robot, instr):
-    i, j = robot
-    for di, dj in instr:
+def find_robot(grid):
+    for pos, val in grid.items():
+        if val == ROBOT:
+            return pos
+    return None
+
+
+def enlarge(grid):
+    grid2 = dict()
+    for (x, y), val in grid.items():
+        if val == WALL:
+            a, b = WALL, WALL
+        elif val == BOX:
+            a, b = LBOX, RBOX
+        elif val == ROBOT:
+            a, b = ROBOT, None
+        else:
+            assert False
+        grid2[(x, 2 * y)] = a
+        if b is not None:
+            grid2[(x, 2 * y + 1)] = b
+    return grid2
+
+
+def pos_add(pos, delta, n=1):
+    i, j = pos
+    di, dj = delta
+    return i + n * di, j + n * dj
+
+
+def display(grid, robot):
+    grid = dict(grid)
+    grid[robot] = ROBOT
+    xs = set(x for x, _ in grid.keys())
+    ys = set(y for _, y in grid.keys())
+    for x in range(min(xs), max(xs) + 1):
+        print("".join(grid.get((x, y), " ") for y in range(min(ys), max(ys) + 1)))
+
+
+def follow_instructions(grid, instr):
+    grid = dict(grid)
+    robot = find_robot(grid)
+    grid.pop(robot)
+    for move in instr:
         do_follow_instructions = True
-        for step in itertools.count(start=1):
-            pos = i + step * di, j + step * dj
-            content = grid.get(pos, None)
-            if content is None:
+        boxes_to_move = []
+        to_check = set([robot])
+        while True:
+            to_check = set(p for p in (pos_add(p, move) for p in to_check) if p in grid)
+            if not to_check:
                 break
-            elif content == WALL:
+            if any(grid[p] == WALL for p in to_check):
                 do_follow_instructions = False
-            else:
-                assert content == BOX
+                break
+            if move[0]:
+                for p in set(to_check):
+                    c = grid[p]
+                    assert c in BOXES
+                    if c == LBOX:
+                        to_check.add(pos_add(p, (0, 1)))
+                    elif c == RBOX:
+                        to_check.add(pos_add(p, (0, -1)))
+            boxes_to_move.extend(to_check)
         if do_follow_instructions:
-            free_pos = i + step * di, j + step * dj
-            assert free_pos not in grid
-            i, j = i + di, j + dj
-            if (i, j) in grid:
-                grid[free_pos] = grid[(i, j)]
-                grid.pop((i, j))
-    return sum(gps(p) for p, v in grid.items() if v == BOX)
+            for b in reversed(boxes_to_move):
+                dest = pos_add(b, move)
+                assert dest not in grid
+                grid[dest] = grid.pop(b)
+            robot = pos_add(robot, move)
+            assert robot not in grid
+        # display(grid, robot)
+    return sum(gps(p) for p, v in grid.items() if v in (BOX, LBOX))
 
 
 def run_tests():
-    grid, robot, instr = get_inputs_from_lines(
+    grid, instr = get_inputs_from_lines(
         """##########
 #..O..O.O#
 #......O.#
@@ -103,8 +152,9 @@ vvv<<^>^v^^><<>>><>^<<><^vv^^<>vvv<>><^^v>^>vv<>v<<<<v<^v>^<^^>>>^<v<v
 ^^>vv<^v^v<vv>^<><v<^v>^^^>>>^^vvv^>vvv<>>>^<^>>>>>^<<^v>^vvv<>^<><<v>
 v^^>>><<^^<>>^v^<v^vv<>v^<<>^<^v^v><^<<<><<^<v><v<>vv>>v><v^<vv<>v^<<^"""
     )
-    assert follow_instructions(grid, robot, instr) == 10092
-    grid, robot, instr = get_inputs_from_lines(
+    assert follow_instructions(grid, instr) == 10092
+    assert follow_instructions(enlarge(grid), instr) == 9021
+    grid, instr = get_inputs_from_lines(
         """########
 #..O.O.#
 ##@.O..#
@@ -116,12 +166,13 @@ v^^>>><<^^<>>^v^<v^vv<>v^<<>^<^v^v><^<<<><<^<v><v<>vv>>v><v^<vv<>v^<<^"""
 
 <^^>>>vv<v>>v<<"""
     )
-    assert follow_instructions(grid, robot, instr) == 2028
+    assert follow_instructions(grid, instr) == 2028
 
 
 def get_solutions():
-    grid, robot, instr = get_inputs_from_file()
-    print(follow_instructions(grid, robot, instr) == 1559280)
+    grid, instr = get_inputs_from_file()
+    print(follow_instructions(grid, instr) == 1559280)
+    print(follow_instructions(enlarge(grid), instr) == 1576353)
 
 
 if __name__ == "__main__":
