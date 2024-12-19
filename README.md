@@ -43,8 +43,8 @@ Solutions are written in Python and/or Rust.
 |Day 16: Reindeer Maze|[Problem](https://adventofcode.com/2024/day/16) [Input](https://adventofcode.com/2024/day/16/input)|[puzzle.html](resources/year2024_day16_puzzle.html) [input.txt](resources/year2024_day16_input.txt)||[day16.py](python/2024/day16.py)|[-](rust/src/2024/day16.rs)|-|-|
 |Day 17: Chronospatial Computer|[Problem](https://adventofcode.com/2024/day/17) [Input](https://adventofcode.com/2024/day/17/input)|[puzzle.html](resources/year2024_day17_puzzle.html) [input.txt](resources/year2024_day17_input.txt)|**|[day17.py](python/2024/day17.py)|[-](rust/src/2024/day17.rs)|03:08:48|14:38:32|
 |Day 18: RAM Run|[Problem](https://adventofcode.com/2024/day/18) [Input](https://adventofcode.com/2024/day/18/input)|[puzzle.html](resources/year2024_day18_puzzle.html) [input.txt](resources/year2024_day18_input.txt)||[-](python/2024/day18.py)|[-](rust/src/2024/day18.rs)|-|-|
-|Day 19: Linen Layout|[Problem](https://adventofcode.com/2024/day/19) [Input](https://adventofcode.com/2024/day/19/input)|[puzzle.html](resources/year2024_day19_puzzle.html) [input.txt](resources/year2024_day19_input.txt)|*|[day19.py](python/2024/day19.py)|[-](rust/src/2024/day19.rs)|00:28:15|-|
-|[2024](https://adventofcode.com/2024)|[Stats](https://adventofcode.com/2024/leaderboard/self)|[stats.txt](misc/leaderboard_self_2024.html)|33|-|-|-|-|
+|Day 19: Linen Layout|[Problem](https://adventofcode.com/2024/day/19) [Input](https://adventofcode.com/2024/day/19/input)|[puzzle.html](resources/year2024_day19_puzzle.html) [input.txt](resources/year2024_day19_input.txt)|**|[day19.py](python/2024/day19.py)|[-](rust/src/2024/day19.rs)|00:28:15|00:45:02|
+|[2024](https://adventofcode.com/2024)|[Stats](https://adventofcode.com/2024/leaderboard/self)|[stats.txt](misc/leaderboard_self_2024.html)|34|-|-|-|-|
 
 ## [2023](https://adventofcode.com/2023)
 |Day|URLs|Puzzle & Input|Stars|Python|Rust|Time part 1|Time part 2|
@@ -337,11 +337,11 @@ Solutions are written in Python and/or Rust.
 |16||**|**|||**|**|**|**||12: ************|
 |17|**|**||||**|**|**|**|**|14: **************|
 |18||**|||*|**|**|**|*||10: **********|
-|19||**||||**|**|**|*|*|10: **********|
+|19||**||||**|**|**|*|**|11: ***********|
 |20|*|**|||**|**|**|**|*||12: ************|
 |21|**|**||||**|**|**|*||11: ***********|
 |22||*|||*|**|**|**||| 8: ********|
 |23||**||||**|*|**||| 7: *******|
 |24||**|||**|**||**|*|| 9: *********|
 |25|*|*||*||**|*|**||| 8: ********|
-|Total|32|48|28|24|29|50|46|50|39|33|379|
+|Total|32|48|28|24|29|50|46|50|39|34|380|
