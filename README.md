@@ -43,6 +43,7 @@ Solutions are written in Python and/or Rust.
 |Day 16: Reindeer Maze|[Problem](https://adventofcode.com/2024/day/16) [Input](https://adventofcode.com/2024/day/16/input)|[puzzle.html](resources/year2024_day16_puzzle.html) [input.txt](resources/year2024_day16_input.txt)||[day16.py](python/2024/day16.py)|[-](rust/src/2024/day16.rs)|-|-|
 |Day 17: Chronospatial Computer|[Problem](https://adventofcode.com/2024/day/17) [Input](https://adventofcode.com/2024/day/17/input)|[puzzle.html](resources/year2024_day17_puzzle.html) [input.txt](resources/year2024_day17_input.txt)|**|[day17.py](python/2024/day17.py)|[-](rust/src/2024/day17.rs)|03:08:48|14:38:32|
 |Day 18: RAM Run|[Problem](https://adventofcode.com/2024/day/18) [Input](https://adventofcode.com/2024/day/18/input)|[puzzle.html](resources/year2024_day18_puzzle.html) [input.txt](resources/year2024_day18_input.txt)||[-](python/2024/day18.py)|[-](rust/src/2024/day18.rs)|-|-|
+|Day 19: Linen Layout|[Problem](https://adventofcode.com/2024/day/19) [Input](https://adventofcode.com/2024/day/19/input)|[puzzle.html](resources/year2024_day19_puzzle.html) [input.txt](resources/year2024_day19_input.txt)||[-](python/2024/day19.py)|[-](rust/src/2024/day19.rs)|-|-|
 |[2024](https://adventofcode.com/2024)|[Stats](https://adventofcode.com/2024/leaderboard/self)|[stats.txt](misc/leaderboard_self_2024.html)|32|-|-|-|-|
 
 ## [2023](https://adventofcode.com/2023)
