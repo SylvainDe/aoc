@@ -49,8 +49,8 @@ Solutions are written in Python and/or Rust.
 |Day 22: Monkey Market|[Problem](https://adventofcode.com/2024/day/22) [Input](https://adventofcode.com/2024/day/22/input)|[puzzle.html](resources/year2024_day22_puzzle.html) [input.txt](resources/year2024_day22_input.txt)||[-](python/2024/day22.py)|[-](rust/src/2024/day22.rs)|-|-|
 |Day 23: LAN Party|[Problem](https://adventofcode.com/2024/day/23) [Input](https://adventofcode.com/2024/day/23/input)|[puzzle.html](resources/year2024_day23_puzzle.html) [input.txt](resources/year2024_day23_input.txt)||[-](python/2024/day23.py)|[-](rust/src/2024/day23.rs)|-|-|
 |Day 24: Crossed Wires|[Problem](https://adventofcode.com/2024/day/24) [Input](https://adventofcode.com/2024/day/24/input)|[puzzle.html](resources/year2024_day24_puzzle.html) [input.txt](resources/year2024_day24_input.txt)||[-](python/2024/day24.py)|[-](rust/src/2024/day24.rs)|-|-|
-|Day 25: Code Chronicle|[Problem](https://adventofcode.com/2024/day/25) [Input](https://adventofcode.com/2024/day/25/input)|[puzzle.html](resources/year2024_day25_puzzle.html) [input.txt](resources/year2024_day25_input.txt)||[-](python/2024/day25.py)|[-](rust/src/2024/day25.rs)|-|-|
-|[2024](https://adventofcode.com/2024)|[Stats](https://adventofcode.com/2024/leaderboard/self)|[stats.txt](misc/leaderboard_self_2024.html)|34|-|-|-|-|
+|Day 25: Code Chronicle|[Problem](https://adventofcode.com/2024/day/25) [Input](https://adventofcode.com/2024/day/25/input)|[puzzle.html](resources/year2024_day25_puzzle.html) [input.txt](resources/year2024_day25_input.txt)|*|[day25.py](python/2024/day25.py)|[-](rust/src/2024/day25.rs)|+24h|-|
+|[2024](https://adventofcode.com/2024)|[Stats](https://adventofcode.com/2024/leaderboard/self)|[stats.txt](misc/leaderboard_self_2024.html)|35|-|-|-|-|
 
 ## [2023](https://adventofcode.com/2023)
 |Day|URLs|Puzzle & Input|Stars|Python|Rust|Time part 1|Time part 2|
@@ -349,5 +349,5 @@ Solutions are written in Python and/or Rust.
 |22||*|||*|**|**|**||| 8: ********|
 |23||**||||**|*|**||| 7: *******|
 |24||**|||**|**||**|*|| 9: *********|
-|25|*|*||*||**|*|**||| 8: ********|
-|Total|32|48|28|24|29|50|46|50|39|34|380|
+|25|*|*||*||**|*|**||*| 9: *********|
+|Total|32|48|28|24|29|50|46|50|39|35|381|
