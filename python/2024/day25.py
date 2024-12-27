@@ -7,6 +7,7 @@ top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
 HEIGHT = 7
 
+
 def measure_height(lst, idx, c):
     is_lock = c == "#"
     assert len(lst) == HEIGHT
@@ -35,6 +36,7 @@ def get_keys_from_file(file_path=top_dir + "resources/year2024_day25_input.txt")
 
 def is_fit(key, lock):
     return all(a + b + 2 <= HEIGHT for a, b in zip(key, lock))
+
 
 def get_nb_fits(keys):
     k, l = [], []
