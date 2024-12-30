@@ -40,7 +40,7 @@ Solutions are written in Python and/or Rust.
 |Day 13: Claw Contraption|[Problem](https://adventofcode.com/2024/day/13) [Input](https://adventofcode.com/2024/day/13/input)|[puzzle.html](resources/year2024_day13_puzzle.html) [input.txt](resources/year2024_day13_input.txt)|**|[day13.py](python/2024/day13.py)|[-](rust/src/2024/day13.rs)|00:37:48|08:06:30|
 |Day 14: Restroom Redoubt|[Problem](https://adventofcode.com/2024/day/14) [Input](https://adventofcode.com/2024/day/14/input)|[puzzle.html](resources/year2024_day14_puzzle.html) [input.txt](resources/year2024_day14_input.txt)|**|[day14.py](python/2024/day14.py)|[-](rust/src/2024/day14.rs)|05:27:51|05:48:39|
 |Day 15: Warehouse Woes|[Problem](https://adventofcode.com/2024/day/15) [Input](https://adventofcode.com/2024/day/15/input)|[puzzle.html](resources/year2024_day15_puzzle.html) [input.txt](resources/year2024_day15_input.txt)|**|[day15.py](python/2024/day15.py)|[-](rust/src/2024/day15.rs)|13:50:00|+24h|
-|Day 16: Reindeer Maze|[Problem](https://adventofcode.com/2024/day/16) [Input](https://adventofcode.com/2024/day/16/input)|[puzzle.html](resources/year2024_day16_puzzle.html) [input.txt](resources/year2024_day16_input.txt)||[day16.py](python/2024/day16.py)|[-](rust/src/2024/day16.rs)|-|-|
+|Day 16: Reindeer Maze|[Problem](https://adventofcode.com/2024/day/16) [Input](https://adventofcode.com/2024/day/16/input)|[puzzle.html](resources/year2024_day16_puzzle.html) [input.txt](resources/year2024_day16_input.txt)|**|[day16.py](python/2024/day16.py)|[-](rust/src/2024/day16.rs)|+24h|+24h|
 |Day 17: Chronospatial Computer|[Problem](https://adventofcode.com/2024/day/17) [Input](https://adventofcode.com/2024/day/17/input)|[puzzle.html](resources/year2024_day17_puzzle.html) [input.txt](resources/year2024_day17_input.txt)|**|[day17.py](python/2024/day17.py)|[-](rust/src/2024/day17.rs)|03:08:48|14:38:32|
 |Day 18: RAM Run|[Problem](https://adventofcode.com/2024/day/18) [Input](https://adventofcode.com/2024/day/18/input)|[puzzle.html](resources/year2024_day18_puzzle.html) [input.txt](resources/year2024_day18_input.txt)||[day18.py](python/2024/day18.py)|[-](rust/src/2024/day18.rs)|-|-|
 |Day 19: Linen Layout|[Problem](https://adventofcode.com/2024/day/19) [Input](https://adventofcode.com/2024/day/19/input)|[puzzle.html](resources/year2024_day19_puzzle.html) [input.txt](resources/year2024_day19_input.txt)|**|[day19.py](python/2024/day19.py)|[-](rust/src/2024/day19.rs)|00:28:15|00:45:02|
@@ -50,7 +50,7 @@ Solutions are written in Python and/or Rust.
 |Day 23: LAN Party|[Problem](https://adventofcode.com/2024/day/23) [Input](https://adventofcode.com/2024/day/23/input)|[puzzle.html](resources/year2024_day23_puzzle.html) [input.txt](resources/year2024_day23_input.txt)||[-](python/2024/day23.py)|[-](rust/src/2024/day23.rs)|-|-|
 |Day 24: Crossed Wires|[Problem](https://adventofcode.com/2024/day/24) [Input](https://adventofcode.com/2024/day/24/input)|[puzzle.html](resources/year2024_day24_puzzle.html) [input.txt](resources/year2024_day24_input.txt)|*|[day24.py](python/2024/day24.py)|[-](rust/src/2024/day24.rs)|+24h|-|
 |Day 25: Code Chronicle|[Problem](https://adventofcode.com/2024/day/25) [Input](https://adventofcode.com/2024/day/25/input)|[puzzle.html](resources/year2024_day25_puzzle.html) [input.txt](resources/year2024_day25_input.txt)|*|[day25.py](python/2024/day25.py)|[-](rust/src/2024/day25.rs)|+24h|-|
-|[2024](https://adventofcode.com/2024)|[Stats](https://adventofcode.com/2024/leaderboard/self)|[stats.txt](misc/leaderboard_self_2024.html)|36|-|-|-|-|
+|[2024](https://adventofcode.com/2024)|[Stats](https://adventofcode.com/2024/leaderboard/self)|[stats.txt](misc/leaderboard_self_2024.html)|38|-|-|-|-|
 
 ## [2023](https://adventofcode.com/2023)
 |Day|URLs|Puzzle & Input|Stars|Python|Rust|Time part 1|Time part 2|
@@ -340,7 +340,7 @@ Solutions are written in Python and/or Rust.
 |13||**|**|||**|**|**|**|**|14: **************|
 |14|**|**||**|**|**|**|**|**|**|18: ******************|
 |15||**||||**|**|**|**|**|12: ************|
-|16||**|**|||**|**|**|**||12: ************|
+|16||**|**|||**|**|**|**|**|14: **************|
 |17|**|**||||**|**|**|**|**|14: **************|
 |18||**|||*|**|**|**|*||10: **********|
 |19||**||||**|**|**|*|**|11: ***********|
@@ -350,4 +350,4 @@ Solutions are written in Python and/or Rust.
 |23||**||||**|*|**||| 7: *******|
 |24||**|||**|**||**|*|*|10: **********|
 |25|*|*||*||**|*|**||*| 9: *********|
-|Total|32|48|28|24|29|50|46|50|39|36|382|
+|Total|32|48|28|24|29|50|46|50|39|38|384|
