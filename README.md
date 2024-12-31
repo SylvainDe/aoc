@@ -44,13 +44,13 @@ Solutions are written in Python and/or Rust.
 |Day 17: Chronospatial Computer|[Problem](https://adventofcode.com/2024/day/17) [Input](https://adventofcode.com/2024/day/17/input)|[puzzle.html](resources/year2024_day17_puzzle.html) [input.txt](resources/year2024_day17_input.txt)|**|[day17.py](python/2024/day17.py)|[-](rust/src/2024/day17.rs)|03:08:48|14:38:32|
 |Day 18: RAM Run|[Problem](https://adventofcode.com/2024/day/18) [Input](https://adventofcode.com/2024/day/18/input)|[puzzle.html](resources/year2024_day18_puzzle.html) [input.txt](resources/year2024_day18_input.txt)||[day18.py](python/2024/day18.py)|[-](rust/src/2024/day18.rs)|-|-|
 |Day 19: Linen Layout|[Problem](https://adventofcode.com/2024/day/19) [Input](https://adventofcode.com/2024/day/19/input)|[puzzle.html](resources/year2024_day19_puzzle.html) [input.txt](resources/year2024_day19_input.txt)|**|[day19.py](python/2024/day19.py)|[-](rust/src/2024/day19.rs)|00:28:15|00:45:02|
-|Day 20: Race Condition|[Problem](https://adventofcode.com/2024/day/20) [Input](https://adventofcode.com/2024/day/20/input)|[puzzle.html](resources/year2024_day20_puzzle.html) [input.txt](resources/year2024_day20_input.txt)||[-](python/2024/day20.py)|[-](rust/src/2024/day20.rs)|-|-|
+|Day 20: Race Condition|[Problem](https://adventofcode.com/2024/day/20) [Input](https://adventofcode.com/2024/day/20/input)|[puzzle.html](resources/year2024_day20_puzzle.html) [input.txt](resources/year2024_day20_input.txt)|*|[-](python/2024/day20.py)|[-](rust/src/2024/day20.rs)|+24h|-|
 |Day 21: Keypad Conundrum|[Problem](https://adventofcode.com/2024/day/21) [Input](https://adventofcode.com/2024/day/21/input)|[puzzle.html](resources/year2024_day21_puzzle.html) [input.txt](resources/year2024_day21_input.txt)||[-](python/2024/day21.py)|[-](rust/src/2024/day21.rs)|-|-|
 |Day 22: Monkey Market|[Problem](https://adventofcode.com/2024/day/22) [Input](https://adventofcode.com/2024/day/22/input)|[puzzle.html](resources/year2024_day22_puzzle.html) [input.txt](resources/year2024_day22_input.txt)||[-](python/2024/day22.py)|[-](rust/src/2024/day22.rs)|-|-|
 |Day 23: LAN Party|[Problem](https://adventofcode.com/2024/day/23) [Input](https://adventofcode.com/2024/day/23/input)|[puzzle.html](resources/year2024_day23_puzzle.html) [input.txt](resources/year2024_day23_input.txt)||[-](python/2024/day23.py)|[-](rust/src/2024/day23.rs)|-|-|
 |Day 24: Crossed Wires|[Problem](https://adventofcode.com/2024/day/24) [Input](https://adventofcode.com/2024/day/24/input)|[puzzle.html](resources/year2024_day24_puzzle.html) [input.txt](resources/year2024_day24_input.txt)|*|[day24.py](python/2024/day24.py)|[-](rust/src/2024/day24.rs)|+24h|-|
 |Day 25: Code Chronicle|[Problem](https://adventofcode.com/2024/day/25) [Input](https://adventofcode.com/2024/day/25/input)|[puzzle.html](resources/year2024_day25_puzzle.html) [input.txt](resources/year2024_day25_input.txt)|*|[day25.py](python/2024/day25.py)|[-](rust/src/2024/day25.rs)|+24h|-|
-|[2024](https://adventofcode.com/2024)|[Stats](https://adventofcode.com/2024/leaderboard/self)|[stats.txt](misc/leaderboard_self_2024.html)|38|-|-|-|-|
+|[2024](https://adventofcode.com/2024)|[Stats](https://adventofcode.com/2024/leaderboard/self)|[stats.txt](misc/leaderboard_self_2024.html)|39|-|-|-|-|
 
 ## [2023](https://adventofcode.com/2023)
 |Day|URLs|Puzzle & Input|Stars|Python|Rust|Time part 1|Time part 2|
@@ -344,10 +344,10 @@ Solutions are written in Python and/or Rust.
 |17|**|**||||**|**|**|**|**|14: **************|
 |18||**|||*|**|**|**|*||10: **********|
 |19||**||||**|**|**|*|**|11: ***********|
-|20|*|**|||**|**|**|**|*||12: ************|
+|20|*|**|||**|**|**|**|*|*|13: *************|
 |21|**|**||||**|**|**|*||11: ***********|
 |22||*|||*|**|**|**||| 8: ********|
 |23||**||||**|*|**||| 7: *******|
 |24||**|||**|**||**|*|*|10: **********|
 |25|*|*||*||**|*|**||*| 9: *********|
-|Total|32|48|28|24|29|50|46|50|39|38|384|
+|Total|32|48|28|24|29|50|46|50|39|39|385|
