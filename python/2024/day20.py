@@ -43,7 +43,13 @@ def get_neighbours(pos):
         yield x + dx, y + dy
 
 
-def find_shortcuts(grid_info):
+def between(pos1, pos2):
+    x1, y1 = pos1
+    x2, y2 = pos2
+    return abs(x1 - x2) + abs(y1 - y2)
+
+
+def find_shortcuts(grid_info, cheat_len=2):
     start, end, walls = grid_info
     distances = dict()
     to_visit = [(0, start)]
@@ -59,13 +65,13 @@ def find_shortcuts(grid_info):
             if pos2 not in walls:
                 heapq.heappush(to_visit, (dist + 1, pos2))
     shortcuts = collections.Counter()
-    for x, y in walls:
-        for dx, dy in oriented_neigh:
-            dist1, dist2 = [
-                distances.get((x + s * dx, y + s * dy), None) for s in (-1, 1)
-            ]
-            if dist1 is not None and dist2 is not None:
-                shortcuts[abs(dist1 - dist2) - 2] += 1
+    for pos1, dist1 in distances.items():
+        for pos2, dist2 in distances.items():
+            dist = between(pos1, pos2)
+            if dist <= cheat_len:
+                diff_dist = dist2 - dist1 - dist
+                if diff_dist > 0:
+                    shortcuts[diff_dist] += 1
     return shortcuts
 
 
@@ -100,11 +106,31 @@ def run_tests():
         64: 1,
         40: 1,
     }
+    shortcuts = {k: v for k, v in find_shortcuts(grid_info, 20).items() if k >= 50}
+    assert shortcuts == {
+        50: 32,
+        52: 31,
+        54: 29,
+        56: 39,
+        58: 25,
+        60: 23,
+        62: 20,
+        64: 19,
+        66: 12,
+        68: 14,
+        70: 12,
+        72: 22,
+        74: 4,
+        76: 3,
+    }
 
 
 def get_solutions():
     grid_info = get_grid_info_from_file()
-    print(sum(c for d, c in find_shortcuts(grid_info).items() if d >= 100) == 1445)
+    shortcuts = {k: v for k, v in find_shortcuts(grid_info).items() if k >= 100}
+    print(sum(shortcuts.values()) == 1445)
+    shortcuts = {k: v for k, v in find_shortcuts(grid_info, 20).items() if k >= 100}
+    print(sum(shortcuts.values()) == 1008040)
 
 
 if __name__ == "__main__":
