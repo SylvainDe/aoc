@@ -43,6 +43,16 @@ def get_map_content_from_file(file_path=top_dir + "resources/year2024_day16_inpu
         return get_map_content_from_lines(f.read())
 
 
+def get_next_states(pos, direct, dist, forward=True):
+    sign = 1 if forward else -1
+    x, y = pos
+    dx, dy = direct
+    pos2 = x + sign * dx, y + sign * dy
+    yield pos2, direct, dist + sign
+    for dir2 in next_directions[direct]:
+        yield pos, dir2, dist + 1000 * sign
+
+
 def get_path(map_content):
     start, end, walls = map_content
     distances = dict()
@@ -58,13 +68,9 @@ def get_path(map_content):
         distances[state] = dist
         if pos == end:
             break
-        x, y = pos
-        dx, dy = direct
-        pos2 = x + dx, y + dy
-        if pos2 not in walls:
-            heapq.heappush(to_visit, (dist + 1, pos2, direct))
-        for dir2 in next_directions[direct]:
-            heapq.heappush(to_visit, (dist + 1000, pos, dir2))
+        for pos2, dir2, dist2 in get_next_states(pos, direct, dist):
+            if pos2 not in walls:
+                heapq.heappush(to_visit, (dist2, pos2, dir2))
     else:  # no break
         assert False
     # Shortest dist is found, visit backward from here
@@ -72,20 +78,13 @@ def get_path(map_content):
     sits = set([state[0]])
     to_visit2 = set([state])
     while to_visit2:
-        pos, direct = to_visit2.pop()
-        dist = distances[(pos, direct)]
-        x, y = pos
-        dx, dy = direct
-        pos2 = x - dx, y - dy
-        state2 = pos2, direct
-        if distances.get(state2, None) == dist - 1:
-            to_visit2.add(state2)
-            sits.add(pos2)
-        for dir2 in next_directions[direct]:
-            state2 = pos, dir2
-            if distances.get(state2, None) == dist - 1000:
+        state = to_visit2.pop()
+        pos, direct = state
+        for pos2, dir2, dist2 in get_next_states(pos, direct, distances[state], False):
+            state2 = pos2, dir2
+            if distances.get(state2, None) == dist2:
                 to_visit2.add(state2)
-                sits.add(pos)
+                sits.add(pos2)
     return shortest_dist, len(set(sits))
 
 
