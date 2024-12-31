@@ -7,10 +7,6 @@ import collections
 top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
 
-def get_xxx_from_line(string):
-    return string
-
-
 def get_grid_info_from_lines(string):
     start, end = None, None
     walls = set()
@@ -34,7 +30,6 @@ def get_grid_info_from_file(file_path=top_dir + "resources/year2024_day20_input.
 
 
 neighbours = ((1, 0), (-1, 0), (0, -1), (0, 1))
-oriented_neigh = ((1, 0), (0, 1))
 
 
 def get_neighbours(pos):
@@ -47,6 +42,18 @@ def between(pos1, pos2):
     x1, y1 = pos1
     x2, y2 = pos2
     return abs(x1 - x2) + abs(y1 - y2)
+
+
+def get_points_around(pos, radius):
+    x, y = pos
+    p = set()
+    for adx in range(radius + 1):
+        for ady in range(radius - adx + 1):
+            p.add((x + adx, y + ady))
+            p.add((x - adx, y + ady))
+            p.add((x + adx, y - ady))
+            p.add((x - adx, y - ady))
+    return p
 
 
 def find_shortcuts(grid_info, cheat_len=2):
@@ -66,9 +73,11 @@ def find_shortcuts(grid_info, cheat_len=2):
                 heapq.heappush(to_visit, (dist + 1, pos2))
     shortcuts = collections.Counter()
     for pos1, dist1 in distances.items():
-        for pos2, dist2 in distances.items():
-            dist = between(pos1, pos2)
-            if dist <= cheat_len:
+        for pos2 in get_points_around(pos1, cheat_len):
+            if pos2 in distances:
+                dist = between(pos1, pos2)
+                assert dist <= cheat_len
+                dist2 = distances[pos2]
                 diff_dist = dist2 - dist1 - dist
                 if diff_dist > 0:
                     shortcuts[diff_dist] += 1
