@@ -13,7 +13,7 @@ def get_simple_wire_from_line(string):
 
 def get_complex_wire_from_line(string):
     lst = string.split(" ")
-    return (lst[i] for i in (4, 0, 1, 2))
+    return tuple(lst[i] for i in (4, 0, 1, 2))
 
 
 def get_wires_from_lines(string):
