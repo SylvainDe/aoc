@@ -3,7 +3,6 @@ import datetime
 import os
 import itertools
 
-
 top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
 
@@ -26,40 +25,48 @@ def get_conns_from_file(file_path=top_dir + "resources/year2024_day23_input.txt"
 def get_conns_as_dict(conns):
     conn_dict = dict()
     for a, b in conns:
-        conn_dict.setdefault(a, []).append(b)
-        conn_dict.setdefault(b, []).append(a)
+        conn_dict.setdefault(a, set()).add(b)
+        conn_dict.setdefault(b, set()).add(a)
     return conn_dict
 
 
 def get_interconnected_triples(conns):
     conns = get_conns_as_dict(conns)
-    ret = set()
-    seen = set()
     for cpu, lst in conns.items():
-        if cpu not in seen:
-            seen.add(cpu)
-            lst2 = [c for c in lst if c not in seen]
-            for cpu2, cpu3 in itertools.combinations(lst2, 2):
-                conn2 = cpu2 in conns[cpu3]
-                conn3 = cpu3 in conns[cpu2]
-                assert conn2 == conn3
-                if conn2:
-                    ret.add((cpu, cpu2, cpu3))
+        lst2 = [c for c in lst if c > cpu]
+        for cpu2, cpu3 in itertools.combinations(lst2, 2):
+            conn2 = cpu2 in conns[cpu3]
+            conn3 = cpu3 in conns[cpu2]
+            assert conn2 == conn3
+            if conn2:
+                yield cpu, cpu2, cpu3
+
+
+def intersection(sets):
+    sets = list(sets)
+    if not sets:
+        return set()
+    ret = sets[0]
+    for s in sets[1:]:
+        ret = ret.intersection(s)
     return ret
 
 
 def get_interconnected_set(conns):
     conns = get_conns_as_dict(conns)
-    ret = []
-    seen = set()
-    for cpu, lst in conns.items():
-        if cpu in seen:
-            continue
-        seen.add(cpu)
-        component = set()
-        to_visit = set([cpu])
-        while to_visit:
-            cpu2 = to_visit.pop()
+    sets = [[cpu] for cpu in conns.keys()]
+    for i in itertools.count(1):
+        new_sets = []
+        for s in sets:
+            assert len(s) == i
+            cands = intersection(conns[cpu] for cpu in s)
+            for c in cands:
+                if c > s[-1]:
+                    new_sets.append(s + [c])
+        if new_sets:
+            sets = new_sets
+        else:
+            return ",".join(sets[0])
 
 
 def run_tests():
@@ -97,18 +104,26 @@ wh-qp
 tb-vc
 td-yn"""
     )
-    ret = get_interconnected_triples(conns)
+    ret = list(get_interconnected_triples(conns))
     assert len(ret) == 12
     ret2 = [s for s in ret if any(e.startswith("t") for e in s)]
     assert len(ret2) == 7
-    print(get_interconnected_set(conns))
+    assert get_interconnected_set(conns) == "co,de,ka,ta"
 
 
 def get_solutions():
     conns = get_conns_from_file()
-    ret = get_interconnected_triples(conns)
-    ret2 = [s for s in ret if any(e.startswith("t") for e in s)]
-    print(len(ret2) == 1248)
+    print(
+        len(
+            [
+                s
+                for s in get_interconnected_triples(conns)
+                if any(e.startswith("t") for e in s)
+            ]
+        )
+        == 1248
+    )
+    print(get_interconnected_set(conns) == "aa,cf,cj,cv,dr,gj,iu,jh,oy,qr,xr,xy,zb")
 
 
 if __name__ == "__main__":
