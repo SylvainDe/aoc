@@ -1,7 +1,7 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
 import os
-
+import random
 
 top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
@@ -30,7 +30,10 @@ def get_wires_from_file(file_path=top_dir + "resources/year2024_day24_input.txt"
 
 def evaluate_wires(wires):
     simp, comp = wires
-    values = dict(simp)
+    return evaluate_wires_internal(comp, dict(simp))
+
+
+def evaluate_wires_internal(comp, values):
     comp = {w: (w1, c, w2) for w, w1, c, w2 in comp}
     change = True
     while change:
@@ -63,6 +66,102 @@ def evaluate_wires(wires):
                 break
     zkeys = sorted((k for k in values.keys() if k.startswith("z")), reverse=True)
     return int("".join(str(values[k]) for k in zkeys), 2)
+
+
+# Visually found wires
+swaps = [("z11", "wpd"), ("skh", "jqf"), ("z19", "mdd"), ("z37", "wts")]
+
+
+def find_wrong_wires_with_eval(comp):
+    input_len = 45
+    for i in range(10):
+        a = random.randint(0, 2**input_len)
+        b = random.randint(0, 2**input_len)
+        c = a + b
+        a2, b2 = [list(reversed("0000000000000000000000" + bin(v)[2:])) for v in (a, b)]
+        values = dict()
+        for i in range(input_len):
+            i2 = "{:02d}".format(i)
+            values["x" + i2] = int(a2[i])
+            values["y" + i2] = int(b2[i])
+        d = evaluate_wires_internal(comp, values)
+        c2, d2 = [list(reversed("0000000000000000000000" + bin(v)[2:])) for v in (c, d)]
+        if c != d:
+            for i, (v1, v2) in enumerate(zip(c2, d2)):
+                if v1 != v2:
+                    print(a, b, c, d, i, v1, v2)
+                    break
+
+
+def extract_info(w):
+    beg, end = w[0], w[1:]
+    try:
+        return int(end), beg
+    except ValueError:
+        return None, w
+
+
+def find_swapped_wires_with_graphviz(wires):
+    simp, comp = wires
+    new_names = dict()
+    wire_names = [c[0] for c in simp] + [c[0] for c in comp]
+    # Swap visually found wires
+    swap_dict = {}
+    for w1, w2 in swaps:
+        swap_dict[w1] = w2
+        swap_dict[w2] = w1
+    comp = [(swap_dict.get(w, w), w1, c, w2) for w, w1, c, w2 in comp]
+    # find_swapped_wires_with_eval(comp)
+    # Re-label wires
+    new_names = {w: extract_info(w) for w in wire_names}
+    renamed = True
+    while renamed:
+        renamed = False
+        for w, w1, c, w2 in comp:
+            n, l = new_names[w]
+            if n is not None:
+                continue
+            inputs = [new_names[v] for v in (w1, w2)]
+            if all(n is not None for n, _ in inputs):
+                new_name = None
+                inputs = sorted(inputs)
+                (n1, l1), (n2, l2) = inputs
+                if n1 == n2:
+                    new_name = c.join([l1, l2])
+                elif n1 + 1 == n2:
+                    new_name = "VAL"
+                if new_name is not None:
+                    new_names[w] = n2, new_name
+                    renamed = True
+    new_names = {
+        k: l + ("" if n is None else "_{:02d}".format(n))
+        for k, (n, l) in new_names.items()
+    }
+    # Generate graphviz graph
+    with open("/tmp/toto.dot", "w") as f:
+        f.write("digraph g {\n")
+        for n in sorted(new_names.values()):
+            color = None
+            if n.startswith("x_"):
+                color = "green"
+            elif n.startswith("y_"):
+                color = "blue"
+            elif n.startswith("z_"):
+                color = "red"
+            if color is not None:
+                f.write(n + " [color=" + color + "]\n")
+        lines = sorted(
+            [
+                '{} -> {} [label="{}" comment="{} {} {} -> {} ({})"]\n'.format(
+                    new_names[v], new_names[w], c, w1, c, w2, w, v
+                )
+                for w, w1, c, w2 in comp
+                for v in (w1, w2)
+            ]
+        )
+        for l in lines:
+            f.write(l)
+        f.write("}\n")
 
 
 def run_tests():
@@ -134,6 +233,10 @@ tnw OR pbm -> gnj"""
 def get_solutions():
     wires = get_wires_from_file()
     print(evaluate_wires(wires) == 36035961805936)
+    part2 = []
+    for pair in swaps:
+        part2.extend(pair)
+    print(",".join(sorted(part2)) == "jqf,mdd,skh,wpd,wts,z11,z19,z37")
 
 
 if __name__ == "__main__":
