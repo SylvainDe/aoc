@@ -6,20 +6,20 @@ import random
 top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
 
-def get_simple_wire_from_line(string):
+def get_wire_value_from_line(string):
     beg, mid, end = string.partition(": ")
     return beg, int(end)
 
 
-def get_complex_wire_from_line(string):
+def get_gate_from_line(string):
     lst = string.split(" ")
     return tuple(lst[i] for i in (4, 0, 1, 2))
 
 
 def get_wires_from_lines(string):
     beg, mid, end = string.partition("\n\n")
-    return [get_simple_wire_from_line(l) for l in beg.splitlines()], [
-        get_complex_wire_from_line(l) for l in end.splitlines()
+    return [get_wire_value_from_line(l) for l in beg.splitlines()], [
+        get_gate_from_line(l) for l in end.splitlines()
     ]
 
 
@@ -29,16 +29,16 @@ def get_wires_from_file(file_path=top_dir + "resources/year2024_day24_input.txt"
 
 
 def evaluate_wires(wires):
-    simp, comp = wires
-    return evaluate_wires_internal(comp, dict(simp))
+    wire_values, gates = wires
+    return evaluate_wires_internal(gates, dict(wire_values))
 
 
-def evaluate_wires_internal(comp, values):
-    comp = {w: (w1, c, w2) for w, w1, c, w2 in comp}
+def evaluate_wires_internal(gates, values):
+    gates = {w: (w1, c, w2) for w, w1, c, w2 in gates}
     change = True
     while change:
         change = False
-        for w, (w1, c, w2) in comp.items():
+        for w, (w1, c, w2) in gates.items():
             assert w not in values
             w1val = values.get(w1)
             w2val = values.get(w2)
@@ -61,7 +61,7 @@ def evaluate_wires_internal(comp, values):
             #             wval = 1
             if wval is not None:
                 values[w] = wval
-                del comp[w]
+                del gates[w]
                 change = True
                 break
     zkeys = sorted((k for k in values.keys() if k.startswith("z")), reverse=True)
@@ -72,25 +72,27 @@ def evaluate_wires_internal(comp, values):
 swaps = [("z11", "wpd"), ("skh", "jqf"), ("z19", "mdd"), ("z37", "wts")]
 
 
-def find_wrong_wires_with_eval(comp):
+def find_wrong_wires_with_eval(gates):
     input_len = 45
     for i in range(10):
         a = random.randint(0, 2**input_len)
         b = random.randint(0, 2**input_len)
         c = a + b
-        a2, b2 = [list(reversed("0000000000000000000000" + bin(v)[2:])) for v in (a, b)]
         values = dict()
         for i in range(input_len):
             i2 = "{:02d}".format(i)
-            values["x" + i2] = int(a2[i])
-            values["y" + i2] = int(b2[i])
-        d = evaluate_wires_internal(comp, values)
-        c2, d2 = [list(reversed("0000000000000000000000" + bin(v)[2:])) for v in (c, d)]
+            values["x" + i2] = (a >> i) & 1
+            values["y" + i2] = (b >> i) & 1
+        d = evaluate_wires_internal(gates, values)
         if c != d:
-            for i, (v1, v2) in enumerate(zip(c2, d2)):
-                if v1 != v2:
-                    print(a, b, c, d, i, v1, v2)
+            for i in range(input_len):
+                ci = (c >> i) & 1
+                di = (d >> i) & 1
+                if ci != di:
+                    print(a, b, c, d, i, ci, di)
                     break
+            else:
+                assert False
 
 
 def extract_info(w):
@@ -102,22 +104,23 @@ def extract_info(w):
 
 
 def find_swapped_wires_with_graphviz(wires):
-    simp, comp = wires
+    wire_values, gates = wires
     new_names = dict()
-    wire_names = [c[0] for c in simp] + [c[0] for c in comp]
+    wire_names = [c[0] for c in wire_values] + [c[0] for c in gates]
+    # find_wrong_wires_with_eval(gates)
     # Swap visually found wires
     swap_dict = {}
     for w1, w2 in swaps:
         swap_dict[w1] = w2
         swap_dict[w2] = w1
-    comp = [(swap_dict.get(w, w), w1, c, w2) for w, w1, c, w2 in comp]
-    # find_swapped_wires_with_eval(comp)
+    gates = [(swap_dict.get(w, w), w1, c, w2) for w, w1, c, w2 in gates]
+    # find_wrong_wires_with_eval(gates)
     # Re-label wires
     new_names = {w: extract_info(w) for w in wire_names}
     renamed = True
     while renamed:
         renamed = False
-        for w, w1, c, w2 in comp:
+        for w, w1, c, w2 in gates:
             n, l = new_names[w]
             if n is not None:
                 continue
@@ -155,7 +158,7 @@ def find_swapped_wires_with_graphviz(wires):
                 '{} -> {} [label="{}" comment="{} {} {} -> {} ({})"]\n'.format(
                     new_names[v], new_names[w], c, w1, c, w2, w, v
                 )
-                for w, w1, c, w2 in comp
+                for w, w1, c, w2 in gates
                 for v in (w1, w2)
             ]
         )
