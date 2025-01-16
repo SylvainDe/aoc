@@ -1,13 +1,13 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
 import os
-
+import itertools
 
 top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
 
 def get_codes_from_lines(string):
-    return [l for l in string.splitlines()]
+    return string.splitlines()
 
 
 def get_codes_from_file(file_path=top_dir + "resources/year2024_day21_input.txt"):
@@ -16,117 +16,63 @@ def get_codes_from_file(file_path=top_dir + "resources/year2024_day21_input.txt"
 
 
 def keypad_buttons(keypad):
-    for i, l in enumerate(keypad):
+    for i, l in enumerate(keypad.splitlines()):
         for j, v in enumerate(l):
-            if True or v != "X":
-                yield v, (i, j)
+            if v != "X":
+                yield (i, j), v
 
 
-num_keypad = dict(
-    keypad_buttons(
-        [
-            "789",
-            "456",
-            "123",
-            "X0A",
-        ]
-    )
-)
+def get_shortest_move(p1, p2, valid_pos):
+    # To go from one button to another, we assume that
+    # only at most 2 paths are going to be relevant:
+    #  - horizontal (</>) then vertical (^/v)
+    #  - vertical (^/v) then horizontal (</>)
+    # as mixing does not seem efficient
+    #
+    # This means changing direction once and in (at most)
+    # 2 possible places:
+    #  - (x2, y1) for the vertical move
+    #  - (x1, y2) for the horizontal move
+    # and under the condition that this position is valid
+    #
+    # Finally, we have multiple combinations:
+    #  - A^>A and A>^A
+    #  - A^<A and A<^A
+    #  - Av>A and A>vA
+    #  - Av<A and A<vA
+    # and for some reason, the later seem to lead to better
+    # results down the line...
+    x1, y1 = p1
+    x2, y2 = p2
+    dx, dy = x2 - x1, y2 - y1
+    x_buttons = ("v" if dx > 0 else "^") * abs(dx)
+    y_buttons = (">" if dy > 0 else "<") * abs(dy)
+    if dy and (x1, y2) in valid_pos:
+        return y_buttons + x_buttons
+    return x_buttons + y_buttons
 
 
-dir_keypad = dict(
-    keypad_buttons(
-        [
-            "X^A",
-            "<v>",
-        ]
-    )
-)
-
-dir_to_key = {
-    (-1, 0): "^",
-    (1, 0): "v",
-    (0, -1): "<",
-    (0, 1): ">",
-}
+def precompute_shortest_moves(keypad):
+    keypad = list(keypad)
+    valid_pos = set(pos for pos, _ in keypad)
+    return {
+        (c1, c2): get_shortest_move(p1, p2, valid_pos) + "A"
+        for (p1, c1), (p2, c2) in itertools.product(keypad, repeat=2)
+    }
 
 
-def keys_from_delta(val, direc):
-    if not val:
-        return ""
-    x, y = direc
-    abs_val = abs(val)
-    q = val // abs_val
-    return dir_to_key[(x * q, y * q)] * abs_val
+num_shortest_move = precompute_shortest_moves(keypad_buttons("789\n456\n123\nX0A"))
+dir_shortest_move = precompute_shortest_moves(keypad_buttons("X^A\n<v>"))
 
 
-# For the time being, assume that starting with a
-# horizontal move is better
-y_move_first = True
-
-
-def shortest_sequence(code, keypad):
-    seq = ""
-    invalid_pos = keypad["X"]
-    pos = [keypad[c] for c in "A" + code]
-    for (prev_x, prev_y), (x, y) in zip(pos, pos[1:]):
-        dx, dy = x - prev_x, y - prev_y
-        # To go from one button to another, we assume that
-        # only at most 2 paths are going to be relevant:
-        #  - horizontal (</>) then vertical (^/v)
-        #  - vertical (^/v) then horizontal (</>)
-        # as mixing does not seem efficient
-        #
-        # This means changing direction once and in (at most)
-        # 2 possible places:
-        #  - (x, prev_y) for the vertical move
-        #  - (prev_x, y) for the horizontal move
-        # and under the condition that this position is valid
-        #
-        # Finally, we have multiple combinations:
-        #  - A^>A and A>^A
-        #  - A^<A and A<^A
-        #  - Av>A and A>vA
-        #  - Av<A and A<vA
-        # and for some reason, the later seem to lead to better
-        # results down the line...
-        x_buttons = keys_from_delta(dx, (1, 0))
-        y_buttons = keys_from_delta(dy, (0, 1))
-        options = []
-        if dy and (prev_x, y) != invalid_pos:
-            options.append(y_buttons + x_buttons)
-        if dx and (x, prev_y) != invalid_pos:
-            options.append(x_buttons + y_buttons)
-        if options:
-            seq += options[0 if y_move_first else -1]
-        seq += "A"
-    return seq
-
-
-def shortest_num_sequence(code):
-    return shortest_sequence(code, num_keypad)
-
-
-def shortest_dir_sequence(code):
-    return shortest_sequence(code, dir_keypad)
-
-
-# for v in (False, True):
-#     y_move_first = v
-#     seq1 = "^AvA"
-#     seq2 = shortest_dir_sequence(seq1)
-#     seq3 = shortest_dir_sequence(seq2)
-#     seq4 = shortest_dir_sequence(seq3)
-#     print(seq1)
-#     print(seq2)
-#     print(seq3)
-#     print(seq4)
+def shortest_seq(code, precomputed, start="A"):
+    return "".join(precomputed[(c1, c2)] for c1, c2 in zip(start + code, code))
 
 
 def get_shortest_seq_len(code, nb_robot_direct_keypad):
-    seq = shortest_num_sequence(code)
+    seq = shortest_seq(code, num_shortest_move)
     for n in range(nb_robot_direct_keypad):
-        seq = shortest_dir_sequence(seq)
+        seq = shortest_seq(seq, dir_shortest_move)
     return len(seq)
 
 
@@ -156,6 +102,8 @@ def run_tests():
 def get_solutions():
     codes = get_codes_from_file()
     print(get_complexity_sum(codes) == 105458)
+    print(get_complexity_sum(codes, 10) == 157394856)
+    # print(get_complexity_sum(codes, 15) == 15468461258) # ~3 secs
     # TODO: To be optimised probably by not recomputing the same same over and over:
     # print(get_complexity_sum(codes, 25))
 
