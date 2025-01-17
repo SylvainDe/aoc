@@ -1,7 +1,7 @@
 # vi: set shiftwidth=4 tabstop=4 expandtab:
 import datetime
 import os
-
+import itertools
 
 top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
@@ -19,9 +19,14 @@ def get_blocks_from_file(file_path=top_dir + "resources/year2024_day18_input.txt
         return get_blocks_from_lines(f.read())
 
 
-def display(blocks):
-    xs = set(x for x, _ in blocks)
-    ys = set(y for _, y in blocks)
+def display(blocks, xs=None, ys=None):
+    if not blocks:
+        print("Empty")
+        return
+    if xs is None:
+        xs = set(x for x, _ in blocks)
+    if ys is None:
+        ys = set(y for _, y in blocks)
     for y in range(min(ys), max(ys) + 1):
         print(
             "".join(
@@ -30,7 +35,61 @@ def display(blocks):
         )
 
 
+def display2(d, xs=None, ys=None):
+    if not d:
+        print("Empty")
+        return
+    if xs is None:
+        xs = set(x for x, _ in d.keys())
+    if ys is None:
+        ys = set(y for _, y in d.keys())
+    for y in range(min(ys), max(ys) + 1):
+        print("".join(d.get((x, y), " ") for x in range(min(xs), max(xs) + 1)))
+
+
+def get_neighbours(pos):
+    x, y = pos
+    return ((x + dx, y + dy) for (dx, dy) in ((-1, 0), (+1, 0), (0, -1), (0, +1)))
+
+
+def get_dist(size, blocks, start=None, end=None):
+    if start is None:
+        start = 0, 0
+    if end is None:
+        end = size - 1, size - 1
+    side = list(range(size))
+    seen = set()
+    reach = set([start])
+    for i in itertools.count():
+        if not reach:
+            return None
+        reach2 = set()
+        for p in reach:
+            if p == end:
+                return i
+            if p in seen:
+                continue
+            seen.add(p)
+            for p2 in get_neighbours(p):
+                if (
+                    all(0 <= c < size for c in p2)
+                    and p2 not in blocks
+                    and p2 not in seen
+                ):
+                    reach2.add(p2)
+        reach = reach2
+
+
+def find_blocking_block(size, blocks):
+    blocks2 = set()
+    for i, b in enumerate(blocks):
+        blocks2.add(b)
+        if get_dist(size, blocks2) is None:
+            return b
+
+
 def run_tests():
+    size = 7
     blocks = get_blocks_from_lines(
         """5,4
 4,2
@@ -59,12 +118,17 @@ def run_tests():
 2,0"""
     )
     blocks12 = set(blocks[:12])
-    display(blocks12)
+    assert get_dist(size, blocks12) == 22
+    assert find_blocking_block(size, blocks) == (6, 1)
 
 
 def get_solutions():
+    size = 71
     blocks = get_blocks_from_file()
     blocks1024 = set(blocks[:1024])
+    print(get_dist(size, blocks1024) == 356)
+    # Slow
+    # print(find_blocking_block(size, blocks) == (22, 33))
 
 
 if __name__ == "__main__":

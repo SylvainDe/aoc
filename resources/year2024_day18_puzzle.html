@@ -145,12 +145,36 @@ Mastodon, and @ericwastl on Twitter.
 </code></pre>
 <p>Simulate the first kilobyte (<code>1024</code> bytes) falling onto your memory space. Afterward, <em>what is the minimum number of steps needed to reach the exit?</em></p>
 </article>
-<p>To begin, <a href="18/input" target="_blank">get your puzzle input</a>.</p>
-<form method="post" action="18/answer"><input type="hidden" name="level" value="1"/><p>Answer: <input type="text" name="answer" autocomplete="off"/> <input type="submit" value="[Submit]"/></p></form>
+<p>Your puzzle answer was <code>356</code>.</p><article class="day-desc"><h2 id="part2">--- Part Two ---</h2><p>The Historians aren't as used to moving around in this pixelated universe as you are. You're afraid they're not going to be fast enough to make it to the exit before the path is completely blocked.</p>
+<p>To determine how fast everyone needs to go, you need to determine <em>the first byte that will cut off the path to the exit</em>.</p>
+<p>In the above example, after the byte at <code>1,1</code> falls, there is still a path to the exit:</p>
+<pre><code><em>O</em>..#<em>O</em><em>O</em><em>O</em>
+<em>O</em>##<em>O</em><em>O</em>#<em>O</em>
+<em>O</em>#<em>O</em><em>O</em>#<em>O</em><em>O</em>
+<em>O</em><em>O</em><em>O</em>#<em>O</em><em>O</em>#
+###<em>O</em><em>O</em>##
+.##<em>O</em>###
+#.#<em>O</em><em>O</em><em>O</em><em>O</em>
+</code></pre>
+<p>However, after adding the very next byte (at <code>6,1</code>), there is no longer a path to the exit:</p>
+<pre><code>...#...
+.##..#<em>#</em>
+.#..#..
+...#..#
+###..##
+.##.###
+#.#....
+</code></pre>
+<p>So, in this example, the coordinates of the first byte that prevents the exit from being reachable are <code><em>6,1</em></code>.</p>
+<p>Simulate more of the bytes that are about to corrupt your memory space. <em>What are the coordinates of the first byte that will prevent the exit from being reachable from your starting position?</em> (Provide the answer as two integers separated by a comma with no other characters.)</p>
+</article>
+<p>Your puzzle answer was <code>22,33</code>.</p><p class="day-success">Both parts of this puzzle are complete! They provide two gold stars: **</p>
+<p>At this point, you should <a href="/2024">return to your Advent calendar</a> and try another puzzle.</p>
+<p>If you still want to see it, you can <a href="18/input" target="_blank">get your puzzle input</a>.</p>
 <p>You can also <span class="share">[Share<span class="share-content">on
-  <a href="https://bsky.app/intent/compose?text=%22RAM+Run%22+%2D+Day+18+%2D+Advent+of+Code+2024+%23AdventOfCode+https%3A%2F%2Fadventofcode%2Ecom%2F2024%2Fday%2F18" target="_blank">Bluesky</a>
-  <a href="https://twitter.com/intent/tweet?text=%22RAM+Run%22+%2D+Day+18+%2D+Advent+of+Code+2024&amp;url=https%3A%2F%2Fadventofcode%2Ecom%2F2024%2Fday%2F18&amp;related=ericwastl&amp;hashtags=AdventOfCode" target="_blank">Twitter</a>
-  <a href="javascript:void(0);" onclick="var ms; try{ms=localStorage.getItem('mastodon.server')}finally{} if(typeof ms!=='string')ms=''; ms=prompt('Mastodon Server?',ms); if(typeof ms==='string' && ms.length){this.href='https://'+ms+'/share?text=%22RAM+Run%22+%2D+Day+18+%2D+Advent+of+Code+2024+%23AdventOfCode+https%3A%2F%2Fadventofcode%2Ecom%2F2024%2Fday%2F18';try{localStorage.setItem('mastodon.server',ms);}finally{}}else{return false;}" target="_blank">Mastodon</a
+  <a href="https://bsky.app/intent/compose?text=I%27ve+completed+%22RAM+Run%22+%2D+Day+18+%2D+Advent+of+Code+2024+%23AdventOfCode+https%3A%2F%2Fadventofcode%2Ecom%2F2024%2Fday%2F18" target="_blank">Bluesky</a>
+  <a href="https://twitter.com/intent/tweet?text=I%27ve+completed+%22RAM+Run%22+%2D+Day+18+%2D+Advent+of+Code+2024&amp;url=https%3A%2F%2Fadventofcode%2Ecom%2F2024%2Fday%2F18&amp;related=ericwastl&amp;hashtags=AdventOfCode" target="_blank">Twitter</a>
+  <a href="javascript:void(0);" onclick="var ms; try{ms=localStorage.getItem('mastodon.server')}finally{} if(typeof ms!=='string')ms=''; ms=prompt('Mastodon Server?',ms); if(typeof ms==='string' && ms.length){this.href='https://'+ms+'/share?text=I%27ve+completed+%22RAM+Run%22+%2D+Day+18+%2D+Advent+of+Code+2024+%23AdventOfCode+https%3A%2F%2Fadventofcode%2Ecom%2F2024%2Fday%2F18';try{localStorage.setItem('mastodon.server',ms);}finally{}}else{return false;}" target="_blank">Mastodon</a
 ></span>]</span> this puzzle.</p>
 </main>
 
