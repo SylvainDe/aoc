@@ -2,6 +2,7 @@
 import datetime
 import os
 import itertools
+import functools
 
 top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
@@ -69,11 +70,31 @@ def shortest_seq(code, precomputed, start="A"):
     return "".join(precomputed[(c1, c2)] for c1, c2 in zip(start + code, code))
 
 
-def get_shortest_seq_len(code, nb_robot_direct_keypad):
+def get_shortest_seq_len_iter(code, nb_robot_direct_keypad):
     seq = shortest_seq(code, num_shortest_move)
     for n in range(nb_robot_direct_keypad):
         seq = shortest_seq(seq, dir_shortest_move)
     return len(seq)
+
+
+@functools.lru_cache
+def get_shortest_seq_len_rec(code, nb_robot_direct_keypad):
+    if nb_robot_direct_keypad == 0:
+        return len(code)
+    codes = [c + "A" for c in code.split("A")[:-1]]
+    assert "".join(codes) == code
+    return sum(
+        get_shortest_seq_len_rec(
+            shortest_seq(c, dir_shortest_move), nb_robot_direct_keypad - 1
+        )
+        for c in codes
+    )
+
+
+def get_shortest_seq_len(code, nb_robot_direct_keypad):
+    return get_shortest_seq_len_rec(
+        shortest_seq(code, num_shortest_move), nb_robot_direct_keypad
+    )
 
 
 def get_numeric_part(code):
@@ -102,10 +123,12 @@ def run_tests():
 def get_solutions():
     codes = get_codes_from_file()
     print(get_complexity_sum(codes) == 105458)
-    print(get_complexity_sum(codes, 10) == 157394856)
+    # TODO: Result here appear to be incorrect (in the same way with get_shortest_seq_len_iter and get_shortest_seq_len)
+    # print(get_complexity_sum(codes, 10) == 157394856)
     # print(get_complexity_sum(codes, 15) == 15468461258) # ~3 secs
-    # TODO: To be optimised probably by not recomputing the same same over and over:
     # print(get_complexity_sum(codes, 25))
+    # Bigger than 59688666728208
+    # Smaller than 149412069429784
 
 
 if __name__ == "__main__":
