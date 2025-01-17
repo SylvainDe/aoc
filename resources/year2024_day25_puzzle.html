@@ -92,7 +92,7 @@ Mastodon, and @ericwastl on Twitter.
 </div><!--/sidebar-->
 
 <main>
-<article class="day-desc"><h2>--- Day 25: Code Chronicle ---</h2><p>Out of ideas and time, The Historians agree that they should go back to check the <em>Chief Historian's office</em> one last time, just in case he went back there without you noticing.</p>
+<style>article *[title]{border-bottom:1px dotted #ffff66;}</style><article class="day-desc"><h2>--- Day 25: Code Chronicle ---</h2><p>Out of ideas and time, The Historians agree that they should go back to check the <em>Chief Historian's office</em> one last time, just in case he went back there without you noticing.</p>
 <p>When you get there, you are surprised to discover that the door to his office is <em>locked</em>! You can hear someone inside, but knocking <span title="function knock() {&#10;  yield no_response;&#10;}">yields</span> no response. The locks on this floor are all fancy, expensive, virtual versions of <a href="https://en.wikipedia.org/wiki/Pin_tumbler_lock" target="_blank">five-pin tumbler locks</a>, so you contact North Pole security to see if they can help open the door.</p>
 <p>Unfortunately, they've lost track of which locks are installed and which keys go with them, so the best they can do is send over <em>schematics of every lock and every key</em> for the floor you're on (your puzzle input).</p>
 <p>The schematics are in a cryptic file format, but they do contain manufacturer information, so you look up their support number.</p>
@@ -183,20 +183,21 @@ Mastodon, and @ericwastl on Twitter.
 <p>So, in this example, the number of unique lock/key pairs that fit together without overlapping in any column is <code><em>3</em></code>.</p>
 <p>Analyze your lock and key schematics. <em>How many unique lock/key pairs fit together without overlapping in any column?</em></p>
 </article>
-<p>Your puzzle answer was <code>3196</code>.</p><p class="day-success">The first half of this puzzle is complete! It provides one gold star: *</p>
-<article class="day-desc"><h2 id="part2">--- Part Two ---</h2><p>You and The Historians crowd into the office, startling the Chief Historian awake! The Historians all take turns looking confused until one asks where he's been for the last few months.</p>
+<p>Your puzzle answer was <code>3196</code>.</p><article class="day-desc"><h2 id="part2">--- Part Two ---</h2><p>You and The Historians crowd into the office, startling the Chief Historian awake! The Historians all take turns looking confused until one asks where he's been for the last few months.</p>
 <p>"I've been right here, working on this high-priority request from Santa! I think the only time I even stepped away was about a month ago when I went to grab a cup of coffee..."</p>
 <p>Just then, the Chief notices the time. "Oh no! I'm going to be late! I must have fallen asleep trying to put the finishing touches on this <em>chronicle</em> Santa requested, but now I don't have enough time to go visit the last 50 places on my list and complete the chronicle before Santa leaves! He said he needed it before tonight's sleigh launch."</p>
 <p>One of The Historians holds up the list they've been using this whole time to keep track of where they've been searching. Next to each place you all visited, they checked off that place with a <em class="star">star</em>. Other Historians hold up their own notes they took on the journey; as The Historians, how could they resist writing everything down while visiting all those historically significant places?</p>
 <p>The Chief's eyes get wide. "With all this, we might just have enough time to finish the chronicle! Santa said he wanted it wrapped up with a bow, so I'll call down to the wrapping department and... hey, could <em>you</em> bring it up to Santa? I'll need to be in my seat to watch the sleigh launch by then."</p>
 <p>You nod, and The Historians quickly work to collect their notes into the final set of pages for the chronicle.</p>
 </article>
-<form method="post" action="25/answer"><input type="hidden" name="level" value="2"/><input type="hidden" name="answer" value="0"/><p>You have enough stars to <input type="submit" value="[Deliver The Chronicle]"/>.</p></form>
-<p>Although it hasn't changed, you can still <a href="25/input" target="_blank">get your puzzle input</a>.</p>
+<form method="post" action="25/answer"><input type="hidden" name="level" value="2"/><input type="hidden" name="answer" value="0"/><p>If you like, you can <input type="submit" value="[Deliver The Chronicle Again]"/>.</p></form>
+<p class="day-success">Both parts of this puzzle are complete! They provide two gold stars: **</p>
+<p>At this point, all that is left is for you to <a href="/2024">admire your Advent calendar</a>.</p>
+<p>If you still want to see it, you can <a href="25/input" target="_blank">get your puzzle input</a>.</p>
 <p>You can also <span class="share">[Share<span class="share-content">on
-  <a href="https://bsky.app/intent/compose?text=I%27ve+completed+Part+One+of+%22Code+Chronicle%22+%2D+Day+25+%2D+Advent+of+Code+2024+%23AdventOfCode+https%3A%2F%2Fadventofcode%2Ecom%2F2024%2Fday%2F25" target="_blank">Bluesky</a>
-  <a href="https://twitter.com/intent/tweet?text=I%27ve+completed+Part+One+of+%22Code+Chronicle%22+%2D+Day+25+%2D+Advent+of+Code+2024&amp;url=https%3A%2F%2Fadventofcode%2Ecom%2F2024%2Fday%2F25&amp;related=ericwastl&amp;hashtags=AdventOfCode" target="_blank">Twitter</a>
-  <a href="javascript:void(0);" onclick="var ms; try{ms=localStorage.getItem('mastodon.server')}finally{} if(typeof ms!=='string')ms=''; ms=prompt('Mastodon Server?',ms); if(typeof ms==='string' && ms.length){this.href='https://'+ms+'/share?text=I%27ve+completed+Part+One+of+%22Code+Chronicle%22+%2D+Day+25+%2D+Advent+of+Code+2024+%23AdventOfCode+https%3A%2F%2Fadventofcode%2Ecom%2F2024%2Fday%2F25';try{localStorage.setItem('mastodon.server',ms);}finally{}}else{return false;}" target="_blank">Mastodon</a
+  <a href="https://bsky.app/intent/compose?text=I%27ve+completed+%22Code+Chronicle%22+%2D+Day+25+%2D+Advent+of+Code+2024+%23AdventOfCode+https%3A%2F%2Fadventofcode%2Ecom%2F2024%2Fday%2F25" target="_blank">Bluesky</a>
+  <a href="https://twitter.com/intent/tweet?text=I%27ve+completed+%22Code+Chronicle%22+%2D+Day+25+%2D+Advent+of+Code+2024&amp;url=https%3A%2F%2Fadventofcode%2Ecom%2F2024%2Fday%2F25&amp;related=ericwastl&amp;hashtags=AdventOfCode" target="_blank">Twitter</a>
+  <a href="javascript:void(0);" onclick="var ms; try{ms=localStorage.getItem('mastodon.server')}finally{} if(typeof ms!=='string')ms=''; ms=prompt('Mastodon Server?',ms); if(typeof ms==='string' && ms.length){this.href='https://'+ms+'/share?text=I%27ve+completed+%22Code+Chronicle%22+%2D+Day+25+%2D+Advent+of+Code+2024+%23AdventOfCode+https%3A%2F%2Fadventofcode%2Ecom%2F2024%2Fday%2F25';try{localStorage.setItem('mastodon.server',ms);}finally{}}else{return false;}" target="_blank">Mastodon</a
 ></span>]</span> this puzzle.</p>
 </main>
 
