@@ -36,21 +36,27 @@ def get_shortest_move(p1, p2, valid_pos):
     #  - (x1, y2) for the horizontal move
     # and under the condition that this position is valid
     #
-    # Finally, we have multiple combinations:
-    #  - A^>A and A>^A
-    #  - A^<A and A<^A
-    #  - Av>A and A>vA
-    #  - Av<A and A<vA
-    # and for some reason, the later seem to lead to better
-    # results down the line...
+    # Finally, we have multiple combinations and for some
+    # reason:
+    # "<vA" is better than "v<A"
+    # "<^A" is better than "^<A"
+    # "^>A" is better than ">^A"
+    # "v>A" is better than ">vA"
     x1, y1 = p1
     x2, y2 = p2
     dx, dy = x2 - x1, y2 - y1
     x_buttons = ("v" if dx > 0 else "^") * abs(dx)
     y_buttons = (">" if dy > 0 else "<") * abs(dy)
-    if dy and (x1, y2) in valid_pos:
-        return y_buttons + x_buttons
-    return x_buttons + y_buttons
+    x_first = True
+    if dx and dy:
+        mx, my = (x2, y1), (x1, y2)
+        if my not in valid_pos:
+            x_first = True
+        elif mx not in valid_pos:
+            x_first = False
+        elif dy < 0:
+            x_first = False
+    return (x_buttons + y_buttons) if x_first else (y_buttons + x_buttons)
 
 
 def precompute_shortest_moves(keypad):
@@ -123,12 +129,7 @@ def run_tests():
 def get_solutions():
     codes = get_codes_from_file()
     print(get_complexity_sum(codes) == 105458)
-    # TODO: Result here appear to be incorrect (in the same way with get_shortest_seq_len_iter and get_shortest_seq_len)
-    # print(get_complexity_sum(codes, 10) == 157394856)
-    # print(get_complexity_sum(codes, 15) == 15468461258) # ~3 secs
-    # print(get_complexity_sum(codes, 25))
-    # Bigger than 59688666728208
-    # Smaller than 149412069429784
+    print(get_complexity_sum(codes, 25) == 129551515895690)
 
 
 if __name__ == "__main__":
