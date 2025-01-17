@@ -35,6 +35,8 @@ clippy_checks="-D clippy::all
 -D clippy::cargo
 -D clippy::nursery
 -D clippy::restriction
+-A clippy::arbitrary_source_item_ordering
+-A clippy::large_stack_arrays
 -A clippy::indexing_slicing
 -A clippy::iter_over_hash_type
 -A clippy::arithmetic_side_effects
