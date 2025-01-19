@@ -292,7 +292,7 @@ if __name__ == "__main__":
             values = (
                 [day_num]
                 + ["*" * nb for nb in nb_stars]
-                + ["{:2d}: {}".format(total, "*" * total)]
+                + [total]
             )
             f.write(format_table_colums(values))
         nb_stars = [y.nb_stars for y in years]
