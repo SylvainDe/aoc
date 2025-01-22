@@ -241,12 +241,51 @@ v  |  |  |  |
 </code></pre>
 <p>In this example, the location of the first crash is <code><em>7,3</em></code>.</p>
 </article>
-<p>To begin, <a href="13/input" target="_blank">get your puzzle input</a>.</p>
-<form method="post" action="13/answer"><input type="hidden" name="level" value="1"/><p>Answer: <input type="text" name="answer" autocomplete="off"/> <input type="submit" value="[Submit]"/></p></form>
+<p>Your puzzle answer was <code>8,3</code>.</p><article class="day-desc"><h2 id="part2">--- Part Two ---</h2><p>There isn't much you can do to prevent crashes in this ridiculous system. However, by predicting the crashes, the Elves know where to be in advance and <em>instantly remove the two crashing carts</em> the moment any crash occurs.</p>
+<p>They can proceed like this for a while, but eventually, they're going to run out of carts. It could be useful to figure out where the last cart that <em>hasn't</em> crashed will end up.</p>
+<p>For example:</p>
+<pre><code>/&gt;-&lt;\  
+|   |  
+| /&lt;+-\
+| | | v
+\&gt;+&lt;/ |
+  |   ^
+  \&lt;-&gt;/
+
+/---\  
+|   |  
+| v-+-\
+| | | |
+\-+-/ |
+  |   |
+  ^---^
+
+/---\  
+|   |  
+| /-+-\
+| v | |
+\-+-/ |
+  ^   ^
+  \---/
+
+/---\  
+|   |  
+| /-+-\
+| | | |
+\-+-/ <em>^</em>
+  |   |
+  \---/
+</code></pre>
+<p>After four very expensive crashes, a tick ends with only one cart remaining; its final location is <code><em>6,4</em></code>.</p>
+<p><em>What is the location of the last cart</em> at the end of the first tick where it is the only cart left?</p>
+</article>
+<p>Your puzzle answer was <code>73,121</code>.</p><p class="day-success">Both parts of this puzzle are complete! They provide two gold stars: **</p>
+<p>At this point, you should <a href="/2018">return to your Advent calendar</a> and try another puzzle.</p>
+<p>If you still want to see it, you can <a href="13/input" target="_blank">get your puzzle input</a>.</p>
 <p>You can also <span class="share">[Share<span class="share-content">on
-  <a href="https://bsky.app/intent/compose?text=%22Mine+Cart+Madness%22+%2D+Day+13+%2D+Advent+of+Code+2018+%23AdventOfCode+https%3A%2F%2Fadventofcode%2Ecom%2F2018%2Fday%2F13" target="_blank">Bluesky</a>
-  <a href="https://twitter.com/intent/tweet?text=%22Mine+Cart+Madness%22+%2D+Day+13+%2D+Advent+of+Code+2018&amp;url=https%3A%2F%2Fadventofcode%2Ecom%2F2018%2Fday%2F13&amp;related=ericwastl&amp;hashtags=AdventOfCode" target="_blank">Twitter</a>
-  <a href="javascript:void(0);" onclick="var ms; try{ms=localStorage.getItem('mastodon.server')}finally{} if(typeof ms!=='string')ms=''; ms=prompt('Mastodon Server?',ms); if(typeof ms==='string' && ms.length){this.href='https://'+ms+'/share?text=%22Mine+Cart+Madness%22+%2D+Day+13+%2D+Advent+of+Code+2018+%23AdventOfCode+https%3A%2F%2Fadventofcode%2Ecom%2F2018%2Fday%2F13';try{localStorage.setItem('mastodon.server',ms);}finally{}}else{return false;}" target="_blank">Mastodon</a
+  <a href="https://bsky.app/intent/compose?text=I%27ve+completed+%22Mine+Cart+Madness%22+%2D+Day+13+%2D+Advent+of+Code+2018+%23AdventOfCode+https%3A%2F%2Fadventofcode%2Ecom%2F2018%2Fday%2F13" target="_blank">Bluesky</a>
+  <a href="https://twitter.com/intent/tweet?text=I%27ve+completed+%22Mine+Cart+Madness%22+%2D+Day+13+%2D+Advent+of+Code+2018&amp;url=https%3A%2F%2Fadventofcode%2Ecom%2F2018%2Fday%2F13&amp;related=ericwastl&amp;hashtags=AdventOfCode" target="_blank">Twitter</a>
+  <a href="javascript:void(0);" onclick="var ms; try{ms=localStorage.getItem('mastodon.server')}finally{} if(typeof ms!=='string')ms=''; ms=prompt('Mastodon Server?',ms); if(typeof ms==='string' && ms.length){this.href='https://'+ms+'/share?text=I%27ve+completed+%22Mine+Cart+Madness%22+%2D+Day+13+%2D+Advent+of+Code+2018+%23AdventOfCode+https%3A%2F%2Fadventofcode%2Ecom%2F2018%2Fday%2F13';try{localStorage.setItem('mastodon.server',ms);}finally{}}else{return false;}" target="_blank">Mastodon</a
 ></span>]</span> this puzzle.</p>
 </main>
 
