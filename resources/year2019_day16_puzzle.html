@@ -154,12 +154,24 @@ After 4 phases: 01029498
 </ul>
 <p>After <em>100</em> phases of FFT, <em>what are the first eight digits in the final output list?</em></p>
 </article>
-<p>To begin, <a href="16/input" target="_blank">get your puzzle input</a>.</p>
-<form method="post" action="16/answer"><input type="hidden" name="level" value="1"/><p>Answer: <input type="text" name="answer" autocomplete="off"/> <input type="submit" value="[Submit]"/></p></form>
+<p>Your puzzle answer was <code>30550349</code>.</p><p class="day-success">The first half of this puzzle is complete! It provides one gold star: *</p>
+<article class="day-desc"><h2 id="part2">--- Part Two ---</h2><p>Now that your FFT is working, you can decode the <em>real signal</em>.</p>
+<p>The real signal is your puzzle input <em>repeated 10000 times</em>. Treat this new signal as a single input list. Patterns are still calculated as before, and 100 phases of FFT are still applied.</p>
+<p>The <em>first seven digits</em> of your initial input signal also represent the <em>message offset</em>. The message offset is the location of the eight-digit message in the final output list. Specifically, the message offset indicates <em>the number of digits to skip</em> before reading the eight-digit message. For example, if the first seven digits of your initial input signal were <code>1234567</code>, the eight-digit message would be the eight digits after skipping 1,234,567 digits of the final output list. Or, if the message offset were <code>7</code> and your final output list were <code>98765432109876543210</code>, the eight-digit message would be <code>21098765</code>. (Of course, your real message offset will be a seven-digit number, not a one-digit number like <code>7</code>.)</p>
+<p>Here is the eight-digit message in the final output list after 100 phases. The message offset given in each input has been highlighted. (Note that the inputs given below are repeated 10000 times to find the actual starting input lists.)</p>
+<ul>
+<li><code><em>0303673</em>2577212944063491565474664</code> becomes <code>84462026</code>.</li>
+<li><code><em>0293510</em>9699940807407585447034323</code> becomes <code>78725270</code>.</li>
+<li><code><em>0308177</em>0884921959731165446850517</code> becomes <code>53553731</code>.</li>
+</ul>
+<p>After repeating your input signal 10000 times and running 100 phases of FFT, <em>what is the eight-digit message embedded in the final output list?</em></p>
+</article>
+<form method="post" action="16/answer"><input type="hidden" name="level" value="2"/><p>Answer: <input type="text" name="answer" autocomplete="off"/> <input type="submit" value="[Submit]"/></p></form>
+<p>Although it hasn't changed, you can still <a href="16/input" target="_blank">get your puzzle input</a>.</p>
 <p>You can also <span class="share">[Share<span class="share-content">on
-  <a href="https://bsky.app/intent/compose?text=%22Flawed+Frequency+Transmission%22+%2D+Day+16+%2D+Advent+of+Code+2019+%23AdventOfCode+https%3A%2F%2Fadventofcode%2Ecom%2F2019%2Fday%2F16" target="_blank">Bluesky</a>
-  <a href="https://twitter.com/intent/tweet?text=%22Flawed+Frequency+Transmission%22+%2D+Day+16+%2D+Advent+of+Code+2019&amp;url=https%3A%2F%2Fadventofcode%2Ecom%2F2019%2Fday%2F16&amp;related=ericwastl&amp;hashtags=AdventOfCode" target="_blank">Twitter</a>
-  <a href="javascript:void(0);" onclick="var ms; try{ms=localStorage.getItem('mastodon.server')}finally{} if(typeof ms!=='string')ms=''; ms=prompt('Mastodon Server?',ms); if(typeof ms==='string' && ms.length){this.href='https://'+ms+'/share?text=%22Flawed+Frequency+Transmission%22+%2D+Day+16+%2D+Advent+of+Code+2019+%23AdventOfCode+https%3A%2F%2Fadventofcode%2Ecom%2F2019%2Fday%2F16';try{localStorage.setItem('mastodon.server',ms);}finally{}}else{return false;}" target="_blank">Mastodon</a
+  <a href="https://bsky.app/intent/compose?text=I%27ve+completed+Part+One+of+%22Flawed+Frequency+Transmission%22+%2D+Day+16+%2D+Advent+of+Code+2019+%23AdventOfCode+https%3A%2F%2Fadventofcode%2Ecom%2F2019%2Fday%2F16" target="_blank">Bluesky</a>
+  <a href="https://twitter.com/intent/tweet?text=I%27ve+completed+Part+One+of+%22Flawed+Frequency+Transmission%22+%2D+Day+16+%2D+Advent+of+Code+2019&amp;url=https%3A%2F%2Fadventofcode%2Ecom%2F2019%2Fday%2F16&amp;related=ericwastl&amp;hashtags=AdventOfCode" target="_blank">Twitter</a>
+  <a href="javascript:void(0);" onclick="var ms; try{ms=localStorage.getItem('mastodon.server')}finally{} if(typeof ms!=='string')ms=''; ms=prompt('Mastodon Server?',ms); if(typeof ms==='string' && ms.length){this.href='https://'+ms+'/share?text=I%27ve+completed+Part+One+of+%22Flawed+Frequency+Transmission%22+%2D+Day+16+%2D+Advent+of+Code+2019+%23AdventOfCode+https%3A%2F%2Fadventofcode%2Ecom%2F2019%2Fday%2F16';try{localStorage.setItem('mastodon.server',ms);}finally{}}else{return false;}" target="_blank">Mastodon</a
 ></span>]</span> this puzzle.</p>
 </main>
 
