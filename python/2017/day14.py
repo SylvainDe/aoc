@@ -26,12 +26,38 @@ def hex_str_to_bits(hex_str):
 
 def get_squares(string):
     string += "-"
-    ret = 0
-    for i in range(128):
-        ret += sum(
-            b == "1" for b in hex_str_to_bits(knot_hash.knot_hash(string + str(i)))
-        )
-    return ret
+    return set(
+        (i, j)
+        for i in range(128)
+        for j, b in enumerate(hex_str_to_bits(knot_hash.knot_hash(string + str(i))))
+        if b == "1"
+    )
+
+
+def get_neighbours(pos):
+    x, y = pos
+    yield x + 1, y
+    yield x - 1, y
+    yield x, y + 1
+    yield x, y - 1
+
+
+def get_regions(squares):
+    squares = set(squares)
+    regions = []
+    while squares:
+        reg = set()
+        to_visit = set([squares.pop()])
+        while to_visit:
+            sq = to_visit.pop()
+            if sq not in reg:
+                reg.add(sq)
+                for sq2 in get_neighbours(sq):
+                    if sq2 in squares:
+                        squares.remove(sq2)
+                        to_visit.add(sq2)
+        regions.append(reg)
+    return len(regions)
 
 
 def run_tests():
@@ -41,12 +67,16 @@ def run_tests():
     assert hex_char_to_bits("e") == "1110"
     assert hex_char_to_bits("f") == "1111"
     assert hex_str_to_bits("a0c2017") == "1010000011000010000000010111"
-    assert get_squares(input_str) == 8108
+    squares = get_squares(input_str)
+    assert len(squares) == 8108
+    assert get_regions(squares) == 1242
 
 
 def get_solutions():
     input_str = get_input_str_from_file()
-    print(get_squares(input_str))
+    squares = get_squares(input_str)
+    print(len(squares) == 8214)
+    print(get_regions(squares))
 
 
 if __name__ == "__main__":
