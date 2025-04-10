@@ -4,9 +4,9 @@ use common::input::collect_from_lines;
 use common::input::get_answers;
 use common::input::get_file_content;
 use core::str::FromStr;
-use lazy_static::lazy_static;
 use regex::Regex;
 use std::collections::HashMap;
+use std::sync::LazyLock;
 use std::time::Instant;
 
 const INPUT_FILEPATH: &str = "../resources/year2018_day4_input.txt";
@@ -49,12 +49,12 @@ impl FromStr for Timestamp {
     type Err = ();
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         // [1518-11-01 00:00
-        lazy_static! {
-            static ref RE: Regex = Regex::new(
+        static RE: LazyLock<Regex> = LazyLock::new(|| {
+            Regex::new(concat!(
                 r"^\[(?P<year>\d+)-(?P<month>\d+)-(?P<day>\d+) (?P<hour>\d+):(?P<minute>\d+)"
-            )
-            .unwrap();
-        }
+            ))
+            .unwrap()
+        });
         let c = RE.captures(s).ok_or(())?;
         let to_int = |s: &str| c.name(s).ok_or(())?.as_str().parse::<Int>().map_err(|_| {});
         Ok(Self {

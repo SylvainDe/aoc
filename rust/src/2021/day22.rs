@@ -4,11 +4,11 @@ use common::input::collect_from_lines;
 use common::input::get_answers;
 use common::input::get_file_content;
 use core::str::FromStr;
-use lazy_static::lazy_static;
 use regex::Regex;
 use std::cmp::max;
 use std::cmp::min;
 use std::collections::HashSet;
+use std::sync::LazyLock;
 use std::time::Instant;
 
 const INPUT_FILEPATH: &str = "../resources/year2021_day22_input.txt";
@@ -35,15 +35,15 @@ impl FromStr for Instruction {
     type Err = ();
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         // on x=-54112..-39298,y=-85059..-49293,z=-27449..7877
-        lazy_static! {
-            static ref RE: Regex = Regex::new(concat!(
+        static RE: LazyLock<Regex> = LazyLock::new(|| {
+            Regex::new(concat!(
                 r"^(?P<action>on|off) ",
                 r"x=(?P<x1>-?\d+)\.\.(?P<x2>-?\d+),",
                 r"y=(?P<y1>-?\d+)\.\.(?P<y2>-?\d+),",
                 r"z=(?P<z1>-?\d+)\.\.(?P<z2>-?\d+)$"
             ))
-            .unwrap();
-        }
+            .unwrap()
+        });
         let c = RE.captures(s).ok_or(())?;
         let get_field = |s: &str| c.name(s).ok_or(());
         let to_int = |s: &str| get_field(s)?.as_str().parse::<Int>().map_err(|_| {});

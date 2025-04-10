@@ -68,7 +68,7 @@ fn part1(arg: &InputContent) -> Int {
         match turn {
             Turn::Left => (dx, dy) = (-dy, dx),
             Turn::Right => (dx, dy) = (dy, -dx),
-        };
+        }
         x += dx * length;
         y += dy * length;
     }
@@ -86,7 +86,7 @@ fn part2(arg: &InputContent) -> Int {
         match turn {
             Turn::Left => (dx, dy) = (-dy, dx),
             Turn::Right => (dx, dy) = (dy, -dx),
-        };
+        }
         for _i in 0..*length {
             x += dx;
             y += dy;

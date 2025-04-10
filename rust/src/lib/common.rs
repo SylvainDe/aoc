@@ -166,7 +166,7 @@ mod tests_input {
 #[cfg(test)]
 mod tests_point {
     use crate::point_module::Point;
-    use std::str::FromStr;
+    use std::str::FromStr as _;
 
     #[test]
     fn test_point_from_str() {
@@ -416,7 +416,7 @@ pub mod assembunny2016 {
 mod tests_assembunny2016 {
     use crate::assembunny2016::{run_instructions, Instruction};
     use crate::input::collect_from_lines;
-    use core::str::FromStr;
+    use core::str::FromStr as _;
 
     const EXAMPLE_DAY_12: &str = "cpy 41 a
 inc a

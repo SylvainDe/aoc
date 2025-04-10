@@ -43,7 +43,7 @@ fn part1(positions: &InputContent) -> Int {
     let n = positions.len();
     min(
         get_fuel_cost_for_position(&positions, positions[n / 2]),
-        get_fuel_cost_for_position(&positions, positions[(n + 1) / 2]),
+        get_fuel_cost_for_position(&positions, positions[n.div_ceil(2)]),
     )
 }
 

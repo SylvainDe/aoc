@@ -2,8 +2,8 @@
 use common::input::check_answer;
 use common::input::get_answers;
 use common::input::get_first_line_from_file;
-use lazy_static::lazy_static;
 use regex::Regex;
+use std::sync::LazyLock;
 use std::time::Instant;
 
 const INPUT_FILEPATH: &str = "../resources/year2018_day9_input.txt";
@@ -12,14 +12,17 @@ const ANSWERS_FILEPATH: &str = "../resources/year2018_day9_answer.txt";
 type Int = u32;
 type InputContent = Int;
 
-#[expect(clippy::missing_const_for_fn, reason = "Not implemented yet")]
-fn get_input_from_str(_string: &str) -> InputContent {
-    lazy_static! {
-        static ref RE: Regex =
-            Regex::new(r"^(\d+) players; last marble is worth (\d+) points$").unwrap();
-    }
-    //dbg!(RE.captures(string).unwrap());
-    0
+fn get_input_from_str(string: &str) -> InputContent {
+    static RE: LazyLock<Regex> = LazyLock::new(|| {
+        Regex::new(concat!(
+            r"^(?P<nb_players>\d+) players; last marble is worth (\d+) points$"
+        ))
+        .unwrap()
+    });
+    let c = RE.captures(string).ok_or(()).unwrap();
+    let get_field = |s: &str| c.name(s).ok_or(());
+    let to_int = |s: &str| get_field(s)?.as_str().parse::<Int>().map_err(|_| {});
+    to_int("nb_players").unwrap()
 }
 
 #[expect(

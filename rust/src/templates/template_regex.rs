@@ -4,8 +4,8 @@ use common::input::collect_from_lines;
 use common::input::get_answers;
 use common::input::get_file_content;
 use core::str::FromStr;
-use lazy_static::lazy_static;
 use regex::Regex;
+use std::sync::LazyLock;
 use std::time::Instant;
 
 const INPUT_FILEPATH: &str = "../resources/yearYYYY_dayDD_input.txt";
@@ -23,9 +23,8 @@ impl FromStr for FooBar {
     type Err = ();
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         // TODO: Example of the regexp
-        lazy_static! {
-            static ref RE: Regex = Regex::new(r"^(?P<char1>.) (?P<int2>\d+)$").unwrap();
-        }
+        static RE: LazyLock<Regex> =
+            LazyLock::new(|| Regex::new(concat!(r"^(?P<char1>.) (?P<int2>\d+)$")).unwrap());
         let c = RE.captures(s).ok_or(())?;
         Ok(Self {
             char1: c

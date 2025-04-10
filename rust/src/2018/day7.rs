@@ -4,11 +4,11 @@ use common::input::collect_from_lines;
 use common::input::get_answers;
 use common::input::get_file_content;
 use core::str::FromStr;
-use lazy_static::lazy_static;
 use regex::Regex;
 use std::collections::BinaryHeap;
 use std::collections::HashMap;
 use std::collections::HashSet;
+use std::sync::LazyLock;
 use std::time::Instant;
 
 const INPUT_FILEPATH: &str = "../resources/year2018_day7_input.txt";
@@ -24,12 +24,12 @@ impl FromStr for Dependency {
     type Err = ();
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         // Step C must be finished before step A can begin.
-        lazy_static! {
-            static ref RE: Regex = Regex::new(
+        static RE: LazyLock<Regex> = LazyLock::new(|| {
+            Regex::new(concat!(
                 r"^Step (?P<first>.) must be finished before step (?P<last>.) can begin\.$"
-            )
-            .unwrap();
-        }
+            ))
+            .unwrap()
+        });
         let c = RE.captures(s).ok_or(())?;
         let first_char = |s: &str| c.name(s).ok_or(())?.as_str().chars().next().ok_or(());
         Ok(Self {

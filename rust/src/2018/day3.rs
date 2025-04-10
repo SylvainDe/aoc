@@ -5,9 +5,9 @@ use common::input::get_answers;
 use common::input::get_file_content;
 use core::str::FromStr;
 use itertools::iproduct;
-use lazy_static::lazy_static;
 use regex::Regex;
 use std::collections::HashMap;
+use std::sync::LazyLock;
 use std::time::Instant;
 
 const INPUT_FILEPATH: &str = "../resources/year2018_day3_input.txt";
@@ -28,11 +28,11 @@ impl FromStr for Claim {
     type Err = ();
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         // #20 @ 291,420: 12x21
-        lazy_static! {
-        static ref RE: Regex =
-            Regex::new(r"^#(?P<claimid>\d+) @ (?P<leftedge>\d+),(?P<topedge>\d+): (?P<width>\d+)x(?P<height>\d+)$")
-                .unwrap();
-        }
+        static RE: LazyLock<Regex> = LazyLock::new(|| {
+            Regex::new(concat!(
+                r"^#(?P<claimid>\d+) @ (?P<leftedge>\d+),(?P<topedge>\d+): (?P<width>\d+)x(?P<height>\d+)$"
+        )).unwrap()
+        });
         let c = RE.captures(s).ok_or(())?;
         let to_int = |s: &str| c.name(s).ok_or(())?.as_str().parse::<Int>().map_err(|_| {});
         Ok(Self {
