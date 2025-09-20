@@ -12,7 +12,7 @@ const ANSWERS_FILEPATH: &str = "../resources/year2021_day24_answer.txt";
 
 type Int = i64;
 
-#[derive(Debug, Eq, Ord, PartialEq, PartialOrd, Clone)]
+#[derive(Debug, Clone)]
 enum Instruction {
     Input(String),
     BinaryOp(String, String, fn(Int, Int) -> Int),

@@ -29,9 +29,9 @@ impl FromStr for Star {
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         // "position=< 9,  1> velocity=< 0,  2>"
         static RE: LazyLock<Regex> = LazyLock::new(|| {
-            Regex::new(concat!(
-                r"^position=<\s*(-?\d+),\s*(-?\d+)> velocity=<\s*(-?\d+),\s*(-?\d+)>$"
-            ))
+            Regex::new(
+                "^position=<\\s*(-?\\d+),\\s*(-?\\d+)> velocity=<\\s*(-?\\d+),\\s*(-?\\d+)>$",
+            )
             .unwrap()
         });
 

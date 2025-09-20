@@ -161,9 +161,9 @@ fn revert_instruction(vec: &[char], instruction: &Instruction) -> Vec<Vec<char>>
             let len = vec.len();
             for nb_l in 0..=2 {
                 let pos2 = pos + nb_l * len;
-                let shift = if pos2 % 2 == 0 { 2 } else { 1 };
+                let shift = if pos2.is_multiple_of(2) { 2 } else { 1 };
                 if pos2 >= shift {
-                    assert!((pos2 - shift) % 2 == 0);
+                    assert!((pos2 - shift).is_multiple_of(2));
                     let initial_pos = (pos2 - shift) / 2;
                     if initial_pos < len {
                         let rotate = 1 + initial_pos + usize::from(initial_pos >= 4);

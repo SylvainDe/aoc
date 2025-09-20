@@ -35,7 +35,7 @@ fn get_input_from_str(string: &str) -> InputContent {
 
 const fn is_caught(delay: Int, layer: &Layer) -> bool {
     // The period for a scanner is 2*(range-1)
-    (layer.depth + delay) % (2 * (layer.range - 1)) == 0
+    (layer.depth + delay).is_multiple_of(2 * (layer.range - 1))
 }
 
 const fn get_caught_score(layer: &Layer) -> Int {

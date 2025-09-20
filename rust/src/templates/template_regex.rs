@@ -24,7 +24,7 @@ impl FromStr for FooBar {
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         // TODO: Example of the regexp
         static RE: LazyLock<Regex> =
-            LazyLock::new(|| Regex::new(concat!(r"^(?P<char1>.) (?P<int2>\d+)$")).unwrap());
+            LazyLock::new(|| Regex::new("^(?P<char1>.) (?P<int2>\\d+)$").unwrap());
         let c = RE.captures(s).ok_or(())?;
         Ok(Self {
             char1: c

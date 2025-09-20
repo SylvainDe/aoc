@@ -29,9 +29,7 @@ impl FromStr for Claim {
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         // #20 @ 291,420: 12x21
         static RE: LazyLock<Regex> = LazyLock::new(|| {
-            Regex::new(concat!(
-                r"^#(?P<claimid>\d+) @ (?P<leftedge>\d+),(?P<topedge>\d+): (?P<width>\d+)x(?P<height>\d+)$"
-        )).unwrap()
+            Regex::new("^#(?P<claimid>\\d+) @ (?P<leftedge>\\d+),(?P<topedge>\\d+): (?P<width>\\d+)x(?P<height>\\d+)$").unwrap()
         });
         let c = RE.captures(s).ok_or(())?;
         let to_int = |s: &str| c.name(s).ok_or(())?.as_str().parse::<Int>().map_err(|_| {});

@@ -25,10 +25,8 @@ impl FromStr for Dependency {
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         // Step C must be finished before step A can begin.
         static RE: LazyLock<Regex> = LazyLock::new(|| {
-            Regex::new(concat!(
-                r"^Step (?P<first>.) must be finished before step (?P<last>.) can begin\.$"
-            ))
-            .unwrap()
+            Regex::new("^Step (?P<first>.) must be finished before step (?P<last>.) can begin\\.$")
+                .unwrap()
         });
         let c = RE.captures(s).ok_or(())?;
         let first_char = |s: &str| c.name(s).ok_or(())?.as_str().chars().next().ok_or(());

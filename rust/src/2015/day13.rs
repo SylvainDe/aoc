@@ -25,9 +25,7 @@ impl FromStr for HappinessCondition {
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         // Alice would gain 54 happiness units by sitting next to Bob.
         static RE: LazyLock<Regex> = LazyLock::new(|| {
-            Regex::new(concat!(
-                r"^(?P<name1>.*) would (?P<direction>gain|lose) (?P<nb>\d+) happiness units by sitting next to (?P<name2>.*)\.$"
-        )).unwrap()
+            Regex::new("^(?P<name1>.*) would (?P<direction>gain|lose) (?P<nb>\\d+) happiness units by sitting next to (?P<name2>.*)\\.$").unwrap()
         });
         let c = RE.captures(s).ok_or(())?;
         let get_field = |s: &str| c.name(s).ok_or(());

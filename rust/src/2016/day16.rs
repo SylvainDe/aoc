@@ -29,7 +29,7 @@ fn generate_data(initial_state: &str, len: usize) -> String {
 }
 
 fn checksum(data: &str) -> String {
-    assert!(data.len() % 2 == 0);
+    assert!(data.len().is_multiple_of(2));
     let mut v = data.chars().collect::<Vec<char>>();
     while v.len() % 2 == 0 {
         v = v

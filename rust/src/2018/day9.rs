@@ -14,10 +14,7 @@ type InputContent = Int;
 
 fn get_input_from_str(string: &str) -> InputContent {
     static RE: LazyLock<Regex> = LazyLock::new(|| {
-        Regex::new(concat!(
-            r"^(?P<nb_players>\d+) players; last marble is worth (\d+) points$"
-        ))
-        .unwrap()
+        Regex::new("^(?P<nb_players>\\d+) players; last marble is worth (\\d+) points$").unwrap()
     });
     let c = RE.captures(string).ok_or(()).unwrap();
     let get_field = |s: &str| c.name(s).ok_or(());

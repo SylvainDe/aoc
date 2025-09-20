@@ -50,9 +50,9 @@ impl FromStr for Timestamp {
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         // [1518-11-01 00:00
         static RE: LazyLock<Regex> = LazyLock::new(|| {
-            Regex::new(concat!(
-                r"^\[(?P<year>\d+)-(?P<month>\d+)-(?P<day>\d+) (?P<hour>\d+):(?P<minute>\d+)"
-            ))
+            Regex::new(
+                "^\\[(?P<year>\\d+)-(?P<month>\\d+)-(?P<day>\\d+) (?P<hour>\\d+):(?P<minute>\\d+)",
+            )
             .unwrap()
         });
         let c = RE.captures(s).ok_or(())?;
