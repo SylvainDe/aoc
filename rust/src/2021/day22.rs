@@ -227,7 +227,6 @@ fn intersection_1d((beg1, end1): Range, (beg2, end2): Range) -> Option<Range> {
     None
 }
 
-#[expect(clippy::similar_names, reason = "Mathematical computations")]
 fn split_3d((rx1, ry1, rz1): Cuboid, (rx2, ry2, rz2): Cuboid) -> Vec<(Cuboid, bool, bool)> {
     let x_split = split_1d(rx1, rx2);
     let y_split = split_1d(ry1, ry2);
@@ -247,7 +246,6 @@ fn split_3d((rx1, ry1, rz1): Cuboid, (rx2, ry2, rz2): Cuboid) -> Vec<(Cuboid, bo
     ret
 }
 
-#[expect(clippy::similar_names, reason = "Mathematical computations")]
 fn intersection_3d((rx1, ry1, rz1): Cuboid, (rx2, ry2, rz2): Cuboid) -> Option<Cuboid> {
     if let Some(rx) = intersection_1d(rx1, rx2) {
         if let Some(ry) = intersection_1d(ry1, ry2) {

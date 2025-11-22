@@ -74,10 +74,10 @@ fn show_stars(positions: &Vec<(Int, Int)>) -> Option<String> {
     }
     let xs = positions.iter().map(|(x, _)| *x).collect::<Vec<Int>>();
     let ys = positions.iter().map(|(_, y)| *y).collect::<Vec<Int>>();
-    let x_min = *xs.iter().min().unwrap();
-    let x_max = *xs.iter().max().unwrap();
-    let y_min = *ys.iter().min().unwrap();
-    let y_max = *ys.iter().max().unwrap();
+    let x_min = *xs.iter().min()?;
+    let x_max = *xs.iter().max()?;
+    let y_min = *ys.iter().min()?;
+    let y_max = *ys.iter().max()?;
     let dx = x_max - x_min;
     let dy = y_max - y_min;
     if dx > 80 || dy > 15 {
