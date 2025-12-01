@@ -23,7 +23,7 @@ stats_file = "misc/leaderboard_self_{year}.html"
 
 # Ranges
 first_year = 2015
-last_year = 2024
+last_year = 2025
 first_day = 1
 last_day = 25
 
