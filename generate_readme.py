@@ -83,10 +83,15 @@ class YearData:
         time_re = r"([0-9:]+|&gt;24h|-)"
         rank_re = r"(\d+|-)"
         score_re = r"(\d+|-)"
+        # On 2025, the self leaderboard is different with no ranks nor scores.
+        # Examples:
+        #     18   04:01:23   8112      0          -      -      -
+        #     15   13:50:00  25097      0       &gt;24h  26302      0
+        #     2   03:39:29   03:47:30
         stat_line_re = re.compile(
             r"^\s+(?P<day>\d+)"
-            "\s+(?P<time1>%s)\s+(?P<rank1>%s)\s+(?P<score1>%s)"
-            "\s+(?P<time2>%s)\s+(?P<rank2>%s)\s+(?P<score2>%s)$"
+            "\s+(?P<time1>%s)(\s+(?P<rank1>%s))?(\s+(?P<score1>%s))?"
+            "\s+(?P<time2>%s)(\s+(?P<rank2>%s))?(\s+(?P<score2>%s))?$"
             % (time_re, rank_re, score_re, time_re, rank_re, score_re)
         )
         all_stats = dict()
@@ -104,11 +109,12 @@ class YearData:
                         gd["rank" + suff],
                         gd["score" + suff],
                     )
-                    assert (rank == "-") == (time == "-") == (score == "-")
-                    if rank != "-":
+                    assert (rank == "-") == (score == "-")
+                    assert (rank is None) == (score is None)
+                    if time != "-":
                         stats["time" + suff] = time.replace("&gt;", "+")
-                        stats["rank" + suff] = int(rank)
-                        stats["score" + suff] = int(score)
+                        stats["rank" + suff] = 0 if rank in ("-", None) else int(rank)
+                        stats["score" + suff] = 0 if score in ("-", None) else int(score)
                 all_stats[day] = stats
         return all_stats
 

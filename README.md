@@ -26,9 +26,9 @@ Solutions are written in Python and/or Rust.
 ## [2025](https://adventofcode.com/2025)
 |Day|URLs|Puzzle & Input|Stars|Python|Rust|Time part 1|Time part 2|
 |---|---|---|---|---|---|---|---|
-|Day 1: Secret Entrance|[Problem](https://adventofcode.com/2025/day/1) [Input](https://adventofcode.com/2025/day/1/input)|[puzzle.html](resources/year2025_day1_puzzle.html) [input.txt](resources/year2025_day1_input.txt)||[day1.py](python/2025/day1.py)|[-](rust/src/2025/day1.rs)|-|-|
-|Day 2: Gift Shop|[Problem](https://adventofcode.com/2025/day/2) [Input](https://adventofcode.com/2025/day/2/input)|[puzzle.html](resources/year2025_day2_puzzle.html) [input.txt](resources/year2025_day2_input.txt)||[day2.py](python/2025/day2.py)|[-](rust/src/2025/day2.rs)|-|-|
-|[2025](https://adventofcode.com/2025)|[Stats](https://adventofcode.com/2025/leaderboard/self)|[stats.txt](misc/leaderboard_self_2025.html)|0|-|-|-|-|
+|Day 1: Secret Entrance|[Problem](https://adventofcode.com/2025/day/1) [Input](https://adventofcode.com/2025/day/1/input)|[puzzle.html](resources/year2025_day1_puzzle.html) [input.txt](resources/year2025_day1_input.txt)|**|[day1.py](python/2025/day1.py)|[-](rust/src/2025/day1.rs)|07:06:12|07:37:42|
+|Day 2: Gift Shop|[Problem](https://adventofcode.com/2025/day/2) [Input](https://adventofcode.com/2025/day/2/input)|[puzzle.html](resources/year2025_day2_puzzle.html) [input.txt](resources/year2025_day2_input.txt)|**|[day2.py](python/2025/day2.py)|[-](rust/src/2025/day2.rs)|03:39:29|03:47:30|
+|[2025](https://adventofcode.com/2025)|[Stats](https://adventofcode.com/2025/leaderboard/self)|[stats.txt](misc/leaderboard_self_2025.html)|4|-|-|-|-|
 
 ## [2024](https://adventofcode.com/2024)
 |Day|URLs|Puzzle & Input|Stars|Python|Rust|Time part 1|Time part 2|
@@ -333,8 +333,8 @@ Solutions are written in Python and/or Rust.
 ##  Summary
 |Day|[2015](https://adventofcode.com/2015) [2015](#2015)|[2016](https://adventofcode.com/2016) [2016](#2016)|[2017](https://adventofcode.com/2017) [2017](#2017)|[2018](https://adventofcode.com/2018) [2018](#2018)|[2019](https://adventofcode.com/2019) [2019](#2019)|[2020](https://adventofcode.com/2020) [2020](#2020)|[2021](https://adventofcode.com/2021) [2021](#2021)|[2022](https://adventofcode.com/2022) [2022](#2022)|[2023](https://adventofcode.com/2023) [2023](#2023)|[2024](https://adventofcode.com/2024) [2024](#2024)|[2025](https://adventofcode.com/2025) [2025](#2025)|Total|
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
-|1|**|**|**|**|**|**|**|**|**|**||20|
-|2|**|**|**|**|**|**|**|**|**|**||20|
+|1|**|**|**|**|**|**|**|**|**|**|**|22|
+|2|**|**|**|**|**|**|**|**|**|**|**|22|
 |3|**|**|**|**|**|**|**|**|**|**||20|
 |4|**|**|**|**|**|**|**|**|**|**||20|
 |5|**|**|**|**|**|**|**|**|**|**||20|
@@ -358,4 +358,4 @@ Solutions are written in Python and/or Rust.
 |23||**||||**|*|**||**||9|
 |24||**|||**|**||**|*|**||11|
 |25|*|*||*||**|*|**||**||10|
-|Total|32|48|30|30|30|50|46|50|39|50|0|405|
+|Total|32|48|30|30|30|50|46|50|39|50|4|409|
