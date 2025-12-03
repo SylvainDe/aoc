@@ -35,9 +35,12 @@ def get_password2(rotations):
     c = 0
     pos = 50
     for s, v in rotations:
-        for i in range(v):
-            pos = (pos + s) % 100
-            c += pos == 0
+        new_pos = pos + s * v
+        if s > 0:
+            c += abs(new_pos // 100)
+        else:
+            c += abs((new_pos - 1) // 100) - (1 if pos == 0 else 0)
+        pos = new_pos % 100
     return c
 
 
