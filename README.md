@@ -28,6 +28,7 @@ Solutions are written in Python and/or Rust.
 |---|---|---|---|---|---|---|---|
 |Day 1: Secret Entrance|[Problem](https://adventofcode.com/2025/day/1) [Input](https://adventofcode.com/2025/day/1/input)|[puzzle.html](resources/year2025_day1_puzzle.html) [input.txt](resources/year2025_day1_input.txt)|**|[day1.py](python/2025/day1.py)|[-](rust/src/2025/day1.rs)|07:06:12|07:37:42|
 |Day 2: Gift Shop|[Problem](https://adventofcode.com/2025/day/2) [Input](https://adventofcode.com/2025/day/2/input)|[puzzle.html](resources/year2025_day2_puzzle.html) [input.txt](resources/year2025_day2_input.txt)|**|[day2.py](python/2025/day2.py)|[-](rust/src/2025/day2.rs)|03:39:29|03:47:30|
+|Day 3: Lobby|[Problem](https://adventofcode.com/2025/day/3) [Input](https://adventofcode.com/2025/day/3/input)|[puzzle.html](resources/year2025_day3_puzzle.html) [input.txt](resources/year2025_day3_input.txt)||[-](python/2025/day3.py)|[-](rust/src/2025/day3.rs)|-|-|
 |[2025](https://adventofcode.com/2025)|[Stats](https://adventofcode.com/2025/leaderboard/self)|[stats.txt](misc/leaderboard_self_2025.html)|4|-|-|-|-|
 
 ## [2024](https://adventofcode.com/2024)
