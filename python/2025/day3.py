@@ -6,29 +6,47 @@ import os
 top_dir = os.path.dirname(os.path.abspath(__file__)) + "/../../"
 
 
-def get_xxx_from_line(string):
+def get_bank_from_line(string):
     return string
 
 
-def get_xxxs_from_lines(string):
-    return [get_xxx_from_line(l) for l in string.splitlines()]
+def get_banks_from_lines(string):
+    return [get_bank_from_line(l) for l in string.splitlines()]
 
 
-def get_xxxs_from_file(file_path=top_dir + "resources/year2025_day3_input.txt"):
+def get_banks_from_file(file_path=top_dir + "resources/year2025_day3_input.txt"):
     with open(file_path) as f:
-        return get_xxxs_from_lines(f.read())
+        return get_banks_from_lines(f.read())
 
+
+def get_largest_joltage(bank, l):
+    digits = ""
+    for i in reversed(range(l)):
+        search_space = bank[:-i] if i else bank
+        d = max(search_space)
+        bank = bank[bank.index(d)+1:]
+        digits += d
+    return int(digits)
+
+
+def get_total_joltage(banks, l):
+    return sum(get_largest_joltage(b, l) for b in banks)
 
 def run_tests():
-    xxxs = get_xxxs_from_lines(
-        """abc
-def
-ghi"""
+    banks = get_banks_from_lines(
+        """987654321111111
+811111111111119
+234234234234278
+818181911112111"""
     )
+    assert get_total_joltage(banks, 2) == 357
+    assert get_total_joltage(banks, 12) == 3121910778619
 
 
 def get_solutions():
-    xxxs = get_xxxs_from_file()
+    banks = get_banks_from_file()
+    print(get_total_joltage(banks, 2) == 17535)
+    print(get_total_joltage(banks, 12) == 173577199527257)
 
 
 if __name__ == "__main__":
