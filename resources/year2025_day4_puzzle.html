@@ -124,12 +124,139 @@ x.x.@@@.x.
 </code></pre>
 <p>Consider your complete diagram of the paper roll locations. <em>How many rolls of paper can be accessed by a forklift?</em></p>
 </article>
-<p>To begin, <a href="4/input" target="_blank">get your puzzle input</a>.</p>
-<form method="post" action="4/answer"><input type="hidden" name="level" value="1"/><p>Answer: <input type="text" name="answer" autocomplete="off"/> <input type="submit" value="[Submit]"/></p></form>
+<p>Your puzzle answer was <code>1523</code>.</p><article class="day-desc"><h2 id="part2">--- Part Two ---</h2><p>Now, the Elves just need help accessing as much of the paper as they can.</p>
+<p>Once a roll of paper can be accessed by a forklift, it can be <em>removed</em>. Once a roll of paper is removed, the forklifts might be able to access <em>more</em> rolls of paper, which they might also be able to remove. How many total rolls of paper could the Elves remove if they keep repeating this process?</p>
+<p>Starting with the same example as above, here is one way you could remove as many rolls of paper as possible, using highlighted <code><em>@</em></code> to indicate that a roll of paper is about to be removed, and using <code>x</code> to indicate that a roll of paper was just removed:</p>
+<pre><code>Initial state:
+..<em>@</em><em>@</em>.<em>@</em><em>@</em>@<em>@</em>.
+<em>@</em>@@.@.@.@@
+@@@@@.<em>@</em>.@@
+@.@@@@..@.
+<em>@</em>@.@@@@.@<em>@</em>
+.@@@@@@@.@
+.@.@.@.@@@
+<em>@</em>.@@@.@@@@
+.@@@@@@@@.
+<em>@</em>.<em>@</em>.@@@.<em>@</em>.
+
+Remove 13 rolls of paper:
+..xx.xx<em>@</em>x.
+x@@.<em>@</em>.<em>@</em>.@<em>@</em>
+<em>@</em>@@@@.x.@@
+<em>@</em>.@@@@..<em>@</em>.
+x@.@@@@.<em>@</em>x
+.<em>@</em>@@@@@@.<em>@</em>
+.<em>@</em>.@.@.@@@
+x.@@@.@@@@
+.<em>@</em>@@@@@@@.
+x.x.@@@.x.
+
+Remove 12 rolls of paper:
+.......x..
+.<em>@</em>@.x.x.<em>@</em>x
+x@@@@...<em>@</em><em>@</em>
+x.@@@@..x.
+.<em>@</em>.@@@@.x.
+.x@@@@@@.x
+.x.@.@.@@<em>@</em>
+..@@@.@@@@
+.x<em>@</em>@@@@@@.
+....@@@...
+
+Remove 7 rolls of paper:
+..........
+.x<em>@</em>.....x.
+.<em>@</em>@@@...xx
+..@@@@....
+.x.@@@@...
+..<em>@</em>@@@@@..
+...@.@.@@x
+..<em>@</em>@@.@@@<em>@</em>
+..x@@@@@@.
+....@@@...
+
+Remove 5 rolls of paper:
+..........
+..x.......
+.x<em>@</em>@@.....
+..@@@@....
+...@@@@...
+..x@@@@@..
+...@.@.@@.
+..x@@.@@@x
+...@@@@@<em>@</em>.
+....@@@...
+
+Remove 2 rolls of paper:
+..........
+..........
+..x@@.....
+..<em>@</em>@@@....
+...@@@@...
+...@@@@@..
+...@.@.@@.
+...@@.@@@.
+...@@@@@x.
+....@@@...
+
+Remove 1 roll of paper:
+..........
+..........
+...<em>@</em>@.....
+..x@@@....
+...@@@@...
+...@@@@@..
+...@.@.@@.
+...@@.@@@.
+...@@@@@..
+....@@@...
+
+Remove 1 roll of paper:
+..........
+..........
+...x<em>@</em>.....
+...@@@....
+...@@@@...
+...@@@@@..
+...@.@.@@.
+...@@.@@@.
+...@@@@@..
+....@@@...
+
+Remove 1 roll of paper:
+..........
+..........
+....x.....
+...<em>@</em>@@....
+...@@@@...
+...@@@@@..
+...@.@.@@.
+...@@.@@@.
+...@@@@@..
+....@@@...
+
+Remove 1 roll of paper:
+..........
+..........
+..........
+...x@@....
+...@@@@...
+...@@@@@..
+...@.@.@@.
+...@@.@@@.
+...@@@@@..
+....@@@...
+</code></pre>
+<p>Stop once no more rolls of paper are accessible by a forklift. In this example, a total of <code><em>43</em></code> rolls of paper can be removed.</p>
+<p>Start with your original diagram. <em>How many rolls of paper in total can be removed by the Elves and their forklifts?</em></p>
+</article>
+<p>Your puzzle answer was <code>9290</code>.</p><p class="day-success">Both parts of this puzzle are complete! They provide two gold stars: **</p>
+<p>At this point, you should <a href="/2025">return to your Advent calendar</a> and try another puzzle.</p>
+<p>If you still want to see it, you can <a href="4/input" target="_blank">get your puzzle input</a>.</p>
 <p>You can also <span class="share">[Share<span class="share-content">on
-  <a href="https://bsky.app/intent/compose?text=%22Printing+Department%22+%2D+Day+4+%2D+Advent+of+Code+2025+%23AdventOfCode+https%3A%2F%2Fadventofcode%2Ecom%2F2025%2Fday%2F4" target="_blank">Bluesky</a>
-  <a href="https://twitter.com/intent/tweet?text=%22Printing+Department%22+%2D+Day+4+%2D+Advent+of+Code+2025&amp;url=https%3A%2F%2Fadventofcode%2Ecom%2F2025%2Fday%2F4&amp;related=ericwastl&amp;hashtags=AdventOfCode" target="_blank">Twitter</a>
-  <a href="javascript:void(0);" onclick="var ms; try{ms=localStorage.getItem('mastodon.server')}finally{} if(typeof ms!=='string')ms=''; ms=prompt('Mastodon Server?',ms); if(typeof ms==='string' && ms.length){this.href='https://'+ms+'/share?text=%22Printing+Department%22+%2D+Day+4+%2D+Advent+of+Code+2025+%23AdventOfCode+https%3A%2F%2Fadventofcode%2Ecom%2F2025%2Fday%2F4';try{localStorage.setItem('mastodon.server',ms);}finally{}}else{return false;}" target="_blank">Mastodon</a
+  <a href="https://bsky.app/intent/compose?text=I%27ve+completed+%22Printing+Department%22+%2D+Day+4+%2D+Advent+of+Code+2025+%23AdventOfCode+https%3A%2F%2Fadventofcode%2Ecom%2F2025%2Fday%2F4" target="_blank">Bluesky</a>
+  <a href="https://twitter.com/intent/tweet?text=I%27ve+completed+%22Printing+Department%22+%2D+Day+4+%2D+Advent+of+Code+2025&amp;url=https%3A%2F%2Fadventofcode%2Ecom%2F2025%2Fday%2F4&amp;related=ericwastl&amp;hashtags=AdventOfCode" target="_blank">Twitter</a>
+  <a href="javascript:void(0);" onclick="var ms; try{ms=localStorage.getItem('mastodon.server')}finally{} if(typeof ms!=='string')ms=''; ms=prompt('Mastodon Server?',ms); if(typeof ms==='string' && ms.length){this.href='https://'+ms+'/share?text=I%27ve+completed+%22Printing+Department%22+%2D+Day+4+%2D+Advent+of+Code+2025+%23AdventOfCode+https%3A%2F%2Fadventofcode%2Ecom%2F2025%2Fday%2F4';try{localStorage.setItem('mastodon.server',ms);}finally{}}else{return false;}" target="_blank">Mastodon</a
 ></span>]</span> this puzzle.</p>
 </main>
 
