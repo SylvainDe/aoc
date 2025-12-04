@@ -42,7 +42,6 @@ def get_password2(rotations):
     return c
 
 
-
 def run_tests():
     rotations = get_rotations_from_lines(
         """L68
@@ -60,6 +59,7 @@ L82"""
     assert get_password2(rotations) == 6
     rotations = get_rotations_from_lines("""R1000""")
     assert get_password2(rotations) == 10
+
 
 def get_solutions():
     rotations = get_rotations_from_file()

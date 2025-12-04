@@ -24,13 +24,14 @@ def get_largest_joltage(bank, l):
     for i in reversed(range(l)):
         search_space = bank[:-i] if i else bank
         d = max(search_space)
-        bank = bank[bank.index(d)+1:]
+        bank = bank[bank.index(d) + 1 :]
         digits += d
     return int(digits)
 
 
 def get_total_joltage(banks, l):
     return sum(get_largest_joltage(b, l) for b in banks)
+
 
 def run_tests():
     banks = get_banks_from_lines(
