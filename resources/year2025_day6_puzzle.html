@@ -114,12 +114,31 @@ on Mastodon.
 <p>Of course, the actual worksheet is <em>much</em> wider. You'll need to make sure to unroll it completely so that you can read the problems clearly.</p>
 <p>Solve the problems on the math worksheet. <em>What is the grand total found by adding together all of the answers to the individual problems?</em></p>
 </article>
-<p>To begin, <a href="6/input" target="_blank">get your puzzle input</a>.</p>
-<form method="post" action="6/answer"><input type="hidden" name="level" value="1"/><p>Answer: <input type="text" name="answer" autocomplete="off"/> <input type="submit" value="[Submit]"/></p></form>
+<p>Your puzzle answer was <code>5733696195703</code>.</p><p class="day-success">The first half of this puzzle is complete! It provides one gold star: *</p>
+<article class="day-desc"><h2 id="part2">--- Part Two ---</h2><p>The big cephalopods come back to check on how things are going. When they see that your grand total doesn't match the one expected by the worksheet, they realize they forgot to explain how to read cephalopod math.</p>
+<p>Cephalopod math is written <em>right-to-left in columns</em>. Each number is given in its own column, with the most significant digit at the top and the least significant digit at the bottom. (Problems are still separated with a column consisting only of spaces, and the symbol at the bottom of the problem is still the operator to use.)</p>
+<p>Here's the example worksheet again:</p>
+<pre><code>123 328  51 64 
+ 45 64  387 23 
+  6 98  215 314
+*   +   *   +  
+</code></pre>
+<p>Reading the problems right-to-left one column at a time, the problems are now quite different:</p>
+<ul>
+<li>The rightmost problem is <code>4</code> + <code>431</code> + <code>623</code> = <code><em>1058</em></code></li>
+<li>The second problem from the right is <code>175</code> * <code>581</code> * <code>32</code> = <code><em>3253600</em></code></li>
+<li>The third problem from the right is <code>8</code> + <code>248</code> + <code>369</code> = <code><em>625</em></code></li>
+<li>Finally, the leftmost problem is <code>356</code> * <code>24</code> * <code>1</code> = <code><em>8544</em></code></li>
+</ul>
+<p>Now, the grand total is <code>1058</code> + <code>3253600</code> + <code>625</code> + <code>8544</code> = <code><em>3263827</em></code>.</p>
+<p>Solve the problems on the math worksheet again. <em>What is the grand total found by adding together all of the answers to the individual problems?</em></p>
+</article>
+<form method="post" action="6/answer"><input type="hidden" name="level" value="2"/><p>Answer: <input type="text" name="answer" autocomplete="off"/> <input type="submit" value="[Submit]"/></p></form>
+<p>Although it hasn't changed, you can still <a href="6/input" target="_blank">get your puzzle input</a>.</p>
 <p>You can also <span class="share">[Share<span class="share-content">on
-  <a href="https://bsky.app/intent/compose?text=%22Trash+Compactor%22+%2D+Day+6+%2D+Advent+of+Code+2025+%23AdventOfCode+https%3A%2F%2Fadventofcode%2Ecom%2F2025%2Fday%2F6" target="_blank">Bluesky</a>
-  <a href="https://twitter.com/intent/tweet?text=%22Trash+Compactor%22+%2D+Day+6+%2D+Advent+of+Code+2025&amp;url=https%3A%2F%2Fadventofcode%2Ecom%2F2025%2Fday%2F6&amp;related=ericwastl&amp;hashtags=AdventOfCode" target="_blank">Twitter</a>
-  <a href="javascript:void(0);" onclick="var ms; try{ms=localStorage.getItem('mastodon.server')}finally{} if(typeof ms!=='string')ms=''; ms=prompt('Mastodon Server?',ms); if(typeof ms==='string' && ms.length){this.href='https://'+ms+'/share?text=%22Trash+Compactor%22+%2D+Day+6+%2D+Advent+of+Code+2025+%23AdventOfCode+https%3A%2F%2Fadventofcode%2Ecom%2F2025%2Fday%2F6';try{localStorage.setItem('mastodon.server',ms);}finally{}}else{return false;}" target="_blank">Mastodon</a
+  <a href="https://bsky.app/intent/compose?text=I%27ve+completed+Part+One+of+%22Trash+Compactor%22+%2D+Day+6+%2D+Advent+of+Code+2025+%23AdventOfCode+https%3A%2F%2Fadventofcode%2Ecom%2F2025%2Fday%2F6" target="_blank">Bluesky</a>
+  <a href="https://twitter.com/intent/tweet?text=I%27ve+completed+Part+One+of+%22Trash+Compactor%22+%2D+Day+6+%2D+Advent+of+Code+2025&amp;url=https%3A%2F%2Fadventofcode%2Ecom%2F2025%2Fday%2F6&amp;related=ericwastl&amp;hashtags=AdventOfCode" target="_blank">Twitter</a>
+  <a href="javascript:void(0);" onclick="var ms; try{ms=localStorage.getItem('mastodon.server')}finally{} if(typeof ms!=='string')ms=''; ms=prompt('Mastodon Server?',ms); if(typeof ms==='string' && ms.length){this.href='https://'+ms+'/share?text=I%27ve+completed+Part+One+of+%22Trash+Compactor%22+%2D+Day+6+%2D+Advent+of+Code+2025+%23AdventOfCode+https%3A%2F%2Fadventofcode%2Ecom%2F2025%2Fday%2F6';try{localStorage.setItem('mastodon.server',ms);}finally{}}else{return false;}" target="_blank">Mastodon</a
 ></span>]</span> this puzzle.</p>
 </main>
 
