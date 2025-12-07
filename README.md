@@ -32,6 +32,7 @@ Solutions are written in Python and/or Rust.
 |Day 4: Printing Department|[Problem](https://adventofcode.com/2025/day/4) [Input](https://adventofcode.com/2025/day/4/input)|[puzzle.html](resources/year2025_day4_puzzle.html) [input.txt](resources/year2025_day4_input.txt)|**|[day4.py](python/2025/day4.py)|[-](rust/src/2025/day4.rs)|03:57:59|04:09:15|
 |Day 5: Cafeteria|[Problem](https://adventofcode.com/2025/day/5) [Input](https://adventofcode.com/2025/day/5/input)|[puzzle.html](resources/year2025_day5_puzzle.html) [input.txt](resources/year2025_day5_input.txt)|**|[day5.py](python/2025/day5.py)|[-](rust/src/2025/day5.rs)|00:16:49|00:34:51|
 |Day 6: Trash Compactor|[Problem](https://adventofcode.com/2025/day/6) [Input](https://adventofcode.com/2025/day/6/input)|[puzzle.html](resources/year2025_day6_puzzle.html) [input.txt](resources/year2025_day6_input.txt)|*|[day6.py](python/2025/day6.py)|[-](rust/src/2025/day6.rs)|10:05:54|-|
+|Day 7: Laboratories|[Problem](https://adventofcode.com/2025/day/7) [Input](https://adventofcode.com/2025/day/7/input)|[puzzle.html](resources/year2025_day7_puzzle.html) [input.txt](resources/year2025_day7_input.txt)||[-](python/2025/day7.py)|[-](rust/src/2025/day7.rs)|-|-|
 |[2025](https://adventofcode.com/2025)|[Stats](https://adventofcode.com/2025/leaderboard/self)|[stats.txt](misc/leaderboard_self_2025.html)|11|-|-|-|-|
 
 ## [2024](https://adventofcode.com/2024)
