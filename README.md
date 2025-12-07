@@ -31,9 +31,9 @@ Solutions are written in Python and/or Rust.
 |Day 3: Lobby|[Problem](https://adventofcode.com/2025/day/3) [Input](https://adventofcode.com/2025/day/3/input)|[puzzle.html](resources/year2025_day3_puzzle.html) [input.txt](resources/year2025_day3_input.txt)|**|[day3.py](python/2025/day3.py)|[-](rust/src/2025/day3.rs)|03:41:53|03:56:42|
 |Day 4: Printing Department|[Problem](https://adventofcode.com/2025/day/4) [Input](https://adventofcode.com/2025/day/4/input)|[puzzle.html](resources/year2025_day4_puzzle.html) [input.txt](resources/year2025_day4_input.txt)|**|[day4.py](python/2025/day4.py)|[-](rust/src/2025/day4.rs)|03:57:59|04:09:15|
 |Day 5: Cafeteria|[Problem](https://adventofcode.com/2025/day/5) [Input](https://adventofcode.com/2025/day/5/input)|[puzzle.html](resources/year2025_day5_puzzle.html) [input.txt](resources/year2025_day5_input.txt)|**|[day5.py](python/2025/day5.py)|[-](rust/src/2025/day5.rs)|00:16:49|00:34:51|
-|Day 6: Trash Compactor|[Problem](https://adventofcode.com/2025/day/6) [Input](https://adventofcode.com/2025/day/6/input)|[puzzle.html](resources/year2025_day6_puzzle.html) [input.txt](resources/year2025_day6_input.txt)|*|[day6.py](python/2025/day6.py)|[-](rust/src/2025/day6.rs)|10:05:54|-|
+|Day 6: Trash Compactor|[Problem](https://adventofcode.com/2025/day/6) [Input](https://adventofcode.com/2025/day/6/input)|[puzzle.html](resources/year2025_day6_puzzle.html) [input.txt](resources/year2025_day6_input.txt)|**|[day6.py](python/2025/day6.py)|[-](rust/src/2025/day6.rs)|10:05:54|+24h|
 |Day 7: Laboratories|[Problem](https://adventofcode.com/2025/day/7) [Input](https://adventofcode.com/2025/day/7/input)|[puzzle.html](resources/year2025_day7_puzzle.html) [input.txt](resources/year2025_day7_input.txt)|**|[day7.py](python/2025/day7.py)|[-](rust/src/2025/day7.rs)|08:34:33|08:39:10|
-|[2025](https://adventofcode.com/2025)|[Stats](https://adventofcode.com/2025/leaderboard/self)|[stats.txt](misc/leaderboard_self_2025.html)|13|-|-|-|-|
+|[2025](https://adventofcode.com/2025)|[Stats](https://adventofcode.com/2025/leaderboard/self)|[stats.txt](misc/leaderboard_self_2025.html)|14|-|-|-|-|
 
 ## [2024](https://adventofcode.com/2024)
 |Day|URLs|Puzzle & Input|Stars|Python|Rust|Time part 1|Time part 2|
@@ -343,7 +343,7 @@ Solutions are written in Python and/or Rust.
 |3|**|**|**|**|**|**|**|**|**|**|**|22|
 |4|**|**|**|**|**|**|**|**|**|**|**|22|
 |5|**|**|**|**|**|**|**|**|**|**|**|22|
-|6|**|**|**|**|**|**|**|**|**|**|*|21|
+|6|**|**|**|**|**|**|**|**|**|**|**|22|
 |7|**|**|**|**|*|**|**|**|**|**|**|21|
 |8|**|**|**|**|**|**|**|**|**|**||20|
 |9|**|**|**|*|**|**|**|**|**|**||19|
@@ -363,4 +363,4 @@ Solutions are written in Python and/or Rust.
 |23||**||||**|*|**||**||9|
 |24||**|||**|**||**|*|**||11|
 |25|*|*||*||**|*|**||**||10|
-|Total|32|48|30|30|30|50|46|50|39|50|13|418|
+|Total|32|48|30|30|30|50|46|50|39|50|14|419|
