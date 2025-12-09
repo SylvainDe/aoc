@@ -24,8 +24,28 @@ def get_rect_size(t1, t2):
     return math.prod(1 + abs(c1 - c2) for c1, c2 in zip(t1, t2))
 
 
-def get_max_rect(tiles):
-    return max(get_rect_size(t1, t2) for t1, t2 in itertools.combinations(tiles, 2))
+def get_max_rect(tiles, is_valid):
+    return max(get_rect_size(t1, t2) for t1, t2 in itertools.combinations(tiles, 2) if is_valid(t1, t2, tiles))
+
+
+def is_valid_part1(t1, t2, tiles):
+    return True
+
+
+def is_inside(t, tiles):
+    for t1, t2 in zip(tiles, tiles[1:] + [tiles[0]]):
+        pass
+        # TODO
+        # x, y = tuple((c1 - c2) for c1, c2 in zip(t1, t2))
+        # perp = (-y, x)
+        # to_tile = tuple((c1 - c2) for c1, c2 in zip(t1, t))
+        # dot_prod = sum(c1 * c2 for c1, c2 in zip(to_tile, perp))
+        # signs.append(math.copysign(1, dot_prod))
+    return True
+
+
+def is_valid_part2(t1, t2, tiles):
+    return is_inside(t1, tiles) and is_inside(t2, tiles)
 
 
 def run_tests():
@@ -39,12 +59,13 @@ def run_tests():
 2,3
 7,3"""
     )
-    assert get_max_rect(tiles) == 50
+    assert get_max_rect(tiles, is_valid_part1) == 50
+    print(get_max_rect(tiles, is_valid_part2)) # TODO
 
 
 def get_solutions():
     tiles = get_tiles_from_file()
-    print(get_max_rect(tiles) == 4748985168)
+    print(get_max_rect(tiles, is_valid_part1) == 4748985168)
 
 
 if __name__ == "__main__":
