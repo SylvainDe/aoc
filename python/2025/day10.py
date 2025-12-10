@@ -37,7 +37,7 @@ def get_nb_button_presses_to_configure(machine):
                 diag2 = list(diag)
                 for w in wiring:
                     diag2[w] = not diag2[w]
-                    q.append((diag2, presses | set([i])))
+                q.append((diag2, presses | set([i])))
     assert False
 
 
@@ -55,7 +55,7 @@ def run_tests():
 
 def get_solutions():
     machines = get_machines_from_file()
-    # print(get_nb_button_presses_to_configure_all(machines) == 459)
+    print(get_nb_button_presses_to_configure_all(machines) == 459)
 
 
 if __name__ == "__main__":
