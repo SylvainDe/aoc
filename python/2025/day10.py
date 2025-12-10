@@ -24,25 +24,33 @@ def get_machines_from_file(file_path=top_dir + "resources/year2025_day10_input.t
         return get_machines_from_lines(f.read())
 
 
-# TO BE OPTIMISED
-def get_nb_button_presses_to_configure(machine):
-    diagram, wirings, _ = machine
-    q = collections.deque([(diagram, set())])
+def get_nb_button_presses_to_configure(machine, configure_lights):
+    diagram, wirings, joltage = machine
+    q = collections.deque([(diagram, joltage, [])])
     while q:
-        diag, presses = q.popleft()
-        if not any(diag):
+        diag, jolt, presses = q.popleft()
+        if not any(diag if configure_lights else jolt):
             return len(presses)
         for i, wiring in enumerate(wirings):
-            if not presses or i > max(presses):
-                diag2 = list(diag)
-                for w in wiring:
-                    diag2[w] = not diag2[w]
-                q.append((diag2, presses | set([i])))
+            presses2 = presses + [i]
+            if configure_lights:
+                if all(i > p for p in presses):
+                    diag2 = list(diag)
+                    for w in wiring:
+                        diag2[w] = not diag2[w]
+                    q.append((diag2, jolt, presses2))
+            else:
+                if all(i >= p for p in presses):
+                    jolt2 = list(jolt)
+                    for w in wiring:
+                        jolt2[w] -= 1
+                    if all(j >= 0 for j in jolt2):
+                        q.append((diag, jolt2, presses2))
     assert False
 
 
-def get_nb_button_presses_to_configure_all(machines):
-    return sum(get_nb_button_presses_to_configure(m) for m in machines)
+def get_nb_button_presses_to_configure_all(machines, configure_lights):
+    return sum(get_nb_button_presses_to_configure(m, configure_lights) for m in machines)
 
 def run_tests():
     machines = get_machines_from_lines(
@@ -50,12 +58,14 @@ def run_tests():
 [...#.] (0,2,3,4) (2,3) (0,4) (0,1,2) (1,2,3,4) {7,5,12,7,2}
 [.###.#] (0,1,2,3,4) (0,3,4) (0,1,2,4,5) (1,2) {10,11,11,5,10,5}"""
     )
-    assert get_nb_button_presses_to_configure_all(machines) == 7
+    assert get_nb_button_presses_to_configure_all(machines, True) == 7
+    assert get_nb_button_presses_to_configure_all(machines, False) == 33
 
 
 def get_solutions():
     machines = get_machines_from_file()
-    print(get_nb_button_presses_to_configure_all(machines) == 459)
+    print(get_nb_button_presses_to_configure_all(machines, True) == 459)
+#    print(get_nb_button_presses_to_configure_all(machines, False)) - TO BE OPTIMISED
 
 
 if __name__ == "__main__":
